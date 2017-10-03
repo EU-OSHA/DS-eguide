@@ -1,0 +1,157 @@
+//Header
+
+.ds-header{
+	background: #FFF;
+}
+
+.logo-camp{
+	padding-top: 10px;
+}
+
+.logo-osha{
+	padding-top: 35px;
+    display: block;
+    float: left;
+    padding-left: 15px;
+    margin-top: 1em;
+}
+
+.logo-eu{
+	margin-top: 88px;
+    margin-left: 20px;
+}
+
+.header_top_bar{
+	ul.menu{
+		list-style: none;
+		float: right;
+		padding-top: 10px;
+		padding-left: 0;
+		li{
+			float: left;
+			a{
+				text-indent: -99999px;
+				display: block;
+				border-right: 0;
+			}
+		}
+
+		li:nth-child(1){
+			background: url('../images/header-twitter.png') no-repeat -1px 0px;
+			margin-left: 15px;
+			width:24px;
+			height: 24px;
+		}
+
+		li:nth-child(2){
+			background: url('../images/header-facebook.png') no-repeat -1px 0px;
+			margin-left: 15px;
+			width:24px;
+			height: 24px;
+		}
+
+		li:nth-child(3){
+			background: url('../images/header-linkedin.png') no-repeat -1px 0px;
+			margin-left: 15px;
+			width:24px;
+			height: 24px;
+		}
+
+		li:nth-child(4){
+			background: url('../images/header-youtube.png') no-repeat -1px 0px;
+			margin-left: 15px;
+			width:24px;
+			height: 24px;
+		}
+
+		li:nth-child(5){
+			background: url('../images/header-flickr.png') no-repeat -2px 0px;
+			margin-left: 15px;
+			width:24px;
+			height: 24px;
+		}
+	}
+}
+
+.content-right-header{
+	padding-top: 97px;
+}
+
+.header-text{
+    color: @ds-blue;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 60px;
+    padding-top: 32px;
+    padding-left: 20px;
+    float: left;
+}
+
+.border-right-header{ 
+	border-right: 1px solid @ds-blue;;
+    padding-right: 20px;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    float: left;
+    height: 150px;
+}
+
+.print-friendly{
+	float: left;
+	padding-left: 10em;
+	clear: none!important;
+}
+
+.block-text-resize{
+	float: left;
+	margin-left: 1em;
+}
+
+a#text_resize_increase, a#text_resize_decrease{
+	background: none;
+    text-indent: 0px;
+    text-transform: lowercase;
+    float: left;
+    width: auto;
+}
+
+a#text_resize_increase sup, a#text_resize_decrease sup{
+	display: none;
+}
+
+a#text_resize_increase {
+    margin: 1px 0px 0px 10px;
+    font-size: 1.7em;
+}
+
+
+//Header Sticky
+
+header.sticktotop{
+	background: #FFF;
+	.content-right-header{
+		display: none;
+	}
+
+	.border-right-header{
+		height: 105px;
+	}
+
+	.logo-camp{
+		padding-top: 0;
+	}
+
+	.logo-osha{
+		padding-top: 20px;
+	}
+
+	.logo-eu{
+		margin-top: 50px;
+	}
+
+	.header-text{
+		padding-top: 10px;
+	}
+}
+
+
