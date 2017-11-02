@@ -54,6 +54,9 @@
  * @ingroup templates
  */
 global $base_url;
+drupal_add_library('system', 'ui.draggable');
+
+
 ?><!DOCTYPE html>
 <html<?php print $html_attributes;?><?php print $rdf_namespaces;?>>
 <head>

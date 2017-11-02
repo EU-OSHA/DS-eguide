@@ -79,6 +79,7 @@
  * @ingroup templates
  */
 $breadcrumb = drupal_set_breadcrumb();
+drupal_add_library('system', 'ui.draggable');
 ?>
 	<div class="container-fluid">
 	<div class="breadcrumb container">

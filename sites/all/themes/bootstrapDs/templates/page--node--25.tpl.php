@@ -1,82 +1,8 @@
 <?php
-/**
- * @file
- * Default theme implementation to display a single Drupal page.
- *
- * The doctype, html, head and body tags are not in this template. Instead they
- * can be found in the html.tpl.php template in this directory.
- *
- * Available variables:
- *
- * General utility variables:
- * - $base_path: The base URL path of the Drupal installation. At the very
- *   least, this will always default to /.
- * - $directory: The directory the template is located in, e.g. modules/system
- *   or themes/bartik.
- * - $is_front: TRUE if the current page is the front page.
- * - $logged_in: TRUE if the user is registered and signed in.
- * - $is_admin: TRUE if the user has permission to access administration pages.
- *
- * Site identity:
- * - $front_page: The URL of the front page. Use this instead of $base_path,
- *   when linking to the front page. This includes the language domain or
- *   prefix.
- * - $logo: The path to the logo image, as defined in theme configuration.
- * - $site_name: The name of the site, empty when display has been disabled
- *   in theme settings.
- * - $site_slogan: The slogan of the site, empty when display has been disabled
- *   in theme settings.
- *
- * Navigation:
- * - $main_menu (array): An array containing the Main menu links for the
- *   site, if they have been configured.
- * - $secondary_menu (array): An array containing the Secondary menu links for
- *   the site, if they have been configured.
- * - $breadcrumb: The breadcrumb trail for the current page.
- *
- * Page content (in order of occurrence in the default page.tpl.php):
- * - $title_prefix (array): An array containing additional output populated by
- *   modules, intended to be displayed in front of the main title tag that
- *   appears in the template.
- * - $title: The page title, for use in the actual HTML content.
- * - $title_suffix (array): An array containing additional output populated by
- *   modules, intended to be displayed after the main title tag that appears in
- *   the template.
- * - $messages: HTML for status and error messages. Should be displayed
- *   prominently.
- * - $tabs (array): Tabs linking to any sub-pages beneath the current page
- *   (e.g., the view and edit tabs when displaying a node).
- * - $action_links (array): Actions local to the page, such as 'Add menu' on the
- *   menu administration interface.
- * - $feed_icons: A string of all feed icons for the current page.
- * - $node: The node object, if there is an automatically-loaded node
- *   associated with the page, and the node ID is the second argument
- *   in the page's path (e.g. node/12345 and node/12345/revisions, but not
- *   comment/reply/12345).
- *
- * Regions:
- * - $page['help']: Dynamic help text, mostly for admin pages.
- * - $page['highlighted']: Items for the highlighted content region.
- * - $page['content']: The main content of the current page.
- * - $page['sidebar_first']: Items for the first sidebar.
- * - $page['sidebar_second']: Items for the second sidebar.
- * - $page['header']: Items for the header region.
- * - $page['footer']: Items for the footer region.
- *
- * @see bootstrap_preprocess_page()
- * @see template_preprocess()
- * @see template_preprocess_page()
- * @see bootstrap_process_page()
- * @see template_process()
- * @see html.tpl.php
- *
- * @ingroup templates
- */
 global $base_url;
-
+drupal_add_library('system', 'ui.draggable');
 
 ?>
-
 
 <?php if (!empty($page['top_header'])): ?>
 <header>
@@ -196,7 +122,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             </div>
             <select name="" id="filter-questions">
               <option id="all-questions" class="all-questions" value="0">All Questions</option>
-              <option id="skipped-questions" class="skipped-questions" value="1">Skipped Questions Only</option>
+              <option id="skipped-questions" class="skipped-questions" value="1"><?php print (t("Skipped Questions Only"));?></option>
             </select>
           </div>
 
@@ -231,8 +157,14 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           $array1 = array();
           $array2 = array();
           $array3 = array();
-          $menu_item_pen ="";   
-          $cur_que = $_SESSION['quiz'][25]['current'];
+          $menu_item_pen ="";  
+          if (isset( $_SESSION['quiz'][25]['current'])==1){
+            $cur_que = $_SESSION['quiz'][25]['current'];
+          }else{
+            //$_SESSION['quiz'][25]['current'] = 1;
+
+          } 
+          
           $no_menu_item_pen =0;
 
           foreach($query as $item) {
@@ -272,7 +204,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
               }
             }
 
-            
             //Add each item to the corresponding group  
             if ($menu_item != ''){
               if ($item->field_group_value==1){
@@ -418,20 +349,17 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
         <div class="content-print-download">
         <ul class="print-download">
           <li class="save">
-            <a href="#">&gt; <?php print t("Save and continue later") ?></a>
+            <a class="greenButton" href="javascript:moreInfo();">&gt; <?php print t("Save and continue later") ?></a>
+            <!--<a href="#">&gt; <?php print t("Save and continue later") ?></a>-->
           </li>
-          <li class="print <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="#" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
+          <li class="view-checklist <?php print $report_class?>" <?php print $sumary_class;?>>
+            <a href="/checklist" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
           </li>
-          <li class="download <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="#" class="<?php print $report_class?>">&gt; <?php print t("View the Recomendations")?></a>
+          <li class="recomendations <?php print $report_class?>" <?php print $sumary_class;?>>
+            <a href="/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recomendations")?></a>
           </li>
           
       </ul></div>
-
-     
-
-
 
         <!-- end Legend -->
         </div>
@@ -444,7 +372,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 <!--*****************************************CONTENT*************************************************************************************************************************-->
      <div class="col-md-6">
         <?php 
-        
         //We are on the summary 
         if (isset ($page['content']['system_main']['quiz_result'])==1){
           //$max_que = 37;
@@ -483,10 +410,10 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             <ul class="print-download">
           
           <li class="print">
-            <a href="">&gt; <?php print t("View the checklist")?> </a>
+            <a href="/checklist">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="download">
-            <a href="">&gt; <?php print t("View the Recomendations")?></a>
+            <a href="/recommendations">&gt; <?php print t("View the Recomendations")?></a>
           </li>
           </ul></div>
           </div>
@@ -496,6 +423,43 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
         //We are on a question
         else
         {
+
+        function quiz_confirmation_form() {
+          $form['confirmation'] = array(
+          '#type' => 'radios',
+          '#title' => t('If you change the answer of this question, all the answers after this will be deleted. Are you sure?'),
+          '#options' => array('Yes'=>t('Yes'),'No'=>t('No')),
+          );
+          return $form;
+        }
+
+          $w_message="";
+
+          $question_flow = array("1","2","5","14","16","19","21","25","27","29","32","34");
+          $next_que =1; 
+          if (isset($_SESSION['quiz'][25]['next_question'])==1){
+            $next_que =$_SESSION['quiz'][25]['next_question']; 
+          }
+  
+          $cur_que = $_SESSION['quiz'][25]['current'];
+          if ($cur_que > $next_que){
+           $_SESSION['quiz'][25]['next_question']  = $cur_que; 
+           $next_que =$_SESSION['quiz'][25]['next_question']; 
+          }
+          
+          if (in_array($cur_que,$question_flow ) &&  $next_que > $cur_que){
+            $form_confirm = drupal_get_form('quiz_confirmation_form');
+            print("<div class='alert alert-block alert-warning messages warning alert-warning-inside confirmation-warning' style='display: none;'>");
+            print drupal_render($form_confirm);
+            print("</div>");
+          //  $w_message = '<div class="alert alert-block alert-warning messages warning alert-warning-inside">'. t('If you change the answer of this question, all the answers after this 
+          //    will be deleted.').'</div>';
+          }
+          else{
+            $w_message ="";
+          }
+          print($w_message);
+          
           if (isset($_SESSION['quiz'][25])==1){
             $cur_que = $_SESSION['quiz'][25]['current'];
             $cur_ans = $_SESSION['quiz'][25]['result_id'];
@@ -539,8 +503,9 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           	
             foreach($query as $item) {
             	$number= $item->number;
-                $answer = $item->points_awarded;
+              $answer = $item->points_awarded;
                 //Question 1 Yes, no action.
+              
                 if ($number == 1 && $answer ==1){
                 	break;
                 }
@@ -893,7 +858,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 	          }
 	          else
 	          {
-	          	$page['content']['system_main']['body']['question']['#markup'] = str_replace('Leave blank</button>' , t("Skip Question") . '</button>',$page['content']['system_main']['body']['question']['#markup']);	
+	          	$page['content']['system_main']['body']['question']['#markup'] = str_replace('Leave blank</button>' , t("Do not know / Reply later") . '</button>',$page['content']['system_main']['body']['question']['#markup']);	
 	          }
           }
                     
@@ -901,13 +866,13 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
               
               switch ($page['content']['system_main']['feedback'][0]['#title']) {
                 case "Question 12":
-                  $page['content']['system_main']['feedback'][0]['#title']= t("End of Block 1");
+                  $page['content']['system_main']['feedback'][0]['#title']= t("Questions on use, handling and storage completed");
                   break;
                 case "Question 24":
-                  $page['content']['system_main']['feedback'][0]['#title']= t("End of Block 2");
+                  $page['content']['system_main']['feedback'][0]['#title']= t("Practices and routines");
                   break;
                 case "Question 36":
-                  $page['content']['system_main']['feedback'][0]['#title']= t("End of Block 3");
+                  $page['content']['system_main']['feedback'][0]['#title']= t("Measures");
                   break;
               }
 
@@ -1012,6 +977,31 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 </footer>
 <?php endif; ?>
 
+<div id="moreInfoDiv" style="display: none;">
+
+<div class="closeMoreInfo">
+<h1 class="moreinfotitle"><?php print(t("Save questionnaire"));?></h1>
+<img src="/sites/all/themes/bootstrapDs/images/closeMoreinfo.png" alt="close">
+</div>
+<div class="contentMoreInfo">
+<p><?php print (t("Please indicate an email in order to send you a link that allow you to retrieve the questionnaire.")); ?></p>
+
+<form class="answering-form" action="/node/25/take/1" method="post" id="request-email" accept-charset="UTF-8"
+<input type="email" id="emailAddress">
+</form>
+<?php  
+
+$form = drupal_get_form('quiz_email_form');
+print drupal_render($form);
+
+?>
+
+</div></div>
+
+
+
+
+
 <?php
 /*
 $question_flow = array("1","2","5","14","16","19","21","25","27","29","32","34");
@@ -1029,3 +1019,207 @@ if (isset ($_SESSION['quiz'][25]['warning'])==1){
 }
 */
 ?>
+
+<script type="text/javascript">
+
+// hack for backwards compatibility
+document.createElement('meter');
+// create polyfill
+function makeMeter(meterElement) {
+    // parse values and attributes
+    function attr(attributeName, defaultValue) {
+        return meterElement.getAttribute(attributeName) != null ?
+                            meterElement.getAttribute(attributeName) :
+                            (defaultValue ? defaultValue : null);
+    }
+    function addClass(classStr) {
+        var classes = meterElement.className.split(' ');
+        if (classes.length == 0) {
+            meterElement.className = classStr;
+            return;
+        }
+        for (classStrVal in classes) {
+            if (classStr == classStrVal) { return; }
+        }
+        classes.push(classStr);
+        meterElement.className = classes.join(' ');
+    }
+    function removeClass(classStr) {
+        var classes = meterElement.className.split(' ');
+        var i = classes.length;
+        while (i--) {
+            if (classes[i] == classStr) {
+                classes.splice(i, 1);
+                break;
+            }
+        }
+        meterElement.className = classes.join(' ');
+    }
+
+    function getFormParent() {
+        var element = meterElement;
+        while (element.parent && element.parent.tagName.toLowerCase() != 'form') {
+            element = element.parent;
+        }
+        if (element.tagName.toLowerCase() == 'form') {
+            return element;
+        }
+        return null;
+    }
+
+    function getFormLabels() {
+        var id = meterElement.id;
+        if (id == null || this.form == null) {
+            return null;
+        }
+        var elementsLabels = [];
+        // otherwise loop through the form's child label elements 
+        // looking for the element that has a for="{this.id}"
+        var labels = this.form.getElementsByTagName('label');
+        for (label in labels) {
+            if (label['for'] == id) {
+                elementsLabels.push(label);
+            }
+        }
+        if (elementsLabels.length > 0) {
+            return elementsLabels;
+        }
+        return null;
+    }
+
+    this.min = parseFloat(attr('min', 0)); // default as per HTML5 spec
+    this.max = parseFloat(attr('max', 1)); // default as per HTML5 spec
+    this.high = parseFloat(attr('high'));
+    this.low = parseFloat(attr('low'));
+    this.optimum = parseFloat(attr('optimum'));
+    // TODO: make this look for 'innerText' if the attribute doesn't exist
+    this.value = attr('value') != null ? parseFloat(attr('value')) : (meterElement.textContent ? meterElement.textContent : meterElement.innerText);
+
+    if (meterElement.textContent) {
+        meterElement.textContent = '';
+    } else if (meterElement.innerText) {
+        meterElement.innerText = '';
+    }
+    this.onchange = function() { alert(1); };
+
+    this.title = attr('title') != null ? attr('title') : this.value;
+    this.form = getFormParent();
+    this.labels = getFormLabels();
+
+    /*
+    The following inequalities must hold, as applicable:
+    minimum ≤ value ≤ maximum
+    minimum ≤ low ≤ maximum (if low is specified)
+    minimum ≤ high ≤ maximum (if high is specified)
+    minimum ≤ optimum ≤ maximum (if optimum is specified)
+    low ≤ high (if both low and high are specified)
+    */
+
+    if (this.value < this.min) {
+        this.value = this.min;
+    }
+
+    if (this.value > this.max) {
+        this.value = this.max;
+    }
+
+    if (this.low != null && this.low < this.min) {
+        this.low = this.min;
+    }
+
+    if (this.high != null && this.high > this.max) {
+        this.high = this.max;
+    }
+
+    if (meterElement.children.length == 0) {
+        var indicator = document.createElement("div");
+    } else {
+        indicator = meterElement.children[0];
+    }
+
+    var width = meterElement.offsetWidth;
+    width *= this.value / this.max;
+
+    indicator.style.width = Math.ceil(width) + 'px';
+
+    if (this.high && this.value >= this.high) {
+        addClass("meterValueTooHigh");
+    }
+    else if (this.low && this.value <= this.low) {
+        addClass("meterValueTooLow");
+    } else {
+        removeClass("meterValueTooHigh");
+        removeClass("meterValueTooLow");
+    }
+
+    if (this.value >= this.max) {
+        addClass('meterIsMaxed');
+    } else {
+        removeClass('meterIsMaxed');
+    }
+
+    meterElement.title = this.title;
+
+
+    if (meterElement.children.length == 0) {
+        meterElement.appendChild(indicator);
+    }
+
+}
+window.onload = function() {
+    var meters = document.getElementsByTagName('meter');
+    var i = meters.length;
+    while (i--) {
+        makeMeter(meters[i]);
+    }
+}
+
+
+function moreInfo() {
+  
+    var body = jQuery("html, body");
+    body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
+  });
+    
+  
+  
+  if(jQuery("#moreInfoDiv").length>0) {
+    
+    if(jQuery(window).width()>1006) {
+      jQuery(".ds-header").after("<div id='shadow'></div>");
+      jQuery("#shadow").css("height",jQuery(window).height());
+      jQuery("#shadow").css("width",jQuery(window).width());
+    }
+   
+    var top=(jQuery(window).height()/2)-(jQuery("#moreInfoDiv").height()/2)-50;
+    var left=(jQuery(window).width()/2)-(jQuery("#moreInfoDiv").width()/2); 
+    
+    jQuery("#moreInfoDiv").css("top",top+"px").css("left",left+"px");
+    
+    jQuery("#moreInfoDiv").slideDown("fast",function() {
+     
+     //jQuery("body").css("overflow","hidden");
+     //posicionarlo en el centro de arriba
+    jQuery("body").css("overflow-y","auto").css("overflow-x","hidden");
+   
+    jQuery("#moreInfoDiv").attr("style","display: block !important;");
+    //jQuery("#moreInfoDiv").css("top","50px").css("left","300px");
+    jQuery("#moreInfoDiv").css("top",top+"px").css("left",left+"px");  
+    jQuery("#edit-email").focus();
+    });
+
+
+  }
+  jQuery(".closeMoreInfo").click(function() {
+    jQuery("#moreInfoDiv").slideUp("fast",function() {
+     jQuery("#shadow").remove();
+      jQuery("body").css("overflow","auto").removeAttr("style");
+
+    });
+  });
+}
+
+
+
+
+</script>

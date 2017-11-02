@@ -73,7 +73,7 @@
  * @ingroup templates
  */
 global $base_url;
-
+drupal_add_library('system', 'ui.draggable');
 ?>
 
 

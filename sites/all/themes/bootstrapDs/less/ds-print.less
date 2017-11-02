@@ -1,0 +1,252 @@
+@media print {
+
+h1, h3, h4, h5, h6{
+	font-size: initial;
+}
+p{
+	font-size: 12pt;
+}
+
+div, span, article{
+	display: block;
+	float: none !important;
+		width: auto !important;
+		margin:  0 !important;
+		padding: 0 !important;
+}
+
+body {
+	padding-top: 0px !important;
+	font-family: "Times New Roman" !important;
+    /* IE 8 + */
+    //-ms-filter: 'progid:DXImageTransform.Microsoft.BasicImage(grayScale=1)';
+    //-webkit-filter: grayscale(100%); 
+	//filter: grayscale(100%);
+	
+	// a[href^=http]:after {
+	// 	content:" <" attr(href) ">" !important;
+	// }
+	a:link:after, a:visited:after {  
+      display: none;
+      content: "";    
+    }
+}
+#toolbar{
+	display: none;
+}
+article{
+	header{
+		border-bottom: none !important;
+		padding-bottom: 0px !important;
+	}
+}
+body > header{
+	border-bottom: 2px solid grey;
+	padding-bottom: 0px;
+	margin-bottom: 2em;
+	.border-right-header{
+		border-right: none;
+		height: inherit;
+		
+	}
+	.pull-left.border-right-header{
+		border-right: 2px solid #002a9a;
+		height: 60px !important;
+		padding-top: 0px !important;
+		img{
+			width: 75px;
+    		height: 65px !important;
+		}
+	}
+	.logo-osha{
+		padding-top: 0px;
+		max-width: 200px;
+	}
+	.pull-left.logo-eu{
+		margin-top: 40px !important;
+		width: 50px;
+	}
+	
+	.content-right-header{
+		display: none;
+	}
+	.header-text{
+		margin-top: 15px !important;
+	    float: right !important;
+	    width: 250px !important;
+	    display: inline-block;
+	    font-size: 14pt !important;
+	}
+
+}
+footer{
+	display: none !important;
+}
+
+.container{
+	width: 100% !important;
+}
+
+h1{
+	font-size: 20pt !important;
+}
+h1.page-header.container{
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+h2{
+	font-size: 16pt !important;
+}
+.legend-img{
+	display: none;
+}
+.breadcrumb.container{
+	display: none;
+}
+
+/*home*/
+.front{
+	.row{
+		.col-md-6{
+			width: 50% !important;
+			float: left !important;
+			
+			.content-home-questions{
+				margin: 10px !important;
+				padding: 15px 30px !important;
+				background-color: #d3d3d3 !important;
+				.number-questions{
+					padding-bottom: 7px !important;
+					margin-bottom: 10px !important;
+					font-size: 16pt !important;
+				}
+				.prev-text span::before{
+					position: relative;
+					float: inherit !important;
+					width: inherit !important;
+				    padding-right: 11px;
+				}
+				.starnew{
+					a{
+						font-size: 16pt;
+						height: inherit !important;
+						padding-top: 0px !important;
+					}
+				}
+			}
+		}
+	}
+	.btn-home{
+		border: none;
+		margin-top: 25px !important;
+		a{
+			background-color: grey !important;
+			color: white !important;
+			font-size: 14pt;
+			font-weight: normal;
+			border-radius: 3px;
+			padding: 5px 15px !important;
+		}
+	}
+	.text-home{
+		margin-top: 30px;
+	}
+}
+
+.page-node-2{
+	.img-about{
+		display: none;
+	}
+	#node-2{
+		img{
+			display: none;
+		}
+		.content-subsection.container{
+			display:  none;
+		}
+	}
+}
+
+.page-node-take{
+	.group-left-questions{
+		border-top: none;
+	}
+	.content-legend{
+		display: none;
+	}
+	.question-header{
+		margin-top: 15px !important;
+		margin-bottom: 20px !important;
+		.title-header{
+			display: inline-block;
+			span{
+				display: inline-block;
+			}
+		}
+		.percent{
+			margin-left: 20px !important;
+			display: inline-block;
+		}
+	}
+	.quiz-question-multichoice{
+		background-color: #494949 !important;
+		padding: 15px !important;
+		.field-name-body{
+			text-align: center;
+			img{
+				margin: 0 auto;
+			}
+		}
+	}
+	.progress-summary-content{
+		.total-answered{
+			display: inline-block; 
+			margin-right: 10px !important;
+			border-right: 2px solid blue;
+			padding-right: 10px !important;
+		}
+		.total-pending{
+			display: inline-block;
+		}
+		.info-ico-right{
+			display: none;
+		}
+	}
+}
+
+.content-print-download {
+	display: none;
+}
+
+.checklist{
+	.block-title{
+		margin-top: 1em !important;
+		margin-bottom: 1em !important;
+		font-size: 16pt;
+	}
+	.check-title{
+		margin-top: 1em !important;
+		margin-bottom: 10px !important;
+	}
+	.check-question{
+		margin-bottom: 15px !important;
+		.check-text{
+			width: 80% !important;
+			display: inline-block;
+		}
+		.check-check{
+			width: 20% !important;
+			padding-left: 15px;
+			display: inline-block;
+			span{
+				display: inline-block;
+			}
+			span:first-child{
+				margin-right: 15px !important;
+			}
+		}
+	}
+}
+
+
+}//en @media print

@@ -30,6 +30,34 @@ legend{
 	margin-bottom: 0;
 }
 
+.glyphicon-triangle-bottom{
+	color: #FFF;
+    background: @ds-blue;
+    border-radius: 17px;
+    width: 21px;
+    height: 21px;
+    float: right;
+}
+
+.glyphicon-triangle-bottom:before {
+    content: "\e252";
+    padding-top: 0px;
+    display: block;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.type-name.active .glyphicon-triangle-bottom:before {
+    content: "\e253";
+    margin-top: 4px;
+}
+
+.faq_question.active .glyphicon-triangle-bottom:before{
+	content: "\e253";
+	margin-top: 4px;
+}
+
 .content-summary .disabled{
 	pointer-events: none;
 	color:#CCC;

@@ -122,13 +122,14 @@ global $base_url;
 <div class="main-container">
   <h1 class="page-header container">Contact us & FAQs</h1>
   <div class="container">  
-    <div class="col-md-6 col-xs12">
-      <h2>Contact us</h2>
-      <div class="webform">
+    <div class="col-md-12">
+      <h2 class="contact-us-title">Contact us</h2>
+      <span class="display-down-contact-us glyphicon glyphicon-plus"></span>
+      <div class="webform col-xs-12 col-sm-10 col-md-10 col-lg-8">
         <?php print render($page['content']['system_main']['nodes'][67]['webform']['#form']); ?>
       </div>
     </div>
-    <div class="col-md-6 col-xs12">
+    <div class="col-md-12">
       <h2 class="faqs-content clearfix">FAQs</h2>
       <div class="webform clearfix">
         <?php print views_embed_view('faqs', $display_id = 'default'); ?>
