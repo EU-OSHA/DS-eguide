@@ -292,7 +292,7 @@ function glossary() {
       removePopUps();
       title=jQuery(this).attr("data-titleBM");
       jQuery(this).addClass("poparizado");
-      var html="<div class='popup'><div class='closePop'><img src='/sites/all/themes/bootstrapDs/images/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div>";
+      var html="<div class='popup'><div class='closePop'><img src='/dangerous-substances/sites/all/themes/bootstrapDs/images/closeGlossary.png'></div><div class='contentPop'>"+title+"</div></div>";
       jQuery(this).before(html);
       //positioning
 
