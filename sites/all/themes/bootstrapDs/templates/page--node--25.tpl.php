@@ -410,10 +410,10 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             <ul class="print-download">
           
           <li class="print">
-            <a href="/checklist">&gt; <?php print t("View the checklist")?> </a>
+            <a href="/dangerous-substances/checklist">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="download">
-            <a href="/recommendations">&gt; <?php print t("View the Recomendations")?></a>
+            <a href="/dangerous-substances/recommendations">&gt; <?php print t("View the Recomendations")?></a>
           </li>
           </ul></div>
           </div>

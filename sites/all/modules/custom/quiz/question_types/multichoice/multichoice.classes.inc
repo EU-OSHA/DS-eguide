@@ -942,20 +942,30 @@ class MultichoiceResponse extends QuizQuestionResponse {
    * @see QuizQuestionResponse::getFeedbackValues()
    */
   public function getFeedbackValues() {
+
     $this->orderAlternatives($this->question->alternatives);
     $simple_scoring = $this->question->choice_boolean;
 
     $data = array();
+    
     foreach ($this->question->alternatives as $alternative) {
+      
       $chosen = in_array($alternative['id'], $this->user_answer_ids);
+      
       $not = $chosen ? '' : 'not_';
+      if ($chosen == TRUE){
+        $ans_fed = $alternative['feedback_if_chosen']['value'];
+      }else{
+        $ans_fed = $alternative['feedback_if_not_chosen']['value'];
+      }
+      
 
       $data[] = array(
         'choice' => check_markup($alternative['answer']['value'], $alternative['answer']['format']),
         'attempt' => $chosen ? quiz_icon('selected') : '',
         'correct' => $chosen ? $alternative['score_if_chosen'] > 0 ? quiz_icon('correct') : quiz_icon('incorrect') : '',
         'score' => $alternative["score_if_{$not}chosen"],
-        'answer_feedback' => check_markup($alternative["feedback_if_{$not}chosen"]['value'], $alternative["feedback_if_{$not}chosen"]['format'], FALSE),
+        'answer_feedback' => $ans_fed,
         'question_feedback' => 'Question feedback',
         'solution' => $alternative['score_if_chosen'] > 0 ? quiz_icon('should') : ($simple_scoring ? quiz_icon('should-not') : ''),
         'quiz_feedback' => "Quiz feedback",
