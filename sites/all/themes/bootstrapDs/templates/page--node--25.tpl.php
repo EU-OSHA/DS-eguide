@@ -353,10 +353,10 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             <!--<a href="#">&gt; <?php print t("Save and continue later") ?></a>-->
           </li>
           <li class="view-checklist <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="/checklist" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
+            <a href="/dangerous-substances/checklist" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="recomendations <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recomendations")?></a>
+            <a href="/dangerous-substances/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recomendations")?></a>
           </li>
           
       </ul></div>

@@ -225,7 +225,7 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
   <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/printpdf/73" class="" target="_blank">&gt; <?php print t("Print to PDF")?> </a>
+            <a href="/dangerous-substances/printpdf/73" class="" target="_blank">&gt; <?php print t("Print to PDF")?> </a>
           </li>
           <li class="download " >
              <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Print to RTF")?></a>
@@ -872,7 +872,7 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
     <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/printpdf/73" class=""  target="_blank">&gt; <?php print t("Print to PDF")?> </a>
+            <a href="/dangerous-substances/printpdf/73" class=""  target="_blank">&gt; <?php print t("Print to PDF")?> </a>
           </li>
           <li class="download " >
              <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Print to RTF")?></a>

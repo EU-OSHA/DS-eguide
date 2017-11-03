@@ -73,7 +73,7 @@
  * @ingroup templates
  */
 global $base_url;
-
+drupal_add_library('system', 'ui.draggable');
 
 ?>
 
@@ -173,7 +173,7 @@ global $base_url;
 
           <?php
           global $base_url;  
-          //dpm($_SESSION);
+          
         
           if (isset($_SESSION['quiz'][14]['result_id'])){
             $quizresult =$_SESSION['quiz'][14]['result_id'];
@@ -181,7 +181,7 @@ global $base_url;
             $quizresult =$_SESSION['quiz']['temp']['result_id'];
           }
           //$quizresult = $_SESSION['temp']['result_id'];
-          //dpm($_SESSION);
+          
            //$sql="select distinct child_nid from quiz_node_relationship where parent_nid=14 order by weight asc;";
           $sql="select distinct child_nid, answer_timestamp from quiz_node_relationship a, quiz_node_results_answers b where parent_nid=14 and a.child_nid  = b.question_nid and b.result_id = " . $quizresult . " order by a.weight asc";
           
@@ -235,7 +235,7 @@ global $base_url;
 <!--*******************************************CONTENT*************************************************************************************************************************-->
      <div class="col-md-6">
         <?php 
-        //dpm($page['content']);
+        
         //We are on the summary 
         if (isset ($page['content']['system_main']['quiz_result'])==1){
           ?>

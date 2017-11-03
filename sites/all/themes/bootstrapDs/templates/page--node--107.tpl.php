@@ -305,7 +305,7 @@ if ($result_id ==0 ){//Nothing to show
 	<div class="content-print-download ">
     <ul class="print-download col-md-4">
       <li class="print" >
-        <a href="/printpdf/107" target="_blank" class="">&gt; <?php print t("Print to PDF")?> </a>
+        <a href="/dangerous-substances/printpdf/107" target="_blank" class="">&gt; <?php print t("Print to PDF")?> </a>
       </li>
       <li class="download " >
         <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Print to RTF")?></a>
@@ -571,7 +571,7 @@ if ($result_id ==0 ){//Nothing to show
     <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/printpdf/107" target="_blank" class="">&gt; <?php print t("Print to PDF")?> </a>
+            <a href="/dangerous-substances/printpdf/107" target="_blank" class="">&gt; <?php print t("Print to PDF")?> </a>
           </li>
           <li class="download " >
             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Print to RTF")?></a>
