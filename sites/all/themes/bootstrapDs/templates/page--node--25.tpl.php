@@ -981,7 +981,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 
 <div class="closeMoreInfo">
 <h1 class="moreinfotitle"><?php print(t("Save questionnaire"));?></h1>
-<img src="/sites/all/themes/bootstrapDs/images/closeMoreinfo.png" alt="close">
+<img src="/dangerous-substances/sites/all/themes/bootstrapDs/images/closeMoreinfo.png" alt="close">
 </div>
 <div class="contentMoreInfo">
 <p><?php print (t("Please indicate an email in order to send you a link that allow you to retrieve the questionnaire.")); ?></p>
