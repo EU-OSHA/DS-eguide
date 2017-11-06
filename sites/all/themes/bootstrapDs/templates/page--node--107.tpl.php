@@ -468,8 +468,10 @@ if ($result_id ==0 ){//Nothing to show
                  	$body_rec  = str_replace('</li>', "", $body_rec);
                  	$body_rec  = str_replace('</ul>', "", $body_rec);
                  	$body_rec  = str_replace('<ul>', "", $body_rec);
-
-                 	
+                  $body_rec  = str_replace('<a href="', "URL:", $body_rec);
+                  $body_rec  = str_replace('" target="_blank">', " - ", $body_rec);
+                  $body_rec  = str_replace('</a>', "", $body_rec);
+                  
 
                   //images
                   
