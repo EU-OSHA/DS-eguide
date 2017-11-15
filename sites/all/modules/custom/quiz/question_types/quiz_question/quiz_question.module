@@ -224,13 +224,20 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
       $w_message ="";
     }
   }  
+    
 
     if (isset($form['question'][$node->nid]['question']['body'])==1){
-      $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message .'<h1 class="node-title">' . $node->title . '</h1>'.$form['question'][$node->nid]['question']['body'][0]['#markup'];
+       $title  = _filter_lexicon($node->title,"","");
+      $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message .'<h1 class="node-title">' .  $title . '</h1>' .$form['question'][$node->nid]['question']['body'][0]['#markup'];
     }else{
-      $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message. '<h1 class="node-title">' . $form['question'][$node->nid]['question']['#node']->title .'</h1>';
+      $title  = _filter_lexicon($form['question'][$node->nid]['question']['#node']->title,"","");
+      $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message. '<h1 class="node-title">' . $title .'</h1>';
 
     }
+
+
+
+
     //Delete Question x text
     $form['question'][$node->nid]['header']="";
 

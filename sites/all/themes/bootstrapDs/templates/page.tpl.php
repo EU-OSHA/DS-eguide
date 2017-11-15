@@ -179,7 +179,7 @@ drupal_add_library('system', 'ui.draggable');
   <footer class="ds-footer">
     <div class="container">
       <div class="copyright">
-        <span>© 2017 EU-OSHA | an agency of the European Union</span>
+        <span>© 2017 <?php print("EU-OSHA | an agency of the European Union");?></span>
       </div>
       <div class="footer_menu">
         <?php

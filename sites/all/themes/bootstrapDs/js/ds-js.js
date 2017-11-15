@@ -25,7 +25,7 @@ $(document).ready(function(){
 })(jQuery);
 
 
-/*Displaying contact us*/
+/*Displaying contact us
 
 (function ($) {
   $(document).ready(function(){
@@ -35,7 +35,7 @@ $(document).ready(function(){
     });
   });
 })(jQuery);
-
+*/
 
 /***** FAQS *********/
 

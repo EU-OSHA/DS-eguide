@@ -267,14 +267,11 @@ drupal_add_library('system', 'ui.draggable');
               <?php 
               $feed_show = $item['feedback']['quiz_result_answer'][$number_answer]['answer_feedback']['#markup'];
 
-              //Recortar y ver más
+              //Cut and see more
               print '<div class="short-and-see-more">'.$feed_show.'</div>';
 
             print ("<br>");
-            print "<div class='question-body'>" . t('This is a help to get started quickly, easily and efficiently with the chemical work. The quick start contains advice and tips on some basic requirements. There are other requirements that you also need to know to take the necessary prevention measures in your company and at your work places.') . "</div>";
-            print ("<br>");
-            print ("<br>");
-            print "<div class='question-body'>" . t('After the quick start, please proceed to ') . "<a href='".$base_url."/node/25/take/"."'>" . t('My Chemical Guide') . "</a> " . t('It deals with all the necessary measures that you need for a good management of chemical products and substances. My Chemical Guide helps you to sort out what you need to do. My Chemical Guide provides tailored advice based on your company and work place specific situation.') . "</div>";
+            
           ?>
               
           </div>
@@ -303,18 +300,15 @@ drupal_add_library('system', 'ui.draggable');
 
 
             <?php
+
             $cont_ans = $cont_ans +1;
 
           }
-
-          
-          
-
+          print "<div class='question-body summary-questions'>" . t('This is a help to get started quickly, easily and efficiently with the chemical work. The quick start contains advice and tips on some basic requirements. There are other requirements that you also need to know to take the necessary prevention measures in your company and at your work places.') . "</div>";
+          print "<div class='question-body summary-questions'>" . t('After the quick start, please proceed to ') . "<a href='".$base_url."/node/25/take/"."'>" . t('My Chemical Guide') . "</a> " . t('It deals with all the necessary measures that you need for a good management of chemical products and substances. My Chemical Guide helps you to sort out what you need to do. My Chemical Guide provides tailored advice based on your company and work place specific situation.') . "</div>";
         ?>
 
-
-
-          <div class="content-print-download final-summary short">
+           <div class="content-print-download final-summary short">
             <ul class="print-download">
               <li class="print short">
               <a href="#">> <?php print t('View the report'); ?></a>
@@ -352,7 +346,6 @@ drupal_add_library('system', 'ui.draggable');
           $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-submit" name="op" value="Finish" class="btn btn-default form-submit">Finish</button>','<button type="submit" id="edit-navigation-submit" name="op" value="Finish" class="btn btn-default form-submit finish">'. t("FINISH") .'</button>',$page['content']['system_main']['body']['question']['#markup']);
 
           }
-       
           print render($page['content']);
           
          } 
@@ -392,9 +385,16 @@ drupal_add_library('system', 'ui.draggable');
           <progress max="7" value="<?php print($ans_res) ?>" class="quiz-progress"></progress>
           <div class="total-answered"><?php print $ans_res; ?> answered</div>
           <div class="total-pending"> <?php print $ans_pen; ?> pending</div>
-          <div class="info-ico-right"><a href=""><img title="info" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
+          <div class="info-ico-right"><a href="javascript:barInfo();"><img title="info" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
         </div>
-     
+         <div id="barInfoDiv" style="display: none;" class="col-md-11">
+        <div class="closebarInfo">
+        <img src="/dangerous-substances/sites/all/themes/bootstrapDs/images/closeMoreinfo.png" alt="close">
+        </div>
+        <div class="contentBarInfo">
+        <p><?php print (t("This graph shows which share of all questions you already completed. If you skip questions to answer them later, the progress bar will change.")); ?></p>
+        </div>
+        </div>
       </div> 
 <!--MENU DCHA********************************************************************************************************************************************************************-->
 
@@ -431,3 +431,20 @@ drupal_add_library('system', 'ui.draggable');
   </div>  
 </footer>
 <?php endif; ?>
+
+<script type="text/javascript">
+function barInfo() {
+  
+  var body = jQuery("html, body");
+  body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
+  });
+    jQuery("#barInfoDiv").slideDown("fast",function() {
+    jQuery("#barInfoDiv").attr("style","display: block !important;");
+    });
+  }
+
+  jQuery(".closebarInfo").click(function() {
+    jQuery("#barInfoDiv").slideUp("fast",function() {
+    });
+  });
+</script>

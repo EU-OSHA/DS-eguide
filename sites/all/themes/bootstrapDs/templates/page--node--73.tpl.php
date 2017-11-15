@@ -160,6 +160,8 @@ $checkcount=0;
 //$header = $rtf->addHeader(PHPRtfLite_Container_Header::TYPE_LEFT);
 //$header->writeText("PHPRtfLite class library. Left document header. This is page - <pagenum> of <pagetotal> -", $times12, $parFormat);
 $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
+$sect->addImage($dir . '/../../../../default/files/cover.png', null, 15);
+$sect->insertPageBreak();
 ?>
 
 
@@ -299,7 +301,7 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
         $number = $answer->number;
         $question_nid = $answer->question_nid;
 
-        if (1==1 || $number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==30){
+        if ($number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==30){
         	//We have to check what was the answers to these questions
         	//print ("Mas de una respuesta :" . $number . "<br>");
 
@@ -466,8 +468,8 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                   $checkcount=0;
                 }             
                 print("<div class='check-title'>");
-                print($number_key . '-'. $checks_title[$number_key][$checkarray]);
-                $sect->writeText('<b>'.$number_key .". ".  $checks_title[$number_key][$checkarray].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
+                print($checks_title[$number_key][$checkarray]);
+                $sect->writeText('<b>'.  $checks_title[$number_key][$checkarray].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                 print("</div>");
                 $show_title=false;
               }  
@@ -540,14 +542,20 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
 
               print("<div class='check-text col-md-9'>");
               print $checks[$number_key][$checkarray];
-              $sect->writeText($checks[$number_key][$checkarray].'<br/>', new PHPRtfLite_Font(10, 'Arial', '#000000'), $parNormal);
+
               
-              $sect->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-              $sect->addCheckbox($fontCheckbox);
+              $sect->writeText($checks[$number_key][$checkarray].'<br/>', new PHPRtfLite_Font(10, 'Arial', '#000000'), $parNormal);
+              $table = $sect->addTable();
+              $table->addRows(1);
+              $table->addColumnsList(array(3,9));
+
+              $cell = $table->getCell(1, 1);
+              $cell->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+              $cell->addCheckbox($fontCheckbox);
+              $cell = $table->getCell(1, 2);
+              $cell->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+              $cell->addCheckbox($fontCheckbox);
               $sect->writeText('<br/>');
-              $sect->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-              $sect->addCheckbox($fontCheckbox);
-              $sect->writeText('<br/><br/>');
                          
               print("</div>");
 
@@ -581,8 +589,8 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                   }
 
                   print("<div class='check-title'>");
-                  print $number_key . '-' . $checks_title[$number_key];
-                  $sect->writeText('<b>'.$number_key .". ".  $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
+                  print $checks_title[$number_key];
+                  $sect->writeText('<b>'.  $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                   print("</div>");
                   $show_title=false;
                 }                 
@@ -654,12 +662,17 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                   print("<div class='check-text col-md-9'>");
                   print $checks[$number_key][$checkarray];
                   $sect->writeText($checks[$number_key][$checkarray].'<br/>', new PHPRtfLite_Font(10,  'Arial', '#000000'), $parNormal);
-                  $sect->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
+                  $table = $sect->addTable();
+                  $table->addRows(1);
+                  $table->addColumnsList(array(3,9));
+
+                  $cell = $table->getCell(1, 1);
+                  $cell->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
+                  $cell = $table->getCell(1, 2);
+                  $cell->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
                   $sect->writeText('<br/>');
-                  $sect->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
-                  $sect->writeText('<br/><br/>');
                   print("</div>");
                   print("<div class='check-check col-md-3'>");
                   print "<span class='yes-txt'>".$yes."</span>";
@@ -675,7 +688,7 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
           }else{  
               
               if (isset($checks[$number_key])==1){
-                $answer_19 = "NOT";
+                $answer_19 = "NO";
                 if ($number_key == "19" ){
 
                   if (isset($check_toshow[19]['is_skipped'])==1){
@@ -690,7 +703,6 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                       }
                   }
 
-
                   //Print 19-1
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
@@ -699,8 +711,8 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                     $checkcount=0;
                   }
                   $checkcount=$checkcount+1;
-                  print  '19-1-' . $checks_title['19-1'];
-                  $sect->writeText('<b>19-1 - ' . $checks_title['19-1'].'</b><br/>', new PHPRtfLite_Font(12, 'Arial', '#000000'), $parNormal);
+                  print  $checks_title['19-1'];
+                  $sect->writeText('<b>' . $checks_title['19-1'].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                   print("</div>");
                   print("<div class='q-answers'><span class='answer-title'>Your answer:</span></div>");
                   print("<span class='answer-text-check'><p>".$answer_19."</p></span>");
@@ -719,11 +731,16 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                   $cell->writeText($answer_19, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
                   $sect->writeText($checks['19-1'].'<br/>', new PHPRtfLite_Font(10, 'Arial', '#000000'), $parNormal);
-                  $sect->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
-                  $sect->writeText('<br/>');
-                  $sect->writeText($no, new PHPRtfLite_Font(10,"Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
+                  $table = $sect->addTable();
+                  $table->addRows(1);
+                  $table->addColumnsList(array(3,9));
+
+                  $cell = $table->getCell(1, 1);
+                  $cell->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
+                  $cell = $table->getCell(1, 2);
+                  $cell->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
                   $sect->writeText('<br/><br/>');                        
                   print("</div>");
                   print("<div class='check-check col-md-3'>");
@@ -735,13 +752,13 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                   //Print 19-2
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
-                  print  '19-2-' . $checks_title['19-2'];
+                  print $checks_title['19-2'];
                   if ($checkcount==4){
                     $sect->insertPageBreak();
                     $checkcount=0;
                   }
                   $checkcount=$checkcount+1;
-                  $sect->writeText('<b>19-2 - ' . $checks_title['19-2'].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#000000'), $parNormal);
+                  $sect->writeText('<b>' . $checks_title['19-2'].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                   print("</div>");
                   print("<div class='q-answers'><span class='answer-title'>Your answer:</span></div>");
                   print("<span class='answer-text-check'><p>".$answer_19."</p></span>");
@@ -760,12 +777,18 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                   $cell->writeText($answer_19, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
                   $sect->writeText($checks['19-2'].'<br/>', new PHPRtfLite_Font(10, 'Arial', '#000000'), $parNormal);
-                  $sect->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
-                  $sect->writeText('<br/>');
-                  $sect->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
-                  $sect->writeText('<br/><br/>');                        
+                  
+                  $table = $sect->addTable();
+                  $table->addRows(1);
+                  $table->addColumnsList(array(3,9));
+
+                  $cell = $table->getCell(1, 1);
+                  $cell->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
+                  $cell = $table->getCell(1, 2);
+                  $cell->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
+                  $sect->writeText('<br/>');                        
                   print("</div>");
                   print("<div class='check-check col-md-3'>");
                   print "<span class='yes-txt'>".$yes."</span>";
@@ -776,13 +799,13 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                 }else { 
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
-                  print  $number_key . '-' . $checks_title[$number_key];
+                  print  $checks_title[$number_key];
                   if ($checkcount==4){
                       $sect->insertPageBreak();
                       $checkcount=0;
                     }
                   $checkcount=$checkcount+1;
-                  $sect->writeText('<b>'.$number_key .". ".  $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
+                  $sect->writeText('<b>' . $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
 
                   print("</div>");
 
@@ -839,16 +862,56 @@ $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
                       }
                     }
                   }
+                 
+                  print ('<span class="answer-text-check">');
+                  if (in_array($number_key,$show_yes) && isset($check_toshow[$number_key]['is_skipped'])!=1){
+                    print t("Yes") ;
+                    $table = $sect->addTable();
+                    $table->addRows(1);
+                    $table->addColumnsList(array(3,9));
+
+                    $cell = $table->getCell(1, 1);
+                    $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+
+                    $cell = $table->getCell(1, 2);
+                    $cell->writeText(t("Yes"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+
+                  }elseif(isset($check_toshow[$number_key]['is_skipped'])!=1){
+                    print t("No");
+                    $table = $sect->addTable();
+                    $table->addRows(1);
+                    $table->addColumnsList(array(3,9));
+
+                    $cell = $table->getCell(1, 1);
+                    $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+
+                    $cell = $table->getCell(1, 2);
+                    $cell->writeText(t("No"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  }
+                  print("</span>");  
                   print("<div class='check-text col-md-9'>");
                   
                   print $checks[$number_key];
+
+
+
+
+
+
+
                   $sect->writeText($checks[$number_key].'<br/>', new PHPRtfLite_Font(10, 'Arial', '#000000'), $parNormal);
-                  $sect->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
-                  $sect->writeText('<br/>');
-                  $sect->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $sect->addCheckbox($fontCheckbox);
-                  $sect->writeText('<br/><br/>');                        
+                  $table = $sect->addTable();
+                  $table->addRows(1);
+                  $table->addColumnsList(array(3,9));
+
+                  $cell = $table->getCell(1, 1);
+                  $cell->writeText($yes, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
+                  $cell = $table->getCell(1, 2);
+                  $cell->writeText($no, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+                  $cell->addCheckbox($fontCheckbox);
+
+                  $sect->writeText('<br/>');                        
                   print("</div>");
 
                   print("<div class='check-check col-md-3'>");

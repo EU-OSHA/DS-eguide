@@ -623,6 +623,98 @@ li.pending{
 	}
 }
 
+.content-print-download-up{
+	margin-bottom: -1em;
+	.print-download{
+		margin-top: 1em;
+		padding: 0;
+		list-style: none;
+		
+		a{
+			font-weight: bold;
+			font-size: 1.4rem;
+			padding-left: 15px;
+		}
+
+		li.save{
+			padding-top: 5px;
+		    padding-bottom: 0px;
+		}
+
+		li.save a{
+			background: url('../images/save.png') 3px 12px no-repeat;
+			padding-left: 40px;
+    		padding-top: 1em;
+    		padding-bottom: 1em;
+		    display: block;
+		}
+
+		li.save a.disabled{
+			background: url('../images/save-disabled.png') 3px 12px no-repeat;
+		}
+
+		li.print{
+			padding-top: 5px;
+		    padding-bottom: 0px;
+		}
+
+		li.print a{
+			background: url('../images/print.png') 0px 12px no-repeat;
+			padding-left: 40px;
+    		padding-top: 1em;
+    		padding-bottom: 1em;
+    		display: block;
+		}
+
+		li.download{
+			padding-top: 5px;
+		    padding-bottom: 10px;
+		}
+
+		li.download a{
+			background: url('../images/download.png') 2px 12px no-repeat;
+			padding-left: 40px;
+    		padding-top: 1em;
+    		padding-bottom: 1em;
+    		display: block;
+		}
+
+		li.view-checklist{
+			padding-top: 5px;
+		    padding-bottom: 10px;
+		}
+
+		li.view-checklist a{
+			background: url('../images/view-checklist.png') 5px 10px no-repeat;
+			padding-left: 40px;
+    		padding-top: 1em;
+    		padding-bottom: 1em;
+    		display: block;
+		}
+
+		li.view-checklist a.disabled{
+			background: url('../images/view-checklist-disabled.png') 5px 10px no-repeat;
+		}
+
+		li.recomendations{
+			padding-top: 5px;
+		    padding-bottom: 10px;
+		}
+
+		li.recomendations a{
+			background: url('../images/recomendations.png') -1px 4px no-repeat;
+			padding-left: 40px;
+    		padding-top: 1em;
+    		padding-bottom: 1em;
+    		display: block;
+		}
+
+		li.recomendations a.disabled{
+			background: url('../images/recomendations-disabled.png') -1px 4px no-repeat;
+		}
+	}
+}
+
 //Only for summary
 .quiz-question-multichoice-summary{
 	.content-print-download{
@@ -1455,18 +1547,25 @@ meter{
 
 /* Contact us & FAQs */
 .page-node-67{
-	
+	h1{
+		margin-bottom: 20px;
+	}
+	.container-webform{
+		width: 100%;
+	}
 	.webform{
 		padding-left: 5px;
 		float: none;
+		max-width: 700px;
+		margin: 0 auto;
 	}
 
 	.contact-us-title{
-		display: inline-block;
+		/*display: inline-block;
 		float: left;
 		cursor: pointer;
     	padding-right: 10px;
-    	margin-bottom: 0;
+    	margin-bottom: 0;*/
 	}
 
 	.display-down-contact-us{
@@ -1499,7 +1598,7 @@ meter{
 }
 
 .webform-client-form{
-	display: none;
+	//display: none;
 	clear: both;
 	.control-label , .captcha{
 		padding-top: 10px;
@@ -1576,7 +1675,7 @@ meter{
 /*e-tool*/
 .img-about{
 	overflow: hidden;
-    height: 360px;
+    max-height: 360px;
 }
 /*end-e-tool*/
 
@@ -1598,8 +1697,58 @@ meter{
     	text-align: center;
     	margin-bottom: 30px;
     }
+	.closeMoreInfo{
+    	img{
+    		position: absolute;
+		    right: 5px;
+		    top: 5px;
+		    width: 25px;
+		    border-radius: 50%;
+		    cursor: pointer;
+    	}
+    }
 
-    .closeMoreInfo{
+    #quiz-email-form{
+    	margin-top: 25px;
+    }
+
+    .form-item-email{
+    	max-width: 75%;
+    	display: inline-block;
+    	margin-right: 15px;
+    	input{
+    		border-color:#003399;
+    	}
+    }
+
+    button.form-submit{
+		vertical-align: inherit !important;
+		background-color: #003399 !important;
+		border: none !important;
+		color: white !important;
+		&:hover{
+			background-color: #041f55 !important;
+		}
+	}
+}
+
+#barInfoDiv{
+	border-radius: 5px;
+    padding: 20px;
+    margin-top: -5em;
+    h1{
+    	margin-top: 0px;
+    	font-size: 3.6rem;
+    	color: #003399;
+    	text-align: center;
+    	margin-bottom: 30px;
+    }
+
+    .contentBarInfo{
+    	margin-top: 10px;
+    }
+
+    .closebarInfo{
     	img{
     		position: absolute;
 		    right: 5px;
@@ -1723,6 +1872,13 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 	height: 16em;
 	z-index: 2147483647;
 }
+#barInfoDiv{
+	position: absolute;
+	background-color: #dddddd;
+	height: 15em;
+	z-index: 2147483647;
+	
+}
 
 /*Hide the fields used for the confirmation message*/
 .form-item-new-confirmation{
@@ -1778,6 +1934,7 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 	.check-text{
 		padding-left: 35px;
 		font-size: 1em;
+		clear:both;
 	}
 	.check-check{
 		span:first-child{
@@ -1833,6 +1990,7 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 			padding: 0px;
     		margin: 0 auto;
     		float: none;
+    		width: 370px;
 			li{
 				display: inline-block;
 			}
@@ -1862,7 +2020,7 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 }
 
 /*RECOMMENDATIONS*/
-.page-node-107{
+.page-node-107,.page-node-168{
 	
 	.block-title{
 		color:@ds-blue;
@@ -1961,6 +2119,27 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 	    padding-bottom: 0px;
 	    clear: both;
 	    margin-left: 15px;
+	    margin-right: 15px;
+		ul{
+			padding: 0px;
+    		margin: 0 auto;
+    		float: none;
+    		width: 370px;
+			li{
+				display: inline-block;
+			}
+			li:first-child{
+				margin-right: 1em;
+			}
+		}
+
+	}
+
+	.content-print-download-up {
+	    margin-top: 1em;
+	    padding-bottom: 0px;
+	    clear: both;
+	    margin-left: 15px;
 		margin-right: 15px;
 		ul{
 			padding: 0px;
@@ -1977,6 +2156,8 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 		}
 
 	}
+
+
 }
 
 .back a{

@@ -994,6 +994,7 @@ function quiz_load($nodes) {
  * Implements hook_view().
  */
 function quiz_view($node) {
+
   // Number of questions is needed on the statistics page.
   $node->number_of_questions = quiz_get_number_of_questions($node->vid, $node->nid);
 
@@ -3678,11 +3679,13 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
         $max_que = 0;   
         $percentage = 100;
       }
+
       $que_node = node_load($feedback_text['quiz_result_answer'][$numberkey]['#entity']->question_nid);
       $que_title = $que_node->title;
       //$percentage = round($numberkey *100 / 7);
       if(isset($qra->view()['quiz_result_answer'][$numberkey]['answer_feedback'])==1){
         $feedback_text['quiz_result_answer'][$numberkey]['table']['#markup'] ="<h1 class='node-title'>".$que_title."</h1><div class='table-responsive'>".$qra->view()['quiz_result_answer'][$numberkey]['answer_feedback']['#markup']."</div>";  
+
       }else{
         $feedback_text['quiz_result_answer'][$numberkey]['table']['#markup'] ="<div class='table-responsive'></div>";
 
@@ -3812,15 +3815,18 @@ function quiz_mail($key, &$message, $params)
     $params['headers'] = array('Content-type'=>'text/html');
     $params['Content-type'] = 'text/html';
   
-    $link = "<a href = " .$base_url . "/retrieve?number=" . $params['values']['numero'] . "&email=".$message['to']."&result_id=" . $params['values']['result_id'] ."&current=".$params['values']['current'] .">LINK</a>";
+    $link = "<a href = " .$base_url . "/retrieve?number=" . $params['values']['numero'] . "&email=".$message['to']."&result_id=" . $params['values']['result_id'] ."&current=".$params['values']['current'] .">link</a>";
     //$link = "<a href = " .$base_url . "/retrieve?number=2&result_id=1>LINK</a>";
     
+    $footerimg = $base_url . "/sites/default/files/ds_footer.png";
+
     $message['headers']['MIME-Version'] = '1.0';
     $message['headers']['Content-Type'] = 'multipart/mixed;';
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
     $message['subject'] = t('Dangerous substances e-guide');
     $message['body'][] = '<html><body>';
-    $message['body'][] = t("Dear user, clicking on the following link you will access to your questionnaire and you could continue editing it ") . $link;
+    $message['body'][] = t("Dear user, clicking on the following") . " " . $link . " " .t("you will access to your questionnaire and you could continue editing it");
+    $message['body'][] = "<br/><br/><div class='footer'><a href = ".$base_url." target='_blank'><img src ='" . $footerimg ."'></a></div>";
     $message['body'][] = '</body></html>';
     //$message['body'] = array(0=>"This is the link:" . $link);
   
@@ -4568,7 +4574,7 @@ if ($block == 3){
          $first_skip = $item->min;
     }
     if ($first_skip>0){
-      $calc =$calc . "<div class='skiped-questions col-md-12' ><a href='/node/25/take/".$first_skip."'>> ".t('Answer skipped questions')."</a></div>";
+      $calc =$calc . "<div class='skiped-questions col-md-12' ><a href='/dangerous-substances/node/25/take/".$first_skip."'>> ".t('Answer skipped questions')."</a></div>";
     }
 
     return $calc;

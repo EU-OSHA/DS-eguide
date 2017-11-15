@@ -74,8 +74,8 @@ $checks['30']['250'] =array("63.1");
 $checks['30']['251']=array("63.3");
 $checks['31']['skipped'] =array("63.0","37.0");
 $checks['31']['214'] =array("63.0","37.0");
-$checks['32']['skipped'] =array("65.0");
-$checks['32']['216'] =array("65.0");
+$checks['32']['skipped'] =array("64.0");
+$checks['32']['216'] =array("64.0");
 $checks['36']['224'] =array("55.0");
 
 $block_title = array();
@@ -245,12 +245,14 @@ if ($result_id ==0 ){//Nothing to show
       
       
 	$dont_get = array(1,2,3,26,33,34,35);
+  $dont_get_bycountry = array(1,9,21,22,23,24);
   	$check_toshow = array();
   	$query = db_select('quiz_node_results_answers', 'que_ans');
   	$query->fields('que_ans', array('is_correct','number','is_skipped','question_nid'));
   	$query->condition('result_id', $result_id);
   	$query->condition('is_skipped',2,'<');
   	$query->condition ('number',$dont_get, 'NOT IN');
+    $query->condition ('number',$dont_get_bycountry, 'NOT IN');
   	$query->condition('number', $next_que,'<');
     $query->isNotNull('answer_timestamp');
   	$query->orderBy('number', 'ASC');
@@ -358,6 +360,8 @@ if ($result_id ==0 ){//Nothing to show
          	$body_rec  = str_replace('</li>', "", $body_rec);
          	$body_rec  = str_replace('</ul>', "", $body_rec);
          	$body_rec  = str_replace('<ul>', "", $body_rec);
+          $body_rec  = str_replace('" target="_blank">', " - ", $body_rec);
+          $body_rec  = str_replace('</a>', "", $body_rec);
           $sect->writeText(t("Introduction") .'<br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parSimple);
 	        $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
 
@@ -389,6 +393,8 @@ if ($result_id ==0 ){//Nothing to show
        	$body_rec  = str_replace('</li>', "", $body_rec);
        	$body_rec  = str_replace('</ul>', "", $body_rec);
        	$body_rec  = str_replace('<ul>', "", $body_rec);
+        $body_rec  = str_replace('" target="_blank">', " - ", $body_rec);
+        $body_rec  = str_replace('</a>', "", $body_rec);
         $sect->writeText(t("Introduction") .'<br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parSimple);
         $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
 	   	}
@@ -403,7 +409,7 @@ if ($result_id ==0 ){//Nothing to show
 	        	$node_q = node_load($check_toshow[$number_key]['nid']);
 	        	$qtitle = $node_q->title;
 
-	        	print("<div class='q-title'>".$number_key .". ". $qtitle."</div>");
+	        	print("<div class='q-title'>". $qtitle."</div>");
 	        	
             if ($block_first_question == true){
                $block_first_question = false;
@@ -411,7 +417,7 @@ if ($result_id ==0 ){//Nothing to show
               $sect->insertPageBreak();
             }
 
-            $sect->writeText('<b>'.$number_key .". ". $qtitle.'</b><br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parNormal);
+            $sect->writeText('<b>'. $qtitle.'</b><br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parNormal);
 
 	        	print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span>");
 	        	$sect->writeText('<b>'.t("Your answer").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
@@ -475,9 +481,9 @@ if ($result_id ==0 ){//Nothing to show
 
                   //images
                   
-                  if ($rec_node =="28.2" ||$rec_node =="38.0" ||$rec_node =="39.0" ||$rec_node =="59.0" ){
+                  if ($rec_node =="28.2" ||$rec_node =="38.0" ||$rec_node =="39.0" ||$rec_node =="58.0" ){
                     
-                    if($rec_node == "59.0"){
+                    if($rec_node == "58.0"){
                       $pos = strpos($body_rec,'<img');
                       $body= substr($body_rec,0,$pos);
                       $sect->writeText($body .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
@@ -517,6 +523,40 @@ if ($result_id ==0 ){//Nothing to show
                       $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
                     }
 
+
+                   if($rec_node == "38.0"){
+                      $pos = strpos($body_rec,'<img');
+                      $body= substr($body_rec,0,$pos);
+                      $sect->writeText($body .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
+                      $sect->addImage($dir . '/../../../../default/files/38-6.png', null);
+
+                      $pos = strpos($body_rec,'.png"');
+                      $body_rec = substr($body_rec, $pos + 8);
+
+                      $pos = strpos($body_rec,'<img');
+                      $body= substr($body_rec,0,$pos);
+                      $sect->writeText($body .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
+                      $sect->addImage($dir . '/../../../../default/files/38-1.png', null);
+
+                      $pos = strpos($body_rec,'.png"');
+                      $body_rec = substr($body_rec, $pos + 49);
+
+                      $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
+                    }
+                     
+                    if($rec_node == "39.0"){
+                      $pos = strpos($body_rec,'<img');
+                      $body= substr($body_rec,0,$pos);
+                      $sect->writeText($body .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
+                      $sect->addImage($dir . '/../../../../default/files/39.png', null);
+
+                      $pos = strpos($body_rec,'.png"');
+                      $body_rec = substr($body_rec, $pos + 8);
+
+                      
+
+                      $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
+                    }
 
 
                   }else{

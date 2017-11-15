@@ -159,7 +159,11 @@
         bottom: 10px;
         font-style: italic
       }
-      
+      .flyleaf {
+          page-break-after: always;
+          margin-top:-100px;
+          padding:0;
+        }
       .break{
         page-break-after: always;
       }
@@ -179,7 +183,7 @@
   $checkcount=0;
 
   ?>
-
+  <div class="flyleaf" width="100%"> <?php print '<img  src="'.base_path() . path_to_theme() .'/images/cover.jpg">'; ?></div>
   <header  style="position: fixed;top:-60px;">
     <?php print '<img  src="'.base_path() . path_to_theme() .'/images/header-pdf.jpg">'; ?>
   </header>
@@ -356,7 +360,7 @@ $no = str_pad($no,  10, " ");
         $number = $answer->number;
         $question_nid = $answer->question_nid;
 
-        if (1==1 || $number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==30){
+        if ($number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==30){
           //We have to check what was the answers to these questions
           //print ("Mas de una respuesta :" . $number . "<br>");
 
@@ -526,7 +530,7 @@ $no = str_pad($no,  10, " ");
                     $checkcount=0;
                   }          
                   print("<div class='check-title'>");
-                  print($number_key . '-'. $checks_title[$number_key][$checkarray]);
+                  print($checks_title[$number_key][$checkarray]);
                   print("</div>");
                   $show_title=false;
                 }  
@@ -537,7 +541,7 @@ $no = str_pad($no,  10, " ");
                 if (isset($check_toshow[$number_key]['is_skipped'])==1){
                   print("<span class='answer-title'>". t("Your answer").":</span>");
                   print("<span class='answer-text-check skipped'>");
-                  print(t('Do not know / Reply later'));
+                  print(t('Do not know / Reply later') . "Este otro");
                   if ($checkcount==4){
                     print("<div class='break'></div>");
                     print("&nbsp;");
@@ -618,7 +622,7 @@ $no = str_pad($no,  10, " ");
                     }
                       
                     print("<div class='check-title'>");
-                    print $number_key . '-' . $checks_title[$number_key];
+                    print $checks_title[$number_key];
                     print("</div>");
                     $show_title=false;
                   }                 
@@ -635,7 +639,7 @@ $no = str_pad($no,  10, " ");
                     
                     print("<span class='answer-title'>". t("Your answer").":</span>");
                     print("<span class='answer-text-check skipped'>");
-                    print(t('Do not know / Reply later'));
+                    print(t('Do not know / Reply later') . "O este");
                     print("</span>");             
                   }
                  
@@ -718,10 +722,10 @@ $no = str_pad($no,  10, " ");
                   $checkcount=$checkcount+1;
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
-                  print  '19-1-' . $checks_title['19-1'];
+                  print $checks_title['19-1'];
                   print("</div>");
-                  print("<div class='q-answers'><span class='answer-title'>Your answer:</span></div>");
-                  print("<span class='answer-text-check'><p>".$answer_19."</p></span>");
+                  print("<span class='answer-title'>". t("Your answer").":</span>");
+                  print("<span class='answer-text-check'>".$answer_19."</span>");
                   print("<div class='check-text col-md-9'>");
                   print $checks['19-1'];
                   
@@ -741,10 +745,10 @@ $no = str_pad($no,  10, " ");
                   $checkcount=$checkcount+1;
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
-                  print  '19-2-' . $checks_title['19-2'];
+                  print $checks_title['19-2'];
                   print("</div>");
-                  print("<div class='q-answers'><span class='answer-title'>Your answer:</span></div>");
-                  print("<span class='answer-text-check'><p>".$answer_19."</p></span>");
+                  print("<span class='answer-title'>". t("Your answer").":</span>");
+                  print("<span class='answer-text-check'>".$answer_19."</span>");
                   print("<div class='check-text col-md-9'>");
                   print $checks['19-2'];
                   
@@ -768,16 +772,18 @@ $no = str_pad($no,  10, " ");
 
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
-                  print $number_key . '-' . $checks_title[$number_key];
+                  print $checks_title[$number_key];
                   
                   print("</div>");
 
                   /*print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span></div>");*/
                   
                   if (isset($check_toshow[$number_key]['is_skipped'])==1){
-                    print("<span class='answer-text-check skipped'>");
-                    print("<p>".t('Do not know / Reply later')."</p>");
-                    print("</span>");             
+                    //print("<span class='answer-text-check'>");
+                    print("<span class='answer-title'>". t("Your answer").":</span>");
+                    print t('Do not know / Reply later');
+                    //print("</span>");         
+                    
                   }
                   
                   if(isset($check_toshow[$number_key]['nid'])){
@@ -796,7 +802,9 @@ $no = str_pad($no,  10, " ");
                         $answer_text = str_replace('</p>', '',$answer_text);
                         
                         print("<span class='answer-text-check'>");
-                        print("<span class='answer-title'>". t("Your answer").":</span>");
+                        if (isset($check_toshow[$number_key]['is_skipped'])!=1){
+                          print("<span class='answer-title'>". t("Your answer").":</span>");
+                        }
                         print(t($answer_text) . "<br/>");
                         $answer = t($answer_text);
                         $answer = str_replace("<p>","",$answer);
@@ -805,6 +813,20 @@ $no = str_pad($no,  10, " ");
                       }
                     }
                   }
+
+                  
+                  if (in_array($number_key,$show_yes) && isset($check_toshow[$number_key]['is_skipped'])!=1){
+                    print ('<span class="answer-text-check">');
+                    print("<span class='answer-title'>". t("Your answer").":</span>");
+                    print t("Yes");
+                  }elseif(isset($check_toshow[$number_key]['is_skipped'])!=1){
+                    print ('<span class="answer-text-check">');
+                    print("<span class='answer-title'>". t("Your answer").":</span>");
+                    print t("No");
+                  }
+                  print("</span>");  
+
+
                   print("<div class='check-text col-md-9'>");
                   
                   print $checks[$number_key];

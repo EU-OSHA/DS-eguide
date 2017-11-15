@@ -308,12 +308,15 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
       return false;
     }else
     $dont_get = array(1,2,3,26,33,34,35);
+    $dont_get_bycountry = array(1,9,21,22,23,24);//Question with empty recommendations for the moment in English version
+
   	$check_toshow = array();
   	$query = db_select('quiz_node_results_answers', 'que_ans');
   	$query->fields('que_ans', array('is_correct','number','is_skipped','question_nid'));
   	$query->condition('result_id', $result_id);
   	$query->condition('is_skipped',2,'<');
   	$query->condition ('number',$dont_get, 'NOT IN');
+    $query->condition ('number',$dont_get_bycountry, 'NOT IN');
   	$query->condition('number', $next_que,'<');
     $query->isNotNull('answer_timestamp');
   	$query->orderBy('number', 'ASC');
@@ -411,7 +414,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
 	        	$node_q = node_load($check_toshow[$number_key]['nid']);
 	        	$qtitle = $node_q->title;
 
-	        	print("<div class='q-title'>".$number_key .".- ". $qtitle."</div>");
+	        	print("<div class='q-title'>" . $qtitle."</div>");
 	        	print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span>");
 	        	
 	        	if ($checkarray=="skipped"){

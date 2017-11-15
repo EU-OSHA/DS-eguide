@@ -336,7 +336,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           }else{
             $sumary_class="";
             $number_result = $_SESSION['quiz'][25]['result_id'];
-            $sumary_link= "/node/25/quiz-results/".$number_result."/view";
+            $sumary_link= "/dangerous-substances/node/25/quiz-results/".$number_result."/view";
             $report_class="";
           }
        }
@@ -356,7 +356,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             <a href="/dangerous-substances/checklist" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="recomendations <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="/dangerous-substances/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recomendations")?></a>
+            <a href="/dangerous-substances/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recommendations")?></a>
           </li>
           
       </ul></div>
@@ -413,7 +413,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             <a href="/dangerous-substances/checklist">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="download">
-            <a href="/dangerous-substances/recommendations">&gt; <?php print t("View the Recomendations")?></a>
+            <a href="/dangerous-substances/recommendations">&gt; <?php print t("View the Recommendations")?></a>
           </li>
           </ul></div>
           </div>
@@ -893,7 +893,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 
           }
          
-         
+          //krumo($page['content']);
           print render($page['content']); 
 
          } 
@@ -929,10 +929,19 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           <progress max="36" value="<?php print($max_que) -1 ?>" class="quiz-progress"></progress>
           <div class="total-answered"><?php print $ans_res; ?> answered</div>
           <div class="total-skipped"> <?php print $ans_ski; ?> skipped</div>
-           
-          <div class="info-ico-right"><a href=""><img title="info" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
+          <div class="info-ico-right"><a href="javascript:barInfo();"><img title="info" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
         </div>
-     
+        
+        <div id="barInfoDiv" style="display: none;" class="col-md-11">
+        <div class="closebarInfo">
+        <img src="/dangerous-substances/sites/all/themes/bootstrapDs/images/closeMoreinfo.png" alt="close">
+        </div>
+        <div class="contentBarInfo">
+        <p><?php print (t("This graph shows which share of all questions you already completed. If you skip questions to answer them later, the progress bar will change.")); ?></p>
+        </div>
+        </div>
+
+
       </div> 
 
 
@@ -1000,25 +1009,6 @@ print drupal_render($form);
 
 
 
-
-
-<?php
-/*
-$question_flow = array("1","2","5","14","16","19","21","25","27","29","32","34");
-$next_que =$_SESSION['quiz'][25]['next_question']; 
-if (in_array($cur_que,$question_flow ) &&  $next_que > $cur_que){
-  drupal_set_message($message = t('If you change the answer of this question, all the answers after this question will be deleted.'), $type = 'warning', $repeat = FALSE);
-}
-
-
-if (isset ($_SESSION['quiz'][25]['warning'])==1){
-  if ($_SESSION['quiz'][25]['warning']==TRUE){
-      //drupal_set_message($message = t('If you change the answer of this question, all the answers after this question will be deleted.'), $type = 'warning', $repeat = FALSE);
-      //$_SESSION['quiz'][25]['warning']=FALSE;
-  }
-}
-*/
-?>
 
 <script type="text/javascript">
 
@@ -1174,6 +1164,21 @@ window.onload = function() {
     }
 }
 
+function barInfo() {
+  
+  var body = jQuery("html, body");
+  body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
+  });
+    jQuery("#barInfoDiv").slideDown("fast",function() {
+    jQuery("#barInfoDiv").attr("style","display: block !important;");
+    });
+  }
+
+  jQuery(".closebarInfo").click(function() {
+    jQuery("#barInfoDiv").slideUp("fast",function() {
+    });
+  });
+
 
 function moreInfo() {
   
@@ -1185,7 +1190,7 @@ function moreInfo() {
   
   if(jQuery("#moreInfoDiv").length>0) {
     
-    if(jQuery(window).width()>1006) {
+    if(jQuery(window).width()>200) {
       jQuery(".ds-header").after("<div id='shadow'></div>");
       jQuery("#shadow").css("height",jQuery(window).height());
       jQuery("#shadow").css("width",jQuery(window).width());
