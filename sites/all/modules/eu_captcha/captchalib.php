@@ -52,7 +52,7 @@ if (!defined('CAPTCHA_ADDITIONAL_HEADER'))
  */
 function _captcha_qsencode($data) {
     $req = "";
-    foreach ($data as $key => $value)
+    foreach ($data as $key => $value){
         if(isset($value)){
           $req .= $key . '=' . urlencode(stripslashes($value)) . '&';
         }

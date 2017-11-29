@@ -89,7 +89,7 @@
     <p class="text-home text-center">
       <?php echo t('This dangerous substances e-tool will give you an overview of the safety and health hazards associated with dangerous substances and chemical products in the workplaces of your company. Based on your input, you will get tailored, company-specific advice on how to apply good practices and measures, and on how to follow the relevant rules and regulations. If you take the recommended action, you will effectively reduce the risks caused by dangerous substances and chemical products in your workplace.');?>
     </p>
-    <div class="btn-home"><a href="about-the-guide"><?php echo t('Learn more about the Dangerous substances e-tool');?></a></div>
+    <div class="btn-home"><a href="about-the-etool"><?php echo t('Learn more about the Dangerous substances e-tool');?></a></div>
     <div class="btn-home"><a href="glossary"><?php echo t('Glossary');?></a></div>
   </section>
    <section class="container">
