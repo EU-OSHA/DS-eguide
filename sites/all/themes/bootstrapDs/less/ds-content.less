@@ -1,4 +1,54 @@
 //General
+body{
+	/* General */
+	padding-top: 232px;
+	&.toolbar-drawer,
+	&.toolbar,
+	&.logged-in{
+		padding-top: 212px !important;
+	}
+	@media only screen and (min-width : 660px) and (max-width : 991px){
+		padding-top: 288px;
+		&.toolbar-drawer,
+		&.toolbar,
+		&.logged-in{
+			padding-top: 268px !important;
+		}
+	}
+	@media only screen and (min-width : 592px) and (max-width : 659px){
+		padding-top: 278px;
+		&.toolbar-drawer,
+		&.toolbar,
+		&.logged-in{
+			padding-top: 258px !important;
+		}
+	}
+	@media only screen and (max-width : 591px){
+		padding-top: 305px;
+		&.toolbar-drawer,
+		&.toolbar,
+		&.logged-in{
+			padding-top: 285px !important;
+		}
+	}
+	@media only screen and (max-width : 480px){
+		padding-top: 230px;
+		&.toolbar-drawer,
+		&.toolbar,
+		&.logged-in{
+			padding-top: 211px !important;
+		}
+	}
+	@media only screen and (max-width : 333px){
+		padding-top: 258px;
+		&.toolbar-drawer,
+		&.toolbar,
+		&.logged-in{
+			padding-top: 238px !important;
+		}
+	}
+}
+
 .container-fluid{
 	padding: 0;
 }

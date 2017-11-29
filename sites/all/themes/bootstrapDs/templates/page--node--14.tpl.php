@@ -306,12 +306,14 @@ drupal_add_library('system', 'ui.draggable');
           }
           print "<div class='question-body summary-questions'>" . t('This is a help to get started quickly, easily and efficiently with the chemical work. The quick start contains advice and tips on some basic requirements. There are other requirements that you also need to know to take the necessary prevention measures in your company and at your work places.') . "</div>";
           print "<div class='question-body summary-questions'>" . t('After the quick start, please proceed to ') . "<a href='".$base_url."/node/25/take/"."'>" . t('My Chemical Guide') . "</a> " . t('It deals with all the necessary measures that you need for a good management of chemical products and substances. My Chemical Guide helps you to sort out what you need to do. My Chemical Guide provides tailored advice based on your company and work place specific situation.') . "</div>";
+
+          $reportlink = $base_url ."/report-sq";
         ?>
 
            <div class="content-print-download final-summary short">
             <ul class="print-download">
               <li class="print short">
-              <a href="#">> <?php print t('View the report'); ?></a>
+              <a href="<?php print ($reportlink)?>"> <?php print t('View the report'); ?></a>
               </li>
             </ul>
           </div>

@@ -188,7 +188,7 @@ foreach ($check_toshow as $checknumber) {
 
   foreach ($checknumber[$number_key] as $checkarray) {
     $node_q = node_load($check_toshow[$number_key]['nid']);
-	  $qtitle = $node_q->title;
+	  $qtitle = substr($node_q->title,3);
 
 	  print("<div class='q-title'>". $qtitle."</div>");
 	  $sect->writeText('<b>'. $qtitle.'</b><br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parNormal);

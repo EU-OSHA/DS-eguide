@@ -159,6 +159,6 @@ global $base_url;
         ?>
       </div>
     </div>
-  </div>  
+  
 </footer>
 <?php endif; ?>

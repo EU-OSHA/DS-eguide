@@ -161,7 +161,7 @@ if (isset($_SESSION['email'])==1){
 </header>
 <div id="footer" style="position: fixed;bottom: 10px; left: 10px; width:100%;">
   <div>
-    My Chemical Guide - Questionnaire Report
+    <?php print t("My Chemical Guide - Questionnaire Report");?>
     <span style="position:absolute;right:25px;">
       <?php print $fecha_actual; ?>
     </span>

@@ -110,7 +110,25 @@
 			.check-check{
 				padding-left: 0px;
 			}
+			.check-title{
+				margin-top: 0px;
+				padding-top: 0px;
+			}
 		}
+	}
+
+	#barInfoDiv{
+		height: inherit !important;
+	}
+
+	//removing the scroll to the question options for mobile
+	.table-responsive > .table > thead > tr > th,
+	.table-responsive > .table > tbody > tr > th,
+	.table-responsive > .table > tfoot > tr > th,
+	.table-responsive > .table > thead > tr > td,
+	.table-responsive > .table > tbody > tr > td,
+	.table-responsive > .table > tfoot > tr > td{
+		    white-space: inherit !important;
 	}
 
 }
@@ -126,6 +144,7 @@
 		max-width: 185px;
 	    padding-top: 27px;
 	}
+	
 
 	.quiz-question-multichoice-summary{
 		.content-print-download{
@@ -138,4 +157,13 @@
 	}
 }
 
+@media only screen and (max-width : 510px){
+
+	.logo-eu {
+	    margin-top: 90px;
+	    margin-left: 10px;
+	    max-width: 48px;
+	}
+
+}
 

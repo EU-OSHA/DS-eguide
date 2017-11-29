@@ -88,15 +88,57 @@ $(document).ready(function(){
   });
 })(jQuery);
 
+// Hide Header on on scroll down
+(function ($) {
+  $(document).ready(function(){
+    var didScroll;
+    var lastScrollTop = 0;
+    var delta = 5;
+    var navbarHeight = $('header').outerHeight()-70;
 
-/* sticky menu  */
+    $(window).scroll(function(event){
+        didScroll = true;
+    });
+
+    setInterval(function() {
+        if (didScroll) {
+            hasScrolled();
+            didScroll = false;
+        }
+    }, 110);
+
+    function hasScrolled() {
+        var st = $(this).scrollTop();
+        
+        // Make sure they scroll more than delta
+        if(Math.abs(lastScrollTop - st) <= delta)
+            return;
+        
+        // If they scrolled down and are past the navbar, add class .nav-up.
+        // This is necessary so you never see what is "behind" the navbar.
+        if (st > lastScrollTop && st > navbarHeight){
+            // Scroll Down
+            $('header').removeClass('nav-down').addClass('nav-up');
+        } else {
+            // Scroll Up
+            if(st + $(window).height() < $(document).height()) {
+                $('header').removeClass('nav-up').addClass('nav-down');
+            }
+        }
+        
+        lastScrollTop = st;
+    }
+  });
+})(jQuery);
+
+/* sticky menu */
 (function ($) {
   $(document).ready(function(){
     //alert(document.documentElement.scrollHeight);
-      $(function () {
+      /*$(function () {
           // Check the initial Position of the Sticky Header
           var nav = $('.ds-menu');
-          if(jQuery("body.not-logged-in").height()>=1440){
+          if(jQuery("body.not-logged-in").height()>=150){
             if (nav.length) {
                 var stickyNavTop = nav.offset().top;
                 $(window).scroll(function () {
@@ -110,8 +152,21 @@ $(document).ready(function(){
               }
           }
       });
+      fixing sticky menu*/
+      var num = 120; //number of pixels before modifying styles
+      if($("body").height()>=550){
+        $(window).bind('scroll', function () {
+            if ($(window).scrollTop() > num) {
+                $("header").addClass("sticktotop");
+            } else {
+                $('header').removeClass('sticktotop');
+            }
+        });
+      };
   });
 })(jQuery);
+
+
 
 
 /** GO TO TOP **/

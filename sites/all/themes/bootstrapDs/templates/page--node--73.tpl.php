@@ -831,9 +831,10 @@ $sect->insertPageBreak();
                   
                   if(isset($check_toshow[$number_key]['nid'])){
                     $node_q = node_load($check_toshow[$number_key]['nid']);
-                    $answer_id =key($check_toshow[$number_key][$number_key]);
+                    if isset($check_toshow[$number_key][$number_key]){
+                      $answer_id =key($check_toshow[$number_key][$number_key]);
+                    }
                   
-
 
                     foreach ($node_q->alternatives as $q_answer) {
                       if ($answer_id == $q_answer['id']){

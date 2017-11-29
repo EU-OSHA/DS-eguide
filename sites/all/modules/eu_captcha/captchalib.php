@@ -53,7 +53,10 @@ if (!defined('CAPTCHA_ADDITIONAL_HEADER'))
 function _captcha_qsencode($data) {
     $req = "";
     foreach ($data as $key => $value)
-        $req .= $key . '=' . urlencode(stripslashes($value)) . '&';
+        if(isset($value)){
+          $req .= $key . '=' . urlencode(stripslashes($value)) . '&';
+        }
+    }
 
     // Cut the last '&'
     $req = substr($req, 0, strlen($req) - 1);

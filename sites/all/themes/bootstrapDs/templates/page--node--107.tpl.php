@@ -624,7 +624,7 @@ if ($result_id ==0 ){//Nothing to show
           
       </ul></div>
 
-</div><!--//Close therecommendations div-->
+
 
 <?php if (!empty($page['footer'])): ?>
   <footer class="ds-footer">
@@ -645,7 +645,7 @@ if ($result_id ==0 ){//Nothing to show
         ?>
       </div>
     </div>
-  </div>  
+
 </footer>
 <?php endif; ?>
 <?php

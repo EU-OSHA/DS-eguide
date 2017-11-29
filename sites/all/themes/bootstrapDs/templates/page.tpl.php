@@ -194,6 +194,6 @@ drupal_add_library('system', 'ui.draggable');
         ?>
       </div>
     </div>
-  </div>  
+  
 </footer>
 <?php endif; ?>
