@@ -166,7 +166,7 @@ if (isset($_SESSION['email'])==1){
       <?php print $fecha_actual; ?>
     </span>
     <br />
-    http://dsetool.osha.eu <?php print $email ?>
+    https://eguides.osha.europa.eu/dangerous-substances/ <?php print $email ?>
     <span style="position:absolute;right:60px;">Page</span>
      <br />
      <br />

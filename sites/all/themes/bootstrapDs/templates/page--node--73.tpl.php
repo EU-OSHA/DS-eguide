@@ -145,7 +145,7 @@ $cell->writeText(t('My Chemical Guide - Checklist'));
 
 $cell = $table->getCell(2, 1);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_LEFT);
-$cell->writeText("http://dsetool.osha.eu" . $email);
+$cell->writeText("https://eguides.osha.europa.eu/dangerous-substances" . $email);
 
 $cell = $table->getCell(1, 2);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_RIGHT);
@@ -295,16 +295,15 @@ $sect->insertPageBreak();
       $answers = $query->execute();
       
 
-      //Question with more than an answer 4,9,10,12,19,30
+      //Question with more than an answer 4,9,10,12,30
       foreach ($answers as $answer) {
         
         $number = $answer->number;
         $question_nid = $answer->question_nid;
 
-        if ($number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==30){
+        if ($number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==14 || $number==15 || $number==16 || $number==18 || $number==24 || $number==30){
         	//We have to check what was the answers to these questions
-        	//print ("Mas de una respuesta :" . $number . "<br>");
-
+        	
            if ($answer->is_skipped==1){
 
               switch ($number){
@@ -381,8 +380,10 @@ $sect->insertPageBreak();
     			    $res_answer = $query->execute();
             
               foreach ($res_answer as $resp) {
+                if ($resp->id!=139 && $resp->id!=261 && $resp->id!=168 && $resp->id!=172 && $resp->id!=180  && $resp->id!=271){ //Dont show this answers
                  $check_toshow[$number][$number][$resp->id] = $resp->id;
                  $check_toshow[$number]['nid'] = $question_nid;
+               }
              }	
             } 
           }    
@@ -418,7 +419,7 @@ $sect->insertPageBreak();
        $block2_printed = false;
        $block3_printed = false;
        
-     // krumo($check_toshow);
+      //krumo($check_toshow);
       foreach ($check_toshow as $checknumber) {
         
         $number_key = (key($checknumber));
@@ -452,7 +453,7 @@ $sect->insertPageBreak();
        		$block3_printed = true;
 
        	}
-      
+             
         if ($number_key == "11"  || $number_key =="30"){
             
           //print($number_key . "Array de " . count($checknumber[$number_key]));
@@ -575,6 +576,7 @@ $sect->insertPageBreak();
         else{
          	  
           if ($number_key == "4" || $number_key =="9" || $number_key =="10"|| $number_key =="12"){
+
 
             $show_title=true;
             foreach ($checknumber[$number_key] as $checkarray) {
@@ -829,10 +831,14 @@ $sect->insertPageBreak();
                     print("</span>");             
                   }
                   
-                  if(isset($check_toshow[$number_key]['nid'])){
+                  if(!isset($check_toshow[$number_key]['is_skipped']) && isset($check_toshow[$number_key]['nid'])){
                     $node_q = node_load($check_toshow[$number_key]['nid']);
-                    if isset($check_toshow[$number_key][$number_key]){
-                      $answer_id =key($check_toshow[$number_key][$number_key]);
+                    //krumo($node_q);
+                    //krumo($number_key);
+                    if(isset($check_toshow[$number_key][$number_key]) ){
+                      if ($number_key==9 || $number_key==10 || $number_key==11 || $number_key==12 || $number_key==14 || $number_key==15 || $number_key==16 || $number_key==18 || $number_key==24){
+                        $answer_id =key($check_toshow[$number_key][$number_key]);
+                      }
                     }
                   
 
@@ -863,9 +869,13 @@ $sect->insertPageBreak();
                       }
                     }
                   }
-                 
+
                   print ('<span class="answer-text-check">');
-                  if (in_array($number_key,$show_yes) && isset($check_toshow[$number_key]['is_skipped'])!=1){
+
+                  $special_answers= array(4,9,10,11,12,14,15,16,18,24,30);  
+
+
+                  if (!in_array($number_key,$special_answers) && in_array($number_key,$show_yes) && isset($check_toshow[$number_key]['is_skipped'])!=1 ){
                     print t("Yes") ;
                     $table = $sect->addTable();
                     $table->addRows(1);
@@ -877,7 +887,7 @@ $sect->insertPageBreak();
                     $cell = $table->getCell(1, 2);
                     $cell->writeText(t("Yes"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
-                  }elseif(isset($check_toshow[$number_key]['is_skipped'])!=1){
+                  }elseif(!in_array($number_key,$special_answers) && in_array($number_key,$show_no) && isset($check_toshow[$number_key]['is_skipped'])!=1){
                     print t("No");
                     $table = $sect->addTable();
                     $table->addRows(1);

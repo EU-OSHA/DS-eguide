@@ -176,7 +176,7 @@ $cell->writeText(t('My Chemical Guide - Questionnaire Report'), new PHPRtfLite_F
 
 $cell = $table->getCell(2, 1);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_LEFT);
-$cell->writeText("http://dsetool.osha.eu" . $email, new PHPRtfLite_Font(9, "Arial", '#000000'), $parNormal);
+$cell->writeText("https://eguides.osha.europa.eu/dangerous-substances" . $email, new PHPRtfLite_Font(9, "Arial", '#000000'), $parNormal);
 
 $cell = $table->getCell(1, 2);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_RIGHT);
