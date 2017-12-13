@@ -1,7 +1,6 @@
 <?php
 global $base_url;
 drupal_add_library('system', 'ui.draggable');
-
 ?>
 
 <?php if (!empty($page['top_header'])): ?>
@@ -1166,9 +1165,6 @@ window.onload = function() {
 
 function barInfo() {
   
-  var body = jQuery("html, body");
-  body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
-  });
     jQuery("#barInfoDiv").slideDown("fast",function() {
     jQuery("#barInfoDiv").attr("style","display: block !important;");
     });

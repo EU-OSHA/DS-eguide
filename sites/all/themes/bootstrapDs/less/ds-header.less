@@ -3,6 +3,7 @@
 #toolbar{
 	z-index: 2000 !important;
 }
+
 header{
 	position: fixed;
 	z-index: 1000;
@@ -10,6 +11,11 @@ header{
 	top: 0px;
 	background-color: white;
 	transition: top 0.3s ease-in-out;
+}
+.overlay-open{
+	header{
+		z-index: 1;
+	}
 }
 .nav-up {
     top: -232px !important;

@@ -54,7 +54,9 @@
                <span class="display-down glyphicon glyphicon-triangle-bottom"></span>
               <?php print($name)?>
             </div>
+            
             <div class="content-term collapssed  collapse" id="demo<?php print $number;?>">
+              <dl>
               <?php
               
               foreach ($glossary_list as $term) {
@@ -63,15 +65,16 @@
                 $term_desc = $term->taxonomy_term_data_description;
               ?>
 
-                <div class="term-title">
+                <dt class="term-title">
                  <?php print $term_title; ?>
-                </div>
-                <div class="term-description">
+                </dt>
+                <dd class="term-description">
                   <?php print $term_desc; ?>
-                </div>
+                </dd>
               <?php
               }
               ?>
+            </dl>
             </div>
           </div>
 

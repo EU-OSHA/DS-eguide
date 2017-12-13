@@ -436,12 +436,10 @@ drupal_add_library('system', 'ui.draggable');
 
 <script type="text/javascript">
 function barInfo() {
-  
-  var body = jQuery("html, body");
-  body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
-  });
+ 
     jQuery("#barInfoDiv").slideDown("fast",function() {
     jQuery("#barInfoDiv").attr("style","display: block !important;");
+    
     });
   }
 
