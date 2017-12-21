@@ -2,31 +2,9 @@
 #########################
 # Ignore configuration files that may contain sensitive information.
 docroot/sites/*/settings*.php
+sites/default/settings.php
 *.local.php
-
-# Directories created by instance.make and User Generated Content #
-##########################
-docroot/*
-
-!docroot/opdt/
-
-!docroot/sites/
-docroot/sites/all/*
-!docroot/sites/all/modules/
-docroot/sites/all/modules/*
-!docroot/sites/all/modules/feeds_tamper/
-docroot/sites/all/modules/feeds_tamper/*
-!docroot/sites/all/modules/feeds_tamper/plugins
-docroot/sites/all/modules/feeds_tamper/plugins/*
-!docroot/sites/all/modules/feeds_tamper/plugins/customstrtotime.inc
-!docroot/sites/all/modules/feeds_tamper/plugins/feedurl.inc
-
-application/language/*
-!application/language/gr/
-
-docroot/sites/default/default.settings.php
-docroot/sites/example.sites.php
-docroot/sites/README.txt
+robots.txt
 
 docroot/files
 docroot/sites/*/files

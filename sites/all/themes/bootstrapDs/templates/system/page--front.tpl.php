@@ -1,6 +1,8 @@
-
+<meta name="description" content="This dangerous substances e-tool gives an overview of the safety and health hazards associated with dangerous substances and chemical products in the workplaces. Based on your input, you will get tailored, company-specific advice." />
 <?php if (!empty($page['top_header'])): ?>
 <header>
+  
+  
   <div class="container ds-header">
     <div class="row">
       <div class="col-xs-12 col-md-12 col-sm-12 row">
