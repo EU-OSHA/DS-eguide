@@ -24,6 +24,17 @@ $(document).ready(function(){
   });
 })(jQuery);
 
+(function ($) {
+    $(document).ready(function(){
+      if($("#quiz-take-question-feedback-form").length>0 || $(".summary-questions").length>0 ){
+      $(".cur_que_title").removeClass("cur_que_title");
+
+    }
+  });
+})(jQuery);
+
+
+
 
 /*Displaying contact us
 
@@ -89,6 +100,7 @@ $(document).ready(function(){
 })(jQuery);
 
 // Hide Header on on scroll down
+/*
 (function ($) {
   $(document).ready(function(){
     var didScroll;
@@ -131,7 +143,7 @@ $(document).ready(function(){
   });
 })(jQuery);
 
-/* sticky menu */
+ //sticky menu 
 (function ($) {
   $(document).ready(function(){
     //alert(document.documentElement.scrollHeight);
@@ -153,7 +165,7 @@ $(document).ready(function(){
           }
       });
       fixing sticky menu*/
-      var num = 120; //number of pixels before modifying styles
+      /*var num = 120; //number of pixels before modifying styles
       if($("body").height()>=550){
         $(window).bind('scroll', function () {
             if ($(window).scrollTop() > num) {
@@ -164,7 +176,7 @@ $(document).ready(function(){
         });
       };
   });
-})(jQuery);
+})(jQuery);*/
 
 
 

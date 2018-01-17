@@ -27,7 +27,7 @@ $parFormat = new PHPRtfLite_ParFormat();
 	
   <div class="container ds-header">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-sm-12 row">
+      <div class="col-xs-12 col-md-12 col-sm-12">
         <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
@@ -167,12 +167,12 @@ foreach ($answers as $answer) {
     
 <div class='recommendation container'> <!--Closed at the end of the document-->
   <div class="content-print-download-up">
-    <ul class="print-download col-md-4">
+    <ul class="print-download col-md-6">
       <li class="print" >
-        <a href="/dangerous-substances/printpdf/168" target="_blank" class="">&gt; <?php print t("Print to PDF")?> </a>
+        <a href="/dangerous-substances/printpdf/168" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
       </li>
       <li class="download " >
-        <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Print to RTF")?></a>
+        <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
       </li>
       <li class="back" >
         <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
@@ -273,10 +273,10 @@ print("</div>");//Close the recommendation div
     <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/168" target="_blank" class="">&gt; <?php print t("Print to PDF")?> </a>
+            <a href="/dangerous-substances/printpdf/168" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-            <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Print to RTF")?></a>
+            <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
             <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>

@@ -1,16 +1,19 @@
 //Header
 
+body.admin-menu{
+	margin-top: 0px !important;
+}
 #toolbar{
 	z-index: 2000 !important;
 }
 
 header{
-	position: fixed;
-	z-index: 1000;
+	//position: fixed;
+	//z-index: 1000;
 	width: 100%;
-	top: 0px;
+	//top: 0px;
 	background-color: white;
-	transition: top 0.3s ease-in-out;
+	//transition: top 0.3s ease-in-out;
 }
 .overlay-open{
 	header{
@@ -30,16 +33,21 @@ header{
 }
 
 .logo-osha{
-	padding-top: 35px;
+	padding-top: 44px;
     display: block;
     float: left;
     padding-left: 15px;
     margin-top: 1em;
+    img{
+    	max-width: 190px;
+    	height: auto;
+    }
 }
 
 .logo-eu{
-	margin-top: 88px;
-    margin-left: 20px;
+	margin-top: 64px;
+    margin-left: 10px;
+    width: 65px;
 }
 
 .header_top_bar{
@@ -50,6 +58,9 @@ header{
 		padding-left: 0;
 		li{
 			float: left;
+			margin-left: 10px;
+			width:24px;
+			height: 24px;
 			a{
 				text-indent: -99999px;
 				display: block;
@@ -59,51 +70,57 @@ header{
 
 		li:nth-child(1){
 			background: url('../images/header-twitter.png') no-repeat -1px 0px;
-			margin-left: 15px;
-			width:24px;
-			height: 24px;
 		}
 
 		li:nth-child(2){
 			background: url('../images/header-facebook.png') no-repeat -1px 0px;
-			margin-left: 15px;
-			width:24px;
-			height: 24px;
 		}
 
 		li:nth-child(3){
 			background: url('../images/header-linkedin.png') no-repeat -1px 0px;
-			margin-left: 15px;
-			width:24px;
-			height: 24px;
 		}
 
 		li:nth-child(4){
 			background: url('../images/header-youtube.png') no-repeat -1px 0px;
-			margin-left: 15px;
-			width:24px;
-			height: 24px;
 		}
 
 		li:nth-child(5){
 			background: url('../images/header-flickr.png') no-repeat -2px 0px;
-			margin-left: 15px;
-			width:24px;
-			height: 24px;
 		}
 	}
 }
 
 .content-right-header{
 	padding-top: 97px;
+	overflow: hidden;
+	float: right;
+	.print-friendly.row{
+		display: inline-block;
+	    float: left;
+	    margin-left: 0px;
+	    margin-right: 0px;
+	}
+	.header_top_bar{
+		overflow: hidden;
+    	display: inline-block;
+    	.region-top-header{
+    		#block-text-resize-0{
+    			display: inline-block;
+    			margin-left: 5px;
+    		}
+    		#block-menu-menu-social-menu-footer{
+    			display: inline-block;
+    		}
+    	}
+	}
 }
 
 .header-text{
     color: @ds-blue;
-    font-size: 1.2em;
+    font-size: 1.6em;
     font-weight: bold;
-    width: 60px;
-    padding-top: 32px;
+    width: 310px;
+    padding-top: 40px;
     padding-left: 20px;
     float: left;
 }
@@ -119,7 +136,7 @@ header{
 
 .print-friendly{
 	float: left;
-	padding-left: 10em;
+	//padding-left: 10em;
 	clear: none!important;
 }
 

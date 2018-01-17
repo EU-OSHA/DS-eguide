@@ -288,10 +288,11 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
   //RLR create the comments field with the previous comment value if exits*********************
    $form['question'][$node->nid]['comments'] = array(
         '#type' => 'textarea',
-        '#title' => t('Comments'),
+        '#title' => t('Comments') . "<p class='comment-text'>".t("Please add your notes here:")."</p>",
         '#attributes' => array('maxlength' => 255),
         '#default_value' => $comment_val,
         '#size' => 3,
+        '#rows' => 4,
         '#weight' => 99,
       );
 

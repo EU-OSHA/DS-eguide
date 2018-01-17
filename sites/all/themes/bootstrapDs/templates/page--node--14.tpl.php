@@ -82,7 +82,7 @@ drupal_add_library('system', 'ui.draggable');
 <header>
   <div class="container ds-header">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-sm-12 row">
+      <div class="col-xs-12 col-md-12 col-sm-12">
         <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
@@ -173,8 +173,8 @@ drupal_add_library('system', 'ui.draggable');
 
           <?php
           global $base_url;  
-          
-        
+       
+       
           if (isset($_SESSION['quiz'][14]['result_id'])){
             $quizresult =$_SESSION['quiz'][14]['result_id'];
           }else{
@@ -189,22 +189,52 @@ drupal_add_library('system', 'ui.draggable');
           $cont =0;
           $ans_res = 0;
           $ans_pen = 0;
+       
+          if (isset($_SESSION['quiz'][14]['current'])==1){
+            $cur_que = $_SESSION['quiz'][14]['current'];  
+          }else{
+            $cur_que = 7;
+          }
+         
           foreach($query as $item) {
             $cont = $cont +1;  
             $nodo = node_load($item->child_nid);
             
             if (isset ($page['content']['system_main']['quiz_result'])==1 || isset($_SESSION['quiz'][14])!=1){
                 print ('<li class="answered">');  
-                print ($nodo->title);
+                if ($cont== $cur_que){
+                  print ("<p class='curque-title'>");
+                  print ($nodo->title);
+                  print ("</p>");
+                }else{
+                  print ($nodo->title);
+                }
 
             }else{  
               if ($item->answer_timestamp == null){
                 print ('<li class="pending">');   
-                print ($nodo->title);
+                if ($cont== $cur_que){
+                  print ("<p class='curque-title'>");
+                  print ($nodo->title);
+                  print ("</p>");
+                }else{
+                  print ($nodo->title);
+                }
+                
                 $ans_pen = $ans_pen +1;
               }else{
                 print ('<li class="answered">');  
-                print ("<a href='".$base_url."/node/14/take/".$cont."'>".$nodo->title."</a>");
+                print ("<a href='".$base_url."/node/14/take/".$cont."'>");
+                
+                if ($cont== $cur_que){
+                  print ("<p class='curque-title'>");
+                  print ($nodo->title);
+                  print ("</p>");
+                }else{
+                  print ($nodo->title);
+                }
+
+                print ("</a>");
                 $ans_res = $ans_res +1;
               }
             }

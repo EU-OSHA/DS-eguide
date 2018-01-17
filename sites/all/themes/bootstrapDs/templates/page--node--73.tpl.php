@@ -169,7 +169,7 @@ $sect->insertPageBreak();
 <header>
   <div class="container ds-header">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-sm-12 row">
+      <div class="col-xs-12 col-md-12 col-sm-12">
         <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
@@ -225,12 +225,12 @@ $sect->insertPageBreak();
   <div class="main-container container">
   <h1 class="page-header container"><?php print t("Checklist"); ?></h1>
   <div class="content-print-download ">
-        <ul class="print-download col-md-4">
+        <ul class="print-download col-md-6">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/73" class="" target="_blank">&gt; <?php print t("Print to PDF")?> </a>
+            <a href="/dangerous-substances/printpdf/73" class="" target="_blank">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Print to RTF")?></a>
+             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
            <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
@@ -946,10 +946,10 @@ $sect->insertPageBreak();
     <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/73" class=""  target="_blank">&gt; <?php print t("Print to PDF")?> </a>
+            <a href="/dangerous-substances/printpdf/73" class=""  target="_blank">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Print to RTF")?></a>
+             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
            <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>

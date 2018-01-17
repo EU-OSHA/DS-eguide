@@ -7,7 +7,7 @@ drupal_add_library('system', 'ui.draggable');
 <header>
   <div class="container ds-header">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-sm-12 row">
+      <div class="col-xs-12 col-md-12 col-sm-12">
         <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
@@ -173,14 +173,25 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             if ($item->is_skipped == 1) {
               $menu_url = $base_url."/node/25/take/" . $item->number;
               $nodo = node_load($item->child_nid);
-              $menu_item = '<li class="skipped"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              if ($item->number== $cur_que){
+              	$menu_item = '<li class="skipped"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo->title.'</p></a></li>';
+              }else{
+              	$menu_item = '<li class="skipped"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              }
               $ans_ski = $ans_ski +1;
               $max_que = $item->number;
               $menu_item_pen ="";
             }elseif ($item->answer_timestamp != null){
               $menu_url = $base_url."/node/25/take/" . $item->number;
               $nodo = node_load($item->child_nid);
-              $menu_item = '<li class="answered"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+
+              if ($item->number== $cur_que){
+              	$menu_item = '<li class="answered"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo->title.'</p></a></li>';
+              }else{
+              	$menu_item = '<li class="answered"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              }
+              
+              
               $ans_res = $ans_res +1;
               $max_que = $item->number;
               $menu_item_pen ="";
@@ -188,7 +199,12 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
               //First pending answer  
               $menu_url = $base_url."/node/25/take/" . $item->number;
               $nodo = node_load($item->child_nid);
-              $menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              if ($item->number== $cur_que){
+              	$menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo->title.'</p></a></li>';
+              }else{
+              	$menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              }
+              
               $menu_item_pen_group =$item->field_group_value;
 
               if ($item->number<36){

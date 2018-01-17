@@ -566,6 +566,10 @@ function quiz_theme($existing, $type, $theme, $path) {
       'path' => $path . '/theme',
       'template' => 'quiz-question-score',
     ),
+    'html_mail_footer' => array(
+      'variables' => array('bottom_text' => ''),
+      'template' => 'theme/html_mail_footer',
+    ),
     'quiz_pager' => array(
       'variables' => array('total' => 0, 'current' => 0, 'siblings' => 0),
     ),
@@ -3817,16 +3821,20 @@ function quiz_mail($key, &$message, $params)
   
     $link = "<a href = " .$base_url . "/retrieve?number=" . $params['values']['numero'] . "&email=".$message['to']."&result_id=" . $params['values']['result_id'] ."&current=".$params['values']['current'] .">link</a>";
     //$link = "<a href = " .$base_url . "/retrieve?number=2&result_id=1>LINK</a>";
-    
-    $footerimg = $base_url . "/sites/default/files/ds_footer.png";
+    $bottom_text = t('This message is intended exclusively for its addressee and may contain information that is CONFIDENTIAL and protected by professional privilege. If you are not the intended recipient you are hereby notified that any dissemination, copy or disclosure of this communication is strictly prohibited by law. If this message has been received in error, please immediately notify us via e-mail and delete it.');
+    $headerimg = $base_url . "/sites/default/files/ds_footer.png";
+    $footerimg = $base_url . "/sites/default/files/ds_footer_mail.png";
 
     $message['headers']['MIME-Version'] = '1.0';
     $message['headers']['Content-Type'] = 'multipart/mixed;';
     $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed';
     $message['subject'] = t('Dangerous substances e-guide');
+
     $message['body'][] = '<html><body>';
+    $message['body'][] = "<div class='footer'><a href = ".$base_url." target='_blank'><img src ='" . $headerimg ."'></a></div>";
     $message['body'][] = t("Dear user, clicking on the following") . " " . $link . " " .t("you will access to your questionnaire and you could continue editing it");
-    $message['body'][] = "<br/><br/><div class='footer'><a href = ".$base_url." target='_blank'><img src ='" . $footerimg ."'></a></div>";
+    //$message['body'][] = "<br/><br/><div class='footer'><a href = ".$base_url." target='_blank'><img src ='" . $footerimg ."'></a></div>";
+    $message['body'][] = theme('html_mail_footer', ['bottom_text' => $bottom_text]);
     $message['body'][] = '</body></html>';
     //$message['body'] = array(0=>"This is the link:" . $link);
   
@@ -4850,6 +4858,11 @@ return true;
 
 
 }
+
+
+
+
+
 
 ?>
 

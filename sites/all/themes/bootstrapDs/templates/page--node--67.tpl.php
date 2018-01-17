@@ -81,7 +81,7 @@ global $base_url;
 <header>
   <div class="container ds-header">
     <div class="row">
-      <div class="col-xs-12 col-md-12 col-sm-12 row">
+      <div class="col-xs-12 col-md-12 col-sm-12">
         <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
