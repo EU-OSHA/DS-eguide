@@ -34,6 +34,29 @@ $(document).ready(function(){
 })(jQuery);
 
 
+/***** TITLE contact Us *********/
+(function ($) {
+    $(document).ready(function(){
+      if($("#webform-client-form-67").length>0){
+    jQuery("title").html("Contact Us | Dangerous Substances e-tool | EU-OSHA");
+    $("meta[name='description']").attr("content", "Submit your feedback to the European Agency for Safety and Health at Work");
+    }
+  });
+})(jQuery);
+
+/***** TITLE Front page *********/
+(function ($) {
+    $(document).ready(function(){
+      if($(".content-home-questions").length>0){
+    jQuery("title").html("Home | Dangerous Substances e-tool | EU-OSHA");
+    }
+  });
+})(jQuery);
+
+
+
+
+
 
 
 /*Displaying contact us
