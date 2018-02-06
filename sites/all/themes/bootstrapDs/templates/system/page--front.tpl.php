@@ -61,7 +61,7 @@
         <div class="content-home-questions">
           
           <div class="number-questions"><?php echo t('7 Questions');?></div>
-          <div class="starnew"><a href="node/14/take"><?php echo t('Quick start');?></a></div>
+          <div class="starnew"><a href="my-chemical-guide-short-questionnaire"><?php echo t('Quick start');?></a></div>
           <h2><?php echo t('My Chemical Guide — Quick Start');?></h2>
           <div class="text-questions">
             <?php echo t('Seven questions will address your current practices with regard to dangerous substances and chemical products. If improvements are needed, you will immediately get tips and advice on what you need to do and on how you can do it as easily and efficiently as possible.')
@@ -77,7 +77,7 @@
           <div class="number-questions prev-text">
             <span><?php echo t('36 Questions');?></span>
           </div>
-          <div class="starnew"><a href="node/25/take"><?php echo t('Quick start');?></a></div>
+          <div class="starnew"><a href="my-chemical-guide-long-questionnaire"><?php echo t('Quick start');?></a></div>
           <h2><?php echo t('My Chemical Guide — long questionnaire');?></h2>
           <div class="text-questions">
             <?php echo t('The long questionnaire will allow a more accurate analysis of your current situation related to chemical products and dangerous substances. You will also receive a report, ‘My Chemical Guide’, containing your answers, a to-do checklist, recommendations and advice. In this report, the advice is tailored to the needs of your company or workplaces based on your responses. You will be informed of the procedures and good practice measures that will help you to create a safe and health working environment.')

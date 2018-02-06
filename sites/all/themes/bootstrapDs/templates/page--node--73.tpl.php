@@ -224,6 +224,7 @@ $sect->insertPageBreak();
   ?>
   <div class="main-container container">
   <h1 class="page-header container"><?php print t("Checklist"); ?></h1>
+  <div class="check-title"> <?php print t("You can use the checklist to document and control your prevention activities and your progress");?></div>  
   <div class="content-print-download ">
         <ul class="print-download col-md-6">
           <li class="print" >
@@ -843,7 +844,7 @@ $sect->insertPageBreak();
                   
 
                     foreach ($node_q->alternatives as $q_answer) {
-                      if ($answer_id == $q_answer['id']){
+                      if (isset($answer_id) && $answer_id == $q_answer['id']){
                       
                         $answer_text = $q_answer['answer']['value'];
                         $answer_text = str_replace('<?php print t("', '',$answer_text);
