@@ -9,6 +9,8 @@ robots.txt
 docroot/files
 docroot/sites/*/files
 docroot/sites/*/private
+sites/*/files
+sites/*/private
 
 # Vagrant Files #
 #################
