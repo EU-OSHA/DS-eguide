@@ -30,6 +30,7 @@
 
  <div class="container fluid">
   <h1 class="page-header container"><?php print(t("Glossary"));?></h1>
+  <p class="text-questions glossary-header">The definitions in Italic letters are taken from a technical, scientific or medical standard, from a legislation or a renowned encyclopaedia. The definitions or explanations in normal letters use non-specialist language and are related to the context of dangerous substances at work places</p>
   <div class="<?php print $classes; ?>">
   
 
