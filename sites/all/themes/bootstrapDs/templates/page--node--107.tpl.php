@@ -98,60 +98,16 @@ $parSimple->setIndentRight(0.5);
 $parNormal = new PHPRtfLite_ParFormat();
 $parNormal->setIndentLeft(0);
 $parNormal->setIndentRight(0.5);
-
 $parFormat = new PHPRtfLite_ParFormat();
-
-
 ?>
 
-<?php if (!empty($page['top_header'])): ?>
-<header>
-	
-  <div class="container ds-header">
-    <div class="row">
-      <div class="col-xs-12 col-md-12 col-sm-12">
-        <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
-          <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
-        </a>
-        <a class="logo-osha" href="http://osha.europa.eu" title="EU-OSHA" target="_blank">
-          <?php print '<img class="pull-left" alt="'.t("EU-OSHA logo").'" src="'.base_path() . path_to_theme() .'/images/logo-osha.png">'; ?>
-        </a>
-        <div class="border-right-header">
-           <?php print '<img  class="pull-left logo-eu" alt="'.t("EU logo").'" src="'.base_path() . path_to_theme() .'/images/logo-eu.png">'; ?>
-        </div>
-       <div class="header-text"><?php echo t('Healthy Workplaces MANAGE DANGEROUS SUBSTANCES'); ?></div>
-       <div class="content-right-header">
-        <div class="print-friendly row">
-          <a href="javascript:if(window.print)window.print();" title="Print page">
-            <?php print '<img alt="'.t("Print").'" src="'.base_path() . path_to_theme() .'/images/print-friendly.png">'; ?>
-          </a>
-        </div>
-        <div class="header_top_bar">
-          <div class="vertical-align">
-            <?php print render($page['top_header']); ?>
-          </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container-fluid nav-ds">
-    <?php if (!empty($primary_nav) || !empty($secondary_nav) || !empty($page['navigation'])): ?>
-        <nav role="navigation" class="navbar navbar-default ds-menu container">
-          <?php if (!empty($page['navigation'])): ?>
-            <?php print render($page['navigation']); ?>
-          <?php endif; ?>
-        </nav>
-    <?php endif; ?>
-  </div>
-</header>
-<?php endif; ?>
+<?php
+  include(drupal_get_path('theme', 'bootstrapDs').'/templates/header.tpl.php');
+?>
 
 <div class="main-container">
   <h1 class="page-header container"><?php print t("Good practices and guidance"); ?></h1>
   <?php
-
   
 $table = $sect->addTable();
 $table->addRows(2,2);
@@ -218,28 +174,7 @@ if ($result_id ==0 ){//Nothing to show
     
     if ($next_que<13){
       print(t("There is still nothing on this Recomendation list.")); 
-          if (!empty($page['footer'])): ?>
-          <footer class="ds-footer">
-            <div class="container">
-              <div class="copyright">
-                <span><?php print t("© 2017 EU-OSHA | an agency of the European Union");?></span>
-              </div>
-              <div class="footer_menu">
-                <?php
-                  $block = module_invoke('menu', 'block_view', 'menu-footer-menu');
-                  print render($block['content']);
-                ?>
-              </div>
-              <div class="footer_menu_social">
-                <?php
-                  $block = module_invoke('menu', 'block_view', 'menu-social-menu-footer');
-                  print render($block['content']);
-                ?>
-              </div>
-            </div>
-          </div>  
-        </footer>
-        <?php endif; 
+      include(drupal_get_path('theme', 'bootstrapDs').'/templates/footer.tpl.php');
       return false;
     }else
       
@@ -574,25 +509,15 @@ if ($result_id ==0 ){//Nothing to show
               	<div class='comments-text'>
               		<textarea rows="4" cols="50" class="comment-box" disabled><?php print(trim($user_comment));?></textarea> 
 				</div>
-
 				<?php
-
 				$sect->writeText('<b>' . t("Comments").'</b>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
 				$sect->writeText('<br>' . $user_comment .'<br><br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);
-
-
-
 	        }  
 	    }         
 	}
-
-        
-	        	
     print("</div>");//Close the recommendation div    
     }
-        
   }
-
 
   function getcomment($result_id , $question_nid){
 
@@ -607,7 +532,6 @@ if ($result_id ==0 ){//Nothing to show
     }	
     return $user_comment;
   }
-
   ?>
 </div>
     <div class="content-print-download ">
@@ -621,39 +545,14 @@ if ($result_id ==0 ){//Nothing to show
           <li class="back" >
             <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
           </li>
-          
       </ul></div>
 
-
-
 <?php if (!empty($page['footer'])): ?>
-  <footer class="ds-footer">
-    <div class="container">
-      <div class="copyright">
-        <span><?php print t("© 2017 EU-OSHA | an agency of the European Union");?></span>
-      </div>
-      <div class="footer_menu">
-        <?php
-          $block = module_invoke('menu', 'block_view', 'menu-footer-menu');
-          print render($block['content']);
-        ?>
-      </div>
-      <div class="footer_menu_social">
-        <?php
-          $block = module_invoke('menu', 'block_view', 'menu-social-menu-footer');
-          print render($block['content']);
-        ?>
-      </div>
-    </div>
-
-</footer>
-<?php endif; ?>
+  <?php
+  include(drupal_get_path('theme', 'bootstrapDs').'/templates/footer.tpl.php');
+  ?>
+<?php endif;?>
 <?php
-
-
 // save rtf document
 $rtf->save('sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-'.$result_id.'.rtf');
-
-
-
 ?>
