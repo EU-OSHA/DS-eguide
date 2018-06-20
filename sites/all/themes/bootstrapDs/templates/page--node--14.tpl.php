@@ -73,6 +73,7 @@
  * @ingroup templates
  */
 global $base_url;
+global $language;
 drupal_add_library('system', 'ui.draggable');
 
 ?>
@@ -128,7 +129,7 @@ drupal_add_library('system', 'ui.draggable');
     <div class="col-md-3">
         <div class="group-left-questions">
           <!--Questions -->
-          <div class="questions-title">All Questions</div>
+          <div class="questions-title"><?php print t('All Questions');?></div>
           <ul class="questions">
 
           <?php
@@ -162,15 +163,22 @@ drupal_add_library('system', 'ui.draggable');
           foreach($query as $item) {
             $cont = $cont +1;  
             $nodo = node_load($item->child_nid);
-            
+                       
+            if (isset($nodo->title_field[$language->language][0]['value'])){
+            	$nodo_title =$nodo->title_field[$language->language][0]['value'];
+            }
+            else{
+            	$nodo_title =$nodo->title;
+            }
+
             if (isset ($page['content']['system_main']['quiz_result'])==1 || isset($_SESSION['quiz'][14])!=1){
                 print ('<li class="answered">');  
                 if ($cont== $cur_que){
                   print ("<p class='curque-title'>");
-                  print ($nodo->title);
+                  print ($nodo_title);
                   print ("</p>");
                 }else{
-                  print ($nodo->title);
+                  print ($nodo_title);
                 }
 
             }else{  
@@ -178,23 +186,30 @@ drupal_add_library('system', 'ui.draggable');
                 print ('<li class="pending">');   
                 if ($cont== $cur_que){
                   print ("<p class='curque-title'>");
-                  print ($nodo->title);
+                  print ($nodo_title);
                   print ("</p>");
                 }else{
-                  print ($nodo->title);
+                  print ($nodo_title);
                 }
                 
                 $ans_pen = $ans_pen +1;
               }else{
-                print ('<li class="answered">');  
-                print ("<a href='".$base_url."/node/14/take/".$cont."'>");
+                print ('<li class="answered">'); 
+
+                if ($language->language!=""){
+                	print ("<a href='".$base_url."/".$language->language."/node/14/take/".$cont."'>");
+                }
+                else{
+                	print ("<a href='".$base_url."/node/14/take/".$cont."'>");
+                } 
+                
                 
                 if ($cont== $cur_que){
                   print ("<p class='curque-title'>");
-                  print ($nodo->title);
+                  print ($nodo_title);
                   print ("</p>");
                 }else{
-                  print ($nodo->title);
+                  print ($nodo_title);
                 }
 
                 print ("</a>");
@@ -211,14 +226,14 @@ drupal_add_library('system', 'ui.draggable');
 
         </div>
         <!-- Legend -->
-        <div class="content-legend">
-          <span class="legend">Legend:</span>
+         <div class="content-legend">
+          <span class="legend"><?php print t('Legend:')?></span>
           <ul class="questions">
             <li class="answered">
-              answered
+              <?php print t('answered');?>
             </li>
             <li class="pending">
-              pending
+              <?php print t('pending');?>
             </li>
           
         </ul></div>
@@ -374,13 +389,13 @@ drupal_add_library('system', 'ui.draggable');
     <div class="col-md-3">
         <div class="progress-summary-content">
           <div class="title-right-group">
-            Progress summary
+            <?php print (t("Progress summary")); ?>
           </div>
           <!--<img src="<?php print($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/short-progress-bar-step-2.png" alt="">-->
           <progress max="7" value="<?php print($ans_res) ?>" class="quiz-progress"></progress>
-          <div class="total-answered"><?php print $ans_res; ?> answered</div>
-          <div class="total-pending"> <?php print $ans_pen; ?> pending</div>
-          <div class="info-ico-right"><a href="javascript:barInfo();"><img title="info" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
+          <div class="total-answered"><?php print $ans_res; ?> <?php print t('answered')?></div>
+          <div class="total-pending"> <?php print $ans_pen; ?> <?php print t('pending')?></div>
+          <div class="info-ico-right"><a href="javascript:barInfo();"><img title="<?php print t('info')?>" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
         </div>
          <div id="barInfoDiv" style="display: none;" class="col-md-11">
         <div class="closebarInfo">

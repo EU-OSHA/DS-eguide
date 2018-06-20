@@ -136,7 +136,7 @@ function quiz_question_validate($node, &$form) {
  *   An renderable FAPI array
  */
 function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
-
+  global $language;
   $quiz_result = quiz_result_load($result_id);
   $quiz = node_load($quiz_result->nid, $quiz_result->vid);
   $view_mode = 'question';
@@ -225,12 +225,19 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
     }
   }  
     
-
+    if (isset($node->title_field[$language->language][0]['value'])){
+      $nodo_title =$node->title_field[$language->language][0]['value'];
+      $title  = _filter_lexicon( $nodo_title,"","");
+    }
+    else{
+      $nodo_title =$node->title;
+      $title  = _filter_lexicon( $nodo_title,"","");
+    } 
     if (isset($form['question'][$node->nid]['question']['body'])==1){
-      $title  = _filter_lexicon($node->title,"","");
+      
       $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message .'<h1 class="node-title">' .  $title . '</h1>' .$form['question'][$node->nid]['question']['body'][0]['#markup'];
     }else{
-      $title  = _filter_lexicon($form['question'][$node->nid]['question']['#node']->title,"","");
+     // $title  = _filter_lexicon($form['question'][$node->nid]['question']['#node']->title,"","");
       $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message. '<h1 class="node-title">' . $title .'</h1>';
     }
 
@@ -318,7 +325,7 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
 
 
   $is_last = _quiz_show_finish_button($quiz);
-
+ 
   $form['navigation']['#type'] = 'actions';
   $form['navigation']['#theme'] = 'quiz_question_navigation_form';
 
@@ -846,8 +853,13 @@ function quiz_question_add_body_field($type) {
  * correct feedback.
  */
 function quiz_question_answering_form_submit(&$form, &$form_state) {
-  
-  
+  global $language;
+  if ($language->language!="" && $language->language!="en"){
+	  $lang_code = "/" . $language->language;
+  }else{
+	  $lang_code = "";
+  } 
+
   $feedback_count = 0;
   $quiz_result = quiz_result_load($_SESSION['quiz'][$form['#quiz']['nid']]['result_id']);
   $quiz = node_load($quiz_result->nid, $quiz_result->vid);
@@ -912,13 +924,19 @@ function quiz_question_answering_form_submit(&$form, &$form_state) {
  * @see quiz_question_answering_form_submit_blank()
  */
 function quiz_question_answering_form_finalize(&$form, &$form_state) {
+  global $language;
+  if ($language->language!="" && $language->language!="en"){
+	  $lang_code = "/" . $language->language;
+  }else{
+	  $lang_code = "";
+  } 	
   $quiz_result = quiz_result_load($_SESSION['quiz'][$form['#quiz']['nid']]['result_id']);
   $quiz = node_load($quiz_result->nid, $quiz_result->vid);
 
   // No more questions. Score quiz.
   $score = quiz_end_scoring($_SESSION['quiz'][$quiz->nid]['result_id']);
-
-  if (empty($quiz->review_options['question']) || !array_filter($quiz->review_options['question']) || empty($form_state['feedback'])) {
+	
+  if (empty($quiz->review_options['question']) || !array_filter($quiz->review_options['question']) || empty($form_state['feedback'])|| $quiz->qnp_id==25) {
     // Only redirect to question results if there is not question feedback.
     $form_state['redirect'] = "node/{$quiz->nid}/quiz-results/{$quiz_result->result_id}/view";
   }

@@ -17,7 +17,7 @@
               <tr class="social footer-social">
                 <td>
                   <span class="hidden-mobile" style="color: #ffffff;font-size: 14px;">
-                    Follow us on:&nbsp;&nbsp;&nbsp;&nbsp;
+                    <?php print t('Follow us on:')?>&nbsp;&nbsp;&nbsp;&nbsp;
                   </span>
                   <?php
                     $social = array(

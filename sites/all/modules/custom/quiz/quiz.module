@@ -14,6 +14,7 @@ define('QUIZ_QUESTION_ALWAYS', 1);
 define('QUIZ_QUESTION_NEVER', 2);
 global $base_url;
 
+
 /**
  * Quiz name.
  */
@@ -3358,6 +3359,7 @@ function _quiz_show_finish_button($quiz) {
   $quiz_result = quiz_result_load($_SESSION['quiz'][$quiz->nid]['result_id']);
   $current = $_SESSION['quiz'][$quiz->nid]['current'];
   $layout = $quiz_result->getLayout();
+  
   foreach ($layout as $idx => $question) {
     $question_node = node_load($question['nid'], $question['vid']);
     if (isset ($question_node->type)==1){
@@ -3554,6 +3556,8 @@ function quiz_access_question($quiz, $question_number) {
  * Show feedback for a question response.
  */
 function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_number) {
+  global $language;
+
   $form = array();
   
   //RLR Only show the feedback at the end of the blocks
@@ -3663,14 +3667,28 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
   {  
     //Short Questionnaire *****************************************
     //RLR SHOW FEEDBACK FOR THE ANSWERS OF THE SHORT QUESTIONNAIRE
-  
     if (empty($out)) {
       $layout = $quiz_result->getLayout();
       $qra = entity_load_single('quiz_result_answer', $layout[$question_number]['result_answer_id']);
       
       $feedback_text =  $qra->view();
+   
       $numberkey = key ($qra->view()['quiz_result_answer']);
+      $rec_title = $feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup'];
       
+      if (strlen($rec_title)<10){
+        $nodefeed = node_load_multiple(NULL, array("title" => trim($rec_title)));
+        $num_nid = key($nodefeed);
+             
+        if (isset($nodefeed[$num_nid]->body[$language->language][0]['value'])){
+          $feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup'] = $nodefeed[$num_nid]->body[$language->language][0]['value'];
+        }
+        else{
+          //Take the default language
+          $feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup'] = $nodefeed[$num_nid]->body['en'][0]['value'];
+        }
+      }
+
       if (isset($_SESSION['quiz'][14]['result_id'])==1){//We have answered some questions
         $result_id = $_SESSION['quiz'][14]['result_id'];
         $sql = "select max(number) max_que from quiz_node_relationship a, quiz_node_results_answers b where parent_nid=14 and a.child_nid  = b.question_nid and b.result_id = ".$result_id." and answer_timestamp <> 'NULL'";
@@ -3683,12 +3701,20 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
         $max_que = 0;   
         $percentage = 100;
       }
-
+           
       $que_node = node_load($feedback_text['quiz_result_answer'][$numberkey]['#entity']->question_nid);
-      $que_title = $que_node->title;
+     
+      if (isset($que_node->title_field[$language->language][0]['value'])){
+        $que_title =$que_node->title_field[$language->language][0]['value'];
+      }
+      else{
+        $que_title = $que_node->title;
+      }
+    
       //$percentage = round($numberkey *100 / 7);
+
       if(isset($qra->view()['quiz_result_answer'][$numberkey]['answer_feedback'])==1){
-        $feedback_text['quiz_result_answer'][$numberkey]['table']['#markup'] ="<h1 class='node-title'>".$que_title."</h1><div class='table-responsive'>".$qra->view()['quiz_result_answer'][$numberkey]['answer_feedback']['#markup']."</div>";  
+        $feedback_text['quiz_result_answer'][$numberkey]['table']['#markup'] ="<h1 class='node-title'>".$que_title."</h1><div class='table-responsive'>".$feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup']."</div>";  
 
       }else{
         $feedback_text['quiz_result_answer'][$numberkey]['table']['#markup'] ="<div class='table-responsive'></div>";
@@ -3788,7 +3814,6 @@ function quiz_email_form_submit($form, &$form_state) {
         ->fields(array('retrieve_string' => $numero))
         ->execute();
      
-     //dpm($form_state); 
       $values = array(
       'url' => "http://46.105.212.13/node/25/take/1",
       'title' => "This is the title",
@@ -3800,7 +3825,7 @@ function quiz_email_form_submit($form, &$form_state) {
 
       drupal_mail('quiz', 'quiz_extension_mail', $form_state['values']['email'], 'en', array('values' => $values));
 
-      drupal_set_message("An email has been sent to " . $form['email']['#value'] . ". In this email there is a link that allow you to retrieve the questionnaire.") ;
+      drupal_set_message(t("An email has been sent to ") . $form['email']['#value'] . ". " . t("In this email there is a link that allow you to retrieve the questionnaire."));
       return true;    
     }  
   }
@@ -3819,7 +3844,7 @@ function quiz_mail($key, &$message, $params)
     $params['headers'] = array('Content-type'=>'text/html');
     $params['Content-type'] = 'text/html';
   
-    $link = "<a href = " .$base_url . "/retrieve?number=" . $params['values']['numero'] . "&email=".$message['to']."&result_id=" . $params['values']['result_id'] ."&current=".$params['values']['current'] .">link</a>";
+    $link = "<a href = " .$base_url . "/retrieve?number=" . $params['values']['numero'] . "&email=".$message['to']."&result_id=" . $params['values']['result_id'] ."&current=".$params['values']['current'] .">".t(' link ')."</a>";
     //$link = "<a href = " .$base_url . "/retrieve?number=2&result_id=1>LINK</a>";
     $bottom_text = t('This message is intended exclusively for its addressee and may contain information that is CONFIDENTIAL and protected by professional privilege. If you are not the intended recipient you are hereby notified that any dissemination, copy or disclosure of this communication is strictly prohibited by law. If this message has been received in error, please immediately notify us via e-mail and delete it.');
     $headerimg = $base_url . "/sites/default/files/ds_footer.png";
@@ -3873,6 +3898,7 @@ function myelement_email_validate($element, &$form_state, $form) {
  * Menu access check for question feedback.
  */
 function quiz_question_feedback_access($quiz, $question_number) {
+  
   if ($question_number >= 1) {
     if (array_filter($quiz->review_options['question'])) {
       $question_index = $question_number;
@@ -4357,13 +4383,20 @@ $common_text = t("For an overall assessment of your situation regarding the safe
   
 
   if ($block == "1T"){
-    $node_feed = node_load (32);
-    return $node_feed->feedback['value'];
+    //$node_feed = node_load (32);
+    
+    $block1_feed= "<p>" . t('Well done! Now we know what types of chemical products and substances you handle, use or generate. We also know whether or not there are specific groups of employees in your workplace that require specific attention.') . "</p> <p>" . t('The second part of this e-tool asks about the prevention and protection routines that you have in place for your chemical products and substances.') . "</p> <p>" . t('When you have answered these questions, you will be asked some final questions about your protective measures.') ."</p> <p>". t('After you have answered these questions, your individual situation will be clear. Based on this, you will receive a report with proposals for actions tailored to your situation. The advice aims to improve chemical safety in your workplace and to help you understand and comply with the regulatory requirements related to working with chemicals.') . "</p>";
+    return $block1_feed;
+
   }
   
   if ($block == "2T"){
-    $node_feed = node_load (49);
-    return $node_feed->feedback['value'];
+    //$node_feed = node_load (49);
+
+    $block2_feed= "<p>" . t('Well done! We now have an overview of your chemical risks and the routines that you have in place to control the risks. Now we will continue to the measures used to reduce the risks.') . "</p> <p>". t('When you have answered this last set of questions, your e-guide will be generated and you will get a report on your current situation, including tips and recommendations on how to improve your management of dangerous substances.') . "</p>";
+
+    return $block2_feed;
+
   }
   
   if ($block == "3T"){
@@ -4581,8 +4614,14 @@ if ($block == 3){
      foreach($query as $item) {
          $first_skip = $item->min;
     }
+    global $language;
+    if ($language->language!="" && $language->language!="en"){
+      $lang_code = "/" . $language->language;
+    }else{
+      $lang_code = "";
+    }
     if ($first_skip>0){
-      $calc =$calc . "<div class='skiped-questions col-md-12' ><a href='/dangerous-substances/node/25/take/".$first_skip."'>> ".t('Answer skipped questions')."</a></div>";
+      $calc =$calc . "<div class='skiped-questions col-md-12' ><a href='/dangerous-substances".$lang_code."/node/25/take/".$first_skip."'>> ".t('Answer skipped questions')."</a></div>";
     }
 
     return $calc;

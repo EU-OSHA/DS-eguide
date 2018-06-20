@@ -1,5 +1,6 @@
 <?php
 global $base_url;
+global $language;
 drupal_add_library('system', 'ui.draggable');
 ?>
 
@@ -58,7 +59,6 @@ drupal_add_library('system', 'ui.draggable');
 
  <?php 
 //We have to know if this is a closed summary
-
 $is_closed = "1";
 if (isset($page['content']['system_main']['quiz_result'])){
   $number_result = key($page['content']['system_main']['quiz_result']);
@@ -75,8 +75,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
   //We are not on the summary*****************************************
   if (isset ($page['content']['system_main']['quiz_result'])!=1  || $is_closed== 0){
   ?>
-
-
         <div class="group-left-questions">
           <!--Questions -->
           <div class="rail-select">
@@ -84,7 +82,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
               <i class="glyphicon glyphicon-menu-down blue"></i>
             </div>
             <select name="" id="filter-questions">
-              <option id="all-questions" class="all-questions" value="0">All Questions</option>
+              <option id="all-questions" class="all-questions" value="0"><?php print t('All Questions')?></option>
               <option id="skipped-questions" class="skipped-questions" value="1"><?php print (t("Skipped Questions Only"));?></option>
             </select>
           </div>
@@ -108,7 +106,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           //Get all the menus
           $nodoquiz = node_load(25);
           $quiz_vid = $nodoquiz->vid;
-          //All the answer that can be answered (If a question is skiped by the workflow the field is_skipped=2)
+          //All the answer that can be answered (If a question is skipped by the workflow the field is_skipped=2)
           $sql="select distinct child_nid,field_group_value, number, is_skipped, answer_timestamp from quiz_node_relationship a, quiz_node_results_answers b, field_data_field_group c where parent_nid=25 and a.parent_vid=".$quiz_vid." and a.child_nid  = b.question_nid and c.entity_id = child_nid and b.result_id = " . $quizresult . " and is_skipped<>2 order by number asc";
          
           $query = db_query($sql);
@@ -125,48 +123,78 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             $cur_que = $_SESSION['quiz'][25]['current'];
           }else{
             //$_SESSION['quiz'][25]['current'] = 1;
-
+            $cur_que =37;
           } 
           
           $no_menu_item_pen =0;
 
           foreach($query as $item) {
-           
             $menu_item = '';
+            $lang_code = '';
             
+            if ($language->language!="" && $language->language!="en"){
+              $lang_code = "/" . $language->language;
+            }else{
+              $lang_code = "";
+            } 
+          
             if ($item->is_skipped == 1) {
-              $menu_url = $base_url."/node/25/take/" . $item->number;
+              $menu_url = $base_url . $lang_code . "/node/25/take/" . $item->number;
+
               $nodo = node_load($item->child_nid);
+
+              if (isset($nodo->title_field[$language->language][0]['value'])){
+                //print($nodo->title_field[$language->language][0]['value']);
+                $nodo_title =$nodo->title_field[$language->language][0]['value'];
+              }
+              else{
+                $nodo_title =$nodo->title;
+              } 
+
               if ($item->number== $cur_que){
-              	$menu_item = '<li class="skipped"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo->title.'</p></a></li>';
+              	$menu_item = '<li class="skipped"> <a href="'.$menu_url.'"><p class="curque-title-long">'. $nodo_title .'</p></a></li>';
               }else{
-              	$menu_item = '<li class="skipped"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              	$menu_item = '<li class="skipped"> <a href="'.$menu_url.'">' . $nodo_title .'</a></li>';
               }
               $ans_ski = $ans_ski +1;
               $max_que = $item->number;
               $menu_item_pen ="";
             }elseif ($item->answer_timestamp != null){
-              $menu_url = $base_url."/node/25/take/" . $item->number;
+              $menu_url = $base_url . $lang_code . "/node/25/take/" . $item->number;
               $nodo = node_load($item->child_nid);
 
-              if ($item->number== $cur_que){
-              	$menu_item = '<li class="answered"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo->title.'</p></a></li>';
-              }else{
-              	$menu_item = '<li class="answered"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              if (isset($nodo->title_field[$language->language][0]['value'])){
+                $nodo_title =$nodo->title_field[$language->language][0]['value'];
               }
-              
+              else{
+                $nodo_title =$nodo->title;
+              } 
+
+              if ($item->number== $cur_que){
+              	$menu_item = '<li class="answered"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo_title.'</p></a></li>';
+              }else{
+              	$menu_item = '<li class="answered"> <a href="'.$menu_url.'">'.$nodo_title.'</a></li>';
+              }
               
               $ans_res = $ans_res +1;
               $max_que = $item->number;
               $menu_item_pen ="";
             }elseif ($item->answer_timestamp == null && $menu_item_pen ==""){
               //First pending answer  
-              $menu_url = $base_url."/node/25/take/" . $item->number;
+              $menu_url = $base_url . $lang_code . "/node/25/take/" . $item->number;
               $nodo = node_load($item->child_nid);
+
+              if (isset($nodo->title_field[$language->language][0]['value'])){
+                $nodo_title =$nodo->title_field[$language->language][0]['value'];
+              }
+              else{
+                $nodo_title =$nodo->title;
+              } 
+
               if ($item->number== $cur_que){
-              	$menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo->title.'</p></a></li>';
+              	$menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'"><p class="curque-title-long">'.$nodo_title.'</p></a></li>';
               }else{
-              	$menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'">'.$nodo->title.'</a></li>';
+              	$menu_item_pen = '<li class="pending"> <a href="'.$menu_url.'">'.$nodo_title.'</a></li>';
               }
               
               $menu_item_pen_group =$item->field_group_value;
@@ -288,14 +316,14 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
         </div>
         <!-- Legend -->
         <div class="content-legend">
-          <span class="legend">Legend:</span>
+          <span class="legend"><?php print t('Legend:')?></span>
 
           <ul class="questions">
             <li class="answered">
-              <?php print t("Answered ");?>
+              <?php print t("Answered");?>
             </li>
             <li class="pending">
-              <?php print t("Not answered ");?>
+              <?php print t("Not answered");?>
             </li>
             <li class="skipped"> 
             <?php print t("Skipped");?>
@@ -315,11 +343,11 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           }else{
             $sumary_class="";
             $number_result = $_SESSION['quiz'][25]['result_id'];
-            $sumary_link= "/dangerous-substances/node/25/quiz-results/".$number_result."/view";
+            $sumary_link= "/dangerous-substances".$lang_code."/node/25/quiz-results/".$number_result."/view";
             $report_class="";
           }
        }
-       
+      
        ?> 
       <div class="content-summary">
         <a href="<?php print $sumary_link;?>" <?php print $sumary_class;?>> > <?php print t("Summary")?></a>
@@ -332,10 +360,10 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             <!--<a href="#">&gt; <?php print t("Save and continue later") ?></a>-->
           </li>
           <li class="view-checklist <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="/dangerous-substances/checklist" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/checklist" class="<?php print $report_class?>">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="recomendations <?php print $report_class?>" <?php print $sumary_class;?>>
-            <a href="/dangerous-substances/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recommendations")?></a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/recommendations" class="<?php print $report_class?>">&gt; <?php print t("View the Recommendations")?></a>
           </li>
           
       </ul></div>
@@ -379,20 +407,23 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
            
            print ('<div class="quiz-question-multichoice-summary form-wrapper form-group">');
            print '<div class="question-body">';
-           print '<div class="title-body">Summary</div>';
+           print '<div class="title-body">'.t('Summary').'</div>';
            print (quiz_calculate_risk("summary",$number_result,$next_que));
            
            print("</div>");
+           if ($language->language!="" && $language->language!="en"){
+              $lang_code = "/" . $language->language;
+            } 
           //Print the buttons of the final report   
         ?>
             <div class="content-print-download final-summary">
             <ul class="print-download">
           
           <li class="print">
-            <a href="/dangerous-substances/checklist">&gt; <?php print t("View the checklist")?> </a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/checklist">&gt; <?php print t("View the checklist")?> </a>
           </li>
           <li class="download">
-            <a href="/dangerous-substances/recommendations">&gt; <?php print t("View the Recommendations")?></a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/recommendations">&gt; <?php print t("View the Recommendations")?></a>
           </li>
           </ul></div>
           </div>
@@ -419,8 +450,12 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           if (isset($_SESSION['quiz'][25]['next_question'])==1){
             $next_que =$_SESSION['quiz'][25]['next_question']; 
           }
-  
-          $cur_que = $_SESSION['quiz'][25]['current'];
+          if (isset($_SESSION['quiz'][25]['current'])){
+            $cur_que = $_SESSION['quiz'][25]['current'];
+          }
+          else{
+            $cur_que = 37;
+          }
           if ($cur_que > $next_que){
            $_SESSION['quiz'][25]['next_question']  = $cur_que; 
            $next_que =$_SESSION['quiz'][25]['next_question']; 
@@ -439,7 +474,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           }
           print($w_message);
           
-          if (isset($_SESSION['quiz'][25])==1){
+          if (isset($_SESSION['quiz'][25]['current'])==1){
             $cur_que = $_SESSION['quiz'][25]['current'];
             $cur_ans = $_SESSION['quiz'][25]['result_id'];
           }else{
@@ -447,7 +482,8 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             $cur_ans ="";
           }
           if (isset ($page['content']['system_main']['body']['question']['#markup'])==1){
-            $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-submit" name="op" value="Next" class="btn btn-default form-submit">Next</button>','<button type="submit" id="edit-navigation-submit" name="op" value="Next question" class="btn btn-default form-submit">'. t("NEXT") .'<br/> <span class="cont-asess">'. t("Continue the assessment") .'</span></button>',$page['content']['system_main']['body']['question']['#markup']);
+            $cont_ase= t("Continue the assessment");
+            $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-submit" name="op" value="Next" class="btn btn-default form-submit">Next</button>','<button type="submit" id="edit-navigation-submit" name="op" value="Next question" class="btn btn-default form-submit">'. t("NEXT") .'<br/> <span class="cont-asess">'. $cont_ase .'</span></button>',$page['content']['system_main']['body']['question']['#markup']);
           }
           if (isset($page['content']['system_main']['body'])==1){
             $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-back" name="op" value="Back" class="btn btn-default form-submit">Back</button>','', $page['content']['system_main']['body']['question']['#markup']);
@@ -469,7 +505,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
         			->condition('number', 2)
         			->fields(array('is_skipped' => 2))
         			->execute();  	
-
 
                 	drupal_goto("node/25/take/3");
                 }
@@ -506,11 +541,8 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
                 }
 
             }
-
-          }
-          
-
-
+        }
+        
            if ($cur_que==6){
 
             $sql ="select sum(points_awarded) total from quiz_node_results_answers where result_id = ". $quizresult ." and number in (1,3,4,5) order by number";
@@ -817,7 +849,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
     			  ->fields(array('is_skipped' => 2))
     			  ->execute();  	
             $_SESSION['quiz'][25]['current'] = 37;
-            header("Location:".$base_url."/node/25/take/36/feedback/"); 
+            header("Location:".$base_url.$lang_code."/node/25/take/36/feedback/"); 
           	
           	break;
          	 	}
@@ -837,10 +869,12 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 	          }
 	          else
 	          {
-	          	$page['content']['system_main']['body']['question']['#markup'] = str_replace('Leave blank</button>' , t("Do not know / Reply later") . '</button>',$page['content']['system_main']['body']['question']['#markup']);	
+              //t("Do not know / Reply later")
+              $dontknow = t("Do not know / Reply later");
+	          	$page['content']['system_main']['body']['question']['#markup'] = str_replace('Leave blank</button>' , $dontknow . '</button>',$page['content']['system_main']['body']['question']['#markup']);	
 	          }
           }
-                    
+          
           if (isset($page['content']['system_main']['feedback'][0]['#title'])==1){
               
               switch ($page['content']['system_main']['feedback'][0]['#title']) {
@@ -906,8 +940,8 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           <!--<img src="<?php print($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/short-progress-bar-step-2.png" alt="">-->
 
           <progress max="36" value="<?php print($max_que) -1 ?>" class="quiz-progress"></progress>
-          <div class="total-answered"><?php print $ans_res; ?> answered</div>
-          <div class="total-skipped"> <?php print $ans_ski; ?> skipped</div>
+          <div class="total-answered"><?php print $ans_res; ?> <?php print t('answered')?></div>
+          <div class="total-skipped"> <?php print $ans_ski; ?> <?php print t('skipped')?></div>
           <div class="info-ico-right"><a href="javascript:barInfo();"><img title="info" src="<?php print ($base_url . '/' . drupal_get_path('theme', 'bootstrapDs'));?>/images/info-ico-white.png" alt=""></a></div>
         </div>
         

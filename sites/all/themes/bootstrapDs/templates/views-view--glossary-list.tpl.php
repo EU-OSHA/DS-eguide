@@ -30,13 +30,13 @@
 
  <div class="container fluid">
   <h1 class="page-header container"><?php print(t("Glossary"));?></h1>
-  <p class="text-questions glossary-header">The definitions in Italic letters are taken from a technical, scientific or medical standard, from a legislation or a renowned encyclopaedia. The definitions or explanations in normal letters use non-specialist language and are related to the context of dangerous substances at work places</p>
+  <p class="text-questions glossary-header"><?php print t('The definitions in Italic letters are taken from a technical, scientific or medical standard, from a legislation or a renowned encyclopaedia. The definitions or explanations in normal letters use non-specialist language and are related to the context of dangerous substances at work places')?></p>
   <div class="<?php print $classes; ?>">
   
 
     <div class="view-content">
     <?php //print $rows; 
-
+      global $language;
       $terms = taxonomy_get_tree(3);
 
       foreach ($terms as $glossary_type) {
@@ -46,9 +46,8 @@
         //Load the data of the glossary terms of each type
 
         $glossary_list = views_get_view_result('glossary_list','page',$number);        
-
-    
         if (count($glossary_list) >0){  
+           $name =$glossary_list[0]->field_field_type[0]['rendered']['#markup'];
           ?>
           <div class="glossary_type">
             <div class="type-name" data-toggle="collapse" data-target="#demo<?php print $number;?>">
@@ -61,9 +60,9 @@
               <?php
               
               foreach ($glossary_list as $term) {
-               
-                $term_title = $term->taxonomy_term_data_name;
-                $term_desc = $term->taxonomy_term_data_description;
+                
+                $term_title = $term->field_name_field[0]['rendered']['#markup'];
+                $term_desc = $term->_field_data['tid']['entity']->description;
               ?>
 
                 <dt class="term-title">

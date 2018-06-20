@@ -1,5 +1,6 @@
 <?php
 global $base_url;
+global $language;
 
 //Array to include all the 
 $checks = array();
@@ -167,7 +168,6 @@ $sect->insertPageBreak();
 <?php
   include(drupal_get_path('theme', 'bootstrapDs').'/templates/header.tpl.php');
 ?>
-
   <?php
   
   $result_id = 0;
@@ -178,9 +178,18 @@ $sect->insertPageBreak();
     if (isset($_SESSION['quiz']['temp']['result_id'])){
       $result_id = $_SESSION['quiz']['temp']['result_id'];
       $next_que = 37;
-
     }
   }
+
+  $lang_code="";
+  $lang_prefix= "";
+
+  if ($language->language!="" && $language->language!="en"){
+    $lang_code = "/" . $language->language;
+    $lang_prefix = "../";
+  }
+
+
   ?>
   <div class="main-container container">
   <h1 class="page-header container"><?php print t("Checklist"); ?></h1>
@@ -188,10 +197,10 @@ $sect->insertPageBreak();
   <div class="content-print-download ">
         <ul class="print-download col-md-6">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/73" class="" target="_blank">&gt; <?php print t("Download as pdf")?> </a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/73" class="" target="_blank">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Download as rich text (rtf)")?></a>
+             <a href="<?php print $lang_prefix?>sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
            <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
@@ -886,10 +895,10 @@ $sect->insertPageBreak();
     <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/73" class=""  target="_blank">&gt; <?php print t("Download as pdf")?> </a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/73" class="" target="_blank">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-             <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Download as rich text (rtf)")?></a>
+             <a href="<?php print $lang_prefix?>sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
            <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
