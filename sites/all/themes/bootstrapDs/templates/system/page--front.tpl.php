@@ -32,9 +32,9 @@
     <!----This is the List-->
       <div id="listText">
           <ul>
-            <li class="lan-au"><a href="AU_de">Austria</a>
+            <li class="lan-au"><a href="AT_de">Austria</a>
               <ul class="at">
-                  <li class="LanHid"><a href="AU_de">German</a></li>
+                  <li class="LanHid"><a href="AT_de">German</a></li>
               </ul>
             </li>
 
