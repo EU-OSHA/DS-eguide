@@ -19,7 +19,7 @@
   <div id="langselect">
     <div id ="langheader">
       <div class="lan-sel">
-        <?php print t('Select your language');?>
+        <?php print t('Select your country');?>
       </div>
       <div class="MapSC">
         <?php print t('MAP')?>
