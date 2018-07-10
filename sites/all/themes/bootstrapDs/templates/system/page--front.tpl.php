@@ -14,8 +14,14 @@
         ;?>
     </p>
    
+<?php
 
-
+  $nodeProd = node_load_multiple(array(), array('title' => 'Production'));
+  $isProd = count($nodeProd);
+  
+  if ($isProd<1){
+?>
+<!--********************************Start of the lenguage section**************************************************************************************************-->
   <div id="langselect">
     <div id ="langheader">
       <div class="lan-sel">
@@ -69,10 +75,13 @@
      
       <div id="vmap"></div>
   </div>
-
-
-    
   </div>
+<!--********************************End of the lenguage section**************************************************************************************************-->
+<?php
+ } 
+?>
+
+
   <section class="container">
     <div class="row">
       <div class="col-md-6">
