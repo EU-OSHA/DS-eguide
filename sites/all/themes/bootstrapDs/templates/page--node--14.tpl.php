@@ -163,6 +163,13 @@ drupal_add_library('system', 'ui.draggable');
           foreach($query as $item) {
             $cont = $cont +1;  
             $nodo = node_load($item->child_nid);
+
+
+            if ($language->language!="" && $language->language!="en"){
+              $lang_code = "/" . $language->language;
+            }else{
+              $lang_code = "";
+            } 
                        
             if (isset($nodo->title_field[$language->language][0]['value'])){
             	$nodo_title =$nodo->title_field[$language->language][0]['value'];
@@ -195,14 +202,7 @@ drupal_add_library('system', 'ui.draggable');
                 $ans_pen = $ans_pen +1;
               }else{
                 print ('<li class="answered">'); 
-
-                if ($language->language!=""){
-                	print ("<a href='".$base_url."/".$language->language."/node/14/take/".$cont."'>");
-                }
-                else{
-                	print ("<a href='".$base_url."/node/14/take/".$cont."'>");
-                } 
-                
+                print ("<a href='".$base_url. $lang_code ."/node/14/take/".$cont."'>");
                 
                 if ($cont== $cur_que){
                   print ("<p class='curque-title'>");

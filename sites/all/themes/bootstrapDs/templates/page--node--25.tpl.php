@@ -1086,7 +1086,7 @@ function makeMeter(meterElement) {
     } else if (meterElement.innerText) {
         meterElement.innerText = '';
     }
-    this.onchange = function() { alert(1); };
+    this.onchange = function() {  };
 
     this.title = attr('title') != null ? attr('title') : this.value;
     this.form = getFormParent();
@@ -1174,7 +1174,6 @@ function barInfo() {
 
 
 function moreInfo() {
-  
     var body = jQuery("html, body");
     body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
   });

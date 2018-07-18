@@ -3785,14 +3785,14 @@ function quiz_email_form() {
   
   $form['submit'] = array(
     '#type' => 'submit',
+    '#attributes' => array('onclick' => "_paq.push(['trackEvent', 'Save', 'Email']);"), 
     '#value' => t('Send email'),
   );
   return $form;
 }
 
 function quiz_email_form_submit($form, &$form_state) {
-
- 
+  
   if($form['email']['#value']==""){
     drupal_set_message('Please, the email format is not correct. You should fill in a valid email address to save the questionnaire','error');
     return false;  
@@ -3824,7 +3824,6 @@ function quiz_email_form_submit($form, &$form_state) {
       );  
 
       drupal_mail('quiz', 'quiz_extension_mail', $form_state['values']['email'], 'en', array('values' => $values));
-
       drupal_set_message(t("An email has been sent to ") . $form['email']['#value'] . ". " . t("In this email there is a link that allow you to retrieve the questionnaire."));
       return true;    
     }  
@@ -3884,7 +3883,7 @@ function myelement_email_validate($element, &$form_state, $form) {
  
   if (!valid_email_address($value)) {
     //form_error($element, t('Please enter a valid email address.'));
-    //drupal_set_message("NOOOOO!");
+   
   }else
   {
    
