@@ -1,82 +1,83 @@
 <?php
+global $language;
 //Array to include all the recommendations with their nodes titles
 $checks = array();
 $checks['4']['skipped'] = array("1.1","1.2","1.3","1.4","2.0","3.1","3.9","4.0","5.0","6.0","7.0","8.0");
-$checks['4']['99'] = array("1.1","1.2","1.3","1.4");
-$checks['4']['100'] = array("1.1","2.0");
-$checks['4']['102'] = array("1.1","3.1","3.9");
+$checks['4']['325'] = array("1.1","1.2","1.3","1.4");
+$checks['4']['326'] = array("1.1","2.0");
+$checks['4']['327'] = array("1.1","3.1","3.9");
 $checks['4']['103'] = array("1.1"); //????Anaesthetic
-$checks['4']['104'] = array("1.1","4.0");
-$checks['4']['105'] = array("1.1","5.0");
-$checks['4']['106'] = array("1.1","6.0");
-$checks['4']['107'] = array("1.1","7.0");
-$checks['4']['108'] = array("1.1","8.0");
-$checks['5']['150'] = array("9.0");
+$checks['4']['328'] = array("1.1","4.0");
+$checks['4']['329'] = array("1.1","5.0");
+$checks['4']['330'] = array("1.1","6.0");
+$checks['4']['331'] = array("1.1","7.0");
+$checks['4']['332'] = array("1.1","8.0");
+$checks['5']['302'] = array("9.0");
 $checks['5']['skipped'] = array("9.0");
-$checks['6']['154'] = array("59.0");
+$checks['6']['400'] = array("59.0");
 $checks['6']['skipped'] = array("59.0");
-$checks['7']['156'] = array("28.1");
+$checks['7']['397'] = array("28.1");
 $checks['7']['skipped'] = array("28.1");
-$checks['8']['159'] = array("28.2");
+$checks['8']['395'] = array("28.2");
 $checks['8']['skipped'] = array("28.2");
 $checks['9']['skipped'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
-$checks['9']['268'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
-$checks['9']['269'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
-$checks['9']['270'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
+$checks['9']['306'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
+$checks['9']['307'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
+$checks['9']['308'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
 $checks['10']['skipped'] =array("15.0","16.0","17.0","18.0","19.0","20.0","21.0");
-$checks['10']['115'] =array("15.0","16.0");
-$checks['10']['116'] =array("15.0","17.0");
-$checks['10']['117'] =array("15.0","18.0");
-$checks['10']['118'] =array("15.0","19.0");
-$checks['10']['119'] =array("15.0","20.0");
-$checks['10']['120'] =array("15.0","21.0");
+$checks['10']['310'] =array("15.0","16.0");
+$checks['10']['311'] =array("15.0","17.0");
+$checks['10']['312'] =array("15.0","18.0");
+$checks['10']['313'] =array("15.0","19.0");
+$checks['10']['314'] =array("15.0","20.0");
+$checks['10']['315'] =array("15.0","21.0");
 $checks['11']['skipped'] =array("38.0","39.0","40.0");
-$checks['11']['136'] =array("39.0","40.0");
-$checks['11']['137'] =array("39.0","40.0");
-$checks['11']['138'] =array("38.0","40.0");
+$checks['11']['391'] =array("39.0","40.0");
+$checks['11']['392'] =array("39.0","40.0");
+$checks['11']['393'] =array("38.0","40.0");
 $checks['12']['skipped'] =array("3.1","3.8");
-$checks['12']['258'] =array("3.8");
-$checks['12']['259'] =array("3.1");
-$checks['12']['260'] =array("3.1");
-$checks['13']['165'] =array("36.0");
+$checks['12']['337'] =array("3.8");
+$checks['12']['338'] =array("3.1");
+$checks['12']['339'] =array("3.1");
+$checks['13']['389'] =array("36.0");
 $checks['14']['skipped'] =array("41.0");
-$checks['14']['169'] =array("41.0");
-$checks['14']['237'] =array("41.0");
-$checks['15']['171'] =array("43.0");
-$checks['16']['175'] =array("44.0","45.0");
+$checks['14']['387'] =array("41.0");
+$checks['14']['388'] =array("41.0");
+$checks['15']['384'] =array("43.0");
+$checks['16']['383'] =array("44.0","45.0");
 $checks['17']['skipped'] =array("49.0","45.0");
-$checks['17']['177'] =array("49.0","45.0");
+$checks['17']['380'] =array("49.0","45.0");
 $checks['18']['skipped'] =array("47.0","51.0");
-$checks['18']['181'] =array("47.0","51.0");
-$checks['18']['238'] =array("47.0","51.0");
+$checks['18']['378'] =array("47.0","51.0");
+$checks['18']['379'] =array("47.0","51.0");
 $checks['19']['skipped'] =array("54.0");
-$checks['19']['184'] =array("54.0");
+$checks['19']['376'] =array("54.0");
 $checks['20']['skipped'] =array("54.0");
-$checks['20']['187'] =array("54.0");
+$checks['20']['374'] =array("54.0");
 $checks['21']['skipped'] =array("57.0");
-$checks['21']['190'] =array("57.0");
-$checks['22']['191'] =array("57.0");
-$checks['22']['192'] =array("57.0");
-$checks['22']['193'] =array("57.0");
+$checks['21']['318'] =array("57.0");
+$checks['22']['369'] =array("57.0");
+$checks['22']['370'] =array("57.0");
+$checks['22']['371'] =array("57.0");
 $checks['23']['skipped'] =array("46.0");
-$checks['23']['196'] =array("46.0");
+$checks['23']['368'] =array("46.0");
 $checks['24']['skipped'] =array("42.0");
-$checks['24']['272'] =array("42.0");
-$checks['25']['200'] =array("58.0");
-$checks['27']['204'] =array("60.0");
+$checks['24']['336'] =array("42.0");
+$checks['25']['366'] =array("58.0");
+$checks['27']['362'] =array("60.0");
 $checks['28']['skipped'] =array("61.0");
-$checks['28']['206'] =array("61.0");
+$checks['28']['360'] =array("61.0");
 $checks['29']['skipped'] =array("63.0");
-$checks['29']['207'] =array("63.0");
-$checks['29']['208'] =array("63.0");
-$checks['30']['249'] =array("62.2");
-$checks['30']['250'] =array("62.1");
-$checks['30']['251']=array("62.3");
+$checks['29']['357'] =array("63.0");
+$checks['29']['358'] =array("63.0");
+$checks['30']['353'] =array("62.2");
+$checks['30']['354'] =array("62.1");
+$checks['30']['355']=array("62.3");
 $checks['31']['skipped'] =array("63.0","37.0");
-$checks['31']['214'] =array("63.0","37.0");
+$checks['31']['352'] =array("63.0","37.0");
 $checks['32']['skipped'] =array("64.0");
-$checks['32']['216'] =array("64.0");
-$checks['36']['224'] =array("55.0");
+$checks['32']['350'] =array("64.0");
+$checks['36']['342'] =array("55.0");
 
 $block_title = array();
 $block_title['1'] = t('Part I: Handling, use and exposure of dangerous substances');
@@ -214,9 +215,10 @@ if ($result_id ==0 ){//Nothing to show
 		   	
 		    $resp_id = "";
 			foreach ($res_ans as $resp) {
+
 				$resp_id = $resp->id;
 	        }
-
+          
 		    if ($resp_id !=""){
 			    $query = db_select('quiz_multichoice_answers', 'a');
 			    $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
@@ -225,6 +227,7 @@ if ($result_id ==0 ){//Nothing to show
 			    $res_answer = $query->execute();
 	  
 		        foreach ($res_answer as $resp) {
+
 		           $check_toshow[$number][$number][$resp->id] = $resp->id;
 		           $check_toshow[$number]['nid'] = $question_nid;
 		        }	
@@ -253,7 +256,7 @@ if ($result_id ==0 ){//Nothing to show
       
   	</ul></div>
 <?php
-   	//krumo ($check_toshow);
+   	
     foreach ($check_toshow as $checknumber) {
 
 	    $number_key = (key($checknumber));
@@ -261,11 +264,11 @@ if ($result_id ==0 ){//Nothing to show
 
 	    if ($number_key<12 and $title1_printed == false){
 	   		print("<div class='block-title col-md-12'>");
-	   	  	print $block_title[1];
-	   	  	$sect->writeText('<b>'.$block_title[1].'</b><br>', new PHPRtfLite_Font(18, 'Arial', '#003399'), $parNormal);
-	      	print("</div>");
+	   	  print $block_title[1];
+	   	  $sect->writeText('<b>'.$block_title[1].'</b><br>', new PHPRtfLite_Font(18, 'Arial', '#003399'), $parNormal);
+	      print("</div>");
 	   		$title1_printed = true;
-       		$block_first_question = true;
+       	$block_first_question = true;
 	   	}
 
 	   	if ($number_key>12 and $number_key<24 and $title2_printed == false){
@@ -280,10 +283,15 @@ if ($result_id ==0 ){//Nothing to show
 	        print ('<div class="check-question col-md-12"><div class="q-title">'.t("Introduction").'</div>');
 	        $node_rec  = node_load_multiple(NULL, array("title" => "35.0"));
 	        $key_node = key($node_rec);
-	        if (isset($node_rec[$key_node]->body['und'][0]['value'])){
-	          $body_rec = $node_rec[$key_node]->body['und'][0]['value'];
+          
+	        if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
+	          $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
 	        }
 	        print($body_rec."</div>");
+
+          for ($i = 1; $i <= 100; $i++) {
+            $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
+          }
 	        $body_rec  = str_replace("<p>", "<br>", $body_rec);
          	$body_rec  = str_replace("</p>", "", $body_rec);
          	$body_rec  = str_replace('<div class="main-point">', "", $body_rec);
@@ -313,10 +321,13 @@ if ($result_id ==0 ){//Nothing to show
         print ('<div class="check-question col-md-12"><div class="q-title">'.t("Introduction").'</div>');
         $node_rec  = node_load_multiple(NULL, array("title" => "57.0"));
         $key_node = key($node_rec);
-        if (isset($node_rec[$key_node]->body['und'][0]['value'])){
-          $body_rec = $node_rec[$key_node]->body['und'][0]['value'];
+        if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
+          $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
         }
         print($body_rec."</div>");
+        for ($i = 1; $i <= 100; $i++) {
+          $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
+        }
         $body_rec  = str_replace("<p>", "<br>", $body_rec);
        	$body_rec  = str_replace("</p>", "", $body_rec);
        	$body_rec  = str_replace('<div class="main-point">', "", $body_rec);
@@ -364,7 +375,7 @@ if ($result_id ==0 ){//Nothing to show
 	        	}
 
 	        	foreach ($node_q->alternatives as $q_answer) {
-	        		
+	        	
 	        		if ($checkarray == $q_answer['id']){
 	        			
 	        			$answer_text = $q_answer['answer']['value'];
@@ -386,9 +397,10 @@ if ($result_id ==0 ){//Nothing to show
 	           
           		    $node_rec  = node_load_multiple(NULL, array("title" => $rec_node));
                 	$key_node = key($node_rec);
-                	if (isset($node_rec[$key_node]->body['und'][0]['value'])){
-                    	$body_rec = $node_rec[$key_node]->body['und'][0]['value'];
-                  	}
+
+                	if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
+                    	$body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+                 	}
                  
                  	if ($print_title == true){
                   	print("<div class='q-answers'><span class='answer-title'>".t("Measures").":</span></div>");
@@ -397,7 +409,14 @@ if ($result_id ==0 ){//Nothing to show
                  		$print_title = false;
                  	}
                  	print($body_rec);
-
+                  for ($i = 1; $i <= 100; $i++) {
+                    $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
+                  }
+                  
+                  $body_rec  = str_replace("<p >", "", $body_rec);
+                  $body_rec  = str_replace("<span >", "", $body_rec);
+                  $body_rec  = str_replace("<ul >", "", $body_rec);
+                  $body_rec  = str_replace("</span>", "", $body_rec);
                  	$body_rec  = str_replace("<p>", "<br>", $body_rec);
                  	$body_rec  = str_replace("</p>", "", $body_rec);
                  	$body_rec  = str_replace('<div class="main-point">', "", $body_rec);
@@ -495,6 +514,7 @@ if ($result_id ==0 ){//Nothing to show
 
 
                   }else{
+                    
                     $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
                   }
 	            }

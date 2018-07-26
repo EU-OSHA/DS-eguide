@@ -1,5 +1,6 @@
 <?php
 //Array to include all the recommendations with their nodes titles
+global $language;
 $checks = array();
 
 $dir = dirname(__FILE__);
@@ -120,7 +121,7 @@ foreach ($answers as $answer) {
     }	
   }  
 }    
-//krumo($nodefeed);
+
 //Once we have get the number of the checlist to show, we print all of them 
 ?>
     
@@ -170,15 +171,35 @@ foreach ($check_toshow as $checknumber) {
   			print("</span>");
         $body_rec =  $q_answer['feedback_if_chosen']['value'];
 
+        if (strlen($body_rec)<10){
+
+          $nodefeed = node_load_multiple(NULL, array("title" => trim($body_rec)));
+          $num_nid = key($nodefeed);
+               
+          if (isset($nodefeed[$num_nid]->body[$language->language][0]['value'])){
+            $body_rec = $nodefeed[$num_nid]->body[$language->language][0]['value'];
+          }
+          else{
+            //Take the default language
+            $body_rec = $nodefeed[$num_nid]->body['en'][0]['value'];
+          }
+       
+        }
   		}
    	}
 	 	print("</div>");
     print("<div class='q-answers'><span class='answer-title'>".t("Measures").":</span></div>");
-    print($body_rec);
 
     $sect->writeText('<b>' . t("Measures").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
-   	$body_rec  = str_replace("<p>", "<br>", $body_rec);
+    //delete the id for tmgmt
+    for ($i = 1; $i <= 100; $i++) {
+      $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
+    }
+    
+    $body_rec  = str_replace("<p>", "<br>", $body_rec);
+    $body_rec  = str_replace("<p >", "<br>", $body_rec);
    	$body_rec  = str_replace("</p>", "", $body_rec);
+    $body_rec  = str_replace('</span>', "", $body_rec);
    	$body_rec  = str_replace('<div class="main-point">', "", $body_rec);
    	$body_rec  = str_replace('<div class="rec-text">', "", $body_rec);
    	$body_rec  = str_replace('<div class="second-point">', "", $body_rec);
@@ -188,7 +209,9 @@ foreach ($check_toshow as $checknumber) {
    	$body_rec  = str_replace('</li>', "", $body_rec);
    	$body_rec  = str_replace('</ul>', "", $body_rec);
    	$body_rec  = str_replace('<ul>', "", $body_rec);
-     
+    $body_rec  = str_replace('<ul >', "", $body_rec);
+    $body_rec  = str_replace('<span >', "", $body_rec);
+         
     /*Print the comments of the questions*/
     $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
    	$user_comment = getcomment($result_id , $number_key);

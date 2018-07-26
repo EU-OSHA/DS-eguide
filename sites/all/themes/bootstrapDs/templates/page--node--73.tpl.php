@@ -4,33 +4,33 @@ global $language;
 
 //Array to include all the 
 $checks = array();
-$checks['4']['99'] = t("Do you apply good working practices described to reduce the risks when working with <b>carcinogenic, mutagenic or reprotoxic substances?</b>");
-$checks['4']['100'] = t("Do you apply good working practices to reduce the risks when working with <b>sensitising substances?</b>");
-$checks['4']['102'] = t("Do you apply good working practices to reduce exposure to <b>asbestos?</b> ");
-$checks['4']['104'] = t("Do you apply good working practices to reduce the risks when working with <b>cytostatics</b> or any other medical product which may cause adverse effects?");
-$checks['4']['105'] = t("Do you apply good working practices to reduce the risks when working with <b>isocyanates/polyurethane, epoxy, acrylates or cyanoacrylates?</b>");
-$checks['4']['106'] = t("Do you apply the good working practices to reduce exposure to <b>dust that contains quartz?</b>");
-$checks['4']['107'] = t("Do you apply good working practices to reduce exposure to dust from mineral wool, e.g. <b>glass wool, rock wool, or glass fibre?</b>");
-$checks['4']['108'] = t("If you cannot avoid working with <b>refractory fibres</b>, special fibres or crystalline fibres, do you apply good working practices described to reduce exposure (and the risk of cancer)? ");
+$checks['4']['325'] = t("Do you apply good working practices described to reduce the risks when working with <b>carcinogenic, mutagenic or reprotoxic substances?</b>");
+$checks['4']['326'] = t("Do you apply good working practices to reduce the risks when working with <b>sensitising substances?</b>");
+$checks['4']['327'] = t("Do you apply good working practices to reduce exposure to <b>asbestos?</b> ");
+$checks['4']['328'] = t("Do you apply good working practices to reduce the risks when working with <b>cytostatics</b> or any other medical product which may cause adverse effects?");
+$checks['4']['329'] = t("Do you apply good working practices to reduce the risks when working with <b>isocyanates/polyurethane, epoxy, acrylates or cyanoacrylates?</b>");
+$checks['4']['330'] = t("Do you apply the good working practices to reduce exposure to <b>dust that contains quartz?</b>");
+$checks['4']['331'] = t("Do you apply good working practices to reduce exposure to dust from mineral wool, e.g. <b>glass wool, rock wool, or glass fibre?</b>");
+$checks['4']['332'] = t("If you cannot avoid working with <b>refractory fibres</b>, special fibres or crystalline fibres, do you apply good working practices described to reduce exposure (and the risk of cancer)? ");
 $checks['7'] = t("Do you know which chemical substances pregnant and breast-feeding women are not allowed to work with?");
 $checks['8'] = t("Do you know which chemical substances young workers are not allowed to work with? ");
-$checks['9']['268'] = t("Have you done what is necessary to protect those that have not the necessary language capacities to understand all written and/or oral preventive instructions? ");
-$checks['9']['269'] = t("Have you done what is necessary to protect those that have mental or physical disabilities?");
-$checks['9']['270'] = t("Have you done what is necessary to protect those that work alone with chemical products or dangerous substances?");
-$checks['10']['115'] = t("Do you apply good working practices for hairdressers? ");
-$checks['10']['116'] = t("Do you apply good working practices for electroplating?");
-$checks['10']['117'] = t("Do you apply good working practices for laboratory work?");
-$checks['10']['118'] = t("Do you apply good working practices for welding and thermo-cutting?");
-$checks['10']['119'] = t("Do you apply good working practices for spray painting?");
-$checks['10']['120'] = t("Do you apply good practices for work in confined spaces?");
-$checks['10']['121'] = t("Do you apply good practices for work with liquid manure? ");
-$checks['11']['136'] = t("Have you got the necessary documented information about risks and safety precautions for the chemicals you import?");
-$checks['11']['137'] = t("Have you taken the necessary risk and safety precautions for the chemical products that you mix and store for later use in your own company?");
-$checks['11']['138'] = t("Have you taken the necessary risk and safety precautions if you repackage or distribute chemical products or substances (e.g. filling a liquid chemical product from a larger barrel to smaller containers");
+$checks['9']['306'] = t("Have you done what is necessary to protect those that have not the necessary language capacities to understand all written and/or oral preventive instructions? ");
+$checks['9']['307'] = t("Have you done what is necessary to protect those that have mental or physical disabilities?");
+$checks['9']['308'] = t("Have you done what is necessary to protect those that work alone with chemical products or dangerous substances?");
+$checks['10']['310'] = t("Do you apply good working practices for hairdressers? ");
+$checks['10']['311'] = t("Do you apply good working practices for electroplating?");
+$checks['10']['312'] = t("Do you apply good working practices for laboratory work?");
+$checks['10']['313'] = t("Do you apply good working practices for welding and thermo-cutting?");
+$checks['10']['314'] = t("Do you apply good working practices for spray painting?");
+$checks['10']['315'] = t("Do you apply good practices for work in confined spaces?");
+$checks['10']['999'] = t("Do you apply good practices for work with liquid manure? ");
+$checks['11']['391'] = t("Have you got the necessary documented information about risks and safety precautions for the chemicals you import?");
+$checks['11']['392'] = t("Have you taken the necessary risk and safety precautions for the chemical products that you mix and store for later use in your own company?");
+$checks['11']['393'] = t("Have you taken the necessary risk and safety precautions if you repackage or distribute chemical products or substances (e.g. filling a liquid chemical product from a larger barrel to smaller containers");
 $checks['12']['no'] = t("Have you checked whether you are working with asbestos or not?");
-$checks['12']['258'] = t("Have you checked whether you are working with asbestos in demolition and renovation works?");
-$checks['12']['259'] = t("Have you checked whether you are processing or treating material containing asbestos?");
-$checks['12']['260'] = t("Have you checked whether you are working with asbestos in research, development or analysis?");
+$checks['12']['337'] = t("Have you checked whether you are working with asbestos in demolition and renovation works?");
+$checks['12']['338'] = t("Have you checked whether you are processing or treating material containing asbestos?");
+$checks['12']['339'] = t("Have you checked whether you are working with asbestos in research, development or analysis?");
 $checks['13'] = t("Did you sort out chemical products which are not used/not needed anymore?");
 $checks['14'] = t("Safety data sheets (SDS) are available for all the chemical products that are used or stored and which are labelled with one or more hazard pictograms (black and white in a red frame).");
 $checks['15'] = t("We have checked that the safety data sheets and labelling of packaging seem to give reasonably correct information?");
@@ -47,9 +47,9 @@ $checks['25'] = t("Have you checked if you can replace /substitute dangerous che
 $checks['26'] = t("Have you checked that the outcome of an implemented or planned exchange/substitution of a chemical product or process was successful? ");
 $checks['27'] = t("Have you taken the measures needed to reduce the concentration of the emission of dangerous substances into the air at the work places?");
 $checks['28'] = t("Have you taken measures needed to reduce the spreading of dangerous substances to colleagues working close by? ");
-$checks['30']['249'] = t("Have you checked that you use the right type of protective gloves and use them in the right way?");
-$checks['30']['250'] = t("Have you checked that you use the right type of respiratory protection and use them in the right way? ");
-$checks['30']['251'] = t("Have you checked that you use the right type of safety goggles and visors and use them in the right way?");
+$checks['30']['353'] = t("Have you checked that you use the right type of protective gloves and use them in the right way?");
+$checks['30']['354'] = t("Have you checked that you use the right type of respiratory protection and use them in the right way? ");
+$checks['30']['355'] = t("Have you checked that you use the right type of safety goggles and visors and use them in the right way?");
 $checks['31'] = t("Signs and labelling may be needed, for example, on pipes and containers, and at work places handling dangerous substances. Do you have the required safety signs and labels? ");
 $checks['32'] = t("Is emergency eye-wash fountain and/or emergency shower fast and easily accessible? ");
 $checks['33'] = t("Have you checked that you use the right kind of emergency eye-wash fountains and emergency showers and use them in the right way? ");
@@ -67,9 +67,9 @@ $checks_title['7'] = t('Employees with specific risk');
 $checks_title['8'] = t('Employees with specific risk');
 $checks_title['9'] = t('Employees with specific risk');
 $checks_title['10'] = t('Good practice for certain activities and businesses');
-$checks_title['11']['136'] = t('Import of chemicals');
-$checks_title['11']['137'] = t('Mixing');
-$checks_title['11']['138'] = t('Repackaging and distributing');
+$checks_title['11']['391'] = t('Import of chemicals');
+$checks_title['11']['392'] = t('Mixing');
+$checks_title['11']['393'] = t('Repackaging and distributing');
 $checks_title['12'] = t('Asbestos');
 $checks_title['13'] = t('Sorting out unnecessary chemicals');
 $checks_title['14'] = t('Safety data sheets and information about risks');
@@ -87,9 +87,9 @@ $checks_title['25'] = t('Substitution');
 $checks_title['26'] = t('Successful substitution ');
 $checks_title['27'] = t('Emissions into the work place air ');
 $checks_title['28'] = t('Exposure at nearby work places');
-$checks_title['30']['249'] = t('Personal Protective Equipment - Gloves');
-$checks_title['30']['250'] = t('Personal Protective Equipment – Respiratory protection');
-$checks_title['30']['251'] = t('Personal Protective Equipment – Googles and visors');
+$checks_title['30']['353'] = t('Personal Protective Equipment - Gloves');
+$checks_title['30']['354'] = t('Personal Protective Equipment – Respiratory protection');
+$checks_title['30']['355'] = t('Personal Protective Equipment – Googles and visors');
 $checks_title['31'] = t('Labels available');
 $checks_title['32'] = t('Emergency eye-wash');
 $checks_title['33'] = t('Safety measure');
@@ -257,51 +257,50 @@ $sect->insertPageBreak();
 
               switch ($number){
                 case 4:
-                  $check_toshow[4][4][99] = 99;
-                  $check_toshow[4][4][100] = 100;
-                  $check_toshow[4][4][102] = 102;
-                  $check_toshow[4][4][104] = 104;
-                  $check_toshow[4][4][105] = 105;
-                  $check_toshow[4][4][106] = 106;
-                  $check_toshow[4][4][107] = 107;
-                  $check_toshow[4][4][108] = 108;
+                  $check_toshow[4][4][325] = 325;
+                  $check_toshow[4][4][326] = 326;
+                  $check_toshow[4][4][327] = 327;
+                  $check_toshow[4][4][328] = 328;
+                  $check_toshow[4][4][329] = 329;
+                  $check_toshow[4][4][330] = 330;
+                  $check_toshow[4][4][331] = 331;
+                  $check_toshow[4][4][332] = 332;
                   $check_toshow[4]['is_skipped'] = true;
                   break;
 
                 case 9:
-                  $check_toshow[9][9][268] = 268;
-                  $check_toshow[9][9][269] = 269;
-                  $check_toshow[9][9][270] = 270;
+                  $check_toshow[9][9][306] = 306;
+                  $check_toshow[9][9][307] = 307;
+                  $check_toshow[9][9][308] = 308;
                   $check_toshow[9]['is_skipped'] = true;
                   break;
 
                 case 10:
-                  $check_toshow[10][10][115] = 115;
-                  $check_toshow[10][10][116] = 116;
-                  $check_toshow[10][10][117] = 117;
-                  $check_toshow[10][10][118] = 118;
-                  $check_toshow[10][10][119] = 119;
-                  $check_toshow[10][10][120] = 120;
-                  $check_toshow[10][10][121] = 121;
+                  $check_toshow[10][10][310] = 310;
+                  $check_toshow[10][10][311] = 311;
+                  $check_toshow[10][10][312] = 312;
+                  $check_toshow[10][10][313] = 313;
+                  $check_toshow[10][10][314] = 314;
+                  $check_toshow[10][10][315] = 315;
                   $check_toshow[10]['is_skipped'] = true;
                   break;
                 case 11:
-                  $check_toshow[11][11][136] = 136;
-                  $check_toshow[11][11][137] = 137;
-                  $check_toshow[11][11][138] = 138;
+                  $check_toshow[11][11][391] = 391;
+                  $check_toshow[11][11][392] = 392;
+                  $check_toshow[11][11][393] = 393;
                   $check_toshow[11]['is_skipped'] = true;
                   break;
                 case 12:
                   $check_toshow[12][12]['no'] = 'no';
-                  $check_toshow[12][12][258] = 258;
-                  $check_toshow[12][12][259] = 259;
-                  $check_toshow[12][12][260] = 260;
+                  $check_toshow[12][12][337] = 337;
+                  $check_toshow[12][12][338] = 338;
+                  $check_toshow[12][12][339] = 339;
                   $check_toshow[12]['is_skipped'] = true;
                   break;
                 case 30:
-                  $check_toshow[30][30][249] = 249;
-                  $check_toshow[30][30][250] = 250;
-                  $check_toshow[30][30][251] = 251;
+                  $check_toshow[30][30][353] = 353;
+                  $check_toshow[30][30][354] = 354;
+                  $check_toshow[30][30][355] = 355;
                   $check_toshow[30]['is_skipped'] = true;
                   break;
               }
@@ -368,7 +367,6 @@ $sect->insertPageBreak();
        $block2_printed = false;
        $block3_printed = false;
        
-      //krumo($check_toshow);
       foreach ($check_toshow as $checknumber) {
         
         $number_key = (key($checknumber));
@@ -782,8 +780,7 @@ $sect->insertPageBreak();
                   
                   if(!isset($check_toshow[$number_key]['is_skipped']) && isset($check_toshow[$number_key]['nid'])){
                     $node_q = node_load($check_toshow[$number_key]['nid']);
-                    //krumo($node_q);
-                    //krumo($number_key);
+                    
                     if(isset($check_toshow[$number_key][$number_key]) ){
                       if ($number_key==9 || $number_key==10 || $number_key==11 || $number_key==12 || $number_key==14 || $number_key==15 || $number_key==16 || $number_key==18 || $number_key==24){
                         $answer_id =key($check_toshow[$number_key][$number_key]);

@@ -273,10 +273,26 @@ drupal_add_library('system', 'ui.draggable');
               </div>
               
               <?php 
-              $feed_show = $item['feedback']['quiz_result_answer'][$number_answer]['answer_feedback']['#markup'];
+              $rec_title = $item['feedback']['quiz_result_answer'][$number_answer]['answer_feedback']['#markup'];
+
+              if (strlen($rec_title)<10){
+                $nodefeed = node_load_multiple(NULL, array("title" => trim($rec_title)));
+                $num_nid = key($nodefeed);
+                     
+                if (isset($nodefeed[$num_nid]->body[$language->language][0]['value'])){
+                  $feedback_text['quiz_result_answer'][$number_answer]['answer_feedback']['#markup'] = $nodefeed[$num_nid]->body[$language->language][0]['value'];
+                }
+                else{
+                  //Take the default language
+                  $feedback_text['quiz_result_answer'][$number_answer]['answer_feedback']['#markup'] = $nodefeed[$num_nid]->body['en'][0]['value'];
+                }
+              }
+
+
+
 
               //Cut and see more
-              print '<div class="short-and-see-more">'.$feed_show.'</div>';
+              print '<div class="short-and-see-more">'.render($feedback_text['quiz_result_answer'][$number_answer]['answer_feedback']).'</div>';
 
             print ("<br>");
             
