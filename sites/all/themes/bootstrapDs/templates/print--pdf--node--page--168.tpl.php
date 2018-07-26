@@ -143,7 +143,7 @@
   </head>
 
 <?php 
-
+global $language;
 $fecha_actual = date('Y-m-d');  
 
 $email = "";
@@ -294,7 +294,20 @@ foreach ($check_toshow as $checknumber) {
   
         print("</span>");
         $body_rec =  $q_answer['feedback_if_chosen']['value'];
+        if (strlen($body_rec)<10){
 
+          $nodefeed = node_load_multiple(NULL, array("title" => trim($body_rec)));
+          $num_nid = key($nodefeed);
+               
+          if (isset($nodefeed[$num_nid]->body[$language->language][0]['value'])){
+            $body_rec = $nodefeed[$num_nid]->body[$language->language][0]['value'];
+          }
+          else{
+            //Take the default language
+            $body_rec = $nodefeed[$num_nid]->body['en'][0]['value'];
+          }
+       
+        }
       }
     }
     print("</div>");
