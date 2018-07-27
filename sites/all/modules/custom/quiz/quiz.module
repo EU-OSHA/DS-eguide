@@ -3674,9 +3674,9 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
       $feedback_text =  $qra->view();
    
       $numberkey = key ($qra->view()['quiz_result_answer']);
-      if (!isset($feedback_text['quiz_result_answer'][$numberkey]['answer_feedback'])){
-        drupal_goto("/");
-      }
+      //if (!isset($feedback_text['quiz_result_answer'][$numberkey]['answer_feedback'])){
+      //  drupal_goto("/");
+      //}
       $rec_title = $feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup'];
       
       if (strlen($rec_title)<10){

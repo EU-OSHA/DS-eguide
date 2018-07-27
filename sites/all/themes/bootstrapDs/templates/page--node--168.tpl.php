@@ -189,7 +189,7 @@ foreach ($check_toshow as $checknumber) {
    	}
 	 	print("</div>");
     print("<div class='q-answers'><span class='answer-title'>".t("Measures").":</span></div>");
-
+print($body_rec . "<br/>");
     $sect->writeText('<b>' . t("Measures").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
     //delete the id for tmgmt
     for ($i = 1; $i <= 100; $i++) {
