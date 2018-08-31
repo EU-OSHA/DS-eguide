@@ -3677,7 +3677,12 @@ function quiz_take_question_feedback_form($form, &$form_state, $quiz, $question_
       //if (!isset($feedback_text['quiz_result_answer'][$numberkey]['answer_feedback'])){
       //  drupal_goto("/");
       //}
-      $rec_title = $feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup'];
+
+      if (isset($feedback_text['quiz_result_answer'][$numberkey]['answer_feedback'])){
+        $rec_title = $feedback_text['quiz_result_answer'][$numberkey]['answer_feedback']['#markup'];
+      }else{
+        $rec_title  = "This is the question";
+      }
       
       if (strlen($rec_title)<10){
         $nodefeed = node_load_multiple(NULL, array("title" => trim($rec_title)));

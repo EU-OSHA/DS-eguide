@@ -406,7 +406,7 @@ $sect->insertPageBreak();
           //print($number_key . "Array de " . count($checknumber[$number_key]));
           $show_title=true;
           foreach ($checknumber[$number_key] as $checkarray) {
-            if ($checkarray!="139" &&  $checkarray!="252"){//These are the ids of the answer without checks
+            if ($checkarray!="394" &&  $checkarray!="356"){//These are the ids of the answer without checks
               print("<div class='check-question'>");//Div for the whole question
 
 
@@ -416,6 +416,9 @@ $sect->insertPageBreak();
                   $checkcount=0;
                 }             
                 print("<div class='check-title'>");
+                print($number_key . "-");
+                
+                
                 print($checks_title[$number_key][$checkarray]);
                 $sect->writeText('<b>'.  $checks_title[$number_key][$checkarray].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                 print("</div>");
