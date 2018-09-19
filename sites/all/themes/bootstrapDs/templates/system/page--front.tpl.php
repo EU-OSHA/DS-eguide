@@ -1,4 +1,4 @@
-<meta name="description" content="This dangerous substances e-tool gives an overview of the safety and health hazards associated with dangerous substances and chemical products in the workplaces. Based on your input, you will get tailored, company-specific advice." />
+<meta name="description" content="<?php echo t('This dangerous substances e-tool gives an overview of the safety and health hazards associated with dangerous substances and chemical products in the workplaces. Based on your input, you will get tailored, company-specific advice.');?>" />
 
 <?php
   include(drupal_get_path('theme', 'bootstrapDs').'/templates/header.tpl.php');
@@ -64,6 +64,7 @@
       <div id="europe_flag" title="<?php print t('European union standar version')?>">
         <a href="/dangerous-substances">
           <img class="pull-left logo-lan" alt="EU logo" src="/dangerous-substances/sites/all/themes/bootstrapDs/images/European_Union_logo.png">
+          <div class="eu_version"><?php print ('EU version')?></div>
         </a>
       </div>
       
@@ -101,6 +102,7 @@
             $idioma = $language->language;
             $urlsh = $idioma ."/". drupal_get_path_alias($idsq,$idioma);
             $urllq = $idioma ."/". drupal_get_path_alias($idlq,$idioma);
+            
           }
           
            
