@@ -106,7 +106,7 @@ function cargaMapa() {
 	    borderOpacity: 1,
 	    borderWidth: 1,
 	    color: '#bdbfbe',
-	    enableZoom: true,
+	    enableZoom: false,
 	    hoverColor: '#99cc00',
 	    hoverOpacity: 0.5,
 	    normalizeFunction: 'linear',

@@ -10,6 +10,7 @@
  * Fork Me @ https://github.com/manifestinteractive/jqvmap
  */
 (function ($) {
+
   var apiParams = {
     colors: 1,
     values: 1,

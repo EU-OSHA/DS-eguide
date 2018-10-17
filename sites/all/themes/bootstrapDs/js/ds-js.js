@@ -1,16 +1,14 @@
-/*SEE MORE*/
-
+ 
 (function ($) {
 $(document).ready(function(){
-    $(".short-and-see-more").shorten();
-
+  $(".short-and-see-more").shorten();
   glossary();
   glossaryLetters();
   glossaryClick();
   glossarySearch();
   glossaryOrderDivs();
 
-
+jQuery("button#edit-navigation-back").remove();
   });
 })(jQuery);
 

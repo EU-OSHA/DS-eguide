@@ -4810,9 +4810,9 @@ if ($block == 3){
       $calc =$calc . $teaser_text;
       $calc =$calc . "<p>";
       $calc =$calc . "<div class='risk-teaser-main'>";
-      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>".$number_correct."</div><div class='risk-text'>".t('Risks not present')."</div></div>";
-      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>". $number_post ."</div><div class='risk-text'>".t('Risks postponed')."</div></div>";
-      $calc =$calc . "<div class='risk-teaser'><div class='number-risks-present'>".$number_present."</div><div class='risk-text'>".t('Present risks')."</div></div>";
+      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>".$number_correct."</div><div class='risk-text'>".t('Risks not present in practices and routines')."</div></div>";
+      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>". $number_post ."</div><div class='risk-text'>".t('Postponed questions in practices and routines')."</div></div>";
+      $calc =$calc . "<div class='risk-teaser'><div class='number-risks-present'>".$number_present."</div><div class='risk-text'>".t('Present risks in practices and routines')."</div></div>";
       $calc =$calc . "</p></div>";
     }
 
@@ -4847,11 +4847,11 @@ if ($block == 3){
       $risk_percentage = 100-$risk_percentage;
       $calc =$calc .  '<meter min="0" max="100" low="50" high="79" optimum="100" value="'.$risk_percentage.'"></meter>';
       
-      $calc =$calc . "<div class='col-md-12'><div class='col-md-6'>" . $teaser_text . "</div>";
-      $calc =$calc . "<div class='col-md-6'>";
-      $calc =$calc . "<div class='risks-not-present'><span>" .$b2_number_correct . "</span> " . t("Risks not present") . "</div>";
-      $calc =$calc . "<div class='risks-postponed'><span>" .$b2_number_post . "</span> " . t("Risks postponed") . "</div>";
-      $calc =$calc . "<div class='risks-present'><span>" . $b2_number_risks . "</span> " . t("Present risks") . "</div>";
+      $calc =$calc . "<div class='col-md-12'><div class='col-md-12'>" . $teaser_text . "</div>";
+      $calc =$calc . "<div class='col-md-12'>";
+      $calc =$calc . "<div class='risks-not-present'><span>" .$b2_number_correct . "</span> " . t("Risks not present in practices and routines") . "</div>";
+      $calc =$calc . "<div class='risks-postponed'><span>" .$b2_number_post . "</span> " . t("Postponed questions in practices and routines") . "</div>";
+      $calc =$calc . "<div class='risks-present'><span>" . $b2_number_risks . "</span> " . t("Present risks in practices and routines") . "<br/><br></div>";
       $calc =$calc . "</div></div>";
     }
 
@@ -4885,11 +4885,11 @@ if ($block == 3){
       $risk_percentage = 100-$risk_percentage;
       $calc =$calc .  '<meter min="0" max="100" low="50" high="79" optimum="100" value="'.$risk_percentage.'"></meter>';
 
-      $calc =$calc . "<div class='col-md-12'><div class='col-md-6'>" . $teaser_text . "</div>";
-      $calc =$calc . "<div class='col-md-6'>";
-      $calc =$calc . "<div class='risks-not-present'><span>" .$b3_correct . "</span> " . t("Risks not present") . "</div>";
-      $calc =$calc . "<div class='risks-postponed'><span>" . $b3_postponed ."</span> " . t("Risks postponed") . "</div>";
-      $calc =$calc . "<div class='risks-present'><span>" . $b3_number_risks . "</span> " .t("Present risks") . "</div>";
+      $calc =$calc . "<div class='col-md-12'><div class='col-md-12'>" . $teaser_text . "</div>";
+      $calc =$calc . "<div class='col-md-12'>";
+      $calc =$calc . "<div class='risks-not-present'><span>" .$b3_correct . "</span> " .  t("Risks not present in measures") . "</div>";
+      $calc =$calc . "<div class='risks-postponed'><span>" . $b3_postponed ."</span> " . t("Postponed questions in measures") . "</div>";
+      $calc =$calc . "<div class='risks-present'><span>" . $b3_number_risks . "</span> " .t("Present risks in measures") . "</div>";
       $calc =$calc . "</div></div>";
     }
 

@@ -66,8 +66,6 @@
  * @see page.tpl.php
  * @ingroup print
  */
-global $base_url;
-drupal_add_css ("sites/all/themes/bootstrapDs/css/css/print.css");
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"

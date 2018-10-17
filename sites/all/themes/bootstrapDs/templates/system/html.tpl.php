@@ -1,4 +1,6 @@
+
 <?php
+
 /**
  * @file
  * Default theme implementation to display the basic html structure of a single
@@ -56,10 +58,10 @@
 global $base_url;
 drupal_add_library('system', 'ui.draggable');
 
-
 ?><!DOCTYPE html>
 <html<?php print $html_attributes;?><?php print $rdf_namespaces;?>>
 <head>
+  <div id="moreInfoDiv" style="display: none;"></div>
   <link rel="profile" href="<?php print $grddl_profile; ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -87,4 +89,36 @@ drupal_add_library('system', 'ui.draggable');
   <?php print $page; ?>
   <?php print $page_bottom; ?>
 </body>
+
+<script type="text/javascript">
+//Block the page until you acept the cookies or go to the privacy policy page  
+  jQuery(document).ready(function() {
+   
+    if(jQuery("#sliding-popup").length>0 && jQuery("iframe").length==0) {//Cookies not acepted and no Privacy policy
+      var body = jQuery("html, body");
+      body.stop().animate({scrollTop:0}, '300', 'swing', function() { 
+      });
+        
+      jQuery("header").after("<div id='shadow'></div>");
+      jQuery("#shadow").css("height",jQuery(window).height());
+      jQuery("#shadow").css("width",jQuery(window).width());
+     
+      var top=(jQuery(window).height());
+      var left=(jQuery(window).width()+20); 
+   
+      jQuery("body").css("overflow-y","hidden").css("overflow-x","hidden");
+    
+      jQuery(".agree-button").click(function() {
+        jQuery("#shadow").remove();
+      });
+
+    }
+    if(jQuery("#sliding-popup").length>0 && jQuery("iframe").length==1) {//Privacy policy
+      jQuery("#sliding-popup").remove();
+    }
+
+  });
+  
+</script>
+
 </html>

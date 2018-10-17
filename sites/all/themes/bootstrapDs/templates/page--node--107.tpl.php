@@ -14,8 +14,8 @@ $checks['4']['331'] = array("1.1","7.0");
 $checks['4']['332'] = array("1.1","8.0");
 $checks['5']['302'] = array("9.0");
 $checks['5']['skipped'] = array("9.0");
-$checks['6']['400'] = array("59.0");
-$checks['6']['skipped'] = array("59.0");
+$checks['6']['399'] = array("64.0");
+$checks['6']['skipped'] = array("64.0");
 $checks['7']['397'] = array("28.1");
 $checks['7']['skipped'] = array("28.1");
 $checks['8']['395'] = array("28.2");
@@ -67,9 +67,9 @@ $checks['25']['366'] =array("58.0");
 $checks['27']['362'] =array("60.0");
 $checks['28']['skipped'] =array("61.0");
 $checks['28']['360'] =array("61.0");
-$checks['29']['skipped'] =array("63.0");
-$checks['29']['357'] =array("63.0");
-$checks['29']['358'] =array("63.0");
+$checks['29']['skipped'] =array("62.0");
+$checks['29']['357'] =array("62.0");
+//$checks['29']['358'] =array("62.0");
 $checks['30']['353'] =array("62.2");
 $checks['30']['354'] =array("62.1");
 $checks['30']['355']=array("62.3");
@@ -256,7 +256,6 @@ if ($result_id ==0 ){//Nothing to show
       
   	</ul></div>
 <?php
-   	
     foreach ($check_toshow as $checknumber) {
 
 	    $number_key = (key($checknumber));
@@ -286,6 +285,8 @@ if ($result_id ==0 ){//Nothing to show
           
 	        if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
 	          $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+          }else{
+            $body_rec = "";   
 	        }
 	        print($body_rec."</div>");
 
@@ -298,14 +299,19 @@ if ($result_id ==0 ){//Nothing to show
          	$body_rec  = str_replace('<div class="rec-text">', "", $body_rec);
          	$body_rec  = str_replace('<div class="second-point">', "", $body_rec);
          	$body_rec  = str_replace('</div>', "", $body_rec);
-         	$body_rec  = str_replace('<li class="rec-text">', "", $body_rec);
-         	$body_rec  = str_replace('<li>', "", $body_rec);
+         	$body_rec  = str_replace('<li class="rec-text">', "- ", $body_rec);
+          $body_rec  = str_replace('<li>', "- ", $body_rec);
          	$body_rec  = str_replace('</li>', "", $body_rec);
          	$body_rec  = str_replace('</ul>', "", $body_rec);
          	$body_rec  = str_replace('<ul>', "", $body_rec);
+          $body_rec  = str_replace('<span>', "", $body_rec);
+          $body_rec  = str_replace('<span >', "", $body_rec);
+          $body_rec  = str_replace('<p >', "", $body_rec);
+          $body_rec  = str_replace('</span>', "", $body_rec);
           $body_rec  = str_replace('" target="_blank">', " - ", $body_rec);
           $body_rec  = str_replace('</a>', "", $body_rec);
           $sect->writeText(t("Introduction") .'<br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parSimple);
+          
 	        $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
 
     	}
@@ -323,6 +329,8 @@ if ($result_id ==0 ){//Nothing to show
         $key_node = key($node_rec);
         if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
           $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+        }else{
+          $body_rec = ""; 
         }
         print($body_rec."</div>");
         for ($i = 1; $i <= 100; $i++) {
@@ -334,13 +342,19 @@ if ($result_id ==0 ){//Nothing to show
        	$body_rec  = str_replace('<div class="rec-text">', "", $body_rec);
        	$body_rec  = str_replace('<div class="second-point">', "", $body_rec);
        	$body_rec  = str_replace('</div>', "", $body_rec);
-       	$body_rec  = str_replace('<li class="rec-text">', "", $body_rec);
-       	$body_rec  = str_replace('<li>', "", $body_rec);
+       	$body_rec  = str_replace('<li class="rec-text">', "- ", $body_rec);
+       	$body_rec  = str_replace('<li>', "- ", $body_rec);
        	$body_rec  = str_replace('</li>', "", $body_rec);
        	$body_rec  = str_replace('</ul>', "", $body_rec);
        	$body_rec  = str_replace('<ul>', "", $body_rec);
+        $body_rec  = str_replace('<ul >', "", $body_rec);
+        $body_rec  = str_replace('<span>', "", $body_rec);
+        $body_rec  = str_replace('<span >', "", $body_rec);
+        $body_rec  = str_replace('</span>', "", $body_rec);
+        $body_rec  = str_replace('</span >', "", $body_rec);
         $body_rec  = str_replace('" target="_blank">', " - ", $body_rec);
         $body_rec  = str_replace('</a>', "", $body_rec);
+        
         $sect->writeText(t("Introduction") .'<br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parSimple);
         $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
 	   	}
@@ -375,9 +389,8 @@ if ($result_id ==0 ){//Nothing to show
 	        	}
 
 	        	foreach ($node_q->alternatives as $q_answer) {
-	        	
-	        		if ($checkarray == $q_answer['id']){
-	        			
+              if ($checkarray == $q_answer['id']){
+
 	        			$answer_text = $q_answer['answer']['value'];
 	        			$answer_text = str_replace('<?php print t("', '',$answer_text);
 	        			$answer_text = str_replace('");?>', '',$answer_text);
@@ -394,13 +407,17 @@ if ($result_id ==0 ){//Nothing to show
 
 	       		$print_title = true;
 	          	foreach($checks[$number_key][$checkarray] as $rec_node){
-	           
+	             
           		    $node_rec  = node_load_multiple(NULL, array("title" => $rec_node));
+                 
+                  
                 	$key_node = key($node_rec);
 
                 	if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
-                    	$body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
-                 	}
+                    $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+                  }else{
+                     $body_rec = ""; 
+                  }
                  
                  	if ($print_title == true){
                   	print("<div class='q-answers'><span class='answer-title'>".t("Measures").":</span></div>");
@@ -408,6 +425,7 @@ if ($result_id ==0 ){//Nothing to show
                  		$check_toshow[$number_key][$key_node]['measures_printed'] = true;
                  		$print_title = false;
                  	}
+                  
                  	print($body_rec);
                   for ($i = 1; $i <= 100; $i++) {
                     $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
@@ -528,7 +546,7 @@ if ($result_id ==0 ){//Nothing to show
 
               	<div class='comments-text'>
               		<textarea rows="4" cols="50" class="comment-box" disabled><?php print(trim($user_comment));?></textarea> 
-				</div>
+				        </div>
 				<?php
 				$sect->writeText('<b>' . t("Comments").'</b>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
 				$sect->writeText('<br>' . $user_comment .'<br><br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);

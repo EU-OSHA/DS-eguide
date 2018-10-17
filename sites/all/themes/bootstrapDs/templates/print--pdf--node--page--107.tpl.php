@@ -202,8 +202,8 @@ $checks['4']['331'] = array("1.1","7.0");
 $checks['4']['332'] = array("1.1","8.0");
 $checks['5']['302'] = array("9.0");
 $checks['5']['skipped'] = array("9.0");
-$checks['6']['400'] = array("59.0");
-$checks['6']['skipped'] = array("59.0");
+$checks['6']['399'] = array("64.0");
+$checks['6']['skipped'] = array("64.0");
 $checks['7']['397'] = array("28.1");
 $checks['7']['skipped'] = array("28.1");
 $checks['8']['395'] = array("28.2");
@@ -255,9 +255,9 @@ $checks['25']['366'] =array("58.0");
 $checks['27']['362'] =array("60.0");
 $checks['28']['skipped'] =array("61.0");
 $checks['28']['360'] =array("61.0");
-$checks['29']['skipped'] =array("63.0");
-$checks['29']['357'] =array("63.0");
-$checks['29']['358'] =array("63.0");
+$checks['29']['skipped'] =array("62.0");
+$checks['29']['357'] =array("62.0");
+//$checks['29']['358'] =array("63.0");
 $checks['30']['353'] =array("62.2");
 $checks['30']['354'] =array("62.1");
 $checks['30']['355']=array("62.3");
@@ -387,6 +387,8 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
         $key_node = key($node_rec);
         if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
           $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+        }else{
+          $body_rec = "";   
         }
         print($body_rec."</div>");
 		}
@@ -402,7 +404,10 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
         $key_node = key($node_rec);
         if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
           $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+        }else{
+          $body_rec = "";   
         }
+        print($body_rec."</div>");
 	   	}
 
 	    print("<div class='check-question col-md-12'>");//Div for the whole question
@@ -442,9 +447,11 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
           		$node_rec  = node_load_multiple(NULL, array("title" => $rec_node));
                 	$key_node = key($node_rec);
                 	if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
-                    	$body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+                  	$body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+                  }else{
+                    $body_rec = "";    
                   	
-                  	}
+                  }
                  
                  	if ($print_title == true){
                   		print("<div class='q-answers'><span class='answer-title measures'>".t("Measures").":</span></div>");

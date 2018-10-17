@@ -26,7 +26,7 @@
 	cursor: pointer;
 	line-height: 20px;
 	text-align: center;
-	display: none;
+	
 }
 .jqvmap-zoomin
 {
@@ -133,4 +133,9 @@
 	width: 40px;
 	padding: 5px;
 	cursor: pointer;
+}
+
+#vmap svg{
+	margin-top: -4em;
+	margin-left: -6em;
 }

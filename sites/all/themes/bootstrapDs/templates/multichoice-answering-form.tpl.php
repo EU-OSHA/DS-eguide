@@ -8,8 +8,7 @@
  * Variables available:
  * - $form.
  */
-dpm($form);
-<h2>TEST</h2>
+
 
 print drupal_render($form);
 

@@ -135,7 +135,7 @@ class QuizResultController extends EntityAPIController {
     $out = parent::buildContent($entity, $view_mode, $langcode);
 
     if (!$entity->is_evaluated && empty($_POST)) {
-      $msg = t('Parts of this @quiz have not been evaluated yet. The score below is not final.', array('@quiz' => QUIZ_NAME));
+      $msg = t('Parts of your responses have not been evaluated yet. The score below is not final.', array('@quiz' => QUIZ_NAME));
       drupal_set_message($msg, 'warning');
     }
 
