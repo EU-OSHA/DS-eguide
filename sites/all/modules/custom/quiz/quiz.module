@@ -4810,9 +4810,9 @@ if ($block == 3){
       $calc =$calc . $teaser_text;
       $calc =$calc . "<p>";
       $calc =$calc . "<div class='risk-teaser-main'>";
-      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>".$number_correct."</div><div class='risk-text'>".t('Risks not present in practices and routines')."</div></div>";
-      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>". $number_post ."</div><div class='risk-text'>".t('Postponed questions in practices and routines')."</div></div>";
-      $calc =$calc . "<div class='risk-teaser'><div class='number-risks-present'>".$number_present."</div><div class='risk-text'>".t('Present risks in practices and routines')."</div></div>";
+      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>".$number_correct."</div><div class='risk-text'>".t('Risks not present')."</div></div>";
+      $calc =$calc . "<div class='risk-teaser'><div class='number-risks'>". $number_post ."</div><div class='risk-text'>".t('Risk postponed')."</div></div>";
+      $calc =$calc . "<div class='risk-teaser'><div class='number-risks-present'>".$number_present."</div><div class='risk-text'>".t('Present risks')."</div></div>";
       $calc =$calc . "</p></div>";
     }
 
