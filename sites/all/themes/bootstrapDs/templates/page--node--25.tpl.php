@@ -393,8 +393,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
               $header_text = t("Partial summary");
             }
           }
-          
-
         ?>
           
           <div class="question-header">
@@ -411,6 +409,10 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
            print (quiz_calculate_risk("summary",$number_result,$next_que));
            
            print("</div>");
+           if(!isset($lang_code)){
+            $lang_code = "";
+           }
+
            if ($language->language!="" && $language->language!="en"){
               $lang_code = "/" . $language->language;
             } 
