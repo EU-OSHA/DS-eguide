@@ -57,7 +57,10 @@
  */
 global $base_url;
 drupal_add_library('system', 'ui.draggable');
-
+if (!isset($html_attributes)){
+ // $html_attributes ="";
+  //$body_attributes ="";
+}
 ?><!DOCTYPE html>
 <html<?php print $html_attributes;?><?php print $rdf_namespaces;?>>
 <head>

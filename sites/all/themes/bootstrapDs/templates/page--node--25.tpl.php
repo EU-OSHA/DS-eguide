@@ -984,7 +984,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
   ?>
 <?php endif;?>
 
-<div id="moreInfoDiv" style="display: none;">
+<div id="moreInfoDiv" style="display:none;">
 
 <div class="closeMoreInfo">
 <h1 class="moreinfotitle"><?php print(t("Save questionnaire"));?></h1>
@@ -1202,6 +1202,7 @@ function moreInfo() {
     jQuery("body").css("overflow-y","auto").css("overflow-x","hidden");
    
     jQuery("#moreInfoDiv").attr("style","display: block !important;");
+    // jQuery("#moreInfoDiv").attr("style","width: 30em !important;");
     //jQuery("#moreInfoDiv").css("top","50px").css("left","300px");
     jQuery("#moreInfoDiv").css("top",top+"px").css("left",left+"px");  
     jQuery("#edit-email").focus();
@@ -1219,6 +1220,10 @@ function moreInfo() {
 }
 
 
-
+jQuery(document).ready(function() {
+	//jQuery("#moreInfoDiv").remove;
+	jQuery("#moreInfoDiv").remove();
+	//alert("Borrado");
+});
 
 </script>

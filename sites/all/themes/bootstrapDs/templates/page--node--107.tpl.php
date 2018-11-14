@@ -245,10 +245,12 @@ if ($result_id ==0 ){//Nothing to show
 	<div class="content-print-download ">
     <ul class="print-download col-md-4">
       <li class="print" >
-        <a href="/dangerous-substances/printpdf/107" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
+        <a href="/dangerous-substances/printpdf/107" target="_blank" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">
+          &gt; <?php print t("Download as pdf")?></a>
       </li>
       <li class="download " >
-        <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
+        <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">
+          &gt; <?php print t("Download as rich text (rtf)")?></a>
       </li>
       <li class="back" >
         <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
@@ -575,10 +577,10 @@ if ($result_id ==0 ){//Nothing to show
     <div class="content-print-download ">
         <ul class="print-download col-md-4">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/107" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
+            <a href="/dangerous-substances/printpdf/107" target="_blank" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-            <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
+            <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
             <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
