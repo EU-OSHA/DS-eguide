@@ -648,10 +648,10 @@ $sect->insertPageBreak();
                     }else{
                       $answer_id =key($check_toshow[19][19]);
                       if ($answer_id==184){
-                        $answer_19 = $no;
+                        $answer_19 = $yes;
                       }
                       else{
-                        $answer_19 = $yes;
+                        $answer_19 = $no;
                       }
                   }
 
