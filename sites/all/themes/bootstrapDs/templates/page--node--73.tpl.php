@@ -156,8 +156,6 @@ $cell = $table->getCell(2, 2);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_RIGHT);
 $cell->writeText(t('Page'). " <pagenum>/<pagetotal>");
 
-$checkcount=0;
-
 //$header = $rtf->addHeader(PHPRtfLite_Container_Header::TYPE_LEFT);
 //$header->writeText("PHPRtfLite class library. Left document header. This is page - <pagenum> of <pagetotal> -", $times12, $parFormat);
 $header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
@@ -208,9 +206,8 @@ $sect->insertPageBreak();
       </ul>
     </div>
 
-
-
   <?php
+
   if ($result_id==0){
     print(t("There is still nothing on this checklit."));  
   }else{
@@ -251,8 +248,8 @@ $sect->insertPageBreak();
         $question_nid = $answer->question_nid;
 
         if ($number==4 || $number==9 || $number==10 || $number==11 || $number==12 || $number==14 || $number==15 || $number==16 || $number==18 || $number==24 || $number==30){
-        	//We have to check what was the answers to these questions
-        	
+          //We have to check what was the answers to these questions
+          
            if ($answer->is_skipped==1){
 
               switch ($number){
@@ -307,32 +304,32 @@ $sect->insertPageBreak();
            }else{
            
 
-          	$query = db_select('quiz_node_results_answers', 'a');
-         		$query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
-  		    	$query->fields('b', array('id'));
-  		    	$query->condition('result_id', $result_id);
-  		      $query->condition('number', $number);
-  		      $res_ans = $query->execute();
-  		   	
-  		      $resp_id = "";
-  			    foreach ($res_ans as $resp) {
-  			     
-  			     $resp_id = $resp->id;
+            $query = db_select('quiz_node_results_answers', 'a');
+            $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
+            $query->fields('b', array('id'));
+            $query->condition('result_id', $result_id);
+            $query->condition('number', $number);
+            $res_ans = $query->execute();
+            
+            $resp_id = "";
+            foreach ($res_ans as $resp) {
+             
+             $resp_id = $resp->id;
             }
 
-    		    if ($resp_id !=""){
-    			    $query = db_select('quiz_multichoice_answers', 'a');
-    			    $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
-    			    $query->fields('a', array('score_if_chosen','id'));
-    			    $query->condition('user_answer_id', $resp_id);
-    			    $res_answer = $query->execute();
+            if ($resp_id !=""){
+              $query = db_select('quiz_multichoice_answers', 'a');
+              $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
+              $query->fields('a', array('score_if_chosen','id'));
+              $query->condition('user_answer_id', $resp_id);
+              $res_answer = $query->execute();
             
               foreach ($res_answer as $resp) {
-                if ($resp->id!=139 && $resp->id!=261 && $resp->id!=168 && $resp->id!=172 && $resp->id!=180  && $resp->id!=271){ //Dont show this answers
+                if ($resp->id!=139 && $resp->id!=261 && $resp->id!=168 && $resp->id!=172 && $resp->id!=180  && $resp->id!=271 && $resp->id!="394" &&  $resp->id!="356"){ //Dont show this answers
                  $check_toshow[$number][$number][$resp->id] = $resp->id;
                  $check_toshow[$number]['nid'] = $question_nid;
                }
-             }	
+             }  
             } 
           }    
         }
@@ -340,7 +337,6 @@ $sect->insertPageBreak();
           
           if ($answer->is_correct==1){
             if(in_array($number,$show_yes )){
-               //$check_toshow[] = $number;
                $check_toshow[$number][$number] = $number;
                $check_toshow[$number]['nid'] = $question_nid;
             }
@@ -360,64 +356,202 @@ $sect->insertPageBreak();
           }
 
         }  
-       } 
-       //Once we have get the number the checlist to show, we print all of them 
-       print("<div class='checklist container'>");
-       $block1_printed = false;
-       $block2_printed = false;
-       $block3_printed = false;
-       
-      foreach ($check_toshow as $checknumber) {
-        
-        $number_key = (key($checknumber));
-              	
-        if ($number_key<12 and $block1_printed == false){
-       		print("<div class='block-title checklist first'>");
-       	  print $block_title[1];
+      } 
+      //Once we have get the number the checlist to show, we print all of them 
+      print("<div class='checklist container'>");
+      $block1_printed = false;
+      $block2_printed = false;
+      $block3_printed = false;
+           
+
+      $query = db_select('quiz_node_results_answers', 'que_ans');
+      $query->fields('que_ans', array('is_correct','number','is_skipped','question_nid'));
+      $query->condition('result_id', $result_id);
+      $query->condition('number', $next_que,'<');
+      $query->orderBy('number', 'ASC');
+      $allanswers = $query->execute();
+      
+
+      //Question with more than an answer 4,9,10,12,30
+      //Checkwithout checklist
+
+      foreach ($allanswers as $answer) {
+        if (!isset($check_toshow[$answer->number])){
+
+          if($answer->is_skipped=="0"){
+           
+            $checksWC[$answer->number] =$answer;
+
+            //Search for an answer**************************************************************************************************************
+            $query = db_select('quiz_node_results_answers', 'a');
+            $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
+            $query->fields('b', array('id'));
+            $query->condition('result_id', $result_id);
+            $query->condition('number', $answer->number);
+            $res_ans = $query->execute();
+
+            $resp_id = "";
+            foreach ($res_ans as $resp) {
+              //There is a response
+             
+             $resp_id = $resp->id;
+              if ($resp_id !=""){
+                $query = db_select('quiz_multichoice_answers', 'a');
+                $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
+                $query->fields('a', array('score_if_chosen','id'));
+                $query->condition('user_answer_id', $resp_id);
+                $res_answer = $query->execute();
+
+                foreach ($res_answer as $resp) {
+                  $respchecksWC[$answer->number]['resp_id'] = $resp->id;
+                }
+              }
+            
+             }   
+              //FIN COMPROBAR QUE HA RESPONDIDO**************************************************************************************************************
+          }
+          else
+          {  //SKIPPED QUESTIONS I only need the number of the question
+            $checksWC[$answer->number] =$answer;
+            if ($answer->is_skipped==1){
+            	$respchecksWC[$answer->number]['resp_id'] ='Skipped';
+            }
+            if ($answer->is_skipped==2){
+            	$respchecksWC[$answer->number]['resp_id'] ='N/A';
+            }
+          
+          }
+        }
+      }
+
+      //Start of ALL questions and answers**********************************************************************************
+      for($cont=1;$cont< $next_que;$cont++){
+      	$number_key = $cont; //(key($checknumber));
+	   	$show_title=true;
+      	$idSalto=array(5,9,11,13,17,21,25,29,33);
+
+        if (in_array($cont, $idSalto)){
+        	$sect->insertPageBreak();
+        }
+
+        //Blocks header section******************************************        
+        if ($number_key==1){
+          print("<div class='block-title checklist first'>");
+          print $block_title[1];
           $sect->writeText('<b>'.$block_title[1].'</b><br>', new PHPRtfLite_Font(14, 'Arial', '#003399'), $parNormal);
           print("</div>");
-       		$block1_printed = true;
-       	}
+        }
 
-       	if ($number_key>12 and $number_key<24 and $block2_printed == false){
-       		print("<div class='block-title checklist'>");
-       	  print $block_title[2];
-          $sect->insertPageBreak();
-          $checkcount=0;
+        if ($number_key==13){
+          print("<div class='block-title checklist'>");
+          print $block_title[2];
           $sect->writeText('<b>'.$block_title[2].'</b><br>', new PHPRtfLite_Font(14, 'Arial', '#003399'), $parNormal);
           print("</div>");
-       		$block2_printed = true;
+        }
 
-       	}
-
-       	if ($number_key>24 and $block3_printed == false){
-       		print("<div class='block-title checklist'>");
-       	  print $block_title[3];
-          $sect->insertPageBreak();
-          $checkcount=0;
+        if ($number_key==25){
+          print("<div class='block-title checklist'>");
+          print $block_title[3];
           $sect->writeText('<b>'.$block_title[3].'</b><br>', new PHPRtfLite_Font(14, 'Arial', '#003399'), $parNormal);
-          print("</div>");	
-       		$block3_printed = true;
+          print("</div>");  
+        }
+	    //End of the blocks header section******************************************
 
-       	}
+        //Section for Questions that don't have related checklists------------------------------------------------------
+        if (isset($checksWC[$cont])){
+        
+        	$node_q = node_load($checksWC[$cont]->question_nid);
+        	
+			print("<div class='check-question'>");//Div for the whole question
+          	/*This is the section for the answers */
+          	if ($show_title==true){   
+                           
+                print("<div class='check-title'>");
+                print($node_q->title);
+                $sect->writeText('<b>'. $node_q->title.'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
+                print("</div>");
+                $show_title=false;
+            }  
+
+            print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span></div>");
+                          
+            if ($respchecksWC[$cont]['resp_id'] =='Skipped'||$respchecksWC[$cont]['resp_id'] =='N/A'){
+            	$testtoshow = t('N/A');
+            	if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
+            		$testtoshow = "Do not know / Reply later";
+            	}
+
+                print("<span class='answer-text-check skipped'>");
+                print("<p>".$testtoshow."</p>");
+                print("</span>");             
+
+                $table = $sect->addTable();
+                $table->addRows(1);
+                $table->addColumnsList(array(3,9));
+
+                $cell = $table->getCell(1, 1);
+                $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+
+                $cell = $table->getCell(1, 2);
+                $cell->writeText($testtoshow, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+
+                
+              }
+
+        	if (isset($respchecksWC[$cont])){//There is a response
+        		
+	          	$checkarray=$respchecksWC[$cont]['resp_id'];
+	          	foreach ($node_q->alternatives as $q_answer) {
+	        
+	                if ($checkarray == $q_answer['id']){
+	                  
+	                  $answer_text = $q_answer['answer']['value'];
+	                  $answer_text = str_replace('<?php print t("', '',$answer_text);
+	                  $answer_text = str_replace('");?>', '',$answer_text);
+	                  print("<span class='answer-text-check'>");
+	                  print(t($answer_text));
+	                  $answer = t($answer_text);
+	                  $answer = str_replace("<p>","",$answer);
+	                  $answer = str_replace("</p>","",$answer);
+	                  $table = $sect->addTable();
+	                  $table->addRows(1);
+	                  $table->addColumnsList(array(3,9));
+
+	                  $cell = $table->getCell(1, 1);
+	                  $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+
+	                  $cell = $table->getCell(1, 2);
+	                  $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+
+	                  print("</span>");
+	                }
+	              
+	            }  
+
+	        }    
+	        print("</div>");
+        }
+        //End of the section for Questions that don't have related checklists------------------------------------------------------
+
+     
+      //foreach ($check_toshow as $checknumber) {
+      //Section for Questions that have related checklists{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+      if (isset($check_toshow[$cont])){	
+      
+      	$number_key = $cont; //(key($checknumber));
              
         if ($number_key == "11"  || $number_key =="30"){
             
           //print($number_key . "Array de " . count($checknumber[$number_key]));
-          $show_title=true;
-          foreach ($checknumber[$number_key] as $checkarray) {
+          
+          foreach ($check_toshow[$cont][$number_key] as $checkarray) {
             if ($checkarray!="394" &&  $checkarray!="356"){//These are the ids of the answer without checks
               print("<div class='check-question'>");//Div for the whole question
 
 
               if ($show_title==true){   
-                if ($checkcount==4){
-                  $sect->insertPageBreak();
-                  $checkcount=0;
-                }             
-                print("<div class='check-title'>");
-                print($number_key . "-");
                 
+                print("<div class='check-title'>");
                 
                 print($checks_title[$number_key][$checkarray]);
                 $sect->writeText('<b>'.  $checks_title[$number_key][$checkarray].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
@@ -432,13 +566,6 @@ $sect->insertPageBreak();
                 print("<span class='answer-text-check skipped'>");
                 print("<p>".t('Do not know / Reply later')."</p>");
                 print("</span>");             
-
-                if ($checkcount==4){
-                  $sect->insertPageBreak();
-                  $checkcount=0;
-                }
-                $checkcount=$checkcount+1;
-               // $sect->writeText('<b>'.t("Your answer").': </b>'.t("Do not know / Reply later"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
                 $table = $sect->addTable();
                 $table->addRows(1);
@@ -471,12 +598,6 @@ $sect->insertPageBreak();
                   $answer = t($answer_text);
                   $answer = str_replace("<p>","",$answer);
                   $answer = str_replace("</p>","",$answer);
-                  if ($checkcount==4){
-                    $sect->insertPageBreak();
-                    $checkcount=0;
-                  }
-                  $checkcount=$checkcount+1;
-                  //$sect->writeText('<b>'.t("Your answer").': </b>'.$answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
                   $table = $sect->addTable();
                   $table->addRows(1);
                   $table->addColumnsList(array(3,9));
@@ -524,87 +645,69 @@ $sect->insertPageBreak();
         }
           
         else{
-         	  
+            
           if ($number_key == "4" || $number_key =="9" || $number_key =="10"|| $number_key =="12"){
 
-
             $show_title=true;
-            foreach ($checknumber[$number_key] as $checkarray) {
-
+            foreach ($check_toshow[$cont][$number_key] as $checkarray) {
+            	
               if ($checkarray!="114" &&  $checkarray!="121" &&  $checkarray!="261" && $checkarray!="110"){//These are the ids of the answer without checks
                 print("<div class='check-question'>");//Div for the whole question
                  
                 if ($show_title==true){
-                  if ($checkcount==4){
-                      $sect->insertPageBreak();
-                      $checkcount=0;
-                  }
-
-                  print("<div class='check-title'>");
-                  print $checks_title[$number_key];
-                  $sect->writeText('<b>'.  $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
-                  print("</div>");
-                  $show_title=false;
+                	print("<div class='check-title'>");
+                  	print $checks_title[$number_key];
+                  	$sect->writeText('<b>'.  $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
+                  	print("</div>");
+                  	$show_title=false;
                 }                 
                  
                 print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span></div>");
                                    
 
                 if (isset($check_toshow[$number_key]['is_skipped'])==1){
-                  print("<span class='answer-text-check skipped'>");
-                  print("<p>".t('Do not know / Reply later')."</p>");
-                  if ($checkcount==4){
-                    $sect->insertPageBreak();
-                    $checkcount=0;
-                  }
-                  $checkcount=$checkcount+1;
-                  //$sect->writeText('<b>'.t("Your answer").': </b>'.t("Do not know / Reply later").'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                  $table = $sect->addTable();
-                  $table->addRows(1);
-                  $table->addColumnsList(array(3,9));
+                  	print("<span class='answer-text-check skipped'>");
+                  	print("<p>".t('Do not know / Reply later')."</p>");
+                	$table = $sect->addTable();
+                  	$table->addRows(1);
+                  	$table->addColumnsList(array(3,9));
 
-                  $cell = $table->getCell(1, 1);
-                  $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+                  	$cell = $table->getCell(1, 1);
+                  	$cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
 
-                  $cell = $table->getCell(1, 2);
-                  $cell->writeText(t("Do not know / Reply later"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+	                $cell = $table->getCell(1, 2);
+    	            $cell->writeText(t("Do not know / Reply later"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
-                  print("</span>");             
+        	        print("</span>");             
                 }
                   
                 if(isset($check_toshow[$number_key]['nid'])){
-                  $node_q = node_load($check_toshow[$number_key]['nid']);
-                  foreach ($node_q->alternatives as $q_answer) {
+                	$node_q = node_load($check_toshow[$number_key]['nid']);
+                	foreach ($node_q->alternatives as $q_answer) {
               
-                    if ($checkarray == $q_answer['id']){
-                      
-                      $answer_text = $q_answer['answer']['value'];
-                      $answer_text = str_replace('<?php print t("', '',$answer_text);
-                      $answer_text = str_replace('");?>', '',$answer_text);
-                      print("<span class='answer-text-check'>");
-                      print(t($answer_text));
-                      $answer = t($answer_text);
-                      $answer = str_replace("<p>","",$answer);
-                      $answer = str_replace("</p>","",$answer);
-                      if ($checkcount==4){
-                        $sect->insertPageBreak();
-                        $checkcount=0;
-                      }
-                      $checkcount=$checkcount+1;
-                      //$sect->writeText('<b>'.t("Your answer").': </b>'.$answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-                      $table = $sect->addTable();
-                      $table->addRows(1);
-                      $table->addColumnsList(array(3,9));
+	                    if ($checkarray == $q_answer['id']){
+	                      
+	                      $answer_text = $q_answer['answer']['value'];
+	                      $answer_text = str_replace('<?php print t("', '',$answer_text);
+	                      $answer_text = str_replace('");?>', '',$answer_text);
+	                      print("<span class='answer-text-check'>");
+	                      print(t($answer_text));
+	                      $answer = t($answer_text);
+	                      $answer = str_replace("<p>","",$answer);
+	                      $answer = str_replace("</p>","",$answer);
+	                      $table = $sect->addTable();
+	                      $table->addRows(1);
+	                      $table->addColumnsList(array(3,9));
 
-                      $cell = $table->getCell(1, 1);
-                      $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+	                      $cell = $table->getCell(1, 1);
+	                      $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
 
-                      $cell = $table->getCell(1, 2);
-                      $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
+	                      $cell = $table->getCell(1, 2);
+	                      $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
-                      print("</span>");
-                    }
-                  }
+	                      print("</span>");
+	                    }
+                  	}
 
                 }
 
@@ -640,11 +743,11 @@ $sect->insertPageBreak();
           }else{  
               
               if (isset($checks[$number_key])==1){
-                $answer_19 = "NO";
+                $answer_19 = t("No");
                 if ($number_key == "19" ){
 
-                  if (isset($check_toshow[19]['is_skipped'])==1){
-                    $answer19 =  "<p>".t('Do not know / Reply later')."</p>";
+                	if (isset($check_toshow[19]['is_skipped'])==1){
+                    	$answer19 =  "<p>".t('Do not know / Reply later')."</p>";
                     }else{
                       $answer_id =key($check_toshow[19][19]);
                       if ($answer_id==184){
@@ -653,16 +756,11 @@ $sect->insertPageBreak();
                       else{
                         $answer_19 = $no;
                       }
-                  }
+                  	}
 
                   //Print 19-1
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
-                  if ($checkcount==4){
-                    $sect->insertPageBreak();
-                    $checkcount=0;
-                  }
-                  $checkcount=$checkcount+1;
                   print  $checks_title['19-1'];
                   $sect->writeText('<b>' . $checks_title['19-1'].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                   print("</div>");
@@ -705,11 +803,6 @@ $sect->insertPageBreak();
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
                   print $checks_title['19-2'];
-                  if ($checkcount==4){
-                    $sect->insertPageBreak();
-                    $checkcount=0;
-                  }
-                  $checkcount=$checkcount+1;
                   $sect->writeText('<b>' . $checks_title['19-2'].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
                   print("</div>");
                   print("<div class='q-answers'><span class='answer-title'>Your answer:</span></div>");
@@ -752,11 +845,6 @@ $sect->insertPageBreak();
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
                   print  $checks_title[$number_key];
-                  if ($checkcount==4){
-                      $sect->insertPageBreak();
-                      $checkcount=0;
-                    }
-                  $checkcount=$checkcount+1;
                   $sect->writeText('<b>' . $checks_title[$number_key].'</b><br/>', new PHPRtfLite_Font(12,  'Arial', '#749b00'), $parNormal);
 
                   print("</div>");
@@ -888,8 +976,11 @@ $sect->insertPageBreak();
           }
             //print("</div>"); //Close the question div
         }
+
+     }  
+     //End of section for Questions that have related checklists{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}  
         print("</div>");//Close the block div
-  }
+      }
 
   ?>
     <div class="content-print-download ">
