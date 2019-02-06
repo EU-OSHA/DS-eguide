@@ -2,13 +2,15 @@
 global $language;
 //Array to include all the recommendations with their nodes titles
 $checks = array();
+$checks['3']['skipped'] = array("10.0");
+$checks['3']['319'] = array("10.0");
 $checks['4']['skipped'] = array("1.1","1.2","1.3","1.4","2.0","3.1","3.9","4.0","5.0","6.0","7.0","8.0");
 $checks['4']['325'] = array("1.1","1.2","1.3","1.4");
 $checks['4']['326'] = array("1.1","2.0");
 $checks['4']['327'] = array("1.1","3.1","3.9");
 $checks['4']['103'] = array("1.1"); //????Anaesthetic
 $checks['4']['328'] = array("1.1","4.0");
-$checks['4']['329'] = array("1.1","5.0");
+$checks['4']['329'] = array("1.1","5.0","5.2","5.4");
 $checks['4']['330'] = array("1.1","6.0");
 $checks['4']['331'] = array("1.1","7.0");
 $checks['4']['332'] = array("1.1","8.0");
@@ -16,14 +18,16 @@ $checks['5']['302'] = array("9.0");
 $checks['5']['skipped'] = array("9.0");
 $checks['6']['399'] = array("64.0");
 $checks['6']['skipped'] = array("64.0");
-$checks['7']['397'] = array("28.1");
-$checks['7']['skipped'] = array("28.1");
-$checks['8']['395'] = array("28.2");
-$checks['8']['skipped'] = array("28.2");
-$checks['9']['skipped'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
-$checks['9']['306'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
-$checks['9']['307'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
-$checks['9']['308'] = array("29.0","30.0","31.0","32.0","33.0","34.0");
+$checks['7']['397'] = array("28.0","28.1");
+$checks['7']['398'] = array("28.0");
+$checks['7']['skipped'] = array("28.0","28.1");
+$checks['8']['395'] = array("28.0","28.2");
+$checks['8']['396'] = array("28.0");
+$checks['8']['skipped'] = array("28.0","28.2");
+$checks['9']['skipped'] = array("28.0");
+$checks['9']['306'] = array("28.0");
+$checks['9']['307'] = array("28.0");
+$checks['9']['308'] = array("28.0");
 $checks['10']['skipped'] =array("15.0","16.0","17.0","18.0","19.0","20.0","21.0");
 $checks['10']['310'] =array("15.0","16.0");
 $checks['10']['311'] =array("15.0","17.0");
@@ -45,25 +49,27 @@ $checks['14']['387'] =array("41.0");
 $checks['14']['388'] =array("41.0");
 $checks['15']['384'] =array("43.0");
 $checks['16']['383'] =array("44.0","45.0");
-$checks['17']['skipped'] =array("49.0","45.0");
-$checks['17']['380'] =array("49.0","45.0");
-$checks['18']['skipped'] =array("47.0","51.0");
-$checks['18']['378'] =array("47.0","51.0");
-$checks['18']['379'] =array("47.0","51.0");
+$checks['17']['skipped'] =array("45.0");
+$checks['17']['380'] =array("45.0");
+$checks['18']['skipped'] =array("47.0");
+$checks['18']['378'] =array("47.0");
+$checks['18']['379'] =array("47.0");
 $checks['19']['skipped'] =array("54.0");
 $checks['19']['376'] =array("54.0");
 $checks['20']['skipped'] =array("54.0");
 $checks['20']['374'] =array("54.0");
-$checks['21']['skipped'] =array("57.0");
-$checks['21']['318'] =array("57.0");
-$checks['22']['369'] =array("57.0");
-$checks['22']['370'] =array("57.0");
-$checks['22']['371'] =array("57.0");
-$checks['23']['skipped'] =array("46.0");
-$checks['23']['368'] =array("46.0");
+$checks['21']['skipped'] =array("48.0");
+$checks['21']['318'] =array("48.0");
+$checks['22']['369'] =array("48.0");
+$checks['22']['370'] =array("48.0");
+$checks['22']['371'] =array("48.0");
+$checks['23']['skipped'] =array("49.0");
+$checks['23']['368'] =array("49.0");
 $checks['24']['skipped'] =array("42.0");
 $checks['24']['336'] =array("42.0");
 $checks['25']['366'] =array("58.0");
+$checks['26']['363'] =array("51.0");
+$checks['26']['364'] =array("51.0");
 $checks['27']['362'] =array("60.0");
 $checks['28']['skipped'] =array("61.0");
 $checks['28']['360'] =array("61.0");
@@ -77,6 +83,9 @@ $checks['31']['skipped'] =array("63.0","37.0");
 $checks['31']['352'] =array("63.0","37.0");
 $checks['32']['skipped'] =array("64.0");
 $checks['32']['350'] =array("64.0");
+$checks['35']['344'] =array("55.0");
+$checks['35']['skipped'] =array("55.0");
+$checks['36']['342'] =array("55.0");
 $checks['36']['342'] =array("55.0");
 
 $block_title = array();
@@ -180,7 +189,7 @@ if ($result_id ==0 ){//Nothing to show
     }else
       
       
-	$dont_get = array(1,2,3,26,33,34,35);
+	$dont_get = array(1,2,33,34);
   $dont_get_bycountry = array(1,9,21,22,23,24);
   	$check_toshow = array();
   	$query = db_select('quiz_node_results_answers', 'que_ans');
@@ -258,6 +267,7 @@ if ($result_id ==0 ){//Nothing to show
       
   	</ul></div>
 <?php
+
     foreach ($check_toshow as $checknumber) {
 
 	    $number_key = (key($checknumber));
@@ -364,7 +374,7 @@ if ($result_id ==0 ){//Nothing to show
 	    print("<div class='check-question col-md-12'>");//Div for the whole question
 
 	    foreach ($checknumber[$number_key] as $checkarray) {
-
+        
 	      if ($checkarray!="114" &&  $checkarray!="121" &&  $checkarray!="261"){//These are the ids of the answer without recommendations
 	        
 	        if (isset($checks[$number_key][$checkarray])){

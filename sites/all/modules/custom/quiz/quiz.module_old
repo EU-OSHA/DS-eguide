@@ -4433,7 +4433,7 @@ $common_text = t("For an overall assessment of your situation regarding the safe
 	  $total_zero = 0;
 
     foreach ($answers as $answer) {
-    	//dpm($answer);
+    	dpm($answer);
        	if($answer->is_skipped==1){
        		$number_post  = $number_post +1;
        	}else{
@@ -4547,6 +4547,7 @@ $common_text = t("For an overall assessment of your situation regarding the safe
 if ($block == 3){
     //Calculate the risk for block number 2
     $dont_get = array(26,30,33,34);
+    dpm("Aqui");
     $query = db_select('quiz_node_results_answers', 'que_ans');
     $query->fields('que_ans', array('is_correct','number','is_skipped'));
     $query->condition('result_id', $result_id);

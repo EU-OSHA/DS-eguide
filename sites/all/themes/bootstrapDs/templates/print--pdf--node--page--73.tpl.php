@@ -180,8 +180,6 @@
     $email =  " - " . $_SESSION['email'];
   }
 
-  $checkcount=0;
-
   ?>
   <div class="flyleaf" width="100%"> <?php print '<img  src="'.base_path() . path_to_theme() .'/images/cover.jpg">'; ?></div>
   <header  style="position: fixed;top:-60px;">
@@ -437,7 +435,7 @@ $no = str_pad($no,  10, " ");
               $res_answer = $query->execute();
            
               foreach ($res_answer as $resp) {
-                if ($resp->id!=139 && $resp->id!=261 && $resp->id!=168 && $resp->id!=172 && $resp->id!=180  && $resp->id!=271){ //Dont show this answers
+                if ($resp->id!=139 && $resp->id!=261 && $resp->id!=168 && $resp->id!=172 && $resp->id!=180  && $resp->id!=271 && $resp->id!="394" &&  $resp->id!="356"){ //Dont show this answers
                   $check_toshow[$number][$number][$resp->id] = $resp->id;
                   $check_toshow[$number]['nid'] = $question_nid;
                 }
@@ -475,58 +473,177 @@ $no = str_pad($no,  10, " ");
        $block1_printed = false;
        $block2_printed = false;
        $block3_printed = false;
+
+        $query = db_select('quiz_node_results_answers', 'que_ans');
+      $query->fields('que_ans', array('is_correct','number','is_skipped','question_nid'));
+      $query->condition('result_id', $result_id);
+      $query->condition('number', $next_que,'<');
+      $query->orderBy('number', 'ASC');
+      $allanswers = $query->execute();
+      
+
+      //Question with more than an answer 4,9,10,12,30
+      //Checkwithout checklist
+
+      //$checksWC = array();
+      foreach ($allanswers as $answer) {
+        if (!isset($check_toshow[$answer->number])){
+
+          if($answer->is_skipped=="0"){
+           
+            $checksWC[$answer->number] =$answer;
+
+            //COMPROBAR QUE HA RESPONDIDO**************************************************************************************************************
+            $query = db_select('quiz_node_results_answers', 'a');
+            $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
+            $query->fields('b', array('id'));
+            $query->condition('result_id', $result_id);
+            $query->condition('number', $answer->number);
+            $res_ans = $query->execute();
+
+            $resp_id = "";
+            foreach ($res_ans as $resp) {
+              //Ha respondido algo
+             
+             $resp_id = $resp->id;
+              if ($resp_id !=""){
+                $query = db_select('quiz_multichoice_answers', 'a');
+                $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
+                $query->fields('a', array('score_if_chosen','id'));
+                $query->condition('user_answer_id', $resp_id);
+                $res_answer = $query->execute();
+
+                foreach ($res_answer as $resp) {
+                  $respchecksWC[$answer->number]['resp_id'] = $resp->id;
+                 // $checksWC[$answer->number]['nid'] = "2";//$question_nid;
+                  //$checksWC[$answer->number]->question_nid=22;
+                }
+              }
+            
+             }   
+              //FIN COMPROBAR QUE HA RESPONDIDO**************************************************************************************************************
+          }
+          else
+          {  //SKIPPED QUESTIONS I only need the number of the question
+            $checksWC[$answer->number] =$answer;
+            if ($answer->is_skipped==1){
+              $respchecksWC[$answer->number]['resp_id'] ='Skipped';
+            }
+            if ($answer->is_skipped==2){
+              $respchecksWC[$answer->number]['resp_id'] ='N/A';
+            }
+          }
+        }
+      }
+    
        
-       foreach ($check_toshow as $checknumber) {
+      //We have all the arrays informed start to print**********************
+      for($cont=1;$cont< $next_que;$cont++){
+        //Create a new page to avoid show question in 2 diferent pages
         
-        $number_key = (key($checknumber));
-                
-        if ($number_key<12 and $block1_printed == false){
-          print("<div class='block-title first'>");
+        $idSalto=array(5,9,11,13,17,21,25,29,33);
+
+          if (in_array($cont, $idSalto)){
+            print("<div class='break'></div>");
+            print("&nbsp;");
+          }
+          
+          $number_key = $cont; 
+          $show_title=true;
+        //Blocks header section******************************************        
+        if ($number_key==1 ){
+          print("<div class='block-title checklist first'>");
           print $block_title[1];
           print("</div>");
-          $block1_printed = true;
+          
         }
 
-        if ($number_key>12 and $number_key<24 and $block2_printed == false){
-          print("<div class='break'></div>");
-          print("&nbsp;");
-          print("<div class='block-title '>");
-          $checkcount=0;
+        if ($number_key==13 ){
+          print("<div class='block-title checklist'>");
           print $block_title[2];
           print("</div>");
-          $block2_printed = true;
-
+         
         }
 
-        if ($number_key>24 and $block3_printed == false){
-          print("<div class='break'></div>");
-          print("&nbsp;");
-          print("<div class='block-title'>");
-          $checkcount=0;
+        if ($number_key==25){
+          
+          print("<div class='block-title checklist'>");
           print $block_title[3];
           print("</div>");  
-          $block3_printed = true;
-
+          
         }
-          
-          
+        
+        
+      //End of the blocks header section******************************************
 
+        //Section for Questions that don't have related checklists------------------------------------------------------
+        if (isset($checksWC[$cont])){
+        
+          $node_q = node_load($checksWC[$cont]->question_nid);
+          
+          print("<div class='check-question'>");//Div for the whole question
+            /*This is the section for the answers */
+            if ($show_title==true){   
+                print("<div class='check-title'>");
+                print($node_q->title);
+                print("</div>");
+                $show_title=false;
+            }  
+
+                          
+            if ($respchecksWC[$cont]['resp_id'] =='N/A'){
+                print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  t('N/A') ."</div>";
+            }
+            if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
+                print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" . t("Do not know / Reply later") ."</div>";
+                
+            }
+ 
+
+             
+
+          if (isset($respchecksWC[$cont])){//There is a response
+            
+              $checkarray=$respchecksWC[$cont]['resp_id'];
+              foreach ($node_q->alternatives as $q_answer) {
+          
+                  if ($checkarray == $q_answer['id']){
+                    
+                    $answer_text = $q_answer['answer']['value'];
+                    $answer_text = str_replace('<?php print t("', '',$answer_text);
+                    $answer_text = str_replace('");?>', '',$answer_text);
+
+                    print("<span class='answer-text-check'>");
+                    print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags($answer_text) ."</div>";
+                    
+                    print("</span>");
+
+                  }
+                
+              }  
+
+          }    
+          print("</div>");
+        }
+        //End of the section for Questions that don't have related checklists------------------------------------------------------
+
+      
+      //Section for Questions that have related checklists{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+      if (isset($check_toshow[$cont])){ 
+      
+        $number_key = $cont; 
+        
           if ($number_key == "11"  || $number_key =="30"){
             
-            //print($number_key . "Array de " . count($checknumber[$number_key]));
             $show_title=true;
-            foreach ($checknumber[$number_key] as $checkarray) {
-              if ($checkarray!="139" &&  $checkarray!="252"){//These are the ids of the answer without checks
+            foreach ($check_toshow[$cont][$number_key] as $checkarray) {
+              if ($checkarray!="394" &&  $checkarray!="356"){//These are the ids of the answer without checks
                 print("<div class='check-question'>");//Div for the whole question
 
 
                 if ($show_title==true){      
-                  if ($checkcount==4){
-                    print("<div class='break'></div>");
-                    print("&nbsp;");
-                    $checkcount=0;
-                  }          
                   print("<div class='check-title'>");
+                  print $checkarray;
                   print($checks_title[$number_key][$checkarray]);
                   print("</div>");
                   $show_title=false;
@@ -539,13 +656,6 @@ $no = str_pad($no,  10, " ");
                   print("<span class='answer-title'>". t("Your answer").":</span>");
                   print("<span class='answer-text-check skipped'>");
                   print(t('Do not know / Reply later') . "Este otro");
-                  if ($checkcount==4){
-                    print("<div class='break'></div>");
-                    print("&nbsp;");
-                    $checkcount=0;
-                  }
-                  $checkcount=$checkcount+1;
-                 
                   print("</span>");             
                 }
                 
@@ -564,14 +674,7 @@ $no = str_pad($no,  10, " ");
                     $answer_text = str_replace('");?>', '',$answer_text);
                     $answer_text = str_replace('<p>', '',$answer_text);
                     $answer_text = str_replace('</p>', '',$answer_text);
-                   
-                    if ($checkcount==4){
-                      print("<div class='break'></div>");
-                      print("&nbsp;");
-                      $checkcount=0;
-                    }
-                    $checkcount=$checkcount+1;
-
+                    
                     print("<span class='answer-text-check'>");
                     print("<span class='answer-title'>". t("Your answer").":</span>");
                     print(t($answer_text) . "<br/>");
@@ -606,18 +709,12 @@ $no = str_pad($no,  10, " ");
 
              
               $show_title=true;
-              foreach ($checknumber[$number_key] as $checkarray) {
-
+              foreach ($check_toshow[$cont][$number_key] as $checkarray) {
+              
                 if ($checkarray!="114" &&  $checkarray!="121" &&  $checkarray!="261" && $checkarray!="110"){//These are the ids of the answer without checks
                   print("<div class='check-question'>");//Div for the whole question
                  
                   if ($show_title==true){
-                    if ($checkcount==4){
-                      print("<div class='break'></div>");
-                      print("&nbsp;");
-                      $checkcount=0;
-                    }
-                      
                     print("<div class='check-title'>");
                     print $checks_title[$number_key];
                     print("</div>");
@@ -627,12 +724,6 @@ $no = str_pad($no,  10, " ");
                   /*print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span></div>");*/
                   
                   if (isset($check_toshow[$number_key]['is_skipped'])==1){
-                    if ($checkcount==4){
-                      print("<div class='break'></div>");
-                      print("&nbsp;");
-                      $checkcount=0;
-                    }
-                    $checkcount=$checkcount+1;
                     
                     print("<span class='answer-title'>". t("Your answer").":</span>");
                     print("<span class='answer-text-check skipped'>");
@@ -651,15 +742,6 @@ $no = str_pad($no,  10, " ");
                         $answer_text = str_replace('");?>', '',$answer_text);
                         $answer_text = str_replace('<p>', '',$answer_text);
                         $answer_text = str_replace('</p>', '',$answer_text);
-                       
-                        if ($checkcount==4){
-                        
-                         print("<div class='break'></div>");
-                         print("&nbsp;");
-                        $checkcount=0;
-                        }
-                        $checkcount=$checkcount+1;
-                          
                        
                         print("<span class='answer-text-check'>");
                         print("<span class='answer-title'>". t("Your answer").":</span>");
@@ -694,7 +776,7 @@ $no = str_pad($no,  10, " ");
             }else{  
               
               if (isset($checks[$number_key])==1){
-                $answer_19 = "NOT";
+                $answer_19 = t("No");
                 if ($number_key == "19" ){
 
                   if (isset($check_toshow[19]['is_skipped'])==1){
@@ -711,12 +793,6 @@ $no = str_pad($no,  10, " ");
 
 
                   //Print 19-1
-                  if ($checkcount==4){
-                      print("<div class='break'></div>");
-                      print("&nbsp;");
-                      $checkcount=0;
-                    }
-                  $checkcount=$checkcount+1;
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
                   print $checks_title['19-1'];
@@ -734,12 +810,6 @@ $no = str_pad($no,  10, " ");
                   print("</div>");
 
                   //Print 19-2
-                  if ($checkcount==4){
-                      print("<div class='break'></div>");
-                      print("&nbsp;");
-                      $checkcount=0;
-                    }
-                  $checkcount=$checkcount+1;
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
                   print $checks_title['19-2'];
@@ -759,14 +829,6 @@ $no = str_pad($no,  10, " ");
 
                 }else { 
                   
-                  if ($checkcount==4){
-                      print("<div class='break'></div>");
-                      print("&nbsp;");
-                      $checkcount=0;
-                    }
-                    $checkcount=$checkcount+1;
-                    
-
                   print("<div class='check-question'>");//Div for the whole question
                   print("<div class='check-title'>");
                   print $checks_title[$number_key];
@@ -839,7 +901,7 @@ $no = str_pad($no,  10, " ");
                    print("</div>");
                 }
 
-
+              }
               }
             }
           }

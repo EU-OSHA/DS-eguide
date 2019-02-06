@@ -522,30 +522,30 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
               $answer = $item->points_awarded;
                 //Question 1 Yes, no action.
               
-                if ($number == 1 && $answer ==1){
-                	break;
-                }
-               //Question 2 No,so we go to the question 1
-                if ($number == 2 && $answer ==0){
-                	drupal_goto("node/25/take/1");
-                	break;
-                }
+              if ($number == 1 && $answer ==1){
+               	break;
+              }
+              //Question 2 No,so we go to the question 1
+              if ($number == 2 && $answer ==0){
+                drupal_goto("node/25/take/1");
+                break;
+              }
                 //Question 2 Yes,so we go to the question 4	
-				if ($number == 2 && $answer ==1){
-					db_update('quiz_node_results_answers')
-        			->condition('result_id', $quizresult)
-        			->condition('number', 3)
-        			->fields(array('is_skipped' => 2))
-        			->execute();  	
+      				if ($number == 2 && $answer ==1){
+      					db_update('quiz_node_results_answers')
+          			->condition('result_id', $quizresult)
+          			->condition('number', 3)
+          			->fields(array('is_skipped' => 2))
+          			->execute();  	
 
-                	drupal_goto("node/25/take/4");
-                	break;
-                }
+              	drupal_goto("node/25/take/4");
+              	break;
+              }
 
             }
-        }
+          }
         
-           if ($cur_que==6){
+          if ($cur_que==6){
 
             $sql ="select sum(points_awarded) total from quiz_node_results_answers where result_id = ". $quizresult ." and number in (1,3,4,5) order by number";
 			      $query = db_query($sql);
@@ -605,258 +605,298 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 
 	        }
 
-       if ($cur_que==6||$cur_que==7||$cur_que==8){
-            $sql ="select number,points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (1,2) order by number";
-            $query = db_query($sql);
+        if ($cur_que==6||$cur_que==7||$cur_que==8){
+          $sql ="select number,points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (1,2) order by number";
+          $query = db_query($sql);
             
-            foreach($query as $item) {
-              $number= $item->number;
-              $answer = $item->points_awarded;
+          foreach($query as $item) {
+            $number= $item->number;
+            $answer = $item->points_awarded;
               
-              //Question 2 Yes,so we go to the question 9 
-             if ($number == 2 && $answer ==1){
-               db_update('quiz_node_results_answers')
-                ->condition('result_id', $quizresult)
-                ->condition('number', 3)
-                ->fields(array('is_skipped' => 2))
-               ->execute();    
+            //Question 2 Yes,so we go to the question 9 
+            if ($number == 2 && $answer ==1){
+              db_update('quiz_node_results_answers')
+              ->condition('result_id', $quizresult)
+              ->condition('number', 3)
+              ->fields(array('is_skipped' => 2))
+              ->execute();    
 
-                  drupal_goto("node/25/take/9");
-                  break;
-                }
-
-            }
-      }
-    
-			if ($cur_que==14 || $cur_que==15){
-          		$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (2) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		$answer = $item->points_awarded;
-                	//If Question 2 is YES SKip Q14 and Q15 
-               	 	if ($answer ==1){
-               	 		$dont_make = array('14','15');
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition ('number',$dont_make, 'IN')
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
-
-                		drupal_goto("node/25/take/16");
-                		break;
-               	 	}
-           		 }
-           	}
-           		 	
-        	if ($cur_que==15){
-            $resp_id = 0;
-            $query = db_select('quiz_node_results_answers', 'a');
-            $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
-            $query->fields('b', array('id'));
-            $query->condition('result_id', $quizresult);
-            $query->condition('number', 14,'=');
-            $res_ans = $query->execute();
-
-            foreach ( $res_ans as $resp) {
-              $resp_id = $resp->id;
-            }
-              
-            $query = db_select('quiz_multichoice_answers', 'a');
-            $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
-            $query->fields('a', array('score_if_chosen'));
-            $query->condition('user_answer_id', $resp_id);
-            $res_answer = $query->execute();
-            $score=0;
-            foreach ($res_answer as $resp) {
-              $score = $resp->score_if_chosen;
+              drupal_goto("node/25/take/9");
+              break;
             }
 
-            if ($score ==0){
-                    db_update('quiz_node_results_answers')
-                  ->condition('result_id', $quizresult)
-                  ->condition('number', 15)
-                  ->fields(array('is_skipped' => 2))
-                  ->execute();    
+          }
+        }
 
-                    drupal_goto("node/25/take/16");
-                    break;
-                  }
-			}
+        /*Look if user selected asbestos in question number 4 if not skip question number 12***********/
+        if ($cur_que==12){
+          $resp_id = 0;
+          $skip_12 = true;
+          $query = db_select('quiz_node_results_answers', 'a');
+          $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
+          $query->fields('b', array('id'));
+          $query->condition('result_id', $quizresult);
+          $query->condition('number', 4,'=');
+          $res_ans = $query->execute();
 
-			if ($cur_que==17){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (16) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 16 No/Skip, so we go to the question 18
-               	 	if ($answer !=1){
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition('number', 17)
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
+          foreach ( $res_ans as $resp) {
+               
+            $resp_id = $resp->id;
 
-                		drupal_goto("node/25/take/18");
-                		break;
-               	 	}
-           		 }
-			}
+            if ($resp_id !=""){
+              $query = db_select('quiz_multichoice_answers', 'a');
+              $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
+              $query->fields('a', array('score_if_chosen','id'));
+              $query->condition('user_answer_id', $resp_id);
+              $res_answer = $query->execute();
 
-			if ($cur_que==20){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (19) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 19 No/Skip, so we go to the question 21
-               	 	if ($answer !=1){
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition('number', 20)
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
+              foreach ($res_answer as $resp) {
+                if($resp->id =='327'){
+                  $skip_12 = false;
+                } 
+              }
+            }        
+          }
 
-                		drupal_goto("node/25/take/21");
-                		break;
-               	 	}
-           		 }
-			}	
+          if ($skip_12 == true){
+            db_update('quiz_node_results_answers')
+            ->condition('result_id', $quizresult)
+            ->condition('number', 12)
+            ->fields(array('is_skipped' => 2))
+            ->execute();    
 
-			if ($cur_que==22){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (21) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 21 No/Skip, so we go to the question 23
-               	 	if ($answer ==1){
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition('number', 22)
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
+            drupal_goto("node/25/take/13");
+            break;
+          }
+        }
+        /******************End asbestos Q12*****/
 
-                		drupal_goto("node/25/take/23");
-                		break;
-               	 	}
-           		 }
-			}	
+  			if ($cur_que==14 || $cur_que==15){
+      		$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (2) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+         		$answer = $item->points_awarded;
+          	//If Question 2 is YES SKip Q14 and Q15 
+         	 	if ($answer ==1){
+         	 		$dont_make = array('14','15');
+           	 		db_update('quiz_node_results_answers')
+        			->condition('result_id', $quizresult)
+        			->condition ('number',$dont_make, 'IN')
+        			->fields(array('is_skipped' => 2))
+        			->execute();  	
 
-			if ($cur_que==26){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (25) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 25 No/Skip, so we go to the question 27
-               	 	if ($answer !=1){
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition('number', 26)
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
-
-                		drupal_goto("node/25/take/27");
-                		break;
-               	 	}
-           		 }
-			}	
-
-			if ($cur_que==28){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (27) order by number";
-            	$query = db_query($sql);
-          	  $dont_make = array('28','29');
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 27 No/Skip, so we go to the question 29
-               	 	if ($answer !=1){
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition ('number',$dont_make, 'IN')
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
-
-                		drupal_goto("node/25/take/30");
-                		break;
-               	 	}
-           		 }
-			}
-
-			if ($cur_que==30){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (27) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 27 is not yes break
-               	 	if ($answer !=1){
-                		break;
-                	}else{
-                		$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (29) order by number";
-            			$query = db_query($sql);
-          	
-            			foreach($query as $item) {
-            				 $answer = $item->points_awarded;
-                			//Question 27 is not yes break
-               	 			if ($answer !=1){
-  			           	 		db_update('quiz_node_results_answers')
-  			        			->condition('result_id', $quizresult)
-  			        			->condition('number', 30)
-  			        			->fields(array('is_skipped' => 2))
-  			        			->execute();  	
-
-               	 				drupal_goto("node/25/take/31");
-                				break;
-               	 			}	
-               			}
-               	 	}
-           		 }
-			}
-
-			if ($cur_que==33){
-            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (32) order by number";
-            	$query = db_query($sql);
-          	
-            	foreach($query as $item) {
-               		 $answer = $item->points_awarded;
-                	//Question 32 No/Skip, so we go to the question 34
-              	 	if ($answer !=1){
-	           	 		db_update('quiz_node_results_answers')
-	        			->condition('result_id', $quizresult)
-	        			->condition('number', 33)
-	        			->fields(array('is_skipped' => 2))
-	        			->execute();  	
-
-                		drupal_goto("node/25/take/34");
-                		break;
-               	 	}
-           		 }
-			}			
-
-      
-			if ($cur_que==35||$cur_que==36){
-
-      	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (34) order by number";
-      	$query = db_query($sql);
-    	  $dont_make = array('35','36');
-      	foreach($query as $item) {
-         		 $answer = $item->points_awarded;
-          	//Question 34 No/Skip, so we go to the END
-         	 	if ($answer !=1){
-       	 		db_update('quiz_node_results_answers')
-    			  ->condition('result_id', $quizresult)
-    			  ->condition ('number',$dont_make, 'IN')
-    			  ->fields(array('is_skipped' => 2))
-    			  ->execute();  	
-            $_SESSION['quiz'][25]['current'] = 37;
-            header("Location:".$base_url.$lang_code."/node/25/take/36/feedback/"); 
-          	
-          	break;
+          		drupal_goto("node/25/take/16");
+          		break;
          	 	}
-     		 }
-			}		
+       		}
+       	}
+           		 	
+      	if ($cur_que==15){
+          $resp_id = 0;
+          $query = db_select('quiz_node_results_answers', 'a');
+          $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
+          $query->fields('b', array('id'));
+          $query->condition('result_id', $quizresult);
+          $query->condition('number', 14,'=');
+          $res_ans = $query->execute();
+
+          foreach ( $res_ans as $resp) {
+            $resp_id = $resp->id;
+          }
+            
+          $query = db_select('quiz_multichoice_answers', 'a');
+          $query->join('quiz_multichoice_user_answer_multi', 'b', 'a.id = b.answer_id');
+          $query->fields('a', array('score_if_chosen'));
+          $query->condition('user_answer_id', $resp_id);
+          $res_answer = $query->execute();
+          $score=0;
+          foreach ($res_answer as $resp) {
+            $score = $resp->score_if_chosen;
+          }
+
+          if ($score ==0){
+            db_update('quiz_node_results_answers')
+          ->condition('result_id', $quizresult)
+          ->condition('number', 15)
+          ->fields(array('is_skipped' => 2))
+          ->execute();    
+
+            drupal_goto("node/25/take/16");
+            break;
+          }
+    		}
+
+  			if ($cur_que==17){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (16) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+           		 $answer = $item->points_awarded;
+            	//Question 16 No/Skip, so we go to the question 18
+           	 	if ($answer !=1){
+             	 	db_update('quiz_node_results_answers')
+          			->condition('result_id', $quizresult)
+          			->condition('number', 17)
+          			->fields(array('is_skipped' => 2))
+          			->execute();  	
+
+            		drupal_goto("node/25/take/18");
+            		break;
+           	 	}
+       		 }
+  			}
+
+  			if ($cur_que==20){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (19) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+         		$answer = $item->points_awarded;
+          	//Question 19 No/Skip, so we go to the question 21
+         	 	if ($answer !=1){
+           		db_update('quiz_node_results_answers')
+        			->condition('result_id', $quizresult)
+        			->condition('number', 20)
+        			->fields(array('is_skipped' => 2))
+        			->execute();  	
+
+          		drupal_goto("node/25/take/21");
+          		break;
+         	 	}
+       		}
+  			}	
+
+  			if ($cur_que==22){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (21) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+           	$answer = $item->points_awarded;
+          	//Question 21 No/Skip, so we go to the question 23
+         	 	if ($answer ==1){
+           	 	db_update('quiz_node_results_answers')
+        			->condition('result_id', $quizresult)
+        			->condition('number', 22)
+        			->fields(array('is_skipped' => 2))
+        			->execute();  	
+
+          		drupal_goto("node/25/take/23");
+          		break;
+         	 	}
+       		}
+  			}	
+
+  			if ($cur_que==26){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (25) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+           	$answer = $item->points_awarded;
+            //Question 25 No/Skip, so we go to the question 27
+           	if ($answer !=1){
+         	 		db_update('quiz_node_results_answers')
+      			 ->condition('result_id', $quizresult)
+      			 ->condition('number', 26)
+      			 ->fields(array('is_skipped' => 2))
+      			 ->execute();  	
+           		drupal_goto("node/25/take/27");
+           		break;
+         	 	}
+      		}
+  			}	
+
+  			if ($cur_que==28){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (27) order by number";
+        	$query = db_query($sql);
+      	  $dont_make = array('28','29');
+        	foreach($query as $item) {
+         		 $answer = $item->points_awarded;
+          	//Question 27 No/Skip, so we go to the question 29
+         	 	if ($answer !=1){
+           	 		db_update('quiz_node_results_answers')
+        			->condition('result_id', $quizresult)
+        			->condition ('number',$dont_make, 'IN')
+        			->fields(array('is_skipped' => 2))
+        			->execute();  	
+
+          		drupal_goto("node/25/take/30");
+          		break;
+         	 	}
+       		}
+  			}
+
+  			if ($cur_que==30){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (27) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+           	$answer = $item->points_awarded;
+            	//Question 27 is not yes break
+           	if ($answer !=1){
+            	break;
+            }else{
+            	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (29) order by number";
+        			$query = db_query($sql);
+      	
+        			foreach($query as $item) {
+      				 $answer = $item->points_awarded;
+          			//Question 27 is not yes break
+         	 			if ($answer !=1){
+             	 		db_update('quiz_node_results_answers')
+          			->condition('result_id', $quizresult)
+          			->condition('number', 30)
+          			->fields(array('is_skipped' => 2))
+          			->execute();  	
+
+         	 				drupal_goto("node/25/take/31");
+          				break;
+         	 			}	
+         			}
+           	}
+       		}
+  			}
+
+  			if ($cur_que==33){
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (32) order by number";
+        	$query = db_query($sql);
+      	
+        	foreach($query as $item) {
+         		 $answer = $item->points_awarded;
+          	//Question 32 No/Skip, so we go to the question 34
+        	 	if ($answer !=1){
+         	 		db_update('quiz_node_results_answers')
+      			 ->condition('result_id', $quizresult)
+      			 ->condition('number', 33)
+      			 ->fields(array('is_skipped' => 2))
+      			 ->execute();  	
+           		drupal_goto("node/25/take/34");
+           		break;
+         	 	}
+      	  }
+    		}			
+
+  			if ($cur_que==35||$cur_que==36){
+
+        	$sql ="select points_awarded from quiz_node_results_answers where result_id = ". $quizresult ." and number in (34) order by number";
+        	$query = db_query($sql);
+      	  $dont_make = array('35','36');
+        	foreach($query as $item) {
+            $answer = $item->points_awarded;
+          	//Question 34 No/Skip, so we go to the END
+           	if ($answer !=1){
+         	 		db_update('quiz_node_results_answers')
+      			  ->condition('result_id', $quizresult)
+      			  ->condition ('number',$dont_make, 'IN')
+      			  ->fields(array('is_skipped' => 2))
+      			  ->execute();  	
+              $_SESSION['quiz'][25]['current'] = 37;
+              header("Location:".$base_url.$lang_code."/node/25/take/36/feedback/"); 
+            	
+            	break;
+           	}
+       		}
+  			}		
 
 		//END OF WORKFLOF*********************************************************************************************************************************
 
