@@ -302,7 +302,7 @@ if ($result_id ==0 ){//Nothing to show
 	        }
 	        print($body_rec."</div>");
 
-          for ($i = 1; $i <= 100; $i++) {
+          for ($i = 1; $i <= 500; $i++) {
             $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
           }
 	        $body_rec  = str_replace("<p>", "<br>", $body_rec);
@@ -345,7 +345,7 @@ if ($result_id ==0 ){//Nothing to show
           $body_rec = ""; 
         }
         print($body_rec."</div>");
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 500; $i++) {
           $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
         }
         $body_rec  = str_replace("<p>", "<br>", $body_rec);
@@ -439,7 +439,7 @@ if ($result_id ==0 ){//Nothing to show
                  	}
                   
                  	print($body_rec);
-                  for ($i = 1; $i <= 100; $i++) {
+                  for ($i = 1; $i <= 500; $i++) {
                     $body_rec  = str_replace('id="tmgmt-'.$i.'"', '', $body_rec);
                   }
                   

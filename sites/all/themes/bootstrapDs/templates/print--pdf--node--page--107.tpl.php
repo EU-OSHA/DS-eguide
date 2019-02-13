@@ -126,7 +126,7 @@
         color: #3c3c3c;
         font-size: 10pt;
         bottom: 10px;
-        font-style: italic
+        font-style: italic;
       }
        
        .flyleaf {
@@ -283,7 +283,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
 
 
 ?>
-<div class="main-container">
+<div class="main-container" style="padding-bottom: 60px;">
   <h1 class="page-header container" style="margin-top:-40px;padding-top:0;"><?php print t("Good practices and guidance"); ?></h1>
   <?php
     $result_id = 0;
@@ -312,7 +312,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
       print(t("There is still nothing on this Recomendation list.")); 
       return false;
     }else
-    $dont_get = array(1,2,3,26,33,34,35);
+    $dont_get = array(1,2,33,34);
     $dont_get_bycountry = array(1,9,21,22,23,24);//Question with empty recommendations for the moment in English version
 
   	$check_toshow = array();
@@ -469,7 +469,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
                  	print($body_rec);
 	            }
                 /*Print the comments of the questions*/
-             	//$user_comment = "AQUI";//getcomment($result_id , $number_key);
+             	//$user_comment = //getcomment($result_id , $number_key);
                 $user_comment = getcomment_print($result_id , $number_key);
              	?>
 
@@ -481,7 +481,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
               	<?php print($user_comment);?>
                </p> 
 
-</div>
+
 
 <?php
 	        }  
