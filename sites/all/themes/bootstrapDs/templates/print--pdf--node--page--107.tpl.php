@@ -4,16 +4,20 @@
   <head>
     <?php print $head; ?>
     <base href='<?php print $url ?>' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php print $print_title; ?></title>
     <?php print $scripts; ?>
     <?php if (isset($sendtoprinter)) print $sendtoprinter; ?>
     <?php print $robots_meta; ?>
-    <?php if (theme_get_setting('toggle_favicon')): ?>
+    <?php 
+    global $language;
+
+    if (theme_get_setting('toggle_favicon')): ?>
       <link rel='shortcut icon' href='<?php print theme_get_setting('favicon') ?>' type='image/x-icon' />
     <?php endif; ?>
     <style>
       
-      @import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+      
       
       header{
         margin-left: -50px;
@@ -21,7 +25,7 @@
       }
 
       body{
-        font-family: Arial, sans-serif;
+        font-family: 'Dejavu Sans', sans-serif;
         margin-top: -50px!important;
       }
 
@@ -29,9 +33,12 @@
         color:#749b00;
       }
 
+      strong {
+        font-weight: bold;
+      }
+
       .page-header{
         font-weight: 300!important;
-        font-family: 'Open Sans', sans-serif!important;
         font-size: 2.6em;
         padding-left: 0;
         margin-left: -10px;
@@ -393,6 +400,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
         print ('<div class="check-question col-md-12"><div class="q-title">'.t("Introduction").'</div>');
         $node_rec  = node_load_multiple(NULL, array("title" => "35.0"));
         $key_node = key($node_rec);
+        
         if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
           $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
         }else{
@@ -454,8 +462,11 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
 	           
           		$node_rec  = node_load_multiple(NULL, array("title" => $rec_node));
                 	$key_node = key($node_rec);
+                 
                 	if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
                   	$body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
+                    //$body_rec = str_replace("<strong>", "<b>", $body_rec);
+                    //$body_rec = str_replace("</strong>", "</b>", $body_rec);
                   }else{
                     $body_rec = "";    
                   	

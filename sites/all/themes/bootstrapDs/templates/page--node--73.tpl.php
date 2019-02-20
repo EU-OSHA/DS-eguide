@@ -478,7 +478,7 @@ $sect->insertPageBreak();
             if ($respchecksWC[$cont]['resp_id'] =='Skipped'||$respchecksWC[$cont]['resp_id'] =='N/A'){
             	$testtoshow = t('N/A');
             	if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
-            		$testtoshow = "Do not know / Reply later";
+            		$testtoshow = t("Do not know / Reply later");
             	}
 
                 print("<span class='answer-text-check skipped'>");
@@ -692,7 +692,7 @@ $sect->insertPageBreak();
 	                      $answer_text = str_replace('");?>', '',$answer_text);
 	                      print("<span class='answer-text-check'>");
 	                      print(t($answer_text));
-	                      $answer = t($answer_text);
+                        $answer = t($answer_text);
 	                      $answer = str_replace("<p>","",$answer);
 	                      $answer = str_replace("</p>","",$answer);
 	                      $table = $sect->addTable();

@@ -248,17 +248,29 @@ if ($result_id ==0 ){//Nothing to show
     $title2_printed = false;
     $title3_printed = false;
    	//Once we have get the number of the checlist to show, we print all of them 
+
+    if($language->language!=''){
+      $linkPdf= "";
+      $linkRtf = "../sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
+    }
+    else
+    {
+      $linkPdf= "";
+      $linkRtf = "sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
+    }
+
+
     ?>
     
     <div class='recommendation container'>
 	<div class="content-print-download ">
     <ul class="print-download col-md-4">
       <li class="print" >
-        <a href="/dangerous-substances/printpdf/107" target="_blank" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">
+        <a href="printpdf/107" target="_blank" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">
           &gt; <?php print t("Download as pdf")?></a>
       </li>
       <li class="download " >
-        <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">
+        <a href="<?php print $linkRtf ;?>" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">
           &gt; <?php print t("Download as rich text (rtf)")?></a>
       </li>
       <li class="back" >
@@ -342,7 +354,7 @@ if ($result_id ==0 ){//Nothing to show
         if (isset($node_rec[$key_node]->body[$language->language][0]['value'])){
           $body_rec = $node_rec[$key_node]->body[$language->language][0]['value'];
         }else{
-          $body_rec = ""; 
+          $body_rec = "Missing translation"; 
         }
         print($body_rec."</div>");
         for ($i = 1; $i <= 500; $i++) {
@@ -494,16 +506,26 @@ if ($result_id ==0 ){//Nothing to show
                       $sect->addImage($dir . '/../../../../default/files/danger5.png', null);
 
                       $pos = strpos($body_rec,'.png"');
-                      $body_rec = substr($body_rec, $pos + 8);
+                      $body_rec = substr($body_rec, $pos + 12);
 
                       $pos = strpos($body_rec,'<img');
                       $body= substr($body_rec,0,$pos);
                       $sect->writeText($body .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
                       $sect->addImage($dir . '/../../../../default/files/dangerX.jpg', null);
+                      $posGlobal = 43;
+                      //Position for all languages excepts Au de
+
+                      //Add the last image
+                      if ($language->language=="AT_de"){
+                        $sect->writeText($body .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
+                        $sect->addImage($dir . '/../../../../default/files/dangerau_de.jpg', null);
+                        $posGlobal = 90;
+                      }
+
 
                       $pos = strpos($body_rec,'.jpg"');
-                      $body_rec = substr($body_rec, $pos + 43);
-
+                      $body_rec = substr($body_rec, $pos + $posGlobal);
+                      
                       $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
                     }
 
@@ -590,7 +612,7 @@ if ($result_id ==0 ){//Nothing to show
             <a href="/dangerous-substances/printpdf/107" target="_blank" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-            <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-<?php print ($result_id)?>.rtf" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
+            <a href="<?php print ($linkRtf)?>" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
             <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
