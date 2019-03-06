@@ -474,12 +474,14 @@ $sect->insertPageBreak();
             }  
 
             print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span></div>");
-                          
-            if ($respchecksWC[$cont]['resp_id'] =='Skipped'||$respchecksWC[$cont]['resp_id'] =='N/A'){
-            	$testtoshow = t('N/A');
-            	if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
-            		$testtoshow = t("Do not know / Reply later");
-            	}
+                   
+                  
+            if (isset($respchecksWC[$cont]['resp_id'])){
+              if ($respchecksWC[$cont]['resp_id'] =='Skipped'||$respchecksWC[$cont]['resp_id'] =='N/A'){
+              	$testtoshow = t('N/A');
+              	if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
+              	 $testtoshow = t("Do not know / Reply later");
+              	}
 
                 print("<span class='answer-text-check skipped'>");
                 print("<p>".$testtoshow."</p>");
@@ -495,8 +497,8 @@ $sect->insertPageBreak();
                 $cell = $table->getCell(1, 2);
                 $cell->writeText($testtoshow, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
-                
               }
+            }
 
         	if (isset($respchecksWC[$cont])){//There is a response
         		

@@ -4,6 +4,7 @@
   <head>
     <?php print $head; ?>
     <base href='<?php print $url ?>' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php print $print_title; ?></title>
     <?php print $scripts; ?>
     <?php if (isset($sendtoprinter)) print $sendtoprinter; ?>
@@ -21,7 +22,7 @@
       }
 
       body{
-        font-family: Arial, sans-serif;
+        font-family: 'Dejavu Sans', sans-serif;
         margin-top: -50px!important;
       }
 
@@ -307,6 +308,7 @@ $yes = t('Yes');
 $yes = str_pad($yes,  10, " ");
 $no = t('No');
 $no = str_pad($no,  10, " ");
+
 ?>
 
   <?php
@@ -323,7 +325,7 @@ $no = str_pad($no,  10, " ");
     }
   }
   ?>
-  <div class="main-container">
+  <div class="main-container" style="padding-bottom: 60px;"> 
   <h1 class="page-header container" style="margin-top:-40px;padding-top:0;"><?php print t("Checklist"); ?></h1>
   
   <?php
@@ -541,7 +543,7 @@ $no = str_pad($no,  10, " ");
       for($cont=1;$cont< $next_que;$cont++){
         //Create a new page to avoid show question in 2 diferent pages
         
-        $idSalto=array(5,9,11,13,17,21,25,29,33);
+        $idSalto=array(4,5,9,11,13,17,21,25,29,33);
 
           if (in_array($cont, $idSalto)){
             print("<div class='break'></div>");
@@ -586,22 +588,19 @@ $no = str_pad($no,  10, " ");
             if ($show_title==true){   
                 print("<div class='check-title'>");
                 print($node_q->title);
-                print("</div>");
+                print("</div>");  
                 $show_title=false;
             }  
 
-                          
-            if ($respchecksWC[$cont]['resp_id'] =='N/A'){
+            if (isset($respchecksWC[$cont]['resp_id'])){                          
+              if ($respchecksWC[$cont]['resp_id'] =='N/A'){
                 print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  t('N/A') ."</div>";
-            }
-            if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
+              }
+              if ($respchecksWC[$cont]['resp_id'] =='Skipped'){
                 print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" . t("Do not know / Reply later") ."</div>";
-                
-            }
- 
-
-             
-
+              }
+            }    
+     
           if (isset($respchecksWC[$cont])){//There is a response
             
               $checkarray=$respchecksWC[$cont]['resp_id'];
@@ -612,10 +611,9 @@ $no = str_pad($no,  10, " ");
                     $answer_text = $q_answer['answer']['value'];
                     $answer_text = str_replace('<?php print t("', '',$answer_text);
                     $answer_text = str_replace('");?>', '',$answer_text);
-
+                   
                     print("<span class='answer-text-check'>");
-                    print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags($answer_text) ."</div>";
-                    
+                    print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags(t($answer_text)) ."</div>";
                     print("</span>");
 
                   }
@@ -643,7 +641,6 @@ $no = str_pad($no,  10, " ");
 
                 if ($show_title==true){      
                   print("<div class='check-title'>");
-                  print $checkarray;
                   print($checks_title[$number_key][$checkarray]);
                   print("</div>");
                   $show_title=false;
