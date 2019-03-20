@@ -15,10 +15,8 @@
     if (theme_get_setting('toggle_favicon')): ?>
       <link rel='shortcut icon' href='<?php print theme_get_setting('favicon') ?>' type='image/x-icon' />
     <?php endif; ?>
-    <style>
-      
-      
-      
+    
+    <style> 
       header{
         margin-left: -50px;
         height: 150px;
@@ -128,7 +126,7 @@
         font-size: 16px;
       }
       
-      #footer:after { content: counter(page); font-size: 22px; position: absolute; right: 23px; top: 26px }
+      #footer:after { content: counter(page); font-size: 22px; position: absolute; right: 05px; top: 30px }
       #footer {
         color: #3c3c3c;
         font-size: 10pt;
@@ -136,28 +134,27 @@
         font-style: italic;
       }
        
-       .flyleaf {
-          page-break-after: always;
-          margin-top:-100px;
-          padding:0;
-        }
+      .flyleaf {
+        page-break-after: always;
+        margin-top:-100px;
+        padding:0;
+      }
 
-        .break{
-          page-break-after: always;
-        }
+      .break{
+        page-break-after: always;
+      }
 
     </style>
-  </head>
+</head>
 
 <?php 
-global $language;
-$fecha_actual = date('Y-m-d');  
+  global $language;
+  $fecha_actual = date('Y-m-d');  
 
-$email = "";
-if (isset($_SESSION['email'])==1){
-  $email =  " - " . $_SESSION['email'];
-}
-
+  $email = "";
+  if (isset($_SESSION['email'])==1){
+    $email =  " - " . $_SESSION['email'];
+  }
 ?>
 
 <div class="flyleaf" width="100%"> <?php print '<img  src="'.base_path() . path_to_theme() .'/images/cover.jpg">'; ?></div>
@@ -169,7 +166,7 @@ if (isset($_SESSION['email'])==1){
 <div id="footer" style="position: fixed;bottom: 10px; left: 10px; width:100%;">
   <div>
     <?php print t("My Chemical Guide - Questionnaire Report");?>
-    <span style="position:absolute;right:25px;">
+    <span style="position:absolute;right:5px;">
       <?php print $fecha_actual; ?>
     </span>
     <br />
@@ -181,7 +178,7 @@ if (isset($_SESSION['email'])==1){
 </div>
 
 
-  <body style="padding-top:200px;">
+<body style="padding-top:200px;">
   <script type='text/php'>
       if ( isset($pdf) ) { 
         $font = Font_Metrics::get_font('helvetica', 'normal');
@@ -291,7 +288,7 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
 
 ?>
 <div class="main-container" style="padding-bottom: 60px;">
-  <h1 class="page-header container" style="margin-top:-40px;padding-top:0;"><?php print t("Good practices and guidance"); ?></h1>
+  <h1 class="page-header container" style="margin-top:-20px;padding-top:0;"><?php print t("Good practices and guidance"); ?></h1>
   <?php
     $result_id = 0;
     if (isset($_SESSION['quiz'][25]['result_id'])==1){

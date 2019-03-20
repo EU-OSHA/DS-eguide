@@ -115,5 +115,10 @@
   'open sans' => 
   array (
     'normal' => DOMPDF_FONT_DIR . '1a916ff1e8c781117a6880954c9ab4ae',
+    'italic' => DOMPDF_FONT_DIR . '6ed1e80ca8f9525d829ac801bd3d8984',
+  ),
+  'cybercjk' => 
+  array (
+    'normal' => DOMPDF_FONT_DIR . 'bd9824db06720e00d8816d60e795b561',
   ),
 ) ?>

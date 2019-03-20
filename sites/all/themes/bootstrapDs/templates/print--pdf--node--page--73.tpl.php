@@ -153,7 +153,7 @@
           margin-top: 2px;
       }
 
-      #footer:after { content: counter(page); font-size: 22px; position: absolute; right: 23px; top: 26px }
+      #footer:after { content: counter(page); font-size: 22px; position: absolute; right: 05px; top: 30px }
       #footer {
         color: #3c3c3c;
         font-size: 10pt;
@@ -189,8 +189,8 @@
   <div id="footer" style="position: fixed;bottom: 10px; left: 10px; width:100%;">
     <div>
       <?php print t("My Chemical Guide - Questionnaire Report");?>
-      <span style="position:absolute;right:25px;">
-        <?php print $fecha_actual; ?>
+      <span style="position:absolute;right:5px;">
+          <?php print $fecha_actual; ?>
       </span>
       <br />
      https://eguides.osha.europa.eu/dangerous-substances/ <?php print $email ?>
