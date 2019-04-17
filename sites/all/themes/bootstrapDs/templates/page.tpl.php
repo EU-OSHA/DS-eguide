@@ -123,7 +123,11 @@ drupal_add_library('system', 'ui.draggable');
       <!--</div>-->
 	  
       <div class="container-fluid">
-        <?php print render($page['content']); ?>
+
+        <?php
+          //delete the links to the other langugae versions
+          unset($page['content']['system_main']['nodes'][$node->nid]['links']['translation']);
+          print render($page['content']); ?>
       </div>
     </section>
 

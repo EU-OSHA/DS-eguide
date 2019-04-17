@@ -73,6 +73,7 @@
  * @ingroup templates
  */
 global $base_url;
+global $language;
 
 ?>
 
@@ -83,12 +84,27 @@ global $base_url;
 
 
 <div class="main-container">
-  <h1 class="page-header container">Contact us</h1>
+  <h1 class="page-header container"><?php print t('Contact us');?></h1>
   <div class="container">  
     <div class="container-webform">
       <!--<h2 class="contact-us-title">Contact us</h2>-->
       <!--<span class="display-down-contact-us glyphicon glyphicon-plus"></span>-->
       <div class="webform">
+        <?php
+        if ($language->language!="" && $language->language!="en"){
+          $lang_code = "/" . $language->language;
+        }else{
+          $lang_code = "";
+        } 
+
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['name']['#title'] = t("Your name");
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['your_surname']['#title'] = t("Your surname");
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['your_email_']['#title'] = t("Your Email");
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['subject']['#title'] = t("Subject");
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['your_message']['#title'] = t("Your Message");
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['actions']['submit']['#value'] = t("Submit");
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['disclaimer']['#markup'] = '<a href="/dangerous-substances'.$lang_code.'/privacy-notice" target="_blank">' . t("Read the privacy policy") . '</a>';
+        ?>
         <?php print render($page['content']['system_main']['nodes'][67]['webform']['#form']); ?>
       </div>
     </div>
