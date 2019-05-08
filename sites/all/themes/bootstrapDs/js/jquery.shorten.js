@@ -19,13 +19,14 @@
 (function($) {
     $.fn.shorten = function(settings) {
         "use strict";
-
+        var sm = Drupal.t("Show more");
+        var sl = Drupal.t("Show less");
         var config = {
             showChars: 120,
             minHideChars: 10,
             ellipsesText: "...",
-            moreText: "Show more",
-            lessText: "Show less",
+            moreText: sm,
+            lessText: sl,
             onLess: function() {},
             onMore: function() {},
             errMsg: null,

@@ -3784,9 +3784,10 @@ function quiz_jumper_form_submit($form, &$form_state) {
 }
 
 function quiz_email_form() {
+  $email_label = t('Email');
   $form['email'] = array(
     '#type' => 'textfield',
-    '#title' => 'Email',
+    '#title' =>  $email_label,
     '#required' => FALSE,
     '#element_validate' => array('myelement_email_validate'),
      );
@@ -4433,7 +4434,7 @@ $common_text = t("For an overall assessment of your situation regarding the safe
 	  $total_zero = 0;
 
     foreach ($answers as $answer) {
-    	//dpm($answer);
+    	
        	if($answer->is_skipped==1){
        		$number_post  = $number_post +1;
        	}else{

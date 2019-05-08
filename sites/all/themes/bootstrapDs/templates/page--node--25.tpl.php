@@ -900,7 +900,7 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
 
 		//END OF WORKFLOF*********************************************************************************************************************************
 
-
+        
           //These are the mandatory questions
           $no_skip = array('1','2','13','15','16','22','25','26','27','30','33','36');
           if (isset($page['content']['system_main']['body']['question']['#markup']) ==1){
@@ -1044,9 +1044,6 @@ print drupal_render($form);
 ?>
 
 </div></div>
-
-
-
 
 <script type="text/javascript">
 

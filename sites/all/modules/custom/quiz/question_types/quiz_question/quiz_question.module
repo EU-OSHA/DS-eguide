@@ -137,8 +137,22 @@ function quiz_question_validate($node, &$form) {
  */
 function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
   global $language;
+  
+  $question_node = node_load($nodes->nid);
+  
+
+  if (isset($question_node->title_field[$language->language][0]['value'])){
+    $nodes->title = $question_node->title_field[$language->language][0]['value'];
+  }
+
+  if (count($nodes->body)>0){
+    $nodes->body['en'][0]['value'] = $question_node->body[$language->language][0]['value'];
+  }
+  
+
   $quiz_result = quiz_result_load($result_id);
-  $quiz = node_load($quiz_result->nid, $quiz_result->vid);
+  $quiz = node_load($quiz_result->nid, $quiz_result->vid,$language->language);
+
   $view_mode = 'question';
 
   // Take quiz and result in the form.
@@ -156,7 +170,7 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
     $next_que = $_SESSION['quiz'][$quiz_number]['next_question'];
   }
   
-  
+ 
   if (!is_array($nodes)) {
     // One single question (or page?)
     if ($nodes->type == 'quiz_page') {
@@ -183,7 +197,9 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
   $form['#tree'] = TRUE;
   
   foreach ($nodes as $node) {
+   
     $question = _quiz_question_get_instance($node);
+    
     $class = drupal_html_class('quiz-question-' . $node->type);
     // Element for a single question
     $element = $question->getAnsweringForm($form_state, $result_id);
@@ -233,6 +249,7 @@ function quiz_question_answering_form($form, $form_state, $nodes, $result_id) {
       $nodo_title =$node->title;
       $title  = _filter_lexicon( $nodo_title,"","");
     } 
+    
     if (isset($form['question'][$node->nid]['question']['body'])==1){
       
       $form['question'][$node->nid]['question']['body'][0]['#markup'] = $w_message .'<h1 class="node-title">' .  $title . '</h1>' .$form['question'][$node->nid]['question']['body'][0]['#markup'];
@@ -688,6 +705,7 @@ function quiz_question_load($nodes) {
  */
 function _quiz_question_get_instance($node) {
   $info = quiz_question_get_info();
+
   if (!empty($node->type)) {
     $constructor = $info[$node->type]['question provider'];
   }
@@ -701,7 +719,7 @@ function _quiz_question_get_instance($node) {
 
   // We create a new instance of QuizQuestion
   $to_return = new $constructor($node);
-
+  
   return $to_return;
 }
 
@@ -1114,7 +1132,6 @@ function quiz_question_answering_form_validate(&$form, &$form_state) {
 
   foreach (array_keys($form_state['values']['question']) as $nid) {
     $current_question = node_load($nid);
-
     if ($current_question && empty($form['question'][$nid]['#disabled'])) {
       // There was an answer submitted.
       $quiz_question = _quiz_question_get_instance($current_question);

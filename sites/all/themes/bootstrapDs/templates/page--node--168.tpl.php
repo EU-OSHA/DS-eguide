@@ -157,7 +157,7 @@ foreach ($check_toshow as $checknumber) {
 	  $sect->writeText('<b>'.t("Your answer").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
 
     foreach ($node_q->alternatives as $q_answer) {
-	  	if ($checkarray == $q_answer['id']){
+      if ($checkarray == $q_answer['id']){
   			
   			$answer_text = $q_answer['answer']['value'];
   			$answer_text = str_replace('<?php print t("', '',$answer_text);

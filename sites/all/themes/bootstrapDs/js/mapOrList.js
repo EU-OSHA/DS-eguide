@@ -148,7 +148,7 @@ function cargaMapa() {
 				if (code=="bg" ||code=="cy"|| code=="cz"|| code=="ro" || code=="at" ||
 				code=="dk"||  code=="fr"|| code=="hr"|| code=="de"||code=="gr"||code=="hu"||code=="ie"||
 				code=="it"|| code=="lv"|| code=="lt"|| code=="nl"||code=="pl"||code=="pt"||code=="sk"||
-				code=="si"|| code=="es"|| code=="se"|| code=="gb"||code=="is"||code=="no"){
+				code=="si"|| code=="es"|| code=="se"|| code=="gb"||code=="is"||code=="no"||code=="ee"){
 					
 					var htmlParent=jQuery("ul."+code).html();
 					
@@ -215,7 +215,7 @@ function cargaMapa() {
 				
 			} 
 			fills();
-			//no encuentro manera mejor.. por el momento esto valdrá.
+			
 			setTimeout("fills()",10);
 			setTimeout("fills()",100);
 	    	setTimeout("fills()",200);

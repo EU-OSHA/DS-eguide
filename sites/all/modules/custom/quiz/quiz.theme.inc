@@ -79,7 +79,7 @@ function theme_quiz_progress($variables) {
   drupal_add_js(drupal_get_path('module', 'quiz') . '/js/quiz.jumper.js');
   $output = '';
   $output .= '<div class="question-header">';
-  $text = '<div class="title-header">Question <span id="quiz-question-number">!x</span> of <span id="quiz-num-questions">@y</span></div>';
+  $text = '<div class="title-header">' . t("Question") . '<span id="quiz-question-number">!x</span>' . t("of") .'<span id="quiz-num-questions">@y</span></div>';
 
   if ($variables['allow_jumping']) {
   //We are on the long Questionnaire
@@ -124,7 +124,7 @@ function theme_quiz_progress($variables) {
        $max_que = 0;   
     }
     $percentage = round((($max_que) / count($variables['questions'])) *100);
-    $text = '<div class="title-header">Question <span id="quiz-question-number">!x</span> of <span id="quiz-num-questions">@y</span></div><div class="percent">'.$percentage.'% Complete</div>';    
+    $text = '<div class="title-header">' . t("Question") . ' <span id="quiz-question-number">!x</span> '. t("of") .' <span id="quiz-num-questions">@y</span></div><div class="percent">'.$percentage.'% '. t('Complete') .'</div>';    
     $output .= t($text, array('!x' => $variables['current'], '@y' => count($variables['questions'])));
   }
 

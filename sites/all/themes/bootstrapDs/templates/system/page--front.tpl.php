@@ -38,25 +38,54 @@
     <!----This is the List-->
       <div id="listText">
           <ul>
-            <li class="lan-au"><a href="AT_de">Austria</a>
+            <li class="lan-au"><a href="AT_de"> <?php print t('Austria');?></a>
               <ul class="at">
-                  <li class="LanHid"><a href="AT_de">German</a></li>
+                  <li class="LanHid"><a href="AT_de"></a></li>
               </ul>
             </li>
 
-            <li class="lan-et"><a href="et">Estonia</a>
+            <li class="lan-et"><a href="et"><?php print t('Estonia');?></a>
               <ul class="ee">
-                <li class="LanHid"><a href="et">Estonian</a></li>
+                <li class="LanHid"><a href="et"></a></li>
               </ul>
             </li>
-            <li class="lan-ro"><a href="ro">Romania</a>
+            <li class="lan-ro"><a href="ro"><?php print t('Romania');?></a>
               <ul class="ro">
-                <li class="LanHid"><a href="ro">Romanian</a></li>
+                <li class="LanHid"><a href="ro"></a></li>
               </ul>
             </li>
+
+            <!--
+            <li class="lan-de"><a href="de">Germany</a>
+              <ul class="de">
+                  <li class="LanHid"><a href="de">German</a></li>
+              </ul>
+            </li>
+            <li class="lan-no"><a href="no">Norway</a>
+              <ul class="no">
+                  <li class="LanHid"><a href="no">Norwegian</a></li>
+              </ul>
+            </li>
+            <li class="lan-pt"><a href="pt">Portuguese</a>
+              <ul class="pt">
+                  <li class="LanHid"><a href="pt">Portuguese</a></li>
+              </ul>
+            </li>
+
+            <li class="lan-sl"><a href="sl">Slovenia</a>
+              <ul class="sl">
+                  <li class="LanHid"><a href="sl">Slovenian</a></li>
+              </ul>
+            </li>
+            <li class="lan-is"><a href="is">Iceland</a>
+              <ul class="is">
+                  <li class="LanHid"><a href="is">Icelandic</a></li>
+              </ul>
+            </li>
+
 
           </ul>
-       
+        -->
       </div>
 
     <!--This is the start of the map-->  
@@ -84,8 +113,8 @@
 
 
   <section class="container">
-    <div class="row">
-      <div class="col-md-6">
+    <div class="row flex">
+      <div class="col-md-6 flex">
         <div class="content-home-questions">
           <?php
            global $language;
@@ -120,9 +149,21 @@
           </div> 
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 flex">
         <div class="content-home-questions">
-          <div class="number-questions prev-text">
+          <?php 
+          if ($language->language == "en"){
+
+            $clas_numberQ = "number-questions prev-text";
+          }else{
+            $clas_numberQ = "number-questions";
+          }
+          
+          ?>
+
+
+
+          <div class="<?php print($clas_numberQ);?>">
             <span><?php echo t('36 Questions');?></span>
           </div>
           <div class="starnew"><a href="<?php print($urllq);?>"><?php echo t('Quick start');?></a></div>
