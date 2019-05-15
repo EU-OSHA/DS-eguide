@@ -1,3 +1,17 @@
+<?php
+  global $language;
+            
+  if ($language->language=="en"){
+    $idioma = "";
+     $logo_Osha = '/images/EU-OSHA.png';
+  }else{
+    $idioma = $language->language;
+    $logo = str_replace("logo.png", "/images/" .$idioma ."_logo.jpg", $logo);
+    $logo_Osha = '/images/EU-OSHA-'. $idioma . '.png';
+  }
+ 
+?>
+
 <header>
   <div class="container ds-header">
     <div class="row">
@@ -6,7 +20,7 @@
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
         <a class="logo-osha" href="http://osha.europa.eu" title="EU-OSHA" target="_blank">
-          <?php print '<img class="pull-left" alt="'.t("EU-OSHA logo").'" src="'.base_path() . path_to_theme() .'/images/logo-osha.png">'; ?>
+          <?php print '<img class="pull-left" alt="'.t("EU-OSHA logo").'" src="'.base_path() . path_to_theme() .$logo_Osha .'">'; ?>
         </a>
         <div class="border-right-header">
            <?php print '<img  class="pull-left logo-eu" alt="'.t("EU logo").'" src="'.base_path() . path_to_theme() .'/images/logo-eu.png">'; ?>
@@ -14,7 +28,7 @@
        <div class="header-text"><?php echo t('Healthy Workplaces MANAGE DANGEROUS SUBSTANCES'); ?></div>
        <div class="content-right-header">
         <div class="print-friendly row">
-          <a href="javascript:if(window.print)window.print();" title="Print page">
+          <a href="javascript:if(window.print)window.print();" title="<?php print t('Print page')?>">
             <?php print '<img alt="'.t("Print").'" src="'.base_path() . path_to_theme() .'/images/print-friendly.png">'; ?>
           </a>
         </div>

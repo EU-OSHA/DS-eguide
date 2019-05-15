@@ -126,8 +126,10 @@ drupal_add_library('system', 'ui.draggable');
 
         <?php
           //delete the links to the other langugae versions
+        if (isset($node)){
           unset($page['content']['system_main']['nodes'][$node->nid]['links']['translation']);
-          print render($page['content']); ?>
+        }
+        print render($page['content']); ?>
       </div>
     </section>
 
