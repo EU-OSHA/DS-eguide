@@ -122,17 +122,32 @@ foreach ($answers as $answer) {
   }  
 }    
 
+if($language->language!=''){
+      $linkPdf= "";
+      $linkRtf = "/../dangerous-substances/sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-" . $result_id . ".rtf";
+    }
+    else
+    {
+      $linkPdf= "";
+      $linkRtf = "sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-" . $result_id . ".rtf";
+    }
+
+if ($language->language!="" && $language->language!="en"){
+    $lang_code = "/" . $language->language;
+    $lang_prefix = "../";
+  }
+  
 //Once we have get the number of the checlist to show, we print all of them 
 ?>
     
 <div class='recommendation container'> <!--Closed at the end of the document-->
   <div class="content-print-download-up">
-    <ul class="print-download col-md-6">
+    <ul class="print-download col-md-12">
       <li class="print" >
-        <a href="/dangerous-substances/printpdf/168" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
+        <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/168" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
       </li>
       <li class="download " >
-        <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
+        <a href="<?php print $linkRtf ;?>" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
       </li>
       <li class="back" >
         <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
@@ -253,12 +268,12 @@ print("</div>");//Close the recommendation div
 
   ?>
     <div class="content-print-download ">
-        <ul class="print-download col-md-4">
+        <ul class="print-download col-md-12">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/168" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
+            <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/168" target="_blank" class="">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-            <a href="sites/all/themes/bootstrapDs/rtf/samples/generated/sqreport-<?php print ($result_id)?>.rtf" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
+            <a href="<?php print $linkRtf ;?>" class="">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
             <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>

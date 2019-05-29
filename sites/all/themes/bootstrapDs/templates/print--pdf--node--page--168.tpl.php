@@ -21,7 +21,7 @@
       }
 
       body{
-        font-family: Arial, sans-serif;
+        font-family: 'Dejavu Sans', sans-serif;
         margin-top: -50px!important;
       }
 
@@ -167,7 +167,7 @@ if (isset($_SESSION['email'])==1){
     </span>
     <br />
     https://eguides.osha.europa.eu/dangerous-substances/ <?php print $email ?>
-    <span style="position:absolute;right:60px;">Page</span>
+    <span style="position:absolute;right:60px;"><?php print t('Page');?></span>
      <br />
      <br />
   </div>

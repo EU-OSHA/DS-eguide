@@ -264,7 +264,7 @@ if ($result_id ==0 ){//Nothing to show
     
     <div class='recommendation container'>
 	<div class="content-print-download ">
-    <ul class="print-download col-md-4">
+    <ul class="print-download col-md-12">
       <li class="print" >
         <a href="printpdf/107" target="_blank" class="" onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">
           &gt; <?php print t("Download as pdf")?></a>
@@ -607,9 +607,9 @@ if ($result_id ==0 ){//Nothing to show
   ?>
 </div>
     <div class="content-print-download ">
-        <ul class="print-download col-md-4">
+        <ul class="print-download col-md-12">
           <li class="print" >
-            <a href="/dangerous-substances/printpdf/107" target="_blank" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
+            <a href="printpdf/107" target="_blank" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
             <a href="<?php print ($linkRtf)?>" class=""  onclick="_paq.push(['trackEvent', 'Download', 'rec-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>

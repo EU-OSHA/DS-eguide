@@ -935,13 +935,16 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           //Finish 
           
           if ($cur_que==37 && isset($page['content']['system_main']['feedback'])!=1){
-      
+            $fin_trans = t('Finish');
             $final_message=$page['content']['system_main']['body']['question']['#markup'];
            // $final_message = str_replace('edit-navigation-submit','edit-navigation-submit-finish',$final_message);
             $final_message = str_replace('<div class="table-responsive">','<div class="table-responsive" style="display:none">',$final_message);
             $final_message = str_replace('form-type-textarea form-group">','form-type-textarea form-group" style="display:none">',$final_message);
             $final_message = str_replace('value="240" class="form-radio"','value="240" class="form-radio"  checked="checked"',$final_message);
+
+            $final_message = str_replace('value="'.$fin_trans.'"','value="'.$fin_trans.'"  style="display:none"',$final_message);
             $final_message = str_replace('value="Finish"','value="Finish"  style="display:none"',$final_message);
+            
             $final_message = str_replace('Leave blank and finish</button>',t("Finish") . '</button>',$final_message);
            
             $page['content']['system_main']['body']['question']['#markup'] = $final_message;

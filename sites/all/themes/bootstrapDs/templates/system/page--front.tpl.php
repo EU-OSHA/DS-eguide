@@ -93,7 +93,7 @@
       <div id="europe_flag" title="<?php print t('European union standar version')?>">
         <a href="/dangerous-substances">
           <img class="pull-left logo-lan" alt="EU logo" src="/dangerous-substances/sites/all/themes/bootstrapDs/images/European_Union_logo.png">
-          <div class="eu_version"><?php print ('EU version')?></div>
+          <div class="eu_version"><?php print t('EU version')?></div>
         </a>
       </div>
       
