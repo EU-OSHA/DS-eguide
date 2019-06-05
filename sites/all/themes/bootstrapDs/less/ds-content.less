@@ -79,6 +79,14 @@ h1.title-home{
     margin-top: 1em;
 }
 
+html[lang="AT_de"] .entity-quiz-result-answer h1{
+	font-size: 1.9rem;
+}
+
+html[lang="AT_de"] .quiz-question-multichoice h1{
+	font-size: 1.9rem;
+}
+
 .node-title{
 	color:@ds-green;
 	font-size: 2.2rem;
@@ -326,7 +334,7 @@ progress[value]::-webkit-progress-bar{
 			display: block;
 			margin: 0 auto;
 			padding-top: 130px;
-			line-height: 40px!important;
+			line-height: 25px!important;
 			font-weight: bold;
 		}
 	}
@@ -1084,6 +1092,7 @@ section.container{
     	border:0px;
     	font-weight: 700;
     	text-align: right;
+    	height: 33px;
 	}
 
 	#edit-navigation-submit-finish{
@@ -1561,11 +1570,11 @@ ul.questions-summary{
 }
 
 .risk-teaser-main{
-	width:403px;
+	display: flex;
+	justify-content: center;
 	padding-bottom: 1em;
 	overflow: hidden;
 	margin-bottom: 1em;
-	margin: 0 auto;
 }
 
 .number-risks{
@@ -2054,7 +2063,8 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 			padding: 0px;
     		margin: 0 auto;
     		float: none;
-    		width: 530px;
+    		width: 100%;
+    		text-align: center;
 			li{
 				display: inline-block;
 			}
@@ -2084,7 +2094,7 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 }
 
 /*RECOMMENDATIONS*/
-.page-node-107,.page-node-168{
+.page-node-107, .page-node-168{
 	
 	.block-title{
 		color:@ds-blue;
@@ -2156,6 +2166,7 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 		padding-left: 1em;
     	padding-top: 1em;
     	margin-left: 1em;
+    	margin-top: 5px;
 	}
 
 	.check-question{
@@ -2188,7 +2199,8 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 			padding: 0px;
     		margin: 0 auto;
     		float: none;
-    		width: 530px;
+    		width: 100%;
+    		text-align: center;
 			li{
 				display: inline-block;
 			}
@@ -2209,7 +2221,8 @@ meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
 			padding: 0px;
 			margin: 0 auto;
 			float: none;
-			
+			width: 100%;
+    		text-align: center;
 			li{
 				display: inline-block;
 			}

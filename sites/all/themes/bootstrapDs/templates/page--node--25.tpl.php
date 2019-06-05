@@ -484,8 +484,9 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             $cur_ans ="";
           }
           if (isset ($page['content']['system_main']['body']['question']['#markup'])==1){
+          
             $cont_ase= t("Continue the assessment");
-            $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-submit" name="op" value="Next" class="btn btn-default form-submit">Next</button>','<button type="submit" id="edit-navigation-submit" name="op" value="Next question" class="btn btn-default form-submit">'. t("NEXT") .'<br/> <span class="cont-asess">'. $cont_ase .'</span></button>',$page['content']['system_main']['body']['question']['#markup']);
+            $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-submit" name="op" value="'.t("Next").'" class="btn btn-default form-submit">'.t("Next").'</button>','<button type="submit" id="edit-navigation-submit" name="op" value="Next question" class="btn btn-default form-submit">'. t("NEXT") .'<br/> <span class="cont-asess">'. $cont_ase .'</span></button>',$page['content']['system_main']['body']['question']['#markup']);
           }
           if (isset($page['content']['system_main']['body'])==1){
             $page['content']['system_main']['body']['question']['#markup'] = str_replace('<button type="submit" id="edit-navigation-back" name="op" value="Back" class="btn btn-default form-submit">Back</button>','', $page['content']['system_main']['body']['question']['#markup']);

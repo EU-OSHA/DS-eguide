@@ -97,13 +97,15 @@ global $language;
           $lang_code = "";
         } 
 
+        $privacyLink = drupal_get_path_alias('node/19',$language->language);
+        
         $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['name']['#title'] = t("Your name");
         $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['your_surname']['#title'] = t("Your surname");
         $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['your_email_']['#title'] = t("Your Email");
         $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['subject']['#title'] = t("Subject");
         $page['content']['system_main']['nodes'][67]['webform']['#form']['submitted']['your_message']['#title'] = t("Your Message");
         $page['content']['system_main']['nodes'][67]['webform']['#form']['actions']['submit']['#value'] = t("Submit");
-        $page['content']['system_main']['nodes'][67]['webform']['#form']['disclaimer']['#markup'] = '<a href="/dangerous-substances'.$lang_code.'/privacy-notice" target="_blank">' . t("Read the privacy policy") . '</a>';
+        $page['content']['system_main']['nodes'][67]['webform']['#form']['disclaimer']['#markup'] = '<a href="/dangerous-substances'.$lang_code. '/' . $privacyLink.'" target="_blank">' . t("Read the privacy policy") . '</a>';
         ?>
         <?php print render($page['content']['system_main']['nodes'][67]['webform']['#form']); ?>
       </div>

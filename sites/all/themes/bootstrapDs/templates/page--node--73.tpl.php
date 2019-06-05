@@ -156,10 +156,14 @@ $cell = $table->getCell(2, 2);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_RIGHT);
 $cell->writeText(t('Page'). " <pagenum>/<pagetotal>");
 
-//$header = $rtf->addHeader(PHPRtfLite_Container_Header::TYPE_LEFT);
-//$header->writeText("PHPRtfLite class library. Left document header. This is page - <pagenum> of <pagetotal> -", $times12, $parFormat);
-$header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
-$sect->addImage($dir . '/../../../../default/files/cover.png', null, 15);
+if ($language->language!="" && $language->language!="en"){
+  $lang_code = "-" . $language->language;
+}else{
+  $lang_code = "";
+} 
+
+$header->addImage($dir . '/../../../../all/modules/print/images/header-que' .$lang_code.'.jpg', null, 15);
+$sect->addImage($dir . '/../../../../all/modules/print/images/cover' .$lang_code.'.jpg', null, 15);
 $sect->insertPageBreak();
 ?>
 
@@ -187,13 +191,12 @@ $sect->insertPageBreak();
     $lang_prefix = "../";
   }
 
-
   ?>
   <div class="main-container container">
   <h1 class="page-header container"><?php print t("Checklist"); ?></h1>
   <div class="check-title"> <?php print t("You can use the checklist to document and control your prevention activities and your progress");?></div>  
   <div class="content-print-download ">
-        <ul class="print-download col-md-6">
+        <ul class="print-download col-md-12">
           <li class="print" >
             <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/73" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>
@@ -986,7 +989,7 @@ $sect->insertPageBreak();
 
   ?>
     <div class="content-print-download ">
-        <ul class="print-download col-md-4">
+        <ul class="print-download col-md-12">
           <li class="print" >
             <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/73" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>

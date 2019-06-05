@@ -144,6 +144,17 @@
 
 <?php 
 global $language;
+
+if ($language->language!="" && $language->language!="en"){
+  $lang_code = "-" . $language->language;
+}else{
+  $lang_code = "";
+} 
+
+$coverpath =  base_path() . path_to_theme() .'/images/cover' .$lang_code.'.jpg' ;
+$headerpath = base_path() . path_to_theme() .'/images/header-que' .$lang_code.'.jpg' ;
+
+
 $fecha_actual = date('Y-m-d');  
 
 $email = "";
@@ -153,11 +164,11 @@ if (isset($_SESSION['email'])==1){
 
 ?>
 
-<div class="flyleaf" width="100%"> <?php print '<img  src="'.base_path() . path_to_theme() .'/images/cover.jpg">'; ?></div>
+<div class="flyleaf" width="100%"> <?php print '<img  src="'.$coverpath.'">'; ?></div>
 
 
 <header  style="position: fixed;top:-60px;">
-  <?php print '<img  src="'.base_path() . path_to_theme() .'/images/header-pdf.jpg">'; ?>
+  <?php print '<img  src="'.$headerpath.'">'; ?>
 </header>
 <div id="footer" style="position: fixed;bottom: 10px; left: 10px; width:100%;">
   <div>

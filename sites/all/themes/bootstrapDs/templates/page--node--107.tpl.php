@@ -152,9 +152,14 @@ $cell = $table->getCell(2, 2);
 $cell->setTextAlignment(PHPRtfLite_Table_Cell::TEXT_ALIGN_RIGHT);
 $cell->writeText(t('Page'). " <pagenum>/<pagetotal>", new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
 
+if ($language->language!="" && $language->language!="en"){
+  $lang_code = "-" . $language->language;
+}else{
+  $lang_code = "";
+} 
 
-$header->addImage($dir . '/../../../../default/files/header-pdf.jpg', null, 15);
-$sect->addImage($dir . '/../../../../default/files/cover.png', null, 15);
+$header->addImage($dir . '/../../../../all/modules/print/images/header-que' .$lang_code.'.jpg', null, 15);
+$sect->addImage($dir . '/../../../../all/modules/print/images/cover' .$lang_code.'.jpg', null, 15);
 $sect->insertPageBreak();
 $sect->writeText(t("Good practices and guidance") ."<br>", new PHPRtfLite_Font(28, "Arial", '#749b00'), $parSimple);
 

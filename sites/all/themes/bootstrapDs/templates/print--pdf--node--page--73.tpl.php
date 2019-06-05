@@ -2,7 +2,10 @@
   "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php print $language->language; ?>" version="XHTML+RDFa 1.0" dir="<?php print $language->dir; ?>">
   <head>
-    <?php print $head; ?>
+    <?php 
+    global $language;
+    print $head; 
+    ?>
     <base href='<?php print $url ?>' />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php print $print_title; ?></title>
@@ -173,6 +176,14 @@
     </style>
   </head>
   <?php 
+   if ($language->language!="" && $language->language!="en"){
+    $lang_code = "-" . $language->language;
+  }else{
+    $lang_code = "";
+  } 
+  
+  $coverpath =  base_path() . path_to_theme() .'/images/cover' .$lang_code.'.jpg' ;
+  $headerpath = base_path() . path_to_theme() .'/images/header-que' .$lang_code.'.jpg' ;
 
   $fecha_actual = date('Y-m-d');  
 
@@ -182,9 +193,10 @@
   }
 
   ?>
-  <div class="flyleaf" width="100%"> <?php print '<img  src="'.base_path() . path_to_theme() .'/images/cover.jpg">'; ?></div>
+  <div class="flyleaf" width="100%"> <?php print '<img  src="'.$coverpath.'">'; ?></div>
   <header  style="position: fixed;top:-60px;">
-    <?php print '<img  src="'.base_path() . path_to_theme() .'/images/header-pdf.jpg">'; ?>
+    <?php print ($headerpath); ?>
+      <?php print '<img  src="'.$headerpath.'">'; ?>
   </header>
   <div id="footer" style="position: fixed;bottom: 10px; left: 10px; width:100%;">
     <div>

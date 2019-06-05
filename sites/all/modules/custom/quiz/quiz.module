@@ -3803,13 +3803,13 @@ function quiz_email_form() {
 function quiz_email_form_submit($form, &$form_state) {
   
   if($form['email']['#value']==""){
-    drupal_set_message('Please, the email format is not correct. You should fill in a valid email address to save the questionnaire','error');
+    drupal_set_message(t('Please, the email format is not correct. You should fill in a valid email address to save the questionnaire'),'error');
     return false;  
   
   }
 
   if (!valid_email_address($form['email']['#value'])){
-    drupal_set_message('Please, the email format is not correct. You should fill in a valid email address to save the questionnaire','error');
+    drupal_set_message(t('Please, the email format is not correct. You should fill in a valid email address to save the questionnaire'),'error');
     return false;  
   
   }else{
@@ -4847,7 +4847,7 @@ if ($block == 3){
       $risk_percentage = 100-$risk_percentage;
       $calc =$calc .  '<meter min="0" max="100" low="50" high="79" optimum="100" value="'.$risk_percentage.'"></meter>';
       
-      $calc =$calc . "<div class='col-md-12'><div class='col-md-12'>" . $teaser_text . "</div>";
+      $calc =$calc . "<div><div>" . $teaser_text . "</div>";
       $calc =$calc . "<div class='col-md-12'>";
       $calc =$calc . "<div class='risks-not-present'><span>" .$b2_number_correct . "</span> " . t("Risks not present in practices and routines") . "</div>";
       $calc =$calc . "<div class='risks-postponed'><span>" .$b2_number_post . "</span> " . t("Postponed questions in practices and routines") . "</div>";
@@ -4885,7 +4885,7 @@ if ($block == 3){
       $risk_percentage = 100-$risk_percentage;
       $calc =$calc .  '<meter min="0" max="100" low="50" high="79" optimum="100" value="'.$risk_percentage.'"></meter>';
 
-      $calc =$calc . "<div class='col-md-12'><div class='col-md-12'>" . $teaser_text . "</div>";
+      $calc =$calc . "<div><div>" . $teaser_text . "</div>";
       $calc =$calc . "<div class='col-md-12'>";
       $calc =$calc . "<div class='risks-not-present'><span>" .$b3_correct . "</span> " .  t("Risks not present in measures") . "</div>";
       $calc =$calc . "<div class='risks-postponed'><span>" . $b3_postponed ."</span> " . t("Postponed questions in measures") . "</div>";
