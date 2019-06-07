@@ -195,7 +195,6 @@
   ?>
   <div class="flyleaf" width="100%"> <?php print '<img  src="'.$coverpath.'">'; ?></div>
   <header  style="position: fixed;top:-60px;">
-    <?php print ($headerpath); ?>
       <?php print '<img  src="'.$headerpath.'">'; ?>
   </header>
   <div id="footer" style="position: fixed;bottom: 10px; left: 10px; width:100%;">
