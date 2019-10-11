@@ -117,7 +117,7 @@ function cargaMapa() {
 
 	    onRegionOver: function(event, code, region)
 	    {
-     		if(code=="at" || code=="ro" || code=="ee"){
+     		if(code=="no" || code=="pt" || code=="is"){
      			
      			jQuery("path#jqvmap1_" + code).addClass("intro");
      			
@@ -129,20 +129,21 @@ function cargaMapa() {
 	    onRegionClick: function(element,e,code,region) { 
 	    	barrablanca = (jQuery(window).width() - jQuery("#vmap").width())/2 ;
 			
-	    	if(code!="es" && code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md" && code!="no" && code!="ch" &&
+	    	if(code!="es" && code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md" && code!="at" && code!="ch" &&
 	    	   code!="bg" && code!="hr" && code!="cy" && code!="cz" && code!="dk" && code!="fr" && code!="de" && code!="gr" && code!="hu" && code!="ie" && code!="be" &&
-	    	   code!="it" && code!="lv" && code!="lt" && code!="nl" && code!="pl" && code!="pt" && code!="sk" && code!="si" && code!="se" && code!="gb" && code!="is" && code!="fi"
+	    	   code!="it" && code!="lv" && code!="lt" && code!="nl" && code!="pl" && code!="ro" && code!="sk" && code!="si" && code!="se" && code!="gb" && code!="ee" && code!="fi"
 	    	) {
-		    	if(jQuery("#containerPopLanguages").length>0) {
+		    /*	if(jQuery("#containerPopLanguages").length>0) {
 		    		jQuery("#containerPopLanguages").remove();
 		    		jQuery("#arrowPop").remove();
 		    	}
-				
+			*/	
 		    	var x=e.pageX;
 		    	var y=e.pageY;
 
 
 				var htmlParent=jQuery("ul."+code).parent().html();
+
 
 				//Countries with only one language
 				if (code=="bg" ||code=="cy"|| code=="cz"|| code=="ro" || code=="at" ||
@@ -161,6 +162,7 @@ function cargaMapa() {
 					var trozo=jQuery.trim(cachos[1]);
 					var cachos2=trozo.split('">');
 					var hrefpais=jQuery.trim(cachos2[0]);
+					
 					hrefpais=hrefpais.replace("&amp;","&");
 				    window.location.href = hrefpais;
 					barrablanca = 50000;
@@ -229,7 +231,7 @@ function cargaMapa() {
 				
 	    }
 	});
-	fills();
+	//fills();
 
 }
 

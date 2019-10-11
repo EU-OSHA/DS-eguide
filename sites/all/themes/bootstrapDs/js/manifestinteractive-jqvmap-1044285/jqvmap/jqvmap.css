@@ -46,15 +46,15 @@
   height: 500px;
 }
 
-#jqvmap1_at, #jqvmap1_ro, #jqvmap1_ee{
+#jqvmap1_no, #jqvmap1_is, #jqvmap1_pt{
 	cursor: pointer;
 	fill: #7f99cc;	
 }
 
-#jqvmap1_es, #jqvmap1_es , #jqvmap1_tr , #jqvmap1_ua , #jqvmap1_by , #jqvmap1_ba , #jqvmap1_rs , #jqvmap1_al , #jqvmap1_mk , #jqvmap1_md , #jqvmap1_no , #jqvmap1_ch
+#jqvmap1_es, #jqvmap1_es , #jqvmap1_tr , #jqvmap1_ua , #jqvmap1_by , #jqvmap1_ba , #jqvmap1_rs , #jqvmap1_al , #jqvmap1_mk , #jqvmap1_md , #jqvmap1_ch
 , #jqvmap1_bg , #jqvmap1_hr , #jqvmap1_cy , #jqvmap1_cz , #jqvmap1_dk , #jqvmap1_fr , #jqvmap1_de , #jqvmap1_gr , #jqvmap1_hu , #jqvmap1_ie , #jqvmap1_be
-, #jqvmap1_it , #jqvmap1_lv , #jqvmap1_lt , #jqvmap1_nl , #jqvmap1_pl , #jqvmap1_pt , #jqvmap1_sk , #jqvmap1_si , #jqvmap1_se , #jqvmap1_gb , #jqvmap1_is 
-, #jqvmap1_fi, #jqvmap1_mt, #jqvmap1_lu{
+, #jqvmap1_it , #jqvmap1_lv , #jqvmap1_lt , #jqvmap1_nl , #jqvmap1_pl , #jqvmap1_sk , #jqvmap1_si , #jqvmap1_se , #jqvmap1_gb , #jqvmap1_fi, #jqvmap1_mt
+, #jqvmap1_lu,#jqvmap1_ee,#jqvmap1_ro{
 	fill:#cccbcc;
 	stroke:white;
 }
@@ -94,17 +94,17 @@
 	margin-top: 20px;	
 }
 
-.lan-au{
-	background: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/flags/austria.svg) no-repeat;
+.lan-no{
+	background: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/flags/norway.svg) no-repeat scroll 0.4em center;
 }
-.lan-ee{
-	background: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/flags/estonia.svg) no-repeat;
+.lan-is{
+	background: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/flags/iceland.svg) no-repeat scroll 0.4em center;
 }
-.lan-ro{
-	background: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/flags/romania.svg) no-repeat;
+.lan-pt{
+	background: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/flags/portugal.svg) no-repeat scroll 0.4em center;
 }
 
-#containerPopLanguages .lan-au,#containerPopLanguages .lan-ee,#containerPopLanguages .lan-ro{
+#containerPopLanguages .lan-no,#containerPopLanguages .lan-is,#containerPopLanguages .lan-pt{
 	height: 35px;
 	width: 35px;
 	background-size: cover;

@@ -180,6 +180,7 @@
         };
 
         node.setOpacity = function (opacity) {
+          
           this.setAttribute('fill-opacity', opacity);
         };
       } else {
@@ -436,6 +437,7 @@
         jQuery(params.container).trigger(regionMouseOverEvent, [code, mapData.pathes[code].name]);
         if (!regionMouseOverEvent.isDefaultPrevented()) {
           map.highlight(code, path);
+
         }
         if (params.showTooltip) {
           map.label.text(mapData.pathes[code].name);
@@ -467,12 +469,14 @@
       var path = e.target;
       var code = e.target.id.split('_').pop();
 
-      //jQuery(params.container).trigger('regionClick.jqvmap', [e,code, mapData.pathes[code].name]); //añadí el e gonzacid
-//* 2 lineas de abajo por gonza cid */
+      //jQuery(params.container).trigger('regionClick.jqvmap', [e,code, mapData.pathes[code].name]); 
+
       regionClickEvent = $.Event('regionClick.jqvmap');
       jQuery(params.container).trigger(regionClickEvent, [e,code, mapData.pathes[code].name]);
 
+      
       if (!regionClickEvent.isDefaultPrevented()) {
+        
         if (map.selectedRegions.indexOf(code) !== -1) {
           map.deselect(code, path);
         } else {
@@ -629,7 +633,8 @@
     highlight: function (cc, path) {
       path = path || $('#' + this.getCountryId(cc))[0];
       //Highligth only for the countries with a idiomatic version
-      if (cc=="ee"||cc=="ro"||cc=="at"){
+      //RRL highligth the countries on hover
+      if (cc=="is"||cc=="pt"||cc=="no"){
         //Show the country info
         if (this.hoverOpacity) {
           path.setOpacity(this.hoverOpacity);
@@ -850,6 +855,7 @@
     },
 
     getCountryId: function (cc) {
+      
       return 'jqvmap' + this.index + '_' + cc;
     },
 

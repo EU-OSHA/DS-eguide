@@ -27,31 +27,33 @@
       <div class="lan-sel">
         <?php print t('Select your country');?>
       </div>
-      <div class="MapSC">
-        <?php print t('MAP')?>
-      </div>  
-      <div class="ListSC">
-        <?php print t('LIST')?>
-      </div>  
+	  <div class="MapList">
+		<div class="MapSC">
+			<?php print t('MAP')?>
+		</div>  
+		<div class="ListSC">
+			<?php print t('LIST')?>
+		</div>  
+	  </div>
     </div>
 
     <!----This is the List-->
       <div id="listText">
           <ul>
-            <li class="lan-au"><a href="AT_de"> <?php print t('Austria');?></a>
-              <ul class="at">
-                  <li class="LanHid"><a href="AT_de"></a></li>
+            <li class="lan-no"><a href="no"> <?php print t('Norway');?></a>
+              <ul class="no">
+                  <li class="LanHid"><a href="no"></a></li>
               </ul>
             </li>
 
-            <li class="lan-et"><a href="et"><?php print t('Estonia');?></a>
-              <ul class="ee">
-                <li class="LanHid"><a href="et"></a></li>
+            <li class="lan-is"><a href="is"><?php print t('Iceland');?></a>
+              <ul class="is">
+                <li class="LanHid"><a href="is"></a></li>
               </ul>
             </li>
-            <li class="lan-ro"><a href="ro"><?php print t('Romania');?></a>
-              <ul class="ro">
-                <li class="LanHid"><a href="ro"></a></li>
+            <li class="lan-pt"><a href="pt"><?php print t('Portugal');?></a>
+              <ul class="pt">
+                <li class="LanHid"><a href="pt"></a></li>
               </ul>
             </li>
 
