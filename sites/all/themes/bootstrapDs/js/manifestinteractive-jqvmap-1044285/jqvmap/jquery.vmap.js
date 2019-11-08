@@ -634,7 +634,7 @@
       path = path || $('#' + this.getCountryId(cc))[0];
       //Highligth only for the countries with a idiomatic version
       //RRL highligth the countries on hover
-      if (cc=="is"||cc=="pt"||cc=="no"){
+      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"||cc=="si"){
         //Show the country info
         if (this.hoverOpacity) {
           path.setOpacity(this.hoverOpacity);

@@ -56,38 +56,37 @@
                 <li class="LanHid"><a href="pt"></a></li>
               </ul>
             </li>
+            <li class="lan-sl"><a href="sl"><?php print t('Slovenia');?></a>
+              <ul class="sl">
+                  <li class="LanHid"><a href="sl"></a></li>
+              </ul>
+            </li>
+            <li class="lan-et"><a href="et"><?php print t('Estonia');?></a>
+              <ul class="et">
+                  <li class="LanHid"><a href="et"></a></li>
+              </ul>
+            </li>
+            <li class="lan-au"><a href="AT_de"><?php print t('Austria');?></a>
+              <ul class="AT_de">
+                  <li class="LanHid"><a href="AT_de"></a></li>
+              </ul>
+            </li>
+            <li class="lan-ro"><a href="ro"><?php print t('Romania');?></a>
+              <ul class="ro">
+                  <li class="LanHid"><a href="ro"></a></li>
+              </ul>
+            </li>
 
-            <!--
-            <li class="lan-de"><a href="de">Germany</a>
+
+
+
+            <!--<li class="lan-de"><a href="de">Germany</a>
               <ul class="de">
                   <li class="LanHid"><a href="de">German</a></li>
-              </ul>
-            </li>
-            <li class="lan-no"><a href="no">Norway</a>
-              <ul class="no">
-                  <li class="LanHid"><a href="no">Norwegian</a></li>
-              </ul>
-            </li>
-            <li class="lan-pt"><a href="pt">Portuguese</a>
-              <ul class="pt">
-                  <li class="LanHid"><a href="pt">Portuguese</a></li>
-              </ul>
-            </li>
-
-            <li class="lan-sl"><a href="sl">Slovenia</a>
-              <ul class="sl">
-                  <li class="LanHid"><a href="sl">Slovenian</a></li>
-              </ul>
-            </li>
-            <li class="lan-is"><a href="is">Iceland</a>
-              <ul class="is">
-                  <li class="LanHid"><a href="is">Icelandic</a></li>
-              </ul>
-            </li>
+              </ul>-->
 
 
           </ul>
-        -->
       </div>
 
     <!--This is the start of the map-->  

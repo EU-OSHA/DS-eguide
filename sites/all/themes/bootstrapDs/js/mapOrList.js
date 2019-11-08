@@ -117,10 +117,9 @@ function cargaMapa() {
 
 	    onRegionOver: function(event, code, region)
 	    {
-     		if(code=="no" || code=="pt" || code=="is"){
+     		if(code=="no" || code=="pt" || code=="is" || code=="at" || code=="si" || code=="ee" || code=="ro"){
      			
-     			jQuery("path#jqvmap1_" + code).addClass("intro");
-     			
+     			jQuery("path#jqvmap1_" + code).addClass("intro");     			
      			
      		}
 	    },
@@ -129,9 +128,9 @@ function cargaMapa() {
 	    onRegionClick: function(element,e,code,region) { 
 	    	barrablanca = (jQuery(window).width() - jQuery("#vmap").width())/2 ;
 			
-	    	if(code!="es" && code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md" && code!="at" && code!="ch" &&
-	    	   code!="bg" && code!="hr" && code!="cy" && code!="cz" && code!="dk" && code!="fr" && code!="de" && code!="gr" && code!="hu" && code!="ie" && code!="be" &&
-	    	   code!="it" && code!="lv" && code!="lt" && code!="nl" && code!="pl" && code!="ro" && code!="sk" && code!="si" && code!="se" && code!="gb" && code!="ee" && code!="fi"
+	    	if(code!="es" && code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md" && code!="ch" && code!="bg" &&
+	    	   code!="hr" && code!="cy" && code!="cz" && code!="dk" && code!="fr" && code!="de" && code!="gr" && code!="hu" && code!="ie" && code!="be" && code!="it" &&
+	    	   code!="lv" && code!="lt" && code!="nl" && code!="pl" && code!="sk" && code!="se" && code!="gb" && code!="fi"
 	    	) {
 		    /*	if(jQuery("#containerPopLanguages").length>0) {
 		    		jQuery("#containerPopLanguages").remove();
@@ -150,6 +149,20 @@ function cargaMapa() {
 				code=="dk"||  code=="fr"|| code=="hr"|| code=="de"||code=="gr"||code=="hu"||code=="ie"||
 				code=="it"|| code=="lv"|| code=="lt"|| code=="nl"||code=="pl"||code=="pt"||code=="sk"||
 				code=="si"|| code=="es"|| code=="se"|| code=="gb"||code=="is"||code=="no"||code=="ee"){
+
+					// Countries with language code different than country code
+					if (code == "ee")
+					{
+						code = "et";
+					}
+					else if (code == "si")
+					{
+						code = "sl";
+					}
+					else if (code == "at")
+					{
+						code = "AT_de";
+					}
 					
 					var htmlParent=jQuery("ul."+code).html();
 					
@@ -173,6 +186,8 @@ function cargaMapa() {
 		    		
 		    		var x=e.pageX;
 		    		var y=e.pageY;
+
+		    		var htmlParent=jQuery("ul."+code).html();
 
 					var cachos=htmlParent.split("<");
 
