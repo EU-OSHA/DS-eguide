@@ -40,6 +40,11 @@
     <!----This is the List-->
       <div id="listText">
           <ul>
+            <li class="lan-en"><a href="/"> <?php print t('EU');?></a>
+              <ul class="en">
+                  <li class="LanHid"><a href="/"></a></li>
+              </ul>
+            </li>
             <li class="lan-no"><a href="no"> <?php print t('Norway');?></a>
               <ul class="no">
                   <li class="LanHid"><a href="no"></a></li>
