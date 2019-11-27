@@ -446,25 +446,29 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
 	        	print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span>");
 	        	
 	        	if ($checkarray=="skipped"){
-					print("<span class='answer-text skipped'>");
+					    print("<span class='answer-text skipped'>");
 	        		print(t('Do not know / Reply later'));
 	        		print("</span>");	        		
 	        	}
 
-	        	foreach ($node_q->alternatives as $q_answer) {
-	        		
-	        		if ($checkarray == $q_answer['id']){
-	        			
-	        			$answer_text = $q_answer['answer']['value'];
-	        			$answer_text = str_replace('<?php print t("', '',$answer_text);
-	        			$answer_text = str_replace('");?>', '',$answer_text);
-                $answer_text = str_replace('<p>', '',$answer_text);
-                $answer_text = str_replace('</p>', '',$answer_text);
-						print("<span class='answer-text'>");
-	        			print(t($answer_text));
-	        			print("</span>");
-	        		}
-	        	}
+            $query = db_select('quiz_multichoice_answers', 'a');
+            $query->fields('a', array('answer'));
+            $query->condition('id', $checkarray);
+            $res_ans = $query->execute();
+
+            foreach ( $res_ans as $resp) {
+              $answer_text = ($resp->answer);
+              $answer_text = str_replace('<?php print t("', '',$answer_text);
+              $answer_text = str_replace('");?>', '',$answer_text);
+              print("<span class='answer-text'>");
+              print(t($answer_text));
+              $answer = t($answer_text);
+              $answer = str_replace("<p>","",$answer);
+              $answer = str_replace("</p>","",$answer);
+             
+              print("</span>");
+            }
+
 	        	print("</div>");
 
 	       		$print_title = true;

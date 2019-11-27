@@ -615,22 +615,25 @@ $no = str_pad($no,  10, " ");
           if (isset($respchecksWC[$cont])){//There is a response
             
               $checkarray=$respchecksWC[$cont]['resp_id'];
-              foreach ($node_q->alternatives as $q_answer) {
-          
-                  if ($checkarray == $q_answer['id']){
-                    
-                    $answer_text = $q_answer['answer']['value'];
-                    $answer_text = str_replace('<?php print t("', '',$answer_text);
-                    $answer_text = str_replace('");?>', '',$answer_text);
-                   
-                    print("<span class='answer-text-check'>");
-                    print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags(t($answer_text)) ."</div>";
-                    print("</span>");
 
-                  }
+              $query = db_select('quiz_multichoice_answers', 'a');
+              $query->fields('a', array('answer'));
+              $query->condition('id', $checkarray);
+              $res_ans = $query->execute();
+              $answer_text= "";
+              foreach ( $res_ans as $resp) {
+                $answer_text = ($resp->answer);
+                $answer_text = str_replace('<?php print t("', '',$answer_text);
+                $answer_text = str_replace('");?>', '',$answer_text);
+                $answer = t($answer_text);
+                $answer = str_replace("<p>","",$answer);
+                $answer = str_replace("</p>","",$answer);
                 
-              }  
+                print("<span class='answer-text-check'>");
+                print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags(t($answer_text)) ."</div>";
+                print("</span>");
 
+              }
           }    
           print("</div>");
         }
@@ -673,26 +676,23 @@ $no = str_pad($no,  10, " ");
                 }
 
 
-                foreach ($node_q->alternatives as $q_answer) {
-            
-                  if ($checkarray == $q_answer['id']){
-                    
-                    $answer_text = $q_answer['answer']['value'];
-                    $answer_text = str_replace('<?php print t("', '',$answer_text);
-                    $answer_text = str_replace('");?>', '',$answer_text);
-                    $answer_text = str_replace('<p>', '',$answer_text);
-                    $answer_text = str_replace('</p>', '',$answer_text);
-                    
-                    print("<span class='answer-text-check'>");
-                    print("<span class='answer-title'>". t("Your answer").":</span>");
-                    print(t($answer_text) . "<br/>");
-                    $answer = t($answer_text);
-                    $answer = str_replace("<p>","",$answer);
-                    $answer = str_replace("</p>","",$answer);
-                    
-                    
-                    print("</span>");
-                  }
+                $query = db_select('quiz_multichoice_answers', 'a');
+                $query->fields('a', array('answer'));
+                $query->condition('id', $checkarray);
+                $res_ans = $query->execute();
+                $answer_text= "";
+                foreach ( $res_ans as $resp) {
+                  $answer_text = ($resp->answer);
+                  $answer_text = str_replace('<?php print t("', '',$answer_text);
+                  $answer_text = str_replace('");?>', '',$answer_text);
+                  $answer = t($answer_text);
+                  $answer = str_replace("<p>","",$answer);
+                  $answer = str_replace("</p>","",$answer);
+                  
+                  print("<span class='answer-text-check'>");
+                  print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags(t($answer_text)) ."</div>";
+                  print("</span>");
+
                 }
 
                 print("<div class='check-text col-md-9'>");
@@ -741,25 +741,23 @@ $no = str_pad($no,  10, " ");
                  
                   if(isset($check_toshow[$number_key]['nid'])){
                     $node_q = node_load($check_toshow[$number_key]['nid']);
-                    foreach ($node_q->alternatives as $q_answer) {
-                
-                      if ($checkarray == $q_answer['id']){
-                        
-                        $answer_text = $q_answer['answer']['value'];
-                        $answer_text = str_replace('<?php print t("', '',$answer_text);
-                        $answer_text = str_replace('");?>', '',$answer_text);
-                        $answer_text = str_replace('<p>', '',$answer_text);
-                        $answer_text = str_replace('</p>', '',$answer_text);
-                       
-                        print("<span class='answer-text-check'>");
-                        print("<span class='answer-title'>". t("Your answer").":</span>");
-                        print(t($answer_text) . "<br/>");
-                        $answer = t($answer_text);
-                        $answer = str_replace("<p>","",$answer);
-                        $answer = str_replace("</p>","",$answer);
-                        
-                        print("</span>");
-                      }
+                    $query = db_select('quiz_multichoice_answers', 'a');
+                    $query->fields('a', array('answer'));
+                    $query->condition('id', $checkarray);
+                    $res_ans = $query->execute();
+                    $answer_text= "";
+                    foreach ( $res_ans as $resp) {
+                      $answer_text = ($resp->answer);
+                      $answer_text = str_replace('<?php print t("', '',$answer_text);
+                      $answer_text = str_replace('");?>', '',$answer_text);
+                      $answer = t($answer_text);
+                      $answer = str_replace("<p>","",$answer);
+                      $answer = str_replace("</p>","",$answer);
+                      
+                      print("<span class='answer-text-check'>");
+                      print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags(t($answer_text)) ."</div>";
+                      print("</span>");
+
                     }
 
                 }
@@ -859,28 +857,25 @@ $no = str_pad($no,  10, " ");
                       $answer_id =key($check_toshow[$number_key][$number_key]);
                     }
                   
-
-
-                    foreach ($node_q->alternatives as $q_answer) {
-                      if ($answer_id == $q_answer['id']){
+                    $query = db_select('quiz_multichoice_answers', 'a');
+                    $query->fields('a', array('answer'));
+                    $query->condition('id', $answer_id);
+                    $res_ans = $query->execute();
+                    $answer_text= "";
+                    foreach ( $res_ans as $resp) {
+                      $answer_text = ($resp->answer);
+                      $answer_text = str_replace('<?php print t("', '',$answer_text);
+                      $answer_text = str_replace('");?>', '',$answer_text);
+                      $answer = t($answer_text);
+                      $answer = str_replace("<p>","",$answer);
+                      $answer = str_replace("</p>","",$answer);
                       
-                        $answer_text = $q_answer['answer']['value'];
-                        $answer_text = str_replace('<?php print t("', '',$answer_text);
-                        $answer_text = str_replace('");?>', '',$answer_text);
-                        $answer_text = str_replace('<p>', '',$answer_text);
-                        $answer_text = str_replace('</p>', '',$answer_text);
-                        
-                        print("<span class='answer-text-check'>");
-                        if (isset($check_toshow[$number_key]['is_skipped'])!=1){
-                          print("<span class='answer-title'>". t("Your answer").":</span>");
-                        }
-                        print(t($answer_text) . "<br/>");
-                        $answer = t($answer_text);
-                        $answer = str_replace("<p>","",$answer);
-                        $answer = str_replace("</p>","",$answer);
-                        print("</span>");
-                      }
+                      print("<span class='answer-text-check'>");
+                      print "<div class='q-answers'><span class='answer-title'>". t("Your answer"). ": </span>" .  strip_tags(t($answer_text)) ."</div>";
+                      print("</span>");
+
                     }
+                   
                   }
 
                    $special_answers= array(4,9,10,11,12,14,15,16,18,24,30);  

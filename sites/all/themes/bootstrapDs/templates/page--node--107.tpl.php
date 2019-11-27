@@ -210,7 +210,6 @@ if ($result_id ==0 ){//Nothing to show
       
 
     foreach ($answers as $answer) {
-        
         $number = $answer->number;
         $question_nid = $answer->question_nid;
         $is_skipped = $answer->is_skipped;
@@ -241,8 +240,7 @@ if ($result_id ==0 ){//Nothing to show
 			    $res_answer = $query->execute();
 	  
 		        foreach ($res_answer as $resp) {
-
-		           $check_toshow[$number][$number][$resp->id] = $resp->id;
+               $check_toshow[$number][$number][$resp->id] = $resp->id;
 		           $check_toshow[$number]['nid'] = $question_nid;
 		        }	
 			}
@@ -284,7 +282,7 @@ if ($result_id ==0 ){//Nothing to show
       
   	</ul></div>
 <?php
-
+    //dpm($check_toshow);//show all the recommendations we need to show
     foreach ($check_toshow as $checknumber) {
 
 	    $number_key = (key($checknumber));
@@ -395,7 +393,10 @@ if ($result_id ==0 ){//Nothing to show
 	      if ($checkarray!="114" &&  $checkarray!="121" &&  $checkarray!="261"){//These are the ids of the answer without recommendations
 	        
 	        if (isset($checks[$number_key][$checkarray])){
+
 	        	$node_q = node_load($check_toshow[$number_key]['nid']);
+             if ($checkarray=='319'){
+            }
 	        	$qtitle = $node_q->title;
 
 	        	print("<div class='q-title'>". $qtitle."</div>");
@@ -416,27 +417,30 @@ if ($result_id ==0 ){//Nothing to show
 	        		$sect->writeText('<i>'.t("Do not know / Reply later").'</i><br><br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);
 	        		print("</span>");	        		
 	        	}
+          
+            $query = db_select('quiz_multichoice_answers', 'a');
+            $query->fields('a', array('answer'));
+            $query->condition('id', $checkarray);
+            $res_ans = $query->execute();
 
-	        	foreach ($node_q->alternatives as $q_answer) {
-              if ($checkarray == $q_answer['id']){
-
-	        			$answer_text = $q_answer['answer']['value'];
-	        			$answer_text = str_replace('<?php print t("', '',$answer_text);
-	        			$answer_text = str_replace('");?>', '',$answer_text);
-						    print("<span class='answer-text'>");
-	        			print(t($answer_text));
-	        			$answer = t($answer_text);
-	        			$answer = str_replace("<p>","",$answer);
-	        			$answer = str_replace("</p>","",$answer);
-	        			$sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
-	        			print("</span>");
-	        		}
-	        	}
+            foreach ( $res_ans as $resp) {
+              $answer_text = ($resp->answer);
+              $answer_text = str_replace('<?php print t("', '',$answer_text);
+              $answer_text = str_replace('");?>', '',$answer_text);
+              print("<span class='answer-text'>");
+              print(t($answer_text));
+              $answer = t($answer_text);
+              $answer = str_replace("<p>","",$answer);
+              $answer = str_replace("</p>","",$answer);
+              $sect->writeText('<b>'.t("Your answer").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
+              $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
+              print("</span>");
+            }
 	        	print("</div>");
 
 	       		$print_title = true;
 	          	foreach($checks[$number_key][$checkarray] as $rec_node){
-	             
+	             //dpm($rec_node);
           		    $node_rec  = node_load_multiple(NULL, array("title" => $rec_node));
                  
                   

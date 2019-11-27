@@ -465,7 +465,7 @@ $sect->insertPageBreak();
         
         	$node_q = node_load($checksWC[$cont]->question_nid);
         	
-			print("<div class='check-question'>");//Div for the whole question
+			   print("<div class='check-question'>");//Div for the whole question
           	/*This is the section for the answers */
           	if ($show_title==true){   
                            
@@ -505,35 +505,27 @@ $sect->insertPageBreak();
 
         	if (isset($respchecksWC[$cont])){//There is a response
         		
-	          	$checkarray=$respchecksWC[$cont]['resp_id'];
-	          	foreach ($node_q->alternatives as $q_answer) {
-	        
-	                if ($checkarray == $q_answer['id']){
-	                  
-	                  $answer_text = $q_answer['answer']['value'];
-	                  $answer_text = str_replace('<?php print t("', '',$answer_text);
-	                  $answer_text = str_replace('");?>', '',$answer_text);
-	                  print("<span class='answer-text-check'>");
-	                  print(t($answer_text));
-	                  $answer = t($answer_text);
-	                  $answer = str_replace("<p>","",$answer);
-	                  $answer = str_replace("</p>","",$answer);
-	                  $table = $sect->addTable();
-	                  $table->addRows(1);
-	                  $table->addColumnsList(array(3,9));
-
-	                  $cell = $table->getCell(1, 1);
-	                  $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
-
-	                  $cell = $table->getCell(1, 2);
-	                  $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-
-	                  print("</span>");
-	                }
-	              
-	            }  
-
-	        }    
+	         	$checkarray=$respchecksWC[$cont]['resp_id'];
+          
+            $query = db_select('quiz_multichoice_answers', 'a');
+            $query->fields('a', array('answer'));
+            $query->condition('id', $checkarray);
+            $res_ans = $query->execute();
+            $answer_text= "";
+            foreach ( $res_ans as $resp) {
+              $answer_text = ($resp->answer);
+              $answer_text = str_replace('<?php print t("', '',$answer_text);
+              $answer_text = str_replace('");?>', '',$answer_text);
+              print("<span class='answer-text-check'>");
+              print(t($answer_text));
+              $answer = t($answer_text);
+              $answer = str_replace("<p>","",$answer);
+              $answer = str_replace("</p>","",$answer);
+              $sect->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+              $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
+              print("</span>");
+            }
+         }    
 	        print("</div>");
         }
         //End of the section for Questions that don't have related checklists------------------------------------------------------
@@ -566,7 +558,6 @@ $sect->insertPageBreak();
 
              print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span></div>");
              
-              
               if (isset($check_toshow[$number_key]['is_skipped'])==1){
                 print("<span class='answer-text-check skipped'>");
                 print("<p>".t('Do not know / Reply later')."</p>");
@@ -581,7 +572,6 @@ $sect->insertPageBreak();
 
                 $cell = $table->getCell(1, 2);
                 $cell->writeText(t("Do not know / Reply later"), new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-
                 
               }
               
@@ -590,33 +580,24 @@ $sect->insertPageBreak();
 
               }
 
+              $query = db_select('quiz_multichoice_answers', 'a');
+              $query->fields('a', array('answer'));
+              $query->condition('id', $checkarray);
+              $res_ans = $query->execute();
 
-              foreach ($node_q->alternatives as $q_answer) {
-          
-                if ($checkarray == $q_answer['id']){
-                  
-                  $answer_text = $q_answer['answer']['value'];
-                  $answer_text = str_replace('<?php print t("', '',$answer_text);
-                  $answer_text = str_replace('");?>', '',$answer_text);
-                  print("<span class='answer-text-check'>");
-                  print(t($answer_text));
-                  $answer = t($answer_text);
-                  $answer = str_replace("<p>","",$answer);
-                  $answer = str_replace("</p>","",$answer);
-                  $table = $sect->addTable();
-                  $table->addRows(1);
-                  $table->addColumnsList(array(3,9));
-
-                  $cell = $table->getCell(1, 1);
-                  $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
-
-                  $cell = $table->getCell(1, 2);
-                  $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-
-                  print("</span>");
-                }
+              foreach ( $res_ans as $resp) {
+                $answer_text = ($resp->answer);
+                $answer_text = str_replace('<?php print t("', '',$answer_text);
+                $answer_text = str_replace('");?>', '',$answer_text);
+                print("<span class='answer-text-check'>");
+                print(t($answer_text));
+                $answer = t($answer_text);
+                $answer = str_replace("<p>","",$answer);
+                $answer = str_replace("</p>","",$answer);
+                $sect->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+                $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
+                print("</span>");
               }
-
               print("<div class='check-text col-md-9'>");
               print $checks[$number_key][$checkarray];
 
@@ -685,34 +666,28 @@ $sect->insertPageBreak();
 
         	        print("</span>");             
                 }
-                  
+                  //AQUI
                 if(isset($check_toshow[$number_key]['nid'])){
                 	$node_q = node_load($check_toshow[$number_key]['nid']);
-                	foreach ($node_q->alternatives as $q_answer) {
-              
-	                    if ($checkarray == $q_answer['id']){
-	                      
-	                      $answer_text = $q_answer['answer']['value'];
-	                      $answer_text = str_replace('<?php print t("', '',$answer_text);
-	                      $answer_text = str_replace('");?>', '',$answer_text);
-	                      print("<span class='answer-text-check'>");
-	                      print(t($answer_text));
-                        $answer = t($answer_text);
-	                      $answer = str_replace("<p>","",$answer);
-	                      $answer = str_replace("</p>","",$answer);
-	                      $table = $sect->addTable();
-	                      $table->addRows(1);
-	                      $table->addColumnsList(array(3,9));
+                	
+                  $query = db_select('quiz_multichoice_answers', 'a');
+              $query->fields('a', array('answer'));
+              $query->condition('id', $checkarray);
+              $res_ans = $query->execute();
 
-	                      $cell = $table->getCell(1, 1);
-	                      $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
-
-	                      $cell = $table->getCell(1, 2);
-	                      $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-
-	                      print("</span>");
-	                    }
-                  	}
+              foreach ( $res_ans as $resp) {
+                $answer_text = ($resp->answer);
+                $answer_text = str_replace('<?php print t("', '',$answer_text);
+                $answer_text = str_replace('");?>', '',$answer_text);
+                print("<span class='answer-text-check'>");
+                print(t($answer_text));
+                $answer = t($answer_text);
+                $answer = str_replace("<p>","",$answer);
+                $answer = str_replace("</p>","",$answer);
+                $sect->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+                $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
+                print("</span>");
+              }
 
                 }
 
@@ -754,6 +729,7 @@ $sect->insertPageBreak();
                 	if (isset($check_toshow[19]['is_skipped'])==1){
                     	$answer19 =  "<p>".t('Do not know / Reply later')."</p>";
                     }else{
+                      dpm($check_toshow);
                       $answer_id =key($check_toshow[19][19]);
                       if ($answer_id==184){
                         $answer_19 = $yes;
@@ -883,35 +859,26 @@ $sect->insertPageBreak();
                       }
                     }
                   
-
-                    foreach ($node_q->alternatives as $q_answer) {
-                      if (isset($answer_id) && $answer_id == $q_answer['id']){
-                      
-                        $answer_text = $q_answer['answer']['value'];
-                        $answer_text = str_replace('<?php print t("', '',$answer_text);
-                        $answer_text = str_replace('");?>', '',$answer_text);
-                        print("<span class='answer-text-check'>");
-                        print(t($answer_text));
-                        $answer = t($answer_text);
-                        $answer = str_replace("<p>","",$answer);
-                        $answer = str_replace("</p>","",$answer);
-
-                        //$sect->writeText('<b>'.t("Your answer").': </b>'.$answer, new PHPRtfLite_Font(10), new PHPRtfLite_ParFormat(PHPRtfLite_ParFormat::TEXT_ALIGN_LEFT));
-                        $table = $sect->addTable();
-                        $table->addRows(1);
-                        $table->addColumnsList(array(3,9));
-
-                        $cell = $table->getCell(1, 1);
-                        $cell->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
-
-                        $cell = $table->getCell(1, 2);
-                        $cell->writeText($answer, new PHPRtfLite_Font(10, "Arial", '#000000'), $parNormal);
-
-                        print("</span>");
-                      }
+                    $query = db_select('quiz_multichoice_answers', 'a');
+                    $query->fields('a', array('answer'));
+                    $query->condition('id', $answer_id);
+                    $res_ans = $query->execute();
+                    $answer_text= "";
+                    foreach ( $res_ans as $resp) {
+                      $answer_text = ($resp->answer);
+                      $answer_text = str_replace('<?php print t("', '',$answer_text);
+                      $answer_text = str_replace('");?>', '',$answer_text);
+                      print("<span class='answer-text-check'>");
+                      print(t($answer_text));
+                      $answer = t($answer_text);
+                      $answer = str_replace("<p>","",$answer);
+                      $answer = str_replace("</p>","",$answer);
+                      $sect->writeText('<b>'.t("Your answer").': </b>', new PHPRtfLite_Font(10, "Arial", '#003399'), $parNormal);
+                      $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
+                      print("</span>");
                     }
-                  }
-
+                 }    
+                 
                   print ('<span class="answer-text-check">');
 
                   $special_answers= array(4,9,10,11,12,14,15,16,18,24,30);  
