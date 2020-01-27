@@ -328,6 +328,7 @@ $sect->insertPageBreak();
               $res_answer = $query->execute();
             
               foreach ($res_answer as $resp) {
+
                 if ($resp->id!=139 && $resp->id!=261 && $resp->id!=168 && $resp->id!=172 && $resp->id!=180  && $resp->id!=271 && $resp->id!="394" &&  $resp->id!="356"){ //Dont show this answers
                  $check_toshow[$number][$number][$resp->id] = $resp->id;
                  $check_toshow[$number]['nid'] = $question_nid;
@@ -721,17 +722,19 @@ $sect->insertPageBreak();
             }
 
           }else{  
-              
+              if (!isset($answer_id)){
+                      
+              }
+
               if (isset($checks[$number_key])==1){
                 $answer_19 = t("No");
                 if ($number_key == "19" ){
 
                 	if (isset($check_toshow[19]['is_skipped'])==1){
                     	$answer19 =  "<p>".t('Do not know / Reply later')."</p>";
-                    }else{
-                      dpm($check_toshow);
-                      $answer_id =key($check_toshow[19][19]);
-                      if ($answer_id==184){
+                    
+                      $answer_id =$check_toshow[19][19];
+                      if ($answer_id==376){
                         $answer_19 = $yes;
                       }
                       else{
@@ -858,7 +861,11 @@ $sect->insertPageBreak();
                         $answer_id =key($check_toshow[$number_key][$number_key]);
                       }
                     }
-                  
+                    if (!isset($answer_id)){
+                      $answer_id = 0;
+
+                    }
+
                     $query = db_select('quiz_multichoice_answers', 'a');
                     $query->fields('a', array('answer'));
                     $query->condition('id', $answer_id);

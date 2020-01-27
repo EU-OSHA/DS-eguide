@@ -1,4 +1,4 @@
- 
+
 (function ($) {
 $(document).ready(function(){
   $(".short-and-see-more").shorten();
@@ -586,3 +586,31 @@ function glossaryOrderDivs() {
     jQuery(this).css("margin-bottom","1em");
   });
 }
+
+
+(function ($) {
+  $(document).ready(function(){
+    if(jQuery("body.page-node-edit.node-type-checklist").length>0) {
+      $("ul.tabs.secondary").addClass("container");
+    }
+    if(jQuery("body.page-node-edit.node-type-recommendation").length>0) {
+      $("ul.tabs.secondary").addClass("container");
+    }
+  });
+})(jQuery);
+
+(function ($) {
+  $(document).ready(function(){
+    if(jQuery(".toolkit-preview").length>0) {
+      $(".alert-block").remove();
+    }
+  jQuery(".form-item-yes label").text("Checklist answer");
+  jQuery(".form-item-no label").text("Checklist answer");
+
+  if(jQuery(".toolkit").length>0) {
+    jQuery(".field-edit-link").remove()
+  }
+
+  });
+})(jQuery);
+

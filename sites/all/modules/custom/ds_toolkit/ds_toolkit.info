@@ -1,0 +1,8 @@
+name = osha DS toolkit
+description = osha DS toolkit
+core = 7.x
+version = 7.1
+package = Osha
+
+files[] = ds_toolkit.install
+files[] = ds_toolkit.module

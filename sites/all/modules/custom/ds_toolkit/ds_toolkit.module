@@ -1,0 +1,273 @@
+<?php
+/**
+ * @file
+ * osha_lingua_tools module file
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function ds_toolkit_menu() {
+
+  $items['toolkit'] = array(
+    'title' => 'DS Management',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('form_toolkit_form'),
+    'access callback' => 'toolkit_access',
+    'weight' => 7,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['checklist-toolkit'] = array(
+    'title' => 'Lingua Tools',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('form_toolkit_form'),
+    'access callback' => 'toolkit_access',
+    'weight' => 7,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ds_toolkit_form_alter(&$form, &$form_state, $form_id) {
+
+  global $user;
+  global $language;
+  //Root user can use the backend
+  if($user->uid==1){
+    return false;
+  }
+  //CHECKLIST FORM**********************************************************************************************************************
+  if ($form['#form_id']=="checklist_node_form"){
+    if (isset($form_state['node_preview'])) {
+      //this will only return true in preview mode
+    $form['#prefix'] = "<div class='panel panel-default'>
+      <div class='container toolkit-preview'>
+      <div class='panel-body'>
+          <fieldset class='col-md-12'>     
+          <legend>Checklist Preview</legend>
+          
+          <div class='panel panel-default'>
+            <div class='panel-body checklist'>
+              <div class='check-text col-md-9'>".$form['field_text'][$language->language][0]['#default_value']."</b></div>
+              <div class='check-check col-md-3'><span class='yes-txt'>".t('Yes')."</span><span class='no-txt'>".t('No')."</span></div></div>
+            </div>
+          </div>
+          
+        </fieldset>       
+        
+        <div class='clearfix'></div>
+            </div>";
+
+
+    }
+  
+    //Get the translation of the string    
+    $translation_id = $form['#node']->field_stringid['und'][0]['value'];
+    $translated_value = t_fromID($language->language, $translation_id);
+    
+    if ($language->language == "en" || $translated_value == ""){//English version or no translation we set the Original text
+      $form['field_text'][$language->language][0]['#default_value'] = $form_state['node']->field_text['en'][0]['safe_value'];
+    }else{
+      $form['field_text'][$language->language][0]['#default_value'] = $translated_value;
+    }  
+    
+    //Hide title, language and StringId fields
+    $form['additional_settings']['#access'] = false;
+    hide($form['additional_settings']);
+
+    $form['title']['#access'] = false;
+    hide($form['title']);
+    
+    $form['field_stringid']['#access'] = false;
+    hide($form['field_stringid']);
+    
+    $form['actions']['delete']['#access'] = false;
+    hide($form['actions']['delete']);
+
+    $form['#attributes']['class'][2] = 'toolkit';
+    $form['#attributes']['class'][3] = 'container';
+
+    //No one can change the original checklist
+    if ($language->language=="en"){
+      $form['#attributes']['class'][] = 'disabled-form';
+      $form['actions']['submit']['#disabled'] = TRUE;
+      $form['actions']['preview']['#disabled'] = TRUE;
+    }
+
+    //Add the custom function to the submit
+    unset($form['actions']['submit']['#submit'][0]);
+    $form['actions']['submit']['#submit'][] = 'ds_toolkit_form_submit';
+
+
+    //Add static fields for Yes and No
+    $form['yes'] = array(
+    '#type' => 'textfield',
+    '#title' => "Checklist answer",
+    '#value' => t('Yes'),
+    '#weight' => 49,
+    '#disabled' => TRUE,
+    );
+    
+    $form['no'] = array(
+    '#type' => 'textfield',
+    '#title' => "Checklist answer",
+    '#value' => t('No'),
+    '#weight' => 50,
+    '#disabled' => TRUE,
+    );
+  }
+  //END OF CHECKLIST FORM**********************************************************************************************************************
+
+
+
+  if ($form['#form_id']=="recommendation_node_form"){
+
+
+  	if (isset($form_state['node_preview'])) {
+       
+
+      //this will only return true in preview mode
+    $form['#prefix'] = "<div class='panel panel-default'>
+        <div class='container toolkit-preview'>
+        <div class='panel-body'>
+          <fieldset class='col-md-12'>     
+          <legend>Recommendation Preview</legend>     
+          <div class='panel panel-default'>".
+          $form['body'][$language->language][0]['#default_value']
+          ."</div>
+         
+          </div>
+        
+        </div>
+        <div class='clearfix'></div></div>";
+
+
+    }
+
+
+  
+    $form['title']['#access'] = false;
+    hide($form['title']);
+    
+    $form['field_stringid']['#access'] = false;
+    hide($form['field_stringid']);
+    
+    $form['actions']['delete']['#access'] = false;
+    hide($form['actions']['delete']);
+
+    $form['#attributes']['class'][2] = 'toolkit';
+    $form['#attributes']['class'][3] = 'container';
+  
+  }
+
+}
+
+
+function form_toolkit_form($form, &$form_state) {
+ 	
+ 	$form['title']['#default_value']="DS Management";
+    $form['header_text'] = array(
+      '#markup' => '<div class="container"><h1 class="page-header">DS Management</h1><div class="content-boxes"><div class="toolkit-box"><a href="/dangerous-substances/toolkit/recommendation-list">Recommendations Management</a></div><div class="toolkit-box"><a href="/dangerous-substances/toolkit/checklist-list">Checklist Management</div></div></div>',
+      '#fieldintname' => '0',
+    );
+
+  return $form;
+}
+
+
+function ds_toolkit_form_submit($form, &$form_state){
+  global $language;
+  $translation_id = $form_state['values']['field_stringid']['und'][0]['value'];
+  $stringTranslation = $form_state['values']['field_text'][$language->language][0]['value'];
+  $stringTranslation = trim(str_replace("</p>", "", $stringTranslation));
+  $stringTranslation = str_replace("<p>", "", $stringTranslation);
+  $stringTranslation = str_replace("<strong>", "<b>", $stringTranslation);
+  $stringTranslation = str_replace("</strong>", "</b>", $stringTranslation);
+
+  db_update('locales_target')
+    ->fields(array(
+    'translation' => $stringTranslation,
+    ))
+    ->condition('lid', $translation_id)
+    ->condition('language', $language->language)
+    ->execute();
+     
+  drupal_set_message("The translation had been saved.");
+  drupal_goto("toolkit/checklist-list");
+
+}
+
+
+
+/**
+ * Access callback fortoolkit
+ */
+function toolkit_access() {
+  global $user;
+
+  foreach ($user->roles as $userrol) {
+    if ($userrol == 'administrator' || $userrol == 'Editor' || $userrol == 'Review Manager') {
+      return TRUE;
+    }
+  }
+  return false;
+}
+
+/**
+*Alter the tabs dependind of the user
+*/
+function ds_toolkit_menu_local_tasks_alter(&$data, $route_name) {
+
+  global $user;      
+  
+  //Review manager can edit all the languages
+  if (isset ($user->roles[11])==1 || $user->uid==1){
+    return true;
+  }
+
+  $translatedLanguages = ['ro','pt','AT_de','is','no','et','de','sl'];
+
+  $account = user_load($user->uid); 
+  $myLanguages = [];
+
+  if (isset ($account->tmgmt_translation_skills['und'])){
+    foreach ($account->tmgmt_translation_skills['und'] as $lang) {
+      $my_lang = $lang['language_to'];
+      array_push($myLanguages, $my_lang);
+    }
+  }
+
+  if (isset ($route_name['map'][1]->translations->data)){
+    foreach ($translatedLanguages as $lang){
+      if (!in_array($lang, $myLanguages)){
+        unset($route_name['map'][1]->translations->data[$lang]);
+      }
+    }
+  }
+
+}
+
+
+
+/**
+*Get the translation with and ID and a languge
+*/
+
+function t_fromID($langcode,$stringId){
+
+  $query = db_select('locales_target', 'a');
+  $query->fields('a', array('translation'));
+  $query->condition('lid',$stringId );
+  $query->condition('language', $langcode);
+  $results = $query->execute();
+
+  foreach ($results as $row) {
+    return $row->translation;
+  }
+     
+}

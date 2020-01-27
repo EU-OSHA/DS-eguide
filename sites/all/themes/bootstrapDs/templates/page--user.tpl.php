@@ -1,4 +1,10 @@
-<?php global $base_url; ?>
+<?php 
+
+  global $base_url; 
+  global $user;
+
+?>
+
 <?php
   include(drupal_get_path('theme', 'bootstrapDs').'/templates/header.tpl.php');
 ?>
@@ -24,7 +30,7 @@
 ?>
 </div>
 
-  <div class="row no-margin">
+  <div class="no-margin">
     <?php if (!empty($page['sidebar_first'])): ?>
       <aside class="col-sm-3" role="complementary">
         <?php print render($page['sidebar_first']); ?>
@@ -58,6 +64,13 @@
       <div class="container hide-tabs">
       <div class='col-md-6 user-login-css'>
         <?php print render($page['content']); ?>
+        <?php if (!user_is_logged_in()) {
+          $url =  $base_url.'/user/password';
+         
+        ?>
+        <a href="<?php print ($url); ?>"><?php print t('Forgot your password?') ?></a>  
+        <?php } ?>
+        
        </div> 
     </section>
 

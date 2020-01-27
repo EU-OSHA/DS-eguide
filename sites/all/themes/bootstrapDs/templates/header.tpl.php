@@ -34,7 +34,18 @@
         </div>
         <div class="header_top_bar">
           <div class="vertical-align">
-            <?php print render($page['top_header']); ?>
+            <?php print render($page['top_header']);?>
+            <?php
+            if ($user->uid==0 ){
+            ?>
+              <div class="login"><a href="user">Log in</a></div>
+            <?php 
+            }else{
+            ?>
+              <div class="logout"><a href="/dangerous-substances/user/logout">Log out</a></div>
+            <?php
+            }
+            ?>
           </div>
         </div>
       </div>

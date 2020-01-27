@@ -109,6 +109,30 @@ drupal_add_library('system', 'ui.draggable');
         <?php if (!empty($title)): ?>
           <!--<h1 class="page-header"><?php print $title; ?></h1>-->
         <?php endif; ?>
+
+        <?php
+          $n = menu_get_object('node');
+          if (!empty($n)){
+        ?>
+        <?php
+          if ($n->type == 'checklist'){
+        ?>  
+            <p class="container back-link-ds-pz"><a href="/dangerous-substances/toolkit/checklist-list">Back to the Checklist Management</a></p>
+            <h1 class="page-header">Checklist</h1>
+            <h2>Edit Checklist</h2>
+            
+        <?php } ?>
+        <?php
+          if ($n->type == 'recommendation'){
+        ?>  
+            <p class="container back-link-ds-pz"><a href="/dangerous-substances/toolkit/recommendation-list">Back to the Recommendations Management</a></p>
+            <h1 class="page-header">Recommendations</h1>
+            <h2>Edit Recommendations</h2>
+            
+        <?php } ?>
+        <?php
+          }
+        ?>          
         <?php print render($title_suffix); ?>
         <?php print $messages; ?>
         <?php if (!empty($tabs)): ?>
