@@ -230,25 +230,39 @@ function ds_toolkit_menu_local_tasks_alter(&$data, $route_name) {
     return true;
   }
 
-  $translatedLanguages = ['ro','pt','AT_de','is','no','et','de','sl'];
-
-  $account = user_load($user->uid); 
-  $myLanguages = [];
-
-  if (isset ($account->tmgmt_translation_skills['und'])){
-    foreach ($account->tmgmt_translation_skills['und'] as $lang) {
-      $my_lang = $lang['language_to'];
-      array_push($myLanguages, $my_lang);
-    }
+  if (isset($route_name['map'][1]->translations->data['ro']) == 1 && !isset($user->roles[12])){
+    unset($route_name['map'][1]->translations->data['ro']);
   }
 
-  if (isset ($route_name['map'][1]->translations->data)){
-    foreach ($translatedLanguages as $lang){
-      if (!in_array($lang, $myLanguages)){
-        unset($route_name['map'][1]->translations->data[$lang]);
-      }
-    }
+  if (isset($route_name['map'][1]->translations->data['pt']) == 1 && !isset($user->roles[13])){
+    unset($route_name['map'][1]->translations->data['pt']);
   }
+
+  if (isset($route_name['map'][1]->translations->data['AT_de']) == 1 && !isset($user->roles[14])){
+    unset($route_name['map'][1]->translations->data['AT_de']);
+  }
+
+  if (isset($route_name['map'][1]->translations->data['is']) == 1 && !isset($user->roles[15])){
+    unset($route_name['map'][1]->translations->data['is']);
+  }
+
+  if (isset($route_name['map'][1]->translations->data['no']) == 1 && !isset($user->roles[16])){
+    unset($route_name['map'][1]->translations->data['no']);
+  }
+
+  if (isset($route_name['map'][1]->translations->data['et']) == 1 && !isset($user->roles[17])){
+    unset($route_name['map'][1]->translations->data['et']);
+  }
+
+  if (isset($route_name['map'][1]->translations->data['de']) == 1 && !isset($user->roles[18])){
+    unset($route_name['map'][1]->translations->data['de']);
+  }
+  
+  if (isset($route_name['map'][1]->translations->data['sl']) == 1 && !isset($user->roles[19])){
+    unset($route_name['map'][1]->translations->data['sl']);
+  }
+
+
 
 }
 
