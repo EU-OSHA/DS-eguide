@@ -35,17 +35,26 @@
         <div class="header_top_bar">
           <div class="vertical-align">
             <?php print render($page['top_header']);?>
-            <?php
-            if ($user->uid==0 ){
-            ?>
-              <div class="login"><a href="user">Log in</a></div>
-            <?php 
-            }else{
-            ?>
-              <div class="logout"><a href="/dangerous-substances/user/logout">Log out</a></div>
-            <?php
-            }
-            ?>
+            <div class="content-back-login">
+              <?php
+              if ($user->uid==0 ){
+              ?>
+                <div class="login"><a href="user">Log in</a></div>
+              <?php 
+              }else{
+              ?>
+                <div class="logout"><a href="/dangerous-substances/user/logout">Log out</a></div>
+              <?php
+              }
+              ?>
+              <?php
+              if (!$user->uid==0 ){
+              ?>
+                <div class="back-link-ds-pz"><a href="/dangerous-substances/toolkit/">Back to the Private zone</a></div>
+              <?php 
+              }
+              ?>
+            </div>
           </div>
         </div>
       </div>

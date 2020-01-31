@@ -73,7 +73,7 @@ function ds_toolkit_form_alter(&$form, &$form_state, $form_id) {
     if ($language->language == "en" || $translated_value == ""){//English version or no translation we set the Original text
       $form['field_text'][$language->language][0]['#default_value'] = $form_state['node']->field_text['en'][0]['value'];
     }else{
-      $form['field_text'][$language->language][0]['#default_value'] = $form['field_text'][$language->language][0]['#default_value'];
+      $form['field_text'][$language->language][0]['#default_value'] = $translated_value;
     }  
     
     //Hide title, language and StringId fields

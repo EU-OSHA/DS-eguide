@@ -15,7 +15,6 @@ header{
     	padding: 2px 10px 2px 27px;
     	background: #003399 url(../images/login.png) no-repeat 8px 5px;
     	border-radius: 4px;
-    	float: right;
     	a{
     		color: #FFF;
     		font-size: 1.4rem;
@@ -29,6 +28,31 @@ header{
     	}
 	}
 }
+
+.content-back-login{
+	float: right;
+    text-align: right;
+    .back-link-ds-pz{
+    	padding-top: 8px;
+    }
+}
+
+.page-toolkit{
+	.content-back-login{
+	    .back-link-ds-pz{
+	    	display: none;
+	    }
+	}
+}
+
+.page-toolkit-checklist-list, .page-toolkit-recommendation-list{
+	.content-back-login{
+	    .back-link-ds-pz{
+	    	display: block;
+	    }
+	}
+}
+
 .overlay-open{
 	header{
 		z-index: 1;

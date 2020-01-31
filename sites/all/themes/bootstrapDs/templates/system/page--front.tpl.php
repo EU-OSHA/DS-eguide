@@ -183,14 +183,14 @@
       $urlAbout = drupal_get_path_alias("node/2",$idioma);
       $urlGlossary =  "glossary";
       $urlRecPdf =  "printpdf/197";
-      $urlCheckPdf =  "printpdf/205";
+      $urlCheckPdf =  "printpdf/201";
 
      }else{
       $idioma = $language->language;
       $urlAbout = $idioma ."/". drupal_get_path_alias("node/2",$idioma);
       $urlGlossary = $idioma . "/glossary";
       $urlRecPdf =  $idioma . "/printpdf/197";
-      $urlCheckPdf =  $idioma . "/printpdf/205";
+      $urlCheckPdf =  $idioma . "/printpdf/201";
 
      }
           
@@ -199,21 +199,8 @@
     <div class="btn-home"><a href="<?php print ($urlAbout)?>"><?php echo t('Learn more about the Dangerous substances e-tool');?></a></div>
     <div class="btn-home"><a href="<?php print ($urlGlossary)?>"><?php echo t('Glossary');?></a></div>
     <div class="btn-home download-dictionary"><a href="<?php print ($urlRecPdf)?>" target='_blank'><?php echo t('Recommendations dictionary');?></a></div>
-
-    
-
-  <?php
-  $nodeProd = node_load_multiple(array(), array('title' => 'ProductionPDF'));
-  $isProd = count($nodeProd);
-  
-  //Don't display the checklist dictionary if we are on prod environment
-  if ($isProd<1){
-  ?>
     <div class="btn-home download-dictionary"><a href="<?php print ($urlCheckPdf)?>" target='_blank'><?php echo t('Checklist dictionary');?></a></div>
-    
-  <?php
-   }
-  ?>
+
 
 
 
