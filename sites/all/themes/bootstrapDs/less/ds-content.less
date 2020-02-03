@@ -2870,7 +2870,7 @@ a.lexicon-term {
 
 form.disabled-form{
 	
-	.field-name-field-text{
+	.field-name-field-text, .field-name-body{
 		cursor: no-drop;
 	}
 
@@ -2886,6 +2886,12 @@ form.disabled-form{
 		background: #003399;
     	border-color: #003399;
     	opacity: 0.65;
+	}
+}
+
+#recommendation-node-form{
+	.field-name-field-rec-type{
+		display: none;
 	}
 }
 
@@ -2975,5 +2981,20 @@ h4 {display: none!important}
 
 	#edit-submit{
 		color: #FFF;
+	}
+}
+
+
+/* Reset password */
+.page-user-74{
+	.help-block.password-help{
+		clear: both !important;
+	}
+	.panel.panel-default.form-wrapper{
+		margin-bottom: 2em !important;
+		display: none !important;
+	}
+	.has-feedback{
+		clear: both !important;
 	}
 }

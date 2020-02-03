@@ -94,11 +94,11 @@ function ds_toolkit_form_alter(&$form, &$form_state, $form_id) {
 
     //No one can change the original checklist
     if ($language->language=="en"){
-      $form['#attributes']['class'][] = 'disabled-form';
-      $form['actions']['submit']['#disabled'] = TRUE;
-      $form['actions']['preview']['#disabled'] = TRUE;
+        $form['#attributes']['class'][] = 'disabled-form';
+        $form['actions']['submit']['#disabled'] = TRUE;
+        $form['actions']['preview']['#disabled'] = TRUE;
     }
-
+    
     //Add the custom function to the submit
     unset($form['actions']['submit']['#submit'][0]);
     $form['actions']['submit']['#submit'][] = 'ds_toolkit_form_submit';
@@ -150,6 +150,14 @@ function ds_toolkit_form_alter(&$form, &$form_state, $form_id) {
     }
 
 
+    if (isset( $user->roles[5])) {
+     //No one can change the original checklist
+      if ($language->language=="en"){
+        $form['#attributes']['class'][0] = 'disabled-form';
+        $form['actions']['submit']['#disabled'] = TRUE;
+        $form['actions']['preview']['#disabled'] = TRUE;
+      }
+    }
   
     $form['title']['#access'] = false;
     hide($form['title']);
