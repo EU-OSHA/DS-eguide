@@ -250,7 +250,7 @@ $checks['5']['check']['0'] = t("Have you taken the necessary risk and safety pre
 $checks['6']['check']['0'] = t("Have you taken the necessary risk and safety precautions if you repackage or distribute chemical products or substances (e.g. filling a liquid chemical product from a larger barrel to smaller containers");
 
 $checks['7']['title'] = t('Asbestos');
-$checks['7']['check']['0']= t("Have you checked whether you are working with asbestos or not?");
+$checks['7']['check']['0'] = t("Have you checked whether you are working with asbestos or not?");
 $checks['7']['check']['0'] = t("Have you checked whether you are working with asbestos in demolition and renovation works?");
 $checks['7']['check']['1'] = t("Have you checked whether you are processing or treating material containing asbestos?");
 $checks['7']['check']['2'] = t("Have you checked whether you are working with asbestos in research, development or analysis?");
@@ -271,10 +271,10 @@ $checks['12']['title'] = t('Register of chemical products');
 $checks['12']['check']['0'] = t("Do you have a register (a list) of the chemical products and substances that is practical for you?");
 
 $checks['13']['title'] = t('Risk assessment - complete');
-$checks['13']['check']['0'] = t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
+$checks['13']['check']['0'] =  t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
 
 $checks['14']['title'] = t('Risk assessment - complete');
-$checks['14']['check']['0'] = t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
+$checks['14']['check']['0'] =  t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
 
 $checks['15']['title'] = t('Risk assessment - written document');
 $checks['15']['check']['0'] = t("Have you got a written record of those risk assessments that ought to/need to be documented?");
@@ -289,7 +289,7 @@ $checks['18']['title'] = t('Storage');
 $checks['18']['check']['0'] = t("Do you follow the specific rules in the safety data sheets on the storage of chemical products? ");
 
 $checks['19']['title'] = t('Unidentified uses');
-$checks['19']['check']['0'] = t("Have you checked that you use chemical products only for the uses that are listed in the Safety Data Sheets?");
+$checks['19']['check']['0'] =  t("Have you checked that you use chemical products only for the uses that are listed in the Safety Data Sheets?");
 
 $checks['20']['title'] = t('Substitution');
 $checks['20']['check']['0'] = t("Have you checked if you can replace /substitute dangerous chemical products or processes by less dangerous ones? ");

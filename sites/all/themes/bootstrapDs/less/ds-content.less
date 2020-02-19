@@ -2676,6 +2676,7 @@ a.lexicon-term {
 		table{
 			width: 100%;
 			border-collapse: collapse;
+			border:1px solid;
 			tr{
 				th{
 					border-right: 1px solid #CCC; 
@@ -2701,7 +2702,7 @@ a.lexicon-term {
 					color: #FFF;
 	    			background: #003399;
 	    			padding: 1em;
-	    			min-width: 135px;
+	    			min-width: 155px;
 				}
 
 				th.views-field.views-field-timestamp{
@@ -2811,6 +2812,18 @@ a.lexicon-term {
 			margin-bottom: 5px;
 		}
 	} 
+}
+
+.view-display-id-recommendations{
+	.view-content{
+		table{
+			tr{
+				th:nth-child(2), td:nth-child(2){
+					text-align: left;
+				}
+			}
+		}
+	}
 }
 
 
@@ -2944,6 +2957,10 @@ body.node-type-checklist, body.node-type-recommendation{
     	border-radius: 0;
 	}
 
+	.field-name-field-last-modification-user{
+		display: none;
+	}
+
 	ul.tabs.primary, .ckeditor_links, fieldset.panel-default.form-wrapper, #edit-delete-translation, .form-type-select, #edit-delete, #edit-preview-changes{
 		display: none !important;
 	}
@@ -2986,7 +3003,7 @@ h4 {display: none!important}
 
 
 /* Reset password */
-.page-user-74{
+.page-user-edit{
 	.help-block.password-help{
 		clear: both !important;
 	}
@@ -2996,5 +3013,24 @@ h4 {display: none!important}
 	}
 	.has-feedback{
 		clear: both !important;
+	}
+
+	.label.label-success, .label.label-warning, .label.label-danger, .progress, #edit-ldap-user-puid-sid, #edit-ldap-user-puid, #edit-ldap-user-puid-property, #edit-ldap-user-current-dn, #edit-ldap-user-prov-entries, #edit-field-cmw-mail-notifications, #edit-ldap-user-last-checked, #edit-ldap-user-ldap-exclude{
+		display: none !important;
+	}
+
+	.has-feedback label ~ .form-control-feedback {
+	    top: 28px;
+	    right: 13px;
+	}
+
+	.has-success .control-label{
+		color: #749b00;
+	}
+
+	.user-login-css{
+		form{
+			padding-top: 3em;
+		}
 	}
 }

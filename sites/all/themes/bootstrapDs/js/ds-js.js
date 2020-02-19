@@ -614,3 +614,15 @@ function glossaryOrderDivs() {
   });
 })(jQuery);
 
+
+/* Hide admin tabs if user login is not administrador - html-tpl.php */
+jQuery(document).ready(function () {
+  jQuery("ul.tabs.primary").hide();
+  if(jQuery(".show-admin-tabs").length>0) {
+    jQuery("ul.tabs.primary").show();
+  }
+});
+
+
+
+

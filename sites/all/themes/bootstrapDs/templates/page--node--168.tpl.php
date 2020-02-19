@@ -80,7 +80,7 @@ if (isset($_SESSION['quiz']['temp']['result_id'])==1){
 }
 
 if ($result_id ==0 ){//Nothing to show
-	print(t("There is still nothing on this Recommendation list."));  
+  print(t("There is still nothing on this Recommendation list."));  
 }
 
 $number = 0; //Number of the question
@@ -101,16 +101,16 @@ foreach ($answers as $answer) {
   $question_nid = $answer->question_nid;
   $is_skipped = $answer->is_skipped;
  
-	$query = db_select('quiz_node_results_answers', 'a');
-	$query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
-	$query->fields('b', array('id'));
-	$query->condition('result_id', $result_id);
-	$query->condition('number', $number);
+  $query = db_select('quiz_node_results_answers', 'a');
+  $query->join('quiz_multichoice_user_answers', 'b', 'a.result_answer_id = b.result_answer_id');
+  $query->fields('b', array('id'));
+  $query->condition('result_id', $result_id);
+  $query->condition('number', $number);
   $res_ans = $query->execute();
- 	
+  
   $resp_id = "";
-	foreach ($res_ans as $resp) {
-		$resp_id = $resp->id;
+  foreach ($res_ans as $resp) {
+    $resp_id = $resp->id;
   }
 
   if ($resp_id !=""){
@@ -121,9 +121,11 @@ foreach ($answers as $answer) {
     $res_answer = $query->execute();
 
     foreach ($res_answer as $resp) {
+
        $check_toshow[$number][$number][$resp->id] = $resp->id;
        $check_toshow[$number]['nid'] = $question_nid;
-    }	
+
+    } 
   }  
 }    
 
@@ -144,7 +146,7 @@ if ($language->language!="" && $language->language!="en"){
   
 //Once we have get the number of the checlist to show, we print all of them 
 ?>
-    
+
 <div class='recommendation container'> <!--Closed at the end of the document-->
   <div class="content-print-download-up">
     <ul class="print-download col-md-12">
@@ -161,34 +163,46 @@ if ($language->language!="" && $language->language!="en"){
   </div>
 
 <?php
-//krumo ($check_toshow);
+
+
+
 foreach ($check_toshow as $checknumber) {
   $number_key = (key($checknumber));
-	print("<div class='check-question col-md-12'>");//Div for the whole question
+  print("<div class='check-question col-md-12'>");//Div for the whole question
 
   foreach ($checknumber[$number_key] as $checkarray) {
     $node_q = node_load($check_toshow[$number_key]['nid']);
-	  $qtitle = substr($node_q->title,3);
 
-	  print("<div class='q-title'>". $qtitle."</div>");
-	  $sect->writeText('<b>'. $qtitle.'</b><br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parNormal);
+    $qtitle = substr($node_q->title,3);
 
-	  print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span>");
-	  $sect->writeText('<b>'.t("Your answer").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
+    print("<div class='q-title'>". $qtitle."</div>");
+    $sect->writeText('<b>'. $qtitle.'</b><br/>', new PHPRtfLite_Font(12, "Arial", '#749b00'), $parNormal);
+
+    print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span>");
+    $sect->writeText('<b>'.t("Your answer").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
+
+    //Store in array the answers
+    foreach ($node_q->alternatives as $all_answer) {
+      $my_all_answer = array();
+      $my_all_answer = $all_answer['answer']['value'];
+    }
+
 
     foreach ($node_q->alternatives as $q_answer) {
-      if ($checkarray == $q_answer['id']){
-  			
-  			$answer_text = $q_answer['answer']['value'];
-  			$answer_text = str_replace('<?php print t("', '',$answer_text);
-  			$answer_text = str_replace('");?>', '',$answer_text);
-		    print("<span class='answer-text'>");
-  			print(t($answer_text));
-  			$answer = t($answer_text);
-  			$answer = str_replace("<p>","",$answer);
-  			$answer = str_replace("</p>","",$answer);
-  			$sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
-  			print("</span>");
+
+      //If the answer in the array is the same that the answer that answered on the checklist
+      if ($my_all_answer == $q_answer['answer']['value']){
+        
+        $answer_text = $q_answer['answer']['value'];
+        $answer_text = str_replace('<?php print t("', '',$answer_text);
+        $answer_text = str_replace('");?>', '',$answer_text);
+        print("<span class='answer-text'>");
+        print(t($answer_text));
+        $answer = t($answer_text);
+        $answer = str_replace("<p>","",$answer);
+        $answer = str_replace("</p>","",$answer);
+        $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
+        print("</span>");
         $body_rec =  $q_answer['feedback_if_chosen']['value'];
 
         if (strlen($body_rec)<10){
@@ -205,9 +219,9 @@ foreach ($check_toshow as $checknumber) {
           }
        
         }
-  		}
-   	}
-	 	print("</div>");
+      }
+    }
+    print("</div>");
     print("<div class='q-answers'><span class='answer-title'>".t("Measures").":</span></div>");
 print($body_rec . "<br/>");
     $sect->writeText('<b>' . t("Measures").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
@@ -218,39 +232,39 @@ print($body_rec . "<br/>");
     
     $body_rec  = str_replace("<p>", "<br>", $body_rec);
     $body_rec  = str_replace("<p >", "<br>", $body_rec);
-   	$body_rec  = str_replace("</p>", "", $body_rec);
+    $body_rec  = str_replace("</p>", "", $body_rec);
     $body_rec  = str_replace('</span>', "", $body_rec);
-   	$body_rec  = str_replace('<div class="main-point">', "", $body_rec);
-   	$body_rec  = str_replace('<div class="rec-text">', "", $body_rec);
-   	$body_rec  = str_replace('<div class="second-point">', "", $body_rec);
-   	$body_rec  = str_replace('</div>', "", $body_rec);
-   	$body_rec  = str_replace('<li class="rec-text">', "", $body_rec);
-   	$body_rec  = str_replace('<li>', "", $body_rec);
-   	$body_rec  = str_replace('</li>', "", $body_rec);
-   	$body_rec  = str_replace('</ul>', "", $body_rec);
-   	$body_rec  = str_replace('<ul>', "", $body_rec);
+    $body_rec  = str_replace('<div class="main-point">', "", $body_rec);
+    $body_rec  = str_replace('<div class="rec-text">', "", $body_rec);
+    $body_rec  = str_replace('<div class="second-point">', "", $body_rec);
+    $body_rec  = str_replace('</div>', "", $body_rec);
+    $body_rec  = str_replace('<li class="rec-text">', "", $body_rec);
+    $body_rec  = str_replace('<li>', "", $body_rec);
+    $body_rec  = str_replace('</li>', "", $body_rec);
+    $body_rec  = str_replace('</ul>', "", $body_rec);
+    $body_rec  = str_replace('<ul>', "", $body_rec);
     $body_rec  = str_replace('<ul >', "", $body_rec);
     $body_rec  = str_replace('<span >', "", $body_rec);
          
     /*Print the comments of the questions*/
     $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
-   	$user_comment = getcomment($result_id , $number_key);
-   	?>
+    $user_comment = getcomment($result_id , $number_key);
+    ?>
 
-  	<div class='q-answers'>
-  		<span class='answer-title'><?php print t("Comments")?>:</span>
-  	</div>
+    <div class='q-answers'>
+      <span class='answer-title'><?php print t("Comments")?>:</span>
+    </div>
 
-  	<div class='comments-text'>
-  		<textarea rows="4" cols="50" class="comment-box" disabled><?php print(trim($user_comment));?></textarea> 
-		</div>
+    <div class='comments-text'>
+      <textarea rows="4" cols="50" class="comment-box" disabled><?php print(trim($user_comment));?></textarea> 
+    </div>
 
 <?php
-				$sect->writeText('<b>' . t("Comments").'</b>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
-				$sect->writeText('<br>' . $user_comment .'<br><br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);
+        $sect->writeText('<b>' . t("Comments").'</b>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
+        $sect->writeText('<br>' . $user_comment .'<br><br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);
   
 }         
-	
+  
 print("</div>");//Close the recommendation div    
 }
         
@@ -259,15 +273,15 @@ print("</div>");//Close the recommendation div
 
   function getcomment($result_id , $question_nid){
 
-  	$query = db_select('quiz_user_comments', 'a');
+    $query = db_select('quiz_user_comments', 'a');
     $query->fields('a', array('quc_comment'));
     $query->condition('result_id', $result_id);
     $query->condition('question_nid', $question_nid);
     $comments = $query->execute();
-  	$user_comment ="";
+    $user_comment ="";
     foreach ($comments as $comment) {
        $user_comment = $comment->quc_comment;
-    }	
+    } 
     return $user_comment;
   }
 

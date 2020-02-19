@@ -58,10 +58,21 @@
 global $base_url;
 drupal_add_library('system', 'ui.draggable');
 if (!isset($html_attributes)){
- // $html_attributes ="";
+  // $html_attributes ="";
   //$body_attributes ="";
 }
-?><!DOCTYPE html>
+
+
+global $user;
+
+foreach ($user->roles as $userrol) {
+  if ($userrol == 'administrator') {
+    $myclass = "show-admin-tabs";
+  }
+}
+
+?>
+<!DOCTYPE html>
 <html<?php print $html_attributes;?><?php print $rdf_namespaces;?>>
 <head>
   <div id="moreInfoDiv" style="display: none;"></div>
@@ -85,6 +96,9 @@ if (!isset($html_attributes)){
     <link href="<?php print ($print_url);?>" rel="stylesheet"/> 
 </head> 
 <body<?php print $body_attributes; ?>>
+  <?php if (isset($myclass)){ ?>
+    <div class="<?php print $myclass ?>"></div>
+  <?php } ?>
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable" accesskey="S"><?php print t('Skip to main content'); ?></a>
   </div>

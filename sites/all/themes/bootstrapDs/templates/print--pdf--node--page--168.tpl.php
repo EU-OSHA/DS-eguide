@@ -289,10 +289,16 @@ foreach ($check_toshow as $checknumber) {
   
 
     print("<div class='q-answers'><span class='answer-title'>". t("Your answer").":</span>");
-  
+    
+    //Store in array the answers
+    foreach ($node_q->alternatives as $all_answer) {
+      $my_all_answer = array();
+      $my_all_answer = $all_answer['answer']['value'];
+    }
 
     foreach ($node_q->alternatives as $q_answer) {
-      if ($checkarray == $q_answer['id']){
+       //If the answer in the array is the same that the answer that answered on the checklist
+      if ($my_all_answer == $q_answer['answer']['value']){
         
         $answer_text = $q_answer['answer']['value'];
         $answer_text = str_replace('<?php print t("', '',$answer_text);
