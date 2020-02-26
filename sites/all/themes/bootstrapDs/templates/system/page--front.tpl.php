@@ -182,15 +182,15 @@
       $idioma = "";
       $urlAbout = drupal_get_path_alias("node/2",$idioma);
       $urlGlossary =  "glossary";
-      $urlRecPdf =  "printpdf/197";
-      $urlCheckPdf =  "printpdf/201";
+      $urlRecPdf =  "printpdf/253";
+      $urlCheckPdf =  "printpdf/252";
 
      }else{
       $idioma = $language->language;
       $urlAbout = $idioma ."/". drupal_get_path_alias("node/2",$idioma);
       $urlGlossary = $idioma . "/glossary";
-      $urlRecPdf =  $idioma . "/printpdf/197";
-      $urlCheckPdf =  $idioma . "/printpdf/201";
+      $urlRecPdf =  $idioma . "/printpdf/253";
+      $urlCheckPdf =  $idioma . "/printpdf/252";
 
      }
           

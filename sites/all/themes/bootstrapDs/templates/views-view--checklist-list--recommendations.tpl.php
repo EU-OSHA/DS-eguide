@@ -13,7 +13,7 @@
   <?php if ($exposed): ?>
     <div class="view-filters">
       <?php print $exposed; ?>
-      <p class="view-link-ds"><a href="../printpdf/197" target="_blank">Recommendatios dictionary</a> </p>
+      <p class="view-link-ds"><a href="../printpdf/197" target="_blank">Recommendations dictionary</a> </p>
     </div>
   <?php endif; ?>
 

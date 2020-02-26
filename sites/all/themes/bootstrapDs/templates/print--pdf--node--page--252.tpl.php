@@ -218,112 +218,112 @@
 global $base_url;
 drupal_add_css ( path_to_theme() . "/css/print.css");
 $checks['1']['title'] = t('Good practice for certain chemical products and dangerous substances');
-$checks['1']['check']['0'] = "Q 4-1 " . t("Do you apply good working practices described to reduce the risks when working with <b>carcinogenic, mutagenic or reprotoxic substances?</b>");
-$checks['1']['check']['1'] = "Q 4-2 " . t("Do you apply good working practices to reduce the risks when working with <b>sensitising substances?</b>");
-$checks['1']['check']['2'] = "Q 4-4 " . t("Do you apply good working practices to reduce exposure to <b>asbestos?</b> ");
-$checks['1']['check']['3'] = "Q 4-6 " . t("Do you apply good working practices to reduce the risks when working with <b>cytostatics</b> or any other medical product which may cause adverse effects?");
-$checks['1']['check']['4'] = "Q 4-7 " . t("Do you apply good working practices to reduce the risks when working with <b>isocyanates/polyurethane, epoxy, acrylates or cyanoacrylates?</b>");
-$checks['1']['check']['5'] = "Q 4-8 " . t("Do you apply the good working practices to reduce exposure to <b>dust that contains quartz?</b>");
-$checks['1']['check']['6'] = "Q 4-9 " . t("Do you apply good working practices to reduce exposure to dust from mineral wool, e.g. <b>glass wool, rock wool, or glass fibre?</b>");
-$checks['1']['check']['7'] = "Q 4-10 " . t("If you cannot avoid working with <b>refractory fibres</b>, special fibres or crystalline fibres, do you apply good working practices described to reduce exposure (and the risk of cancer)? ");
+$checks['1']['check']['0'] = t("Do you apply good working practices described to reduce the risks when working with <b>carcinogenic, mutagenic or reprotoxic substances?</b>");
+$checks['1']['check']['1'] = t("Do you apply good working practices to reduce the risks when working with <b>sensitising substances?</b>");
+$checks['1']['check']['2'] = t("Do you apply good working practices to reduce exposure to <b>asbestos?</b> ");
+$checks['1']['check']['3'] = t("Do you apply good working practices to reduce the risks when working with <b>cytostatics</b> or any other medical product which may cause adverse effects?");
+$checks['1']['check']['4'] = t("Do you apply good working practices to reduce the risks when working with <b>isocyanates/polyurethane, epoxy, acrylates or cyanoacrylates?</b>");
+$checks['1']['check']['5'] = t("Do you apply the good working practices to reduce exposure to <b>dust that contains quartz?</b>");
+$checks['1']['check']['6'] = t("Do you apply good working practices to reduce exposure to dust from mineral wool, e.g. <b>glass wool, rock wool, or glass fibre?</b>");
+$checks['1']['check']['7'] = t("If you cannot avoid working with <b>refractory fibres</b>, special fibres or crystalline fibres, do you apply good working practices described to reduce exposure (and the risk of cancer)? ");
 $checks['2']['title'] = t('Employees with specific risk');
-$checks['2']['check']['0'] = "Q 7 " . t("Do you know which chemical substances pregnant and breast-feeding women are not allowed to work with?");
-$checks['2']['check']['1'] = "Q 8 " . t("Do you know which chemical substances young workers are not allowed to work with? ");
-$checks['2']['check']['2'] = "Q 9-1 " . t("Have you done what is necessary to protect those that have not the necessary language capacities to understand all written and/or oral preventive instructions? ");
-$checks['2']['check']['3'] = "Q 9-2 " . t("Have you done what is necessary to protect those that have mental or physical disabilities?");
-$checks['2']['check']['4'] = "Q 9-3 " . t("Have you done what is necessary to protect those that work alone with chemical products or dangerous substances?");
+$checks['2']['check']['0'] = t("Do you know which chemical substances pregnant and breast-feeding women are not allowed to work with?");
+$checks['2']['check']['1'] = t("Do you know which chemical substances young workers are not allowed to work with? ");
+$checks['2']['check']['2'] = t("Have you done what is necessary to protect those that have not the necessary language capacities to understand all written and/or oral preventive instructions? ");
+$checks['2']['check']['3'] = t("Have you done what is necessary to protect those that have mental or physical disabilities?");
+$checks['2']['check']['4'] = t("Have you done what is necessary to protect those that work alone with chemical products or dangerous substances?");
 
 $checks['3']['title'] = t('Good practice for certain activities and businesses');
-$checks['3']['check']['0'] = "Q 10-1 " . t("Do you apply good working practices for hairdressers? ");
-$checks['3']['check']['1'] = "Q 10-3 " . t("Do you apply good working practices for electroplating?");
-$checks['3']['check']['2'] = "Q 10-4 " . t("Do you apply good working practices for laboratory work?");
-$checks['3']['check']['3'] = "Q 10-5 " . t("Do you apply good working practices for welding and thermo-cutting?");
-$checks['3']['check']['4'] = "Q 10-2 " . t("Do you apply good working practices for spray painting?");
-$checks['3']['check']['5'] = "Q 10-7 " . t("Do you apply good practices for work in confined spaces?");
-$checks['3']['check']['6'] = "Q 10-6 " . t("Do you apply good practices for work with liquid manure? ");
+$checks['3']['check']['0'] = t("Do you apply good working practices for hairdressers? ");
+$checks['3']['check']['1'] = t("Do you apply good working practices for electroplating?");
+$checks['3']['check']['2'] = t("Do you apply good working practices for laboratory work?");
+$checks['3']['check']['3'] = t("Do you apply good working practices for welding and thermo-cutting?");
+$checks['3']['check']['4'] = t("Do you apply good working practices for spray painting?");
+$checks['3']['check']['5'] = t("Do you apply good practices for work in confined spaces?");
+$checks['3']['check']['6'] = t("Do you apply good practices for work with liquid manure? ");
 
 $checks['4']['title'] = t('Import of chemicals');
 $checks['5']['title'] = t('Mixing');
 $checks['6']['title'] = t('Repackaging and distributing');
-$checks['4']['check']['0'] = "Q 11-1 " . t("Have you got the necessary documented information about risks and safety precautions for the chemicals you import?");
-$checks['5']['check']['0'] = "Q 11-2 " . t("Have you taken the necessary risk and safety precautions for the chemical products that you mix and store for later use in your own company?");
-$checks['6']['check']['0'] = "Q 11-2 " . t("Have you taken the necessary risk and safety precautions if you repackage or distribute chemical products or substances (e.g. filling a liquid chemical product from a larger barrel to smaller containers");
+$checks['4']['check']['0'] = t("Have you got the necessary documented information about risks and safety precautions for the chemicals you import?");
+$checks['5']['check']['0'] = t("Have you taken the necessary risk and safety precautions for the chemical products that you mix and store for later use in your own company?");
+$checks['6']['check']['0'] = t("Have you taken the necessary risk and safety precautions if you repackage or distribute chemical products or substances (e.g. filling a liquid chemical product from a larger barrel to smaller containers");
 
 $checks['7']['title'] = t('Asbestos');
-$checks['7']['check']['0'] = "Q 12-1 " . t("Have you checked whether you are working with asbestos or not?");
-$checks['7']['check']['0'] = "Q 12-2 " . t("Have you checked whether you are working with asbestos in demolition and renovation works?");
-$checks['7']['check']['1'] = "Q 12-3 " . t("Have you checked whether you are processing or treating material containing asbestos?");
-$checks['7']['check']['2'] = "Q 12-3 " . t("Have you checked whether you are working with asbestos in research, development or analysis?");
+$checks['7']['check']['0'] = t("Have you checked whether you are working with asbestos or not?");
+$checks['7']['check']['0'] = t("Have you checked whether you are working with asbestos in demolition and renovation works?");
+$checks['7']['check']['1'] = t("Have you checked whether you are processing or treating material containing asbestos?");
+$checks['7']['check']['2'] = t("Have you checked whether you are working with asbestos in research, development or analysis?");
 
 $checks['8']['title'] = t('Sorting out unnecessary chemicals');
-$checks['8']['check']['0'] = "Q 13 " . t("Did you sort out chemical products which are not used/not needed anymore?");
+$checks['8']['check']['0'] = t("Did you sort out chemical products which are not used/not needed anymore?");
 
 $checks['9']['title'] = t('Safety data sheets and information about risks');
-$checks['9']['check']['0'] = "Q 14 " . t("Safety data sheets (SDS) are available for all the chemical products that are used or stored and which are labelled with one or more hazard pictograms (black and white in a red frame).");
+$checks['9']['check']['0'] = t("Safety data sheets (SDS) are available for all the chemical products that are used or stored and which are labelled with one or more hazard pictograms (black and white in a red frame).");
 
 $checks['10']['title'] = t('Correct info in the SDS');
-$checks['10']['check']['0'] = "Q 15 " . t("We have checked that the safety data sheets and labelling of packaging seem to give reasonably correct information?");
+$checks['10']['check']['0'] = t("We have checked that the safety data sheets and labelling of packaging seem to give reasonably correct information?");
 
 $checks['11']['title'] = t('Awareness and knowledge');
-$checks['11']['check']['0'] = "Q 17 " . t("Have all staff and all others who are in contact with chemical products or substances got information about and are aware of the risks and to they know how to work safely and protect themselves?");
+$checks['11']['check']['0'] = t("Have all staff and all others who are in contact with chemical products or substances got information about and are aware of the risks and to they know how to work safely and protect themselves?");
 
 $checks['12']['title'] = t('Register of chemical products');
-$checks['12']['check']['0'] = "Q 18 " . t("Do you have a register (a list) of the chemical products and substances that is practical for you?");
+$checks['12']['check']['0'] = t("Do you have a register (a list) of the chemical products and substances that is practical for you?");
 
 $checks['13']['title'] = t('Risk assessment - complete');
-$checks['13']['check']['0'] =  "Q 19-1 " . t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
+$checks['13']['check']['0'] =  t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
 
 $checks['14']['title'] = t('Risk assessment - complete');
-$checks['14']['check']['0'] =  "Q 19-1 " . t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
+$checks['14']['check']['0'] =  t("We have carried out a complete risk assessment for all the works in which chemical products and substances are used or dangerous substances are generated ");
 
 $checks['15']['title'] = t('Risk assessment - written document');
-$checks['15']['check']['0'] = "Q 19-2 " . t("Have you got a written record of those risk assessments that ought to/need to be documented?");
+$checks['15']['check']['0'] = t("Have you got a written record of those risk assessments that ought to/need to be documented?");
 
 $checks['16']['title'] = t('Quality of risk assessment');
-$checks['16']['check']['0'] = "Q 20 " . t("Are your risk assessments good enough?");
+$checks['16']['check']['0'] = t("Are your risk assessments good enough?");
 
 $checks['17']['title'] = t('Purchase routines');
-$checks['17']['check']['0'] = "Q 21 " . t("Do you control now whether you purchase unnecessarily dangerous chemical products?");
+$checks['17']['check']['0'] = t("Do you control now whether you purchase unnecessarily dangerous chemical products?");
 
 $checks['18']['title'] = t('Storage');
-$checks['18']['check']['0'] = "Q 23 " . t("Do you follow the specific rules in the safety data sheets on the storage of chemical products? ");
+$checks['18']['check']['0'] = t("Do you follow the specific rules in the safety data sheets on the storage of chemical products? ");
 
 $checks['19']['title'] = t('Unidentified uses');
-$checks['19']['check']['0'] =  "Q 24 " . t("Have you checked that you use chemical products only for the uses that are listed in the Safety Data Sheets?");
+$checks['19']['check']['0'] =  t("Have you checked that you use chemical products only for the uses that are listed in the Safety Data Sheets?");
 
 $checks['20']['title'] = t('Substitution');
-$checks['20']['check']['0'] = "Q 25 " . t("Have you checked if you can replace /substitute dangerous chemical products or processes by less dangerous ones? ");
+$checks['20']['check']['0'] = t("Have you checked if you can replace /substitute dangerous chemical products or processes by less dangerous ones? ");
 
 $checks['21']['title'] = t('Successful substitution ');
-$checks['21']['check']['0'] = "Q 26 " . t("Have you checked that the outcome of an implemented or planned exchange/substitution of a chemical product or process was successful? ");
+$checks['21']['check']['0'] = t("Have you checked that the outcome of an implemented or planned exchange/substitution of a chemical product or process was successful? ");
 
 $checks['22']['title'] = t('Emissions into the work place air ');
-$checks['22']['check']['0'] = "Q 27 " . t("Have you taken the measures needed to reduce the concentration of the emission of dangerous substances into the air at the work places?");
+$checks['22']['check']['0'] = t("Have you taken the measures needed to reduce the concentration of the emission of dangerous substances into the air at the work places?");
 
 $checks['23']['title'] = t('Exposure at nearby work places');
-$checks['23']['check']['0'] = "Q 28 " . t("Have you taken measures needed to reduce the spreading of dangerous substances to colleagues working close by? ");
+$checks['23']['check']['0'] = t("Have you taken measures needed to reduce the spreading of dangerous substances to colleagues working close by? ");
 
 $checks['24']['title'] = t('Personal Protective Equipment - Gloves');
-$checks['24']['check']['0'] = "Q 30-1 " . t("Have you checked that you use the right type of protective gloves and use them in the right way?");
+$checks['24']['check']['0'] = t("Have you checked that you use the right type of protective gloves and use them in the right way?");
 $checks['25']['title']= t('Personal Protective Equipment – Respiratory protection');
-$checks['25']['check']['0'] = "Q 30-2 " . t("Have you checked that you use the right type of respiratory protection and use them in the right way? ");
+$checks['25']['check']['0'] = t("Have you checked that you use the right type of respiratory protection and use them in the right way? ");
 $checks['26']['title'] = t('Personal Protective Equipment – Googles and visors');
-$checks['26']['check']['0'] = "Q 30-3 " . t("Have you checked that you use the right type of safety goggles and visors and use them in the right way?");
+$checks['26']['check']['0'] = t("Have you checked that you use the right type of safety goggles and visors and use them in the right way?");
 
 $checks['27']['title'] = t('Labels available');
-$checks['27']['check']['0'] = "Q 31 " . t("Signs and labelling may be needed, for example, on pipes and containers, and at work places handling dangerous substances. Do you have the required safety signs and labels? ");
+$checks['27']['check']['0'] = t("Signs and labelling may be needed, for example, on pipes and containers, and at work places handling dangerous substances. Do you have the required safety signs and labels? ");
 
 $checks['28']['title'] = t('Emergency eye-wash');
-$checks['28']['check']['0'] = "Q 32 " . t("Is emergency eye-wash fountain and/or emergency shower fast and easily accessible? ");
+$checks['28']['check']['0'] = t("Is emergency eye-wash fountain and/or emergency shower fast and easily accessible? ");
 
 $checks['29']['title'] = t('Safety measure');
-$checks['29']['check']['0'] = "Q 33 " . t("Have you checked that you use the right kind of emergency eye-wash fountains and emergency showers and use them in the right way? ");
+$checks['29']['check']['0'] = t("Have you checked that you use the right kind of emergency eye-wash fountains and emergency showers and use them in the right way? ");
 
 $checks['30']['title'] = t('Reporting of chemical injuries and accidents');
-$checks['30']['check']['0'] = "Q 35 " . t("Have you reported chemical incidents or injuries to the authorities (as well as other occupational injuries)?");
+$checks['30']['check']['0'] = t("Have you reported chemical incidents or injuries to the authorities (as well as other occupational injuries)?");
 
 $checks['31']['title'] = t('Follow-up on chemical injuries and accidents ');
-$checks['31']['check']['0'] = "Q 36 " . t("Have you followed up these accidents and injuries and taken precautions to avoid similar incidents and injuries? ");
+$checks['31']['check']['0'] = t("Have you followed up these accidents and injuries and taken precautions to avoid similar incidents and injuries? ");
 
 $block_title = array();
 $block_title['1'] = t('Part I: Handling, use and exposure of dangerous substances');
@@ -403,4 +403,4 @@ $no = str_pad($no,  10, " ");
   }
     //End of the blocks header section******************************************
   print("</div>");//Close the block div
- 
+  

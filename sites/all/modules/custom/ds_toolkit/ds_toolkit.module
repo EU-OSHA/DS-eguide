@@ -88,6 +88,9 @@ function ds_toolkit_form_alter(&$form, &$form_state, $form_id) {
     
     $form['field_stringid']['#access'] = false;
     hide($form['field_stringid']);
+
+    $form['field_question_number']['#access'] = false;
+    hide($form['field_stringid']);
     
     $form['actions']['delete']['#access'] = false;
     hide($form['actions']['delete']);
@@ -180,27 +183,31 @@ function ds_toolkit_form_alter(&$form, &$form_state, $form_id) {
 }
 
 function ds_toolkit_views_pre_render(&$view) {
+  
   global $user;
   global $language;
 
-  foreach ( $view->result as $result) {
-    if ($view->name == 'checklist_list' && $language->language != "en") {
-      $translation_id = $result->field_field_stringid[0]['rendered']['#markup'];
-      $translated_value = t_fromID($language->language, $translation_id);
-      $result->field_field_text[0]['rendered']['#markup'] = $translated_value;
+
+  if( $view->current_display == 'checklist' ){
+    foreach ( $view->result as $result) {
+      if ($view->name == 'checklist_list' && $language->language != "en") {
+        $translation_id = $result->field_field_stringid[0]['rendered']['#markup'];
+        $translated_value = t_fromID($language->language, $translation_id);
+        $result->field_field_text[0]['rendered']['#markup'] = $translated_value;
+      }
+
+      //Load node
+      $my_node = node_load($result->nid);
+      //If node has fill in the field "last modification user, we altered the view to display it"
+      if (isset($my_node->field_last_modification_user[$language->language][0]['value'])){
+        $result->field_field_last_modification_user[0]['rendered']['#markup'] = $my_node->field_last_modification_user[$language->language][0]['value'];
+      }else{
+        $result->field_field_last_modification_user[0]['rendered']['#markup'] = 'root';
+      }      
     }
-
-    //Load node
-    $my_node = node_load($result->nid);
-    //If node has fill in the field "last modification user, we altered the view to display it"
-    if (isset($my_node->field_last_modification_user[$language->language][0]['value'])){
-      $result->field_field_last_modification_user[0]['rendered']['#markup'] = $my_node->field_last_modification_user[$language->language][0]['value'];
-    }else{
-      $result->field_field_last_modification_user[0]['rendered']['#markup'] = 'root';
-    }      
   }
-}
 
+}
 
 function form_toolkit_form($form, &$form_state) {
 
@@ -215,10 +222,13 @@ function form_toolkit_form($form, &$form_state) {
 
 
 function ds_toolkit_form_submit($form, &$form_state){
+  
   global $language;
   global $user;
-
-  $node = node_form_submit_build_node($form, $form_state);
+  
+  if ($form['#form_id']=="checklist_node_form"){
+    $node = node_form_submit_build_node($form, $form_state);
+  }
 
   $translation_id = $form_state['values']['field_stringid']['und'][0]['value'];
   $stringTranslation = $form_state['values']['field_text'][$language->language][0]['value'];
@@ -246,8 +256,10 @@ function ds_toolkit_node_submit($node, $form, &$form_state) {
   global $language;
   global $user;
 
-  $node->field_last_modification_user[$language->language][0]['value'] = $user->name;
-  node_save($node);
+  if ($form['#form_id']=="checklist_node_form"){
+    $node->field_last_modification_user[$language->language][0]['value'] = $user->name;
+    node_save($node);
+  }
 
 }
 

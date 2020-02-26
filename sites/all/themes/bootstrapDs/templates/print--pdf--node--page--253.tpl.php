@@ -51,15 +51,6 @@
         text-align: left;
       }
 
-      .number{
-      	color: #003399;
-        margin-top: 1em;
-        font-size: 1.3em;
-        text-align: left;
-        padding-bottom: 5px;
-        border-bottom: 1px dotted  #003399;
-      }
-
       .q-title{
         margin-top: 1.2em;
         padding-top: 1em;
@@ -91,7 +82,6 @@
           border-bottom: 1px dotted;
           margin-left: 1em;
           margin-bottom: 0.5em;
-          padding-top: 10px;
       }
 
       .second-point{
@@ -208,7 +198,7 @@ drupal_add_css ( path_to_theme() . "/css/print.css");
 
 //These are the required recommendations
 $check1 = array("10.0","1.1","1.2","1.3","1.4","2.0","3.1","3.9","4.0","5.0","5.2","5.4","6.0","7.0","8.0","9.0","64.0","28.0","28.1","28.2","15.0","16.0","17.0","18.0","19.0","20.0","21.0","38.0","39.0","40.0","3.1","3.8");
-$check2 = array("36.0","41.0","43.0","44.0","45.0","47.0","54.0","48.0","49.0");
+$check2 = array("36.0","41.0","43.0","44.0","45.0","47.0","54.0","48.0","49.0","42.0");
 $check3 = array("58.0","51.0","60.0","61.0","62.0","62.1","62.2","62.3","63.0","37.0","64.0","55.0");
 
 
@@ -239,9 +229,6 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
         $body_rec = "";    
         
       }
-      print("<div class='number'>");
-        print($rec_id);
-      print("</div>");
       print($body_rec);
 
     }
@@ -261,9 +248,6 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
         $body_rec = "";    
         
       }
-      print("<div class='number'>");
-        print($rec_id);
-      print("</div>");
       print($body_rec);
 
     }
@@ -283,9 +267,6 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
         $body_rec = "";    
         
       }
-      print("<div class='number'>");
-        print($rec_id);
-      print("</div>");
       print($body_rec);
 
     }
@@ -294,5 +275,3 @@ $block_title['3'] = t('Part III: Control measures to reduce the risks');
 
 </body>
 </html>
-
-
