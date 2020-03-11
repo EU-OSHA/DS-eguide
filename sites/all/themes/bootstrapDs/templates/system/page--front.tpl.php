@@ -33,9 +33,9 @@
     <!----This is the List-->
       <div id="listText">
           <ul>
-            <li class="lan-en"><a href="/"> <?php print t('EU');?></a>
+            <li class="lan-en"><a href="/dangerous-substances"> <?php print t('EU');?></a>
               <ul class="en">
-                  <li class="LanHid"><a href="/"></a></li>
+                  <li class="LanHid"><a href="/dangerous-substances"></a></li>
               </ul>
             </li>
             <li class="lan-no"><a href="no"> <?php print t('Norway');?></a>

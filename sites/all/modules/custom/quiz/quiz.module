@@ -3855,8 +3855,8 @@ function quiz_mail($key, &$message, $params)
     $link = "<a href = " .$base_url . "/retrieve?number=" . $params['values']['numero'] . "&email=".$message['to']."&result_id=" . $params['values']['result_id'] ."&current=".$params['values']['current'] .">".t(' link ')."</a>";
     //$link = "<a href = " .$base_url . "/retrieve?number=2&result_id=1>LINK</a>";
     $bottom_text = t('This message is intended exclusively for its addressee and may contain information that is CONFIDENTIAL and protected by professional privilege. If you are not the intended recipient you are hereby notified that any dissemination, copy or disclosure of this communication is strictly prohibited by law. If this message has been received in error, please immediately notify us via e-mail and delete it.');
-    $headerimg = $base_url . "/sites/default/files/ds_footer.png";
-    $footerimg = $base_url . "/sites/default/files/ds_footer_mail.png";
+    $headerimg = $base_url . "/sites/all/themes/bootstrapDs/images/imghwccrm/healthy-workplaces.png";
+    //$footerimg = $base_url . "/sites/default/files/ds_footer_mail.png";
 
     $message['headers']['MIME-Version'] = '1.0';
     $message['headers']['Content-Type'] = 'multipart/mixed;';
@@ -3864,7 +3864,7 @@ function quiz_mail($key, &$message, $params)
     $message['subject'] = t('Dangerous substances e-guide');
 
     $message['body'][] = '<html><body>';
-    $message['body'][] = "<div class='footer'><a href = ".$base_url." target='_blank'><img src ='" . $headerimg ."'></a></div>";
+    $message['body'][] = "<div class='footer' style='margin-bottom:3em;'><a href = ".$base_url." target='_blank'><img src ='" . $headerimg ."'></a></div>";
     $message['body'][] = t("Dear user, clicking on the following") . " " . $link . " " .t("you will access to your questionnaire and you could continue editing it");
     //$message['body'][] = "<br/><br/><div class='footer'><a href = ".$base_url." target='_blank'><img src ='" . $footerimg ."'></a></div>";
     $message['body'][] = theme('html_mail_footer', ['bottom_text' => $bottom_text]);

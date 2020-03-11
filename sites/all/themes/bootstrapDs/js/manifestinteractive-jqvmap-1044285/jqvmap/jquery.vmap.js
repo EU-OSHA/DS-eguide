@@ -631,10 +631,86 @@
     },
 
     highlight: function (cc, path) {
+      var url = window.location.href; 
+      var parts = url.split('/');
+      var lastSegment = parts.pop() || parts.pop();  // handle potential trailing slash
+      
+      //Iceland is
+      var iceland_en = 'Iceland';
+      var iceland_is = 'Ísland';
+      var iceland_pt = 'Islândia';
+      var iceland_no = 'Island';
+      var iceland_at = 'Island';
+      var iceland_ee = 'Island';
+      var iceland_ro = 'Islanda';
+      var iceland_si = 'Islandija';
+
+      //Portugal pt
+      var portugal_en = 'Portugal';
+      var portugal_is = 'Portúgal';
+      var portugal_pt = 'Portugal';
+      var portugal_no = 'Portugal';
+      var portugal_at = 'Portugal';
+      var portugal_ee = 'Portugal';
+      var portugal_ro = 'Portugalia';
+      var portugal_si = 'Portugalska';
+
+      //Norway no
+      var norway_en = 'Norway';
+      var norway_is = 'Noregur';
+      var norway_pt = 'Noruega';
+      var norway_no = 'Norge';
+      var norway_at = 'Norwegen';
+      var norway_ee = 'Norra';
+      var norway_ro = 'Norvegia';
+      var norway_si = 'Norveška';
+
+      //Austria at
+      var austria_en = 'Austria';
+      var austria_is = 'Austurríki';
+      var austria_pt = 'Áustria';
+      var austria_no = 'Østerrike';
+      var austria_at = 'Österreich';
+      var austria_ee = 'Austria';
+      var austria_ro = 'Austria';
+      var austria_si = 'Avstrija';
+
+      //Estonia ee
+      var estonia_en = 'Estonia';
+      var estonia_is = 'Eistland';
+      var estonia_pt = 'Estónia';
+      var estonia_no = 'Estland';
+      var estonia_at = 'Estland';
+      var estonia_ee = 'Eesti';
+      var estonia_ro = 'Estonia';
+      var estonia_si = 'Estonija';
+
+      //Romania ro
+      var romania_en = 'Romania';
+      var romania_is = 'Rúmenía';
+      var romania_pt = 'Roménia';
+      var romania_no = 'Romania';
+      var romania_at = 'Rumänien';
+      var romania_ee = 'Rumeenia';
+      var romania_ro = 'România';
+      var romania_si = 'Romunija';
+
+      //Slovenia si
+      var slovenia_en = 'Slovenia';
+      var slovenia_is = 'Slóvenía';
+      var slovenia_pt = 'Eslovénia';
+      var slovenia_no = 'Slovenia';
+      var slovenia_at = 'Slowenien';
+      var slovenia_ee = 'Sloveenia';
+      var slovenia_ro = 'Slovenia';
+      var slovenia_si = 'Slovenija';
+
+
+
       path = path || $('#' + this.getCountryId(cc))[0];
       //Highligth only for the countries with a idiomatic version
       //RRL highligth the countries on hover
-      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"||cc=="si"){
+      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"|| cc=="si"){
         //Show the country info
         if (this.hoverOpacity) {
           path.setOpacity(this.hoverOpacity);
@@ -643,6 +719,251 @@
           path.setFill(this.hoverColor);
         }
       }
+
+      if (cc=="is"){
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_si + '</span>');
+        }
+      }
+
+      if (cc=="pt"){
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' + portugal_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' +  portugal_si + '</span>');
+        }
+      }
+
+      if (cc=="no"){
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_at+ '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_si + '</span>');
+        }
+      }
+
+      if (cc=="at"){
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_si + '</span>');
+        }
+      }
+
+      if (cc=="ee"){
+
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_si + '</span>');
+        }
+      }
+
+      //Romania Hover
+      if (cc=="ro"){
+        
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_si + '</span>');
+        }
+
+      }
+
+      if (cc=="si"){
+
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_si + '</span>');
+        }
+
+      }
+
     },
 
     unhighlight: function (cc, path) {
@@ -651,6 +972,11 @@
       if (path.currentFillColor) {
         path.setFill(path.currentFillColor);
       }
+
+      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"||cc=="si"){
+        jQuery('.tooltip-map').remove();
+      }
+    
     },
 
     select: function (cc, path) {
