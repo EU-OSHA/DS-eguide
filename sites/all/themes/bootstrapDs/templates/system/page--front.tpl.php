@@ -196,13 +196,12 @@
           
     ?>
 
-    <div class="btn-home"><a href="<?php print ($urlAbout)?>"><?php echo t('Learn more about the Dangerous substances e-tool');?></a></div>
-    <div class="btn-home"><a href="<?php print ($urlGlossary)?>"><?php echo t('Glossary');?></a></div>
-    <div class="btn-home download-dictionary"><a href="<?php print ($urlRecPdf)?>" target='_blank'><?php echo t('Recommendations dictionary');?></a></div>
-    <div class="btn-home download-dictionary"><a href="<?php print ($urlCheckPdf)?>" target='_blank'><?php echo t('Checklist dictionary');?></a></div>
-
-
-
+    <div class="content-buttons">
+      <a href="<?php print ($urlAbout)?>"><span class="btn-home"><?php echo t('Learn more about the Dangerous substances e-tool');?></span></a>
+      <a href="<?php print ($urlGlossary)?>"><span class="btn-home glossary"><?php echo t('Glossary');?></span></a>
+      <a href="<?php print ($urlRecPdf)?>" target='_blank'><span class="btn-home download-dictionary max-reco"><span><?php echo t('Recommendations dictionary');?></span></span></a>
+      <a href="<?php print ($urlCheckPdf)?>" target='_blank'><span class="btn-home download-dictionary max-check"><span><?php echo t('Checklist dictionary');?></span></span></a>
+    </div>
 
   </section>
    <section class="container">
@@ -216,6 +215,14 @@
       </a>
     </p>
   </section>
+</div>
+
+<div class="content-view-partner container">
+  <h2 class="home-h2"><?php print t('Partners');?></h2>
+  <?php
+    $block = module_invoke('views', 'block_view', 'partner-block');
+    print render($block['content']);
+  ?>
 </div>
 
 <?php if (!empty($page['footer'])): ?>

@@ -79,6 +79,13 @@ h1.title-home{
     margin-top: 1em;
 }
 
+h2.home-h2{
+	border-bottom: 1px solid #003399;
+    color: #003399;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+
 html[lang="AT_de"] .entity-quiz-result-answer h1{
 	font-size: 1.9rem;
 }
@@ -363,24 +370,6 @@ progress[value]::-webkit-progress-bar{
 		opacity: 0.8;
 	}
 }
-
-.btn-home{
-	width: 43%;
-	border:1px solid @ds-blue;
-	padding-left:1em;
-	text-align: center;
-	margin: 3em auto;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	a{
-		font-size: 2.1rem;
-		background: url('../images/ico-btn.png') 0px 8px no-repeat;
-    	padding-left: 1em;
-    	padding-right: 1em;
-    	font-weight: bold;
-	}
-}
-
 
 //Section 
 .content-section{
@@ -3105,4 +3094,96 @@ body.page-user-password > div.main-container > div.no-margin > section > div > d
     button{
     	font-size: 11.5px;
     }
+}
+
+/* New Home content buttons */
+.content-buttons{
+	display: flex;
+    align-content: space-between;
+    flex-wrap: wrap;
+    a{
+		width: 24%;
+		font-size: 1.7rem;
+	    padding-left: 0;
+	    padding-right: 0;
+	    font-weight: bold;
+	    margin: 3em auto;
+	    &:hover{
+	    	color: #003399;
+	    	opacity: 0.8;
+	    }
+    }
+
+    span{
+    	display: block;
+    }
+
+	.btn-home{
+		width: 100%;
+		min-height: 80px;
+		display: flex;
+		justify-content: left;
+		align-items: center;
+		border: 1px solid #003399;
+		border-radius: 7px;
+		padding-left: 10px;
+		text-align: left;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		padding-right: 10px;
+	}
+
+	.btn-home.glossary{
+		text-align: center;
+    	justify-content: center;
+	}
+
+	.download-dictionary{
+		padding-right: 20px;
+		position: relative;
+			&:after{
+				content: ' ';
+				background-image: url(/dangerous-substances/sites/all/themes/bootstrapDs/images/download.png);
+				display: block;
+				width: 25px;
+    			height: 29px;
+				position: absolute;
+				right: 20px;
+   				top: 33%;
+			}
+	}
+
+	.download-dictionary.max-reco{
+		span{
+			width: 200px;
+		}
+		
+	}
+
+	.download-dictionary.max-check{
+		span{
+			width: 168px;
+		}
+	}
+}
+
+/* View Partner Home */
+.view-partner{
+	padding-top: 0.5em;
+	.view-content{
+		.views-row{
+			float: left;
+			width: 25%;
+			.views-field-field-logo{
+				display: flex;
+    			align-items: center;
+				width: 210px;
+    			height: 110px;
+			}
+		    .link-title-partner{
+		    	max-width: 145px;
+		    	display: block;
+		    }
+		}
+	}
 }
