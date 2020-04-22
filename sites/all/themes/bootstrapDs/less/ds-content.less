@@ -3108,6 +3108,7 @@ body.page-user-password > div.main-container > div.no-margin > section > div > d
 	    padding-right: 0;
 	    font-weight: bold;
 	    margin: 3em auto;
+	    display: flex;
 	    &:hover{
 	    	color: #003399;
 	    	opacity: 0.8;
@@ -3170,19 +3171,32 @@ body.page-user-password > div.main-container > div.no-margin > section > div > d
 /* View Partner Home */
 .view-partner{
 	padding-top: 0.5em;
+	.view-header{
+		p{
+			padding-top: 10px;
+		}
+	}
 	.view-content{
 		.views-row{
 			float: left;
 			width: 25%;
-			.views-field-field-logo{
-				display: flex;
-    			align-items: center;
-				width: 210px;
-    			height: 110px;
+			.views-field-field-logo a{
+			    display: flex;
+			    align-items: center;
+			    width: 260px;
+			    height: 140px;
+			    overflow: hidden;
+			    margin-top: 10px;
+			    border-radius: 5px;
+			    border: 1px solid #CCC;
+			    padding: 15px;
+			    justify-content: center;
 			}
+
 		    .link-title-partner{
-		    	max-width: 145px;
+		    	max-width: 260px;
 		    	display: block;
+		    	padding-top: 5px;
 		    }
 		}
 	}

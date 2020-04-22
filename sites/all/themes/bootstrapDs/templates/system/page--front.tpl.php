@@ -218,10 +218,11 @@
 </div>
 
 <div class="content-view-partner container">
-  <h2 class="home-h2"><?php print t('Partners');?></h2>
   <?php
     $block = module_invoke('views', 'block_view', 'partner-block');
-    print render($block['content']);
+  
+      print render($block['content']);
+
   ?>
 </div>
 
