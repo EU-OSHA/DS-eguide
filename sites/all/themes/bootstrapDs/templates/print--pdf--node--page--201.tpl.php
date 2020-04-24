@@ -342,7 +342,7 @@ $no = str_pad($no,  10, " ");
 
 ?>
  <div class="main-container" style="padding-bottom: 60px;"> 
-  <h1 class="page-header container" style="margin-top:-40px;padding-top:0;"><?php print t("Checklist Dictionary"); ?></h1>
+  <h1 class="page-header container" style="margin-top:-40px;padding-top:0;"><?php print t("Checklist overview"); ?></h1>
   
 <?php
  

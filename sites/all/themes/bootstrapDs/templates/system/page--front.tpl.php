@@ -200,7 +200,7 @@
       <a href="<?php print ($urlAbout)?>"><span class="btn-home"><?php echo t('Learn more about the Dangerous substances e-tool');?></span></a>
       <a href="<?php print ($urlGlossary)?>"><span class="btn-home glossary"><?php echo t('Glossary');?></span></a>
       <a href="<?php print ($urlRecPdf)?>" target='_blank'><span class="btn-home download-dictionary max-reco"><span><?php echo t('Recommendations dictionary');?></span></span></a>
-      <a href="<?php print ($urlCheckPdf)?>" target='_blank'><span class="btn-home download-dictionary max-check"><span><?php echo t('Checklist dictionary');?></span></span></a>
+      <a href="<?php print ($urlCheckPdf)?>" target='_blank'><span class="btn-home download-dictionary max-check"><span><?php echo t('Checklist overview');?></span></span></a>
     </div>
 
   </section>
