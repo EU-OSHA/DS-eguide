@@ -1,3 +1,12 @@
+<?php
+
+global $user;
+
+$document_editor = base_path() . path_to_theme() .'/images/EU-OSHA_DSI_User_Manual - Editor_23042020' ;
+$document_review_manager = base_path() . path_to_theme() .'/images/EU-OSHA_DSI_User_Manual - RM_23042020.pptx' ;
+
+?>
+
 <div class="<?php print $classes; ?>">
   <?php print render($title_prefix); ?>
   <?php if ($title): ?>
@@ -13,8 +22,18 @@
   <?php if ($exposed): ?>
     <div class="view-filters">
       <?php print $exposed; ?>
-      <p class="view-link-ds back-list"><a href="checklist-list">Go to checklist management</a></p>
-      <p class="view-link-ds"><a href="../printpdf/197" target="_blank">Recommendations dictionary</a> </p>
+      <div class="content-links-view-ds">
+        <p class="view-link-ds back-list recommendations"><a href="checklist-list"><?php echo t('Go to checklist management');?></a></p>
+        <p class="view-link-ds"><a href="../printpdf/197" target="_blank"><?php echo t('Recommendations dictionary');?></a></p>
+        <p class="view-link-ds recommendations user">
+          <?php if( isset($user->roles[5]) == 'Editor'){ ?>
+          <a href="<?php print $document_editor;?>"><?php echo t('User manual');?></a>
+          <?php } ?>
+          <?php if( isset($user->roles[11]) == 'Review Manager'){ ?>
+          <a href="<?php print $document_review_manager;?>"><?php echo t('User manual');?></a>
+          <?php } ?>
+        </p>
+      </div>
     </div>
   <?php endif; ?>
 
