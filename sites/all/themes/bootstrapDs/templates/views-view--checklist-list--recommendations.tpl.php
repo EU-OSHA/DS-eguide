@@ -2,8 +2,8 @@
 
 global $user;
 
-$document_editor = base_path() . path_to_theme() .'/images/EU-OSHA_DSI_User_Manual - Editor_23042020' ;
-$document_review_manager = base_path() . path_to_theme() .'/images/EU-OSHA_DSI_User_Manual - RM_23042020.pptx' ;
+$document_editor = base_path() . path_to_theme() .'/documents/EU-OSHA_DSI_User_Manual - Editor_23042020.pptx' ;
+$document_review_manager = base_path() . path_to_theme() .'/documents/EU-OSHA_DSI_User_Manual - RM_23042020.pptx' ;
 
 ?>
 
