@@ -2,8 +2,8 @@
 
 global $user;
 
-$document_editor = base_path() . path_to_theme() .'/documents/EU-OSHA_DSI_User_Manual - Editor_23042020.pptx' ;
-$document_review_manager = base_path() . path_to_theme() .'/documents/EU-OSHA_DSI_User_Manual - RM_23042020.pptx' ;
+$document_editor = base_path() . path_to_theme() .'/documents/Editor-manual.pptx' ;
+$document_review_manager = base_path() . path_to_theme() .'/documents/Review Manager-manual.pptx' ;
 
 ?>
 
@@ -26,12 +26,13 @@ $document_review_manager = base_path() . path_to_theme() .'/documents/EU-OSHA_DS
         <p class="view-link-ds back-list recommendations"><a href="checklist-list"><?php echo t('Go to checklist management');?></a></p>
         <p class="view-link-ds"><a href="../printpdf/197" target="_blank"><?php echo t('Recommendations dictionary');?></a></p>
         <p class="view-link-ds recommendations user">
-          <?php if( isset($user->roles[5]) == 'Editor'){ ?>
-          <a href="<?php print $document_editor;?>"><?php echo t('User manual');?></a>
-          <?php } ?>
-          <?php if( isset($user->roles[11]) == 'Review Manager'){ ?>
-          <a href="<?php print $document_review_manager;?>"><?php echo t('User manual');?></a>
-          <?php } ?>
+            <?php if ( isset($user->roles[5]) == 'Editor' && isset($user->roles[3]) != 'administrator' ): ?>
+              <a href="<?php print $document_editor;?>"><?php echo t('User manual');?></a>
+            <?php elseif ( isset($user->roles[11]) == 'Review Manager'): ?>
+              <a href="<?php print $document_review_manager;?>"><?php echo t('User manual');?></a>
+            <?php elseif ( isset($user->roles[3]) == 'administrator' ): ?>
+              <a href="<?php print $document_review_manager;?>"><?php echo t('User manual');?></a>
+            <?php endif; ?>
         </p>
       </div>
     </div>
