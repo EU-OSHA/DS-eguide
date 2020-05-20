@@ -250,18 +250,17 @@ if ($result_id ==0 ){//Nothing to show
   	$title1_printed = false;
     $title2_printed = false;
     $title3_printed = false;
-   	//Once we have get the number of the checlist to show, we print all of them 
+   	//Once we have get the number of the checklist to show, we print all of them 
 
-    if($language->language!=''){
-      $linkPdf= "";
+    /*if($language->language!=''){
       $linkRtf = "../sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
     }
     else
     {
-      $linkPdf= "";
-      $linkRtf = "sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
-    }
-
+      $linkRtf = "dangerous-substances/sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
+    }*/
+    
+    $linkRtf = $GLOBALS['base_url'] . "/sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
 
     ?>
     
@@ -432,7 +431,7 @@ if ($result_id ==0 ){//Nothing to show
               $answer = t($answer_text);
               $answer = str_replace("<p>","",$answer);
               $answer = str_replace("</p>","",$answer);
-              $sect->writeText('<b>'.t("Your answer").'</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
+            //  $sect->writeText('<b>'.t("Your answer").'2</b><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parNormal);
               $sect->writeText('<i>'.$answer.'</i><br>', new PHPRtfLite_Font(12, "Arial", '#000000'), $parSimple);
               print("</span>");
             }

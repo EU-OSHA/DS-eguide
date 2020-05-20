@@ -191,6 +191,16 @@ $sect->insertPageBreak();
     $lang_prefix = "../";
   }
 
+  if($language->language!='' && $language->language!='en'){
+      $linkRtf = $GLOBALS['base_url'] . "/sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
+    
+    }
+    else
+    {
+      $linkRtf = $GLOBALS['base_url'] . "/sites/all/themes/bootstrapDs/rtf/samples/generated/lqreport-" . $result_id . ".rtf";
+   
+    }
+
   ?>
   <div class="main-container container">
   <h1 class="page-header container"><?php print t("Checklist"); ?></h1>
@@ -201,7 +211,7 @@ $sect->insertPageBreak();
             <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/73" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-             <a href="<?php print $lang_prefix?>sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
+             <a href="<?php print $linkRtf;?>" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
            <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
@@ -968,7 +978,7 @@ $sect->insertPageBreak();
             <a href="/dangerous-substances<?php print($lang_code);?>/printpdf/73" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-pdf']);">&gt; <?php print t("Download as pdf")?> </a>
           </li>
           <li class="download " >
-             <a href="<?php print $lang_prefix?>sites/all/themes/bootstrapDs/rtf/samples/generated/lqcheck-<?php print ($result_id)?>.rtf" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
+             <a href="<?php print $linkRtf;?>" class="" target="_blank" onclick="_paq.push(['trackEvent', 'Download', 'check-rtf']);">&gt; <?php print t("Download as rich text (rtf)")?></a>
           </li>
           <li class="back" >
            <a href="javascript:window.history.back()" class=""><?php print t("Back")?></a>
