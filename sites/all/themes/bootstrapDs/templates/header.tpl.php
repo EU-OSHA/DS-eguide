@@ -19,7 +19,7 @@
         <a class="pull-left border-right-header logo-camp" accesskey="0" href="https://healthy-workplaces.eu/" target="_blank">
           <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
         </a>
-        <a class="logo-osha" href="http://osha.europa.eu" title="EU-OSHA" target="_blank">
+        <a class="logo-osha" href="http://osha.europa.eu" title="<?php print t('EU-OSHA corporate website')?>" target="_blank">
           <?php print '<img class="pull-left" alt="'.t("EU-OSHA logo").'" src="'.base_path() . path_to_theme() .$logo_Osha .'">'; ?>
         </a>
         <div class="border-right-header">
