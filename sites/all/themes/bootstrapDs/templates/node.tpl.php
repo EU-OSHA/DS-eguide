@@ -84,10 +84,12 @@ drupal_add_library('system', 'ui.draggable');
 	<div class="container-fluid">
 	<div class="breadcrumb container">
 	<?php
-  	for($i=0;$i<sizeof($breadcrumb);$i++) {
-  		print $breadcrumb[$i]." <span class='bread-separator'> > </span> "; 
-      }
-  	print $title;;
+	if (!empty($breadcrumb)) {
+  		for($i=0;$i<sizeof($breadcrumb);$i++) {
+  			print $breadcrumb[$i]." <span class='bread-separator'> > </span> "; 
+      			}
+	}
+  	print $title;
 	?>
 	</div>
 

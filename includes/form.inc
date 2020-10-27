@@ -122,12 +122,10 @@
  */
 function drupal_get_form($form_id) {
   $form_state = array();
-
   $args = func_get_args();
   // Remove $form_id from the arguments.
   array_shift($args);
   $form_state['build_info']['args'] = $args;
-
   return drupal_build_form($form_id, $form_state);
 }
 
@@ -1813,6 +1811,8 @@ function form_builder($form_id, &$element, &$form_state) {
     $element['#defaults_loaded'] = TRUE;
   }
   // Assign basic defaults common for all form elements.
+
+
   $element += array(
     '#required' => FALSE,
     '#attributes' => array(),
@@ -1861,6 +1861,8 @@ function form_builder($form_id, &$element, &$form_state) {
       $form_state['process_input'] = FALSE;
     }
 
+
+
     // All form elements should have an #array_parents property.
     $element['#array_parents'] = array();
   }
@@ -1887,6 +1889,11 @@ function form_builder($form_id, &$element, &$form_state) {
   // Recurse through all child elements.
   $count = 0;
   foreach (element_children($element) as $key) {
+
+   if (!is_array($element[$key])){
+       $element[$key]=array();
+   }
+
     // Prior to checking properties of child elements, their default properties
     // need to be loaded.
     if (isset($element[$key]['#type']) && empty($element[$key]['#defaults_loaded']) && ($info = element_info($element[$key]['#type']))) {
@@ -1894,7 +1901,9 @@ function form_builder($form_id, &$element, &$form_state) {
       $element[$key]['#defaults_loaded'] = TRUE;
     }
 
+
     // Don't squash an existing tree value.
+
     if (!isset($element[$key]['#tree'])) {
       $element[$key]['#tree'] = $element['#tree'];
     }
@@ -1903,6 +1912,7 @@ function form_builder($form_id, &$element, &$form_state) {
     if (isset($element['#access']) && !$element['#access']) {
       $element[$key]['#access'] = FALSE;
     }
+    
 
     // Make child elements inherit their parent's #disabled and #allow_focus
     // values unless they specify their own.
@@ -4650,7 +4660,6 @@ function batch_set($batch_definition) {
  */
 function batch_process($redirect = NULL, $url = 'batch', $redirect_callback = 'drupal_goto') {
   $batch =& batch_get();
-
   drupal_theme_initialize();
 
   if (isset($batch)) {
