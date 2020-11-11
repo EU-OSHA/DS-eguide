@@ -1108,7 +1108,7 @@ function quiz_question_answering_form_validate(&$form, &$form_state) {
     }
     
     $comment = $que_comment['#value'];
-    mberegi_replace("[\n|\r|\n\r|\t|\0|\x0B]", "",$comment);
+    str_replace("[\n|\r|\n\r|\t|\0|\x0B]", "",$comment);
     $comment  = substr($comment,0,255);
     if ($quc_id_old =="0"){//Is a new coment 
       $nid = db_insert('quiz_user_comments') 

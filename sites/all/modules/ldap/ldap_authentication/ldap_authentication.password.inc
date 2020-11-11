@@ -54,7 +54,7 @@ function user_check_password($password, $account) {
     // User 1 is always being authenticated via Drupal
     return core_user_check_password($password, $account);
   }
-  elseif ($auth_conf->authenticationMode == 1) {
+  elseif ($auth_conf->authenticationMode == 2) {
     // Mixed authentication mode => check via Drupal first
     if (core_user_check_password($password, $account)) {
       return TRUE;
@@ -66,7 +66,7 @@ function user_check_password($password, $account) {
   $authname = $account->name;
   $watchdog_tokens = array('%username' => $authname, '%authname' => $authname);
 
-  ldap_servers_module_load_include('inc', 'ldap_authentication', 'ldap_authentication');
+  ldap_servers_module_load('inc', 'ldap_authentication', 'ldap_authentication');
   list($authentication_result, , ) = ldap_authentication_test_credentials($auth_conf, $sso_login, $authname, $password, $watchdog_tokens);
 
   return $authentication_result == LDAP_AUTHENTICATION_RESULT_SUCCESS;

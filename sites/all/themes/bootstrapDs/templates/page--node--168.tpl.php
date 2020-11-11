@@ -245,6 +245,9 @@ print($body_rec . "<br/>");
     $body_rec  = str_replace('<ul>', "", $body_rec);
     $body_rec  = str_replace('<ul >', "", $body_rec);
     $body_rec  = str_replace('<span >', "", $body_rec);
+    $body_rec  = str_replace('<a href="', "URL: ", $body_rec);
+    $body_rec  = str_replace('" target="_blank">', " - ", $body_rec);
+    $body_rec  = str_replace('</a>', "", $body_rec);
          
     /*Print the comments of the questions*/
     $sect->writeText($body_rec .'<br>', new PHPRtfLite_Font(10, "Arial", '#000000'), $parSimple);  
