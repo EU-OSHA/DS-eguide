@@ -54,7 +54,7 @@ function user_check_password($password, $account) {
     // User 1 is always being authenticated via Drupal
     return core_user_check_password($password, $account);
   }
-  elseif ($auth_conf->authenticationMode == 2) {
+  elseif ($auth_conf->authenticationMode == 1) {
     // Mixed authentication mode => check via Drupal first
     if (core_user_check_password($password, $account)) {
       return TRUE;
