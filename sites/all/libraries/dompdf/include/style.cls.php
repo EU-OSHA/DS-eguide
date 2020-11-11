@@ -1276,7 +1276,6 @@ class Style {
     $rTR = $this->__get("border_top_right_radius");
     $rBL = $this->__get("border_bottom_left_radius");
     $rBR = $this->__get("border_bottom_right_radius");
-    echo $rBR;
 
     if ( intval($rTL) + intval($rTR) + intval($rBL) + intval($rBR) == 0 ) {
       return $this->_computed_border_radius = array(
