@@ -3,12 +3,17 @@
 
 
 $(document).ready(function(){
- if (jQuery('li:contains("targeting switch")').length>0){
+ if (jQuery('em:contains("targeting switch")').length>0){
       jQuery("div .error").remove()
  }
- if (jQuery('li:contains("__autoload")').length>0){
+ if (jQuery('em:contains("__autoload")').length>0){
      jQuery("div .error").remove()
  }
+
+if (jQuery('em:contains("Deprecated function")').length>0){
+     jQuery("div .error").remove()
+ }
+
  });
 
 

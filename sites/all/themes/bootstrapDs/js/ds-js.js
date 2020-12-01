@@ -11,10 +11,10 @@ $(document).ready(function(){
   jQuery("button#edit-navigation-back").remove();
 
   if (jQuery('div:contains("targeting switch")').length>0){
-      
+    jQuery('div .error').remove()
   }
   if (jQuery('div:contains("__autoload")').length>0){
-  alert("Estoy");   
+    jQuery('div .error').remove()
   }
 
   });
