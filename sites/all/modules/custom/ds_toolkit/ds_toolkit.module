@@ -323,6 +323,10 @@ function ds_toolkit_menu_local_tasks_alter(&$data, $route_name) {
     unset($route_name['map'][1]->translations->data['sl']);
   }
 
+  if (isset($route_name['map'][1]->translations->data['es']) == 1 && !isset($user->roles[20])){
+    unset($route_name['map'][1]->translations->data['es']);
+  }
+
 
 
 }
