@@ -704,7 +704,7 @@
       var romania_ee = 'Rumeenia';
       var romania_ro = 'România';
       var romania_si = 'Romunija';
-      var romania_es = 'Rumania';
+      var romania_es = 'Rumanía';
       var romania_de = 'Rumänien';
 
       //Slovenia si
