@@ -117,7 +117,7 @@ function cargaMapa() {
 
 	    onRegionOver: function(event, code, region)
 	    {
-     		if(code=="no" || code=="pt" || code=="is" || code=="at" || code=="si" || code=="ee" || code=="ro"){
+     		if(code=="no" || code=="pt" || code=="is" || code=="at" || code=="si" || code=="ee" || code=="ro" || code=="es" || code=="de"){
      			
      			jQuery("path#jqvmap1_" + code).addClass("intro");     			
      			
@@ -128,8 +128,8 @@ function cargaMapa() {
 	    onRegionClick: function(element,e,code,region) { 
 	    	barrablanca = (jQuery(window).width() - jQuery("#vmap").width())/2 ;
 			
-	    	if(code!="es" && code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md" && code!="ch" && code!="bg" &&
-	    	   code!="hr" && code!="cy" && code!="cz" && code!="dk" && code!="fr" && code!="de" && code!="gr" && code!="hu" && code!="ie" && code!="be" && code!="it" &&
+	    	if(code!="tr" && code!="ua" && code!="by" && code!="ba" && code!="rs" && code!="al" && code!="mk" && code!="md" && code!="ch" && code!="bg" &&
+	    	   code!="hr" && code!="cy" && code!="cz" && code!="dk" && code!="fr" && code!="gr" && code!="hu" && code!="ie" && code!="be" && code!="it" &&
 	    	   code!="lv" && code!="lt" && code!="nl" && code!="pl" && code!="sk" && code!="se" && code!="gb" && code!="fi"
 	    	) {
 		    /*	if(jQuery("#containerPopLanguages").length>0) {

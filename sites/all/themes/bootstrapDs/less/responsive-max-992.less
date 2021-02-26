@@ -2,16 +2,31 @@
  
     //Header
     .header-text{
-        width: 100%;
-        padding-top: 10px;
-        padding-bottom: 1em;
-        text-align: center;
+        width: 400px;
+        clear: both;
+        height: auto;
+        padding-top: 1em;
+        text-align: left;
+        padding-left: 0;
     }
+
+    html[lang="de"], html[lang="AT_de"], html[lang="ro"], html[lang="sl"]{
+        .header-text{
+            width: 400px;
+            font-size: 1.3em;
+            padding-bottom: 1em;
+        }
+        .content-right-header{
+            padding-top: 1.5em;
+        }
+    }
+
     .nav-up {
         top: -288px !important;
     }
 
     .content-right-header {
+        height: auto;
         padding-top: 0px;
         padding-bottom: 1em;
     }
