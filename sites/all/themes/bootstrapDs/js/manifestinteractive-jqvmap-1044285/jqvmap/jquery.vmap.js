@@ -644,8 +644,8 @@
       var iceland_ee = 'Island';
       var iceland_ro = 'Islanda';
       var iceland_si = 'Islandija';
-      var iceland_es = 'Iceland_es';
-      var iceland_de = 'Iceland_de';
+      var iceland_es = 'Islandia';
+      var iceland_de = 'Island';
 
       //Portugal pt
       var portugal_en = 'Portugal';
@@ -656,8 +656,8 @@
       var portugal_ee = 'Portugal';
       var portugal_ro = 'Portugalia';
       var portugal_si = 'Portugalska';
-      var portugal_es = 'Portugal_es';
-      var portugal_de = 'Portugal_de';
+      var portugal_es = 'Portugal';
+      var portugal_de = 'Portugal';
 
       //Norway no
       var norway_en = 'Norway';
@@ -668,8 +668,8 @@
       var norway_ee = 'Norra';
       var norway_ro = 'Norvegia';
       var norway_si = 'Norveška';
-      var norway_es = 'Norway_es';
-      var norway_de = 'Norway_de';
+      var norway_es = 'Noruega';
+      var norway_de = 'Norwegen';
 
       //Austria at
       var austria_en = 'Austria';
@@ -680,8 +680,8 @@
       var austria_ee = 'Austria';
       var austria_ro = 'Austria';
       var austria_si = 'Avstrija';
-      var austria_es = 'Austria_es';
-      var austria_de = 'Austria_de';
+      var austria_es = 'Austria';
+      var austria_de = 'Österreich';
 
       //Estonia ee
       var estonia_en = 'Estonia';
@@ -692,8 +692,8 @@
       var estonia_ee = 'Eesti';
       var estonia_ro = 'Estonia';
       var estonia_si = 'Estonija';
-      var estonia_es = 'Estonia_es';
-      var estonia_de = 'Estonia_de';
+      var estonia_es = 'Estonia';
+      var estonia_de = 'Estland';
 
       //Romania ro
       var romania_en = 'Romania';
@@ -704,8 +704,8 @@
       var romania_ee = 'Rumeenia';
       var romania_ro = 'România';
       var romania_si = 'Romunija';
-      var romania_es = 'Romania_es';
-      var romania_de = 'Romania_de';
+      var romania_es = 'Rumania';
+      var romania_de = 'Rumänien';
 
       //Slovenia si
       var slovenia_en = 'Slovenia';
@@ -716,32 +716,32 @@
       var slovenia_ee = 'Sloveenia';
       var slovenia_ro = 'Slovenia';
       var slovenia_si = 'Slovenija';
-      var slovenia_es = 'Slovenia_es';
-      var slovenia_de = 'Slovenia_de';
+      var slovenia_es = 'Eslovenia';
+      var slovenia_de = 'Slowenien';
 
       //Spain es
       var spain_en = 'Spain';
-      var spain_is = 'Spain_is';
-      var spain_pt = 'Spain_pt';
-      var spain_no = 'Spain_no';
-      var spain_at = 'Spain_at';
-      var spain_ee = 'Spain_ee';
-      var spain_ro = 'Spain_ro';
-      var spain_si = 'Spain_si';
+      var spain_is = 'Spánn';   
+      var spain_pt = 'Espanha';
+      var spain_no = 'Spania';
+      var spain_at = 'Spanien';
+      var spain_ee = 'Hispaania';  
+      var spain_ro = 'Spania';  
+      var spain_si = 'Španija'; 
       var spain_es = 'España';
-      var spain_de = 'España_de';
-
+      var spain_de = 'Spanien';
+  
       //Germany de
       var germany_en = 'Germany';
-      var germany_is = 'Germany_is';
-      var germany_pt = 'Germany_pt';
-      var germany_no = 'Germany_no';
-      var germany_at = 'Germany_at';
-      var germany_ee = 'Germany_ee';
-      var germany_ro = 'Germany_ro';
-      var germany_si = 'Germany_si';
+      var germany_is = 'Þýskaland';
+      var germany_pt = 'Alemanha';
+      var germany_no = 'Tyskland';
+      var germany_at = 'Deutschland';
+      var germany_ee = 'Saksamaa';
+      var germany_ro = 'Germania';
+      var germany_si = 'Nemčija';
       var germany_es = 'Alemania';
-      var germany_de = 'Germany_de';
+      var germany_de = 'Deutschland';
 
 
 
