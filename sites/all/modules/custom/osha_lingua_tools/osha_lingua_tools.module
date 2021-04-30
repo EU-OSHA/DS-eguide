@@ -36,7 +36,7 @@ function osha_lingua_tools_form_alter(&$form, &$form_state, $form_id) {
     $form['body_en']['en'][0]['#default_value'] = $value;
     unset($form['body_en'][$language->language]);
 
-    $form['body']['#prefix'] = '<div class="comparison" style="display:flex;"><div class="lv">';
+    $form['body']['#prefix'] = '<div class="comparison"><div class="lv">';
     $form['body']['#suffix'] = '</div>';
 
     $form['body_en']['#prefix'] = '<div class="original">';
