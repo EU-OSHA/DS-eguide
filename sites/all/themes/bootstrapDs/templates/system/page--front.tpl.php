@@ -74,16 +74,16 @@
                   <li class="LanHid"><a href="ro"></a></li>
               </ul>
             </li>
-
-
-
-
-            <!--<li class="lan-de"><a href="de">Germany</a>
+            <li class="lan-de"><a href="de"><?php print t('Germany');?></a>
               <ul class="de">
-                  <li class="LanHid"><a href="de">German</a></li>
-              </ul>-->
-
-
+                  <li class="LanHid"><a href="de"></a></li>
+              </ul>
+            </li>
+            <li class="lan-es"><a href="es"><?php print t('Spain');?></a>
+              <ul class="es">
+                  <li class="LanHid"><a href="es"></a></li>
+              </ul>
+            </li>
           </ul>
       </div>
 

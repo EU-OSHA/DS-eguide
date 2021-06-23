@@ -25,6 +25,23 @@ function osha_lingua_tools_menu() {
  * Implements hook_form_alter().
  */
 function osha_lingua_tools_form_alter(&$form, &$form_state, $form_id) {
+  global $language;
+  $value = $form['#node']->body['en'][0]['value'];
+
+  if ($language->language != 'en' && $form_id == 'recommendation_node_form') {
+    // Clone settings.
+    $form['body_en'] = $form['body'];
+    $form['body_en']['en'] = $form['body_en'][$language->language];
+    $form['body_en']['en'][0]['#attributes']['readonly'] = TRUE;
+    $form['body_en']['en'][0]['#default_value'] = $value;
+    unset($form['body_en'][$language->language]);
+
+    $form['body']['#prefix'] = '<div class="comparison"><div class="lv">';
+    $form['body']['#suffix'] = '</div>';
+
+    $form['body_en']['#prefix'] = '<div class="original">';
+    $form['body_en']['#suffix'] = '</div></div>';
+  }
 }
 
 function form_lingua_form($form, &$form_state) {

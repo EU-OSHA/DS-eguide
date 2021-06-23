@@ -644,6 +644,8 @@
       var iceland_ee = 'Island';
       var iceland_ro = 'Islanda';
       var iceland_si = 'Islandija';
+      var iceland_es = 'Islandia';
+      var iceland_de = 'Island';
 
       //Portugal pt
       var portugal_en = 'Portugal';
@@ -654,6 +656,8 @@
       var portugal_ee = 'Portugal';
       var portugal_ro = 'Portugalia';
       var portugal_si = 'Portugalska';
+      var portugal_es = 'Portugal';
+      var portugal_de = 'Portugal';
 
       //Norway no
       var norway_en = 'Norway';
@@ -664,6 +668,8 @@
       var norway_ee = 'Norra';
       var norway_ro = 'Norvegia';
       var norway_si = 'Norveška';
+      var norway_es = 'Noruega';
+      var norway_de = 'Norwegen';
 
       //Austria at
       var austria_en = 'Austria';
@@ -674,6 +680,8 @@
       var austria_ee = 'Austria';
       var austria_ro = 'Austria';
       var austria_si = 'Avstrija';
+      var austria_es = 'Austria';
+      var austria_de = 'Österreich';
 
       //Estonia ee
       var estonia_en = 'Estonia';
@@ -684,6 +692,8 @@
       var estonia_ee = 'Eesti';
       var estonia_ro = 'Estonia';
       var estonia_si = 'Estonija';
+      var estonia_es = 'Estonia';
+      var estonia_de = 'Estland';
 
       //Romania ro
       var romania_en = 'Romania';
@@ -694,6 +704,8 @@
       var romania_ee = 'Rumeenia';
       var romania_ro = 'România';
       var romania_si = 'Romunija';
+      var romania_es = 'Rumanía';
+      var romania_de = 'Rumänien';
 
       //Slovenia si
       var slovenia_en = 'Slovenia';
@@ -704,13 +716,39 @@
       var slovenia_ee = 'Sloveenia';
       var slovenia_ro = 'Slovenia';
       var slovenia_si = 'Slovenija';
+      var slovenia_es = 'Eslovenia';
+      var slovenia_de = 'Slowenien';
+
+      //Spain es
+      var spain_en = 'Spain';
+      var spain_is = 'Spánn';   
+      var spain_pt = 'Espanha';
+      var spain_no = 'Spania';
+      var spain_at = 'Spanien';
+      var spain_ee = 'Hispaania';  
+      var spain_ro = 'Spania';  
+      var spain_si = 'Španija'; 
+      var spain_es = 'España';
+      var spain_de = 'Spanien';
+  
+      //Germany de
+      var germany_en = 'Germany';
+      var germany_is = 'Þýskaland';
+      var germany_pt = 'Alemanha';
+      var germany_no = 'Tyskland';
+      var germany_at = 'Deutschland';
+      var germany_ee = 'Saksamaa';
+      var germany_ro = 'Germania';
+      var germany_si = 'Nemčija';
+      var germany_es = 'Alemania';
+      var germany_de = 'Deutschland';
 
 
 
       path = path || $('#' + this.getCountryId(cc))[0];
       //Highligth only for the countries with a idiomatic version
       //RRL highligth the countries on hover
-      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"|| cc=="si"){
+      if (cc=="is" || cc=="pt" || cc=="no" || cc=="at" || cc=="ee" || cc=="ro" || cc=="si" || cc=="es" || cc=="de"){
         //Show the country info
         if (this.hoverOpacity) {
           path.setOpacity(this.hoverOpacity);
@@ -752,6 +790,14 @@
         if(lastSegment == 'sl'){
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_si + '</span>');
         }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-is">' + iceland_de + '</span>');
+        }
       }
 
       if (cc=="pt"){
@@ -785,6 +831,14 @@
 
         if(lastSegment == 'sl'){
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' +  portugal_si + '</span>');
+        }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' +  portugal_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-pt">' +  portugal_de + '</span>');
         }
       }
 
@@ -820,6 +874,14 @@
         if(lastSegment == 'sl'){
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_si + '</span>');
         }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-no">' + norway_de + '</span>');
+        }
       }
 
       if (cc=="at"){
@@ -853,6 +915,14 @@
 
         if(lastSegment == 'sl'){
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_si + '</span>');
+        }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-at">' + austria_de + '</span>');
         }
       }
 
@@ -888,6 +958,14 @@
 
         if(lastSegment == 'sl'){
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_si + '</span>');
+        }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ee">' + estonia_de + '</span>');
         }
       }
 
@@ -926,6 +1004,13 @@
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_si + '</span>');
         }
 
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-ro">' + romania_de + '</span>');
+        }
       }
 
       if (cc=="si"){
@@ -962,6 +1047,99 @@
           jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_si + '</span>');
         }
 
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-si">' + slovenia_de + '</span>');
+        }
+      }
+
+      if (cc=="es"){
+
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_si + '</span>');
+        }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-es">' + spain_de + '</span>');
+        }
+      }
+
+      if (cc=="de"){
+
+        if(lastSegment == 'dangerous-substances'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_en + '</span>');
+        }
+
+        if(lastSegment == 'is'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_is + '</span>');
+        }
+
+        if(lastSegment == 'pt'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_pt + '</span>');
+        }
+
+        if(lastSegment == 'no'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_no + '</span>');
+        }
+
+        if(lastSegment == 'AT_de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_at + '</span>');
+        }
+
+        if(lastSegment == 'et'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_ee + '</span>');
+        }
+
+        if(lastSegment == 'ro'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_ro + '</span>');
+        }
+
+        if(lastSegment == 'sl'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_si + '</span>');
+        }
+
+        if(lastSegment == 'es'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_es + '</span>');
+        }
+
+        if(lastSegment == 'de'){
+          jQuery('#mapImg').append('<span class="tooltip-map tooltip-de">' + germany_de + '</span>');
+        }
       }
 
     },
@@ -973,7 +1151,7 @@
         path.setFill(path.currentFillColor);
       }
 
-      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"||cc=="si"){
+      if (cc=="is"||cc=="pt"||cc=="no"||cc=="at"||cc=="ee"||cc=="ro"||cc=="si"||cc=="es"||cc=="de"){
         jQuery('.tooltip-map').remove();
       }
     

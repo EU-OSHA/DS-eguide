@@ -44,7 +44,7 @@ class Fixed_Positioner extends Positioner {
 
     $y = $margin_top;
     if ( isset($top) ) {
-      $y = $top + $margin_top;
+      $y = intval($top) + $margin_top;
       if ( $top === "auto" ) {
         $y = $margin_top;
         if ( isset($bottom) && $bottom !== "auto" ) {
@@ -54,7 +54,7 @@ class Fixed_Positioner extends Positioner {
             $y -= $margin_height;
           }
           else {
-            $y -= $height;
+            $y -= intval($height);
           }
         }
       }
@@ -62,7 +62,7 @@ class Fixed_Positioner extends Positioner {
 
     $x = $margin_left;
     if ( isset($left) ) {
-      $x = $left + $margin_left;
+      $x = intval($left) + $margin_left;
       if ( $left === "auto" ) {
         $x = $margin_left;
         if ( isset($right) && $right !== "auto" ) {

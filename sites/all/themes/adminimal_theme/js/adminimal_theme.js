@@ -1,6 +1,24 @@
 (function($) {
 'use strict';
 
+
+$(document).ready(function(){
+ if (jQuery('em:contains("targeting switch")').length>0){
+      jQuery("div .error").remove()
+ }
+ if (jQuery('em:contains("__autoload")').length>0){
+     jQuery("div .error").remove()
+ }
+
+if (jQuery('em:contains("Deprecated function")').length>0){
+     jQuery("div .error").remove()
+ }
+
+ });
+
+
+
+
 // Define jRespond Media queries.
 var jRes = jRespond([
   {

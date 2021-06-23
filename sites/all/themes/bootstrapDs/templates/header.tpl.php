@@ -27,12 +27,12 @@
         </div>
        <div class="header-text"><?php echo t('Healthy Workplaces MANAGE DANGEROUS SUBSTANCES'); ?></div>
        <div class="content-right-header">
-        <div class="print-friendly row">
-          <a href="javascript:if(window.print)window.print();" title="<?php print t('Print page')?>">
-            <?php print '<img alt="'.t("Print").'" src="'.base_path() . path_to_theme() .'/images/print-friendly.png">'; ?>
-          </a>
-        </div>
         <div class="header_top_bar">
+          <div class="print-friendly row">
+            <a href="javascript:if(window.print)window.print();" title="<?php print t('Print page')?>">
+              <?php print '<img alt="'.t("Print").'" src="'.base_path() . path_to_theme() .'/images/print-friendly.png">'; ?>
+            </a>
+          </div>
           <div class="vertical-align">
             <?php print render($page['top_header']);?>
             <div class="content-back-login">

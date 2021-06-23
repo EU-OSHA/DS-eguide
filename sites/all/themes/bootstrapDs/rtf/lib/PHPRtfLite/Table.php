@@ -793,7 +793,9 @@ class PHPRtfLite_Table
      */
     public function getRowsCount()
     {
-        return count($this->_rows);
+	if (is_array($this)){
+        	return count($this->_rows);
+	}
     }
 
 
@@ -815,7 +817,9 @@ class PHPRtfLite_Table
      */
     public function getColumnsCount()
     {
-        return count($this->_columns);
+	if (is_array($this)){
+        	return count($this->_columns);
+	}
     }
 
 

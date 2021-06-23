@@ -8,7 +8,15 @@ $(document).ready(function(){
   glossarySearch();
   glossaryOrderDivs();
 
-jQuery("button#edit-navigation-back").remove();
+  jQuery("button#edit-navigation-back").remove();
+
+  if (jQuery('div:contains("targeting switch")').length>0){
+    jQuery('div .error').remove()
+  }
+  if (jQuery('div:contains("__autoload")').length>0){
+    jQuery('div .error').remove()
+  }
+
   });
 })(jQuery);
 

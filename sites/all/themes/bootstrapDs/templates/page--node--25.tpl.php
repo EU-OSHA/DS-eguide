@@ -667,7 +667,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
             ->execute();    
 
             drupal_goto("node/25/take/13");
-            break;
           }
         }
         /******************End asbestos Q12*****/
@@ -724,7 +723,6 @@ if (isset($_SESSION['quiz'][25]['result_id'])==1){
           ->execute();    
 
             drupal_goto("node/25/take/16");
-            break;
           }
     		}
 

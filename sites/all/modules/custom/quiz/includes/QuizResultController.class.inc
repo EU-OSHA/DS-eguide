@@ -131,7 +131,7 @@ class QuizResultController extends EntityAPIController {
     return FALSE;
   }
 
-  public function buildContent($entity, $view_mode = 'full', $langcode = NULL) {
+  public function buildContent($entity, $view_mode = 'full', $langcode = NULL, $content = array()) {
     $out = parent::buildContent($entity, $view_mode, $langcode);
 
     if (!$entity->is_evaluated && empty($_POST)) {

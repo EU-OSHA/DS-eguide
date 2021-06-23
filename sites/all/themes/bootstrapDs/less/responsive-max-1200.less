@@ -11,16 +11,28 @@
 	}
 
 	.header-text{
+		clear: both;
 		padding-left: 10px;
 		font-size: 1.2em;
 	    width: 225px;
 	}
+
+	html[lang="de"], html[lang="AT_de"], html[lang="ro"], html[lang="sl"]{
+        .header-text{
+            width: 530px;
+            font-size: 1.3em;
+        }
+    }
 
 	header{
 		.container{
 			width: 100%;
 		}
 	}
+
+	body > header > div > div > div > div.border-right-header{
+        border:0px;
+    }
 
 	//Home
 	.content-home-questions {

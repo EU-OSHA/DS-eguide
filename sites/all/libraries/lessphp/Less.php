@@ -9332,7 +9332,12 @@ class Less_Visitor_toCSS extends Less_VisitorReplacing{
 
 
 		// Compile rules and rulesets
-		$nodeRuleCnt = count($rulesetNode->rules);
+		if(is_countable($rulesetNode->rules)) {
+			$nodeRuleCnt = count($rulesetNode->rules);
+		}else{
+    		$nodeRuleCnt =0;
+		}
+		
 		for( $i = 0; $i < $nodeRuleCnt; ){
 			$rule = $rulesetNode->rules[$i];
 
@@ -9697,7 +9702,7 @@ class Less_Exception_Chunk extends Less_Exception_Parser{
 			$cc = $this->CharCode($this->parserCurrentIndex);
 			if ((($cc >= 97) && ($cc <= 122)) || ($cc < 34)) {
 				// a-z or whitespace
-				continue;
+				//continue;
 			}
 
 			switch ($cc) {
@@ -9706,7 +9711,7 @@ class Less_Exception_Chunk extends Less_Exception_Parser{
 				case 40:
 					$parenLevel++;
 					$lastParen = $this->parserCurrentIndex;
-					continue;
+					//continue;
 
 				// )
 				case 41:
@@ -9714,18 +9719,18 @@ class Less_Exception_Chunk extends Less_Exception_Parser{
 					if( $parenLevel < 0 ){
 						return $this->fail("missing opening `(`");
 					}
-					continue;
+					//continue;
 
 				// ;
 				case 59:
 					//if (!$parenLevel) { $this->emitChunk();	}
-					continue;
+					//continue;
 
 				// {
 				case 123:
 					$level++;
 					$lastOpening = $this->parserCurrentIndex;
-					continue;
+					//continue;
 
 				// }
 				case 125:
@@ -9735,7 +9740,7 @@ class Less_Exception_Chunk extends Less_Exception_Parser{
 
 					}
 					//if (!$level && !$parenLevel) { $this->emitChunk(); }
-					continue;
+					//continue;
 				// \
 				case 92:
 					if ($this->parserCurrentIndex < $this->input_len - 1) { $this->parserCurrentIndex++; continue; }
@@ -9758,12 +9763,12 @@ class Less_Exception_Chunk extends Less_Exception_Parser{
 							$this->parserCurrentIndex++;
 						}
 					}
-					if ($matched) { continue; }
+					if ($matched) { }//continue; }
 					return $this->fail("unmatched `" . chr($cc) . "`", $currentChunkStartIndex);
 
 				// /, check for comment
 				case 47:
-					if ($parenLevel || ($this->parserCurrentIndex == $this->input_len - 1)) { continue; }
+					if ($parenLevel || ($this->parserCurrentIndex == $this->input_len - 1)) { }
 					$cc2 = $this->CharCode($this->parserCurrentIndex+1);
 					if ($cc2 == 47) {
 						// //, find lnfeed
@@ -9784,14 +9789,14 @@ class Less_Exception_Chunk extends Less_Exception_Parser{
 							return $this->fail("missing closing `*/`", $currentChunkStartIndex);
 						}
 					}
-					continue;
+					//continue;
 
 				// *, check for unmatched */
 				case 42:
 					if (($this->parserCurrentIndex < $this->input_len - 1) && ($this->CharCode($this->parserCurrentIndex+1) == 47)) {
 						return $this->fail("unmatched `/*`");
 					}
-					continue;
+					//continue;
 			}
 		}
 

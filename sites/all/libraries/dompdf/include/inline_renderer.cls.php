@@ -102,7 +102,7 @@ class Inline_Renderer extends Abstract_Renderer {
         $h = $child_h;
         continue;
       }
-
+      $child_w = intval($child_w);
       if ( is_null($w) )
         $w = $child_w;
       else
