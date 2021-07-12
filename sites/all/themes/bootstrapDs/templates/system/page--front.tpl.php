@@ -79,11 +79,13 @@
                   <li class="LanHid"><a href="de"></a></li>
               </ul>
             </li>
+            <!--
             <li class="lan-es"><a href="es"><?php print t('Spain');?></a>
               <ul class="es">
                   <li class="LanHid"><a href="es"></a></li>
               </ul>
             </li>
+        	-->
           </ul>
       </div>
 

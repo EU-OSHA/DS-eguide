@@ -117,7 +117,7 @@ function cargaMapa() {
 
 	    onRegionOver: function(event, code, region)
 	    {
-     		if(code=="no" || code=="pt" || code=="is" || code=="at" || code=="si" || code=="ee" || code=="ro" || code=="es" || code=="de"){
+     		if(code=="no" || code=="pt" || code=="is" || code=="at" || code=="si" || code=="ee" || code=="ro" || code=="de"){
      			
      			jQuery("path#jqvmap1_" + code).addClass("intro");     			
      			
@@ -148,7 +148,7 @@ function cargaMapa() {
 				if (code=="bg" ||code=="cy"|| code=="cz"|| code=="ro" || code=="at" ||
 				code=="dk"||  code=="fr"|| code=="hr"|| code=="de"||code=="gr"||code=="hu"||code=="ie"||
 				code=="it"|| code=="lv"|| code=="lt"|| code=="nl"||code=="pl"||code=="pt"||code=="sk"||
-				code=="si"|| code=="es"|| code=="se"|| code=="gb"||code=="is"||code=="no"||code=="ee"){
+				code=="si"|| code=="se"|| code=="gb"||code=="is"||code=="no"||code=="ee"){
 
 					// Countries with language code different than country code
 					if (code == "ee")
@@ -275,9 +275,6 @@ function fills() {
 			jQuery(this).attr("fill","#eaebeb").attr("stroke","#989a9b");
 		}
 		if (id=="jqvmap1_md") {
-			jQuery(this).attr("fill","#eaebeb").attr("stroke","#989a9b");
-		}
-		if (id=="jqvmap1_es") {
 			jQuery(this).attr("fill","#eaebeb").attr("stroke","#989a9b");
 		}
 		if (id=="jqvmap1_pt") {
